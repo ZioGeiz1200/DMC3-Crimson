@@ -249,42 +249,42 @@ void DrawCrimson(IDXGISwapChain* pSwapChain, const char* title, bool* pIsOpened)
 		{
 			const ImVec2 pos = wndRect.Min + ImVec2{ scaledFontSize * 1.33f, scaledFontSize * 2.66f };
 
-			window->DrawList->AddText(g_ImGuiFont_Roboto[scaledFontSize], scaledFontSize, pos, SwapColorEndianness(0xFFFFFFFF), "Selected Game Mode: ");
+			window->DrawList->AddText(g_ImGuiFont_Roboto[scaledFontSize], scaledFontSize, pos, SwapColorEndianness(0xFFFFFFFF), "已选游戏模式： ");
 
-			const float modeTextWidth = ImGui::CalcTextSize("Selected Game Mode: ").x;
+			const float modeTextWidth = ImGui::CalcTextSize("已选游戏模式： ").x;
 
 			const char* gameModeString = nullptr;
 			ImU32 gameModeStringColor = 0;
 
 			switch (g_UIContext.SelectedGameMode) {
 			case UIContext::GameModes::Vanilla:
-				gameModeString = "VANILLA MODE";
+				gameModeString = "原版模式";
 				gameModeStringColor = 0xFFFFFFFF;
 				break;
 
 			case UIContext::GameModes::StyleSwitcher:
-				gameModeString = "STYLE SWITCHER MODE";
+				gameModeString = "风格切换模式";
 				gameModeStringColor = SwapColorEndianness(0xE8BA18FF);
 				break;
 
 			case UIContext::GameModes::Crimson:
-				gameModeString = "CRIMSON MODE";
+				gameModeString = "CRIMSON 模式";
 				gameModeStringColor = SwapColorEndianness(0xDA1B53FF);
 				break;
 
 			case UIContext::GameModes::Custom:
-				gameModeString = "CUSTOM MODE";
+				gameModeString = "自定义模式";
 				gameModeStringColor = SwapColorEndianness(0x4050FFFF);
 				break;
 
 			default:
-				gameModeString = "Unknown";
+				gameModeString = "未知";
 				break;
 			}
 
 			const float gameModeStringWidth = ImGui::CalcTextSize(gameModeString).x;
 
-			const char* ccsRestartString = "Restart mission required to update CCS.";
+			const char* ccsRestartString = "需重启任务以更新 CCS。";
 			auto ccsRestartStringColor = SwapColorEndianness(0x1DD6FFFF);
 
 			window->DrawList->AddText(g_ImGuiFont_Benguiat[scaledFontSize], scaledFontSize, pos + ImVec2{ modeTextWidth, 0.0f }, 
@@ -309,10 +309,10 @@ void DrawCrimson(IDXGISwapChain* pSwapChain, const char* title, bool* pIsOpened)
 			}
 
 			if (g_UIContext.LatestVersion.PatchLetter == 0) {
-				newVersionText = std::format("NEW VERSION AVAILABLE (v{}.{})", g_UIContext.LatestVersion.Major, g_UIContext.LatestVersion.Minor);
+				newVersionText = std::format("新版本可用 (v{}.{})", g_UIContext.LatestVersion.Major, g_UIContext.LatestVersion.Minor);
 			}
 			else {
-				newVersionText = std::format("NEW VERSION AVAILABLE (v{}.{}{})", g_UIContext.LatestVersion.Major, g_UIContext.LatestVersion.Minor, g_UIContext.LatestVersion.PatchLetter);
+				newVersionText = std::format("新版本可用 (v{}.{}{})", g_UIContext.LatestVersion.Major, g_UIContext.LatestVersion.Minor, g_UIContext.LatestVersion.PatchLetter);
 			}
 
 			switch (UI::versionCheckResult) {
@@ -321,7 +321,7 @@ void DrawCrimson(IDXGISwapChain* pSwapChain, const char* title, bool* pIsOpened)
 				break;
 
 			case WebAPIResult::Awaiting:
-				latestUpdateStr = "Latest Update...";
+				latestUpdateStr = "最新更新...";
 				break;
 
 			default:
@@ -428,37 +428,37 @@ void DrawCrimson(IDXGISwapChain* pSwapChain, const char* title, bool* pIsOpened)
 					ImGui::SetCursorScreenPos({ wndRect.Min.x, wndRect.Min.y + 2.0f * tabBtnSize.y + tabBtnSize.y });
 
 					ImGui::SetCursorPosX(ImGui::GetCursorPosX() + tabButtonsGap);
-					if (TabButton("GAMEPLAY", g_UIContext.SelectedOptionsSubTab == UIContext::OptionsSubTabs::Gameplay, true, false, subTabBtnSize)) {
+					if (TabButton("玩法", g_UIContext.SelectedOptionsSubTab == UIContext::OptionsSubTabs::Gameplay, true, false, subTabBtnSize)) {
 						g_UIContext.SelectedOptionsSubTab = UIContext::OptionsSubTabs::Gameplay;
 					}
 
 					ImGui::SameLine(0.0f, tabButtonsGap);
-					if (TabButton("CAMERA", g_UIContext.SelectedOptionsSubTab == UIContext::OptionsSubTabs::Camera, true, false, subTabBtnSize)) {
+					if (TabButton("镜头", g_UIContext.SelectedOptionsSubTab == UIContext::OptionsSubTabs::Camera, true, false, subTabBtnSize)) {
 						g_UIContext.SelectedOptionsSubTab = UIContext::OptionsSubTabs::Camera;
 					}
 
 					ImGui::SameLine(0.0f, tabButtonsGap);
-					if (TabButton("HOTKEYS", g_UIContext.SelectedOptionsSubTab == UIContext::OptionsSubTabs::Hotkeys, true, false, subTabBtnSize)) {
+					if (TabButton("快捷键", g_UIContext.SelectedOptionsSubTab == UIContext::OptionsSubTabs::Hotkeys, true, false, subTabBtnSize)) {
 						g_UIContext.SelectedOptionsSubTab = UIContext::OptionsSubTabs::Hotkeys;
 					}
 
 					ImGui::SameLine(0.0f, tabButtonsGap);
-					if (TabButton("INTERFACE", g_UIContext.SelectedOptionsSubTab == UIContext::OptionsSubTabs::Interface, true, false, subTabBtnSize)) {
+					if (TabButton("界面", g_UIContext.SelectedOptionsSubTab == UIContext::OptionsSubTabs::Interface, true, false, subTabBtnSize)) {
 						g_UIContext.SelectedOptionsSubTab = UIContext::OptionsSubTabs::Interface;
 					}
 
 					ImGui::SameLine(0.0f, tabButtonsGap);
-					if (TabButton("SOUND", g_UIContext.SelectedOptionsSubTab == UIContext::OptionsSubTabs::Sound, true, false, subTabBtnSize)) {
+					if (TabButton("音效", g_UIContext.SelectedOptionsSubTab == UIContext::OptionsSubTabs::Sound, true, false, subTabBtnSize)) {
 						g_UIContext.SelectedOptionsSubTab = UIContext::OptionsSubTabs::Sound;
 					}
 
 					ImGui::SameLine(0.0f, tabButtonsGap);
-					if (TabButton("VISUAL", g_UIContext.SelectedOptionsSubTab == UIContext::OptionsSubTabs::Visual, true, false, subTabBtnSize)) {
+					if (TabButton("画面", g_UIContext.SelectedOptionsSubTab == UIContext::OptionsSubTabs::Visual, true, false, subTabBtnSize)) {
 						g_UIContext.SelectedOptionsSubTab = UIContext::OptionsSubTabs::Visual;
 					}
 
 					ImGui::SameLine(0.0f, tabButtonsGap);
-					if (TabButton("SYSTEM", g_UIContext.SelectedOptionsSubTab == UIContext::OptionsSubTabs::System, true, false, subTabBtnSize)) {
+					if (TabButton("系统", g_UIContext.SelectedOptionsSubTab == UIContext::OptionsSubTabs::System, true, false, subTabBtnSize)) {
 						g_UIContext.SelectedOptionsSubTab = UIContext::OptionsSubTabs::System;
 					}
 
@@ -476,29 +476,29 @@ void DrawCrimson(IDXGISwapChain* pSwapChain, const char* title, bool* pIsOpened)
 					ImGui::SetCursorScreenPos({ wndRect.Min.x, wndRect.Min.y + 2.0f * tabBtnSize.y + tabBtnSize.y });
 
 					ImGui::SetCursorPosX(ImGui::GetCursorPosX() + tabButtonsGap);
-					if (TabButton("COMMON CHEATS", g_UIContext.SelectedCheatsAndDebugSubTab == UIContext::CheatsAndDebugSubTabs::CommonCheats, true, false, subTabBtnSize)) {
+					if (TabButton("通用作弊", g_UIContext.SelectedCheatsAndDebugSubTab == UIContext::CheatsAndDebugSubTabs::CommonCheats, true, false, subTabBtnSize)) {
 						g_UIContext.SelectedCheatsAndDebugSubTab = UIContext::CheatsAndDebugSubTabs::CommonCheats;
 					}
 
 					ImGui::SameLine(0.0f, tabButtonsGap);
 					ImGui::PushFont(g_ImGuiFont_RussoOne[g_UIContext.DefaultFontSize * 0.83f]);
-					if (TabButton("CHARACTER CHEATS", g_UIContext.SelectedCheatsAndDebugSubTab == UIContext::CheatsAndDebugSubTabs::CharacterCheats, true, false, subTabBtnSize)) {
+					if (TabButton("角色作弊", g_UIContext.SelectedCheatsAndDebugSubTab == UIContext::CheatsAndDebugSubTabs::CharacterCheats, true, false, subTabBtnSize)) {
 						g_UIContext.SelectedCheatsAndDebugSubTab = UIContext::CheatsAndDebugSubTabs::CharacterCheats;
 					}
 					ImGui::PopFont();
 
 					ImGui::SameLine(0.0f, tabButtonsGap);
-					if (TabButton("TELEPORTER", g_UIContext.SelectedCheatsAndDebugSubTab == UIContext::CheatsAndDebugSubTabs::Teleporter, true, false, subTabBtnSize)) {
+					if (TabButton("传送", g_UIContext.SelectedCheatsAndDebugSubTab == UIContext::CheatsAndDebugSubTabs::Teleporter, true, false, subTabBtnSize)) {
 						g_UIContext.SelectedCheatsAndDebugSubTab = UIContext::CheatsAndDebugSubTabs::Teleporter;
 					}
 
 					ImGui::SameLine(0.0f, tabButtonsGap);
-					if (TabButton("ENEMY SPAWNER", g_UIContext.SelectedCheatsAndDebugSubTab == UIContext::CheatsAndDebugSubTabs::EnemySpawner, true, false, subTabBtnSize)) {
+					if (TabButton("敌人生成器", g_UIContext.SelectedCheatsAndDebugSubTab == UIContext::CheatsAndDebugSubTabs::EnemySpawner, true, false, subTabBtnSize)) {
 						g_UIContext.SelectedCheatsAndDebugSubTab = UIContext::CheatsAndDebugSubTabs::EnemySpawner;
 					}
 
 					ImGui::SameLine(0.0f, tabButtonsGap);
-					if (TabButton("FMOD JUKEBOX", g_UIContext.SelectedCheatsAndDebugSubTab == UIContext::CheatsAndDebugSubTabs::FMODJukebox, true, false, subTabBtnSize)) {
+					if (TabButton("FMOD 点唱机", g_UIContext.SelectedCheatsAndDebugSubTab == UIContext::CheatsAndDebugSubTabs::FMODJukebox, true, false, subTabBtnSize)) {
 						g_UIContext.SelectedCheatsAndDebugSubTab = UIContext::CheatsAndDebugSubTabs::FMODJukebox;
 					}
 
@@ -526,32 +526,32 @@ void DrawCrimson(IDXGISwapChain* pSwapChain, const char* title, bool* pIsOpened)
 				ImGui::SetCursorPosY(ImGui::GetCursorPosY() + 2.0f * tabBtnSize.y);
 
 				ImGui::SetCursorPosX(ImGui::GetCursorPosX() + tabButtonsGap);
-				if (TabButton("GAME MODE", g_UIContext.SelectedTab == UIContext::MainTabs::GameMode, true, false, tabBtnSize)) {
+				if (TabButton("游戏模式", g_UIContext.SelectedTab == UIContext::MainTabs::GameMode, true, false, tabBtnSize)) {
 					g_UIContext.SelectedTab = UIContext::MainTabs::GameMode;
 				}
 
 				ImGui::SameLine(0.0f, tabButtonsGap);
-				if (TabButton("PLAYER", g_UIContext.SelectedTab == UIContext::MainTabs::Player, true, false, tabBtnSize)) {
+				if (TabButton("玩家", g_UIContext.SelectedTab == UIContext::MainTabs::Player, true, false, tabBtnSize)) {
 					g_UIContext.SelectedTab = UIContext::MainTabs::Player;
 				}
 
 				ImGui::SameLine(0.0f, tabButtonsGap);
-				if (TabButton("QUICKPLAY", g_UIContext.SelectedTab == UIContext::MainTabs::Quickplay, true, false, tabBtnSize)) {
+				if (TabButton("快速游玩", g_UIContext.SelectedTab == UIContext::MainTabs::Quickplay, true, false, tabBtnSize)) {
 					g_UIContext.SelectedTab = UIContext::MainTabs::Quickplay;
 				}
 
 				ImGui::SameLine(0.0f, tabButtonsGap);
-				if (TabButton("MUSIC SWITCHER", g_UIContext.SelectedTab == UIContext::MainTabs::MusicSwitcher, false, false, tabBtnSize)) {
+				if (TabButton("音乐切换", g_UIContext.SelectedTab == UIContext::MainTabs::MusicSwitcher, false, false, tabBtnSize)) {
 					g_UIContext.SelectedTab = UIContext::MainTabs::MusicSwitcher;
 				}
 
 				ImGui::SameLine(0.0f, tabButtonsGap);
-				if (TabButton("OPTIONS", g_UIContext.SelectedTab == UIContext::MainTabs::Options, true, true, tabBtnSize)) {
+				if (TabButton("选项", g_UIContext.SelectedTab == UIContext::MainTabs::Options, true, true, tabBtnSize)) {
 					g_UIContext.SelectedTab = UIContext::MainTabs::Options;
 				}
 
 				ImGui::SameLine(0.0f, tabButtonsGap);
-				if (TabButton("CHEATS & DEBUG", g_UIContext.SelectedTab == UIContext::MainTabs::CheatsAndDebug, true, true, tabBtnSize)) {
+				if (TabButton("作弊与调试", g_UIContext.SelectedTab == UIContext::MainTabs::CheatsAndDebug, true, true, tabBtnSize)) {
 					g_UIContext.SelectedTab = UIContext::MainTabs::CheatsAndDebug;
 				}
 
@@ -569,28 +569,28 @@ void DrawCrimson(IDXGISwapChain* pSwapChain, const char* title, bool* pIsOpened)
 				case UIContext::MainTabs::GameMode:
 				{
 					window->DrawList->AddText(g_ImGuiFont_RussoOne256, scaledFontSize * 9.6f, pos,
-						SwapColorEndianness(0xFFFFFF10), "Game Mode");
+						SwapColorEndianness(0xFFFFFF10), "游戏模式");
 				}
 				break;
 
 				case UIContext::MainTabs::Player:
 				{
 					window->DrawList->AddText(g_ImGuiFont_RussoOne256, scaledFontSize * 9.6f, pos,
-						SwapColorEndianness(0xFFFFFF10), "Player");
+						SwapColorEndianness(0xFFFFFF10), "玩家");
 				}
 				break;
 
 				case UIContext::MainTabs::Quickplay:
 				{
 					window->DrawList->AddText(g_ImGuiFont_RussoOne256, scaledFontSize * 9.6f, pos,
-						SwapColorEndianness(0xFFFFFF10), "Quickplay");
+						SwapColorEndianness(0xFFFFFF10), "快速游玩");
 				}
 				break;
 
 				case UIContext::MainTabs::MusicSwitcher:
 				{
 					window->DrawList->AddText(g_ImGuiFont_RussoOne256, scaledFontSize * 9.6f, pos,
-						SwapColorEndianness(0xFFFFFF10), "Music Switcher");
+						SwapColorEndianness(0xFFFFFF10), "音乐切换");
 				}
 				break;
 
@@ -601,31 +601,31 @@ void DrawCrimson(IDXGISwapChain* pSwapChain, const char* title, bool* pIsOpened)
 
 					if (g_UIContext.SelectedOptionsSubTab == UIContext::OptionsSubTabs::Gameplay) {
 						window->DrawList->AddText(g_ImGuiFont_RussoOne256, scaledFontSize * 9.6f, pos,
-							SwapColorEndianness(0xFFFFFF10), "Gameplay");
+							SwapColorEndianness(0xFFFFFF10), "玩法");
 					}
 					else if (g_UIContext.SelectedOptionsSubTab == UIContext::OptionsSubTabs::Camera) {
 						window->DrawList->AddText(g_ImGuiFont_RussoOne256, scaledFontSize * 9.6f, pos,
-							SwapColorEndianness(0xFFFFFF10), "Camera");
+							SwapColorEndianness(0xFFFFFF10), "镜头");
 					}
 					else if (g_UIContext.SelectedOptionsSubTab == UIContext::OptionsSubTabs::Hotkeys) {
 						window->DrawList->AddText(g_ImGuiFont_RussoOne256, scaledFontSize * 9.6f, pos,
-							SwapColorEndianness(0xFFFFFF10), "Hotkeys");
+							SwapColorEndianness(0xFFFFFF10), "快捷键");
 					}
 					else if (g_UIContext.SelectedOptionsSubTab == UIContext::OptionsSubTabs::Interface) {
 						window->DrawList->AddText(g_ImGuiFont_RussoOne256, scaledFontSize * 9.6f, pos,
-							SwapColorEndianness(0xFFFFFF10), "Interface");
+							SwapColorEndianness(0xFFFFFF10), "界面");
 					}
 					else if (g_UIContext.SelectedOptionsSubTab == UIContext::OptionsSubTabs::Sound) {
 						window->DrawList->AddText(g_ImGuiFont_RussoOne256, scaledFontSize * 9.6f, pos,
-							SwapColorEndianness(0xFFFFFF10), "Sound");
+							SwapColorEndianness(0xFFFFFF10), "音效");
 					}
 					else if (g_UIContext.SelectedOptionsSubTab == UIContext::OptionsSubTabs::Visual) {
 						window->DrawList->AddText(g_ImGuiFont_RussoOne256, scaledFontSize * 9.6f, pos,
-							SwapColorEndianness(0xFFFFFF10), "Visual");
+							SwapColorEndianness(0xFFFFFF10), "画面");
 					}
 					else if (g_UIContext.SelectedOptionsSubTab == UIContext::OptionsSubTabs::System) {
 						window->DrawList->AddText(g_ImGuiFont_RussoOne256, scaledFontSize * 9.6f, pos,
-							SwapColorEndianness(0xFFFFFF10), "System");
+							SwapColorEndianness(0xFFFFFF10), "系统");
 					}
 
 
@@ -640,23 +640,23 @@ void DrawCrimson(IDXGISwapChain* pSwapChain, const char* title, bool* pIsOpened)
 
 					if (g_UIContext.SelectedCheatsAndDebugSubTab == UIContext::CheatsAndDebugSubTabs::CommonCheats) {
 						window->DrawList->AddText(g_ImGuiFont_RussoOne256, scaledFontSize * 9.6f, pos,
-							SwapColorEndianness(0xFFFFFF10), "Common Cheats");
+							SwapColorEndianness(0xFFFFFF10), "通用作弊");
 					}
 					else if (g_UIContext.SelectedCheatsAndDebugSubTab == UIContext::CheatsAndDebugSubTabs::CharacterCheats) {
 						window->DrawList->AddText(g_ImGuiFont_RussoOne256, scaledFontSize * 9.6f, pos,
-							SwapColorEndianness(0xFFFFFF10), "Character Cheats");
+							SwapColorEndianness(0xFFFFFF10), "角色作弊");
 					}
 					else if (g_UIContext.SelectedCheatsAndDebugSubTab == UIContext::CheatsAndDebugSubTabs::Teleporter) {
 						window->DrawList->AddText(g_ImGuiFont_RussoOne256, scaledFontSize * 9.6f, pos,
-							SwapColorEndianness(0xFFFFFF10), "Teleporter");
+							SwapColorEndianness(0xFFFFFF10), "传送");
 					}
 					else if (g_UIContext.SelectedCheatsAndDebugSubTab == UIContext::CheatsAndDebugSubTabs::EnemySpawner) {
 						window->DrawList->AddText(g_ImGuiFont_RussoOne256, scaledFontSize * 9.6f, pos,
-							SwapColorEndianness(0xFFFFFF10), "Enemy Spawner");
+							SwapColorEndianness(0xFFFFFF10), "敌人生成器");
 					}
 					else if (g_UIContext.SelectedCheatsAndDebugSubTab == UIContext::CheatsAndDebugSubTabs::FMODJukebox) {
 						window->DrawList->AddText(g_ImGuiFont_RussoOne256, scaledFontSize * 9.6f, pos,
-							SwapColorEndianness(0xFFFFFF10), "FMOD Jukebox");
+							SwapColorEndianness(0xFFFFFF10), "FMOD 点唱机");
 					}
 				}
 				break;
@@ -705,7 +705,7 @@ void DrawCrimson(IDXGISwapChain* pSwapChain, const char* title, bool* pIsOpened)
 			{
 				constexpr auto BACKGROUND_FADED_TEXT = u8"C•Team";
 				constexpr auto CREDIT_TEXT = u8"Berthrage • SSSiyan • deepdarkkapustka • Darkness • Charlie • The Hitchhiker • RaccMoon • Lenam • Airdragon • ZippoIG • Vainiuss1 ";
-				constexpr auto ABOUT_BUTTON_TEXT = "ABOUT";
+				constexpr auto ABOUT_BUTTON_TEXT = "关于";
 
 				ImGui::PushFont(g_ImGuiFont_Roboto[g_UIContext.DefaultFontSize * 0.85f]);
 
@@ -743,7 +743,7 @@ void DrawCrimson(IDXGISwapChain* pSwapChain, const char* title, bool* pIsOpened)
 
 			// Right footer section
 			{
-				constexpr auto CREDIT_TEXT = "Based on serpentiem's ";
+				constexpr auto CREDIT_TEXT = "基于 serpentiem 的 ";
 				constexpr auto DDMK_BUTTON_TEXT = "DDMK";
 
 				ImGui::PushFont(g_ImGuiFont_Roboto[g_UIContext.DefaultFontSize]);
@@ -780,7 +780,7 @@ void DrawCrimson(IDXGISwapChain* pSwapChain, const char* title, bool* pIsOpened)
 								  wndRect.Min.y + contentMinHeightOffsetFromTop + scaledFontSize * 0.3f };
 
 			ImGui::SetNextWindowPos(contentMin, ImGuiCond_Always);
-			ImGui::BeginChildEx("Content Window", window->GetID("Content Window"),
+			ImGui::BeginChildEx("内容窗口", window->GetID("内容窗口"),
 				window->Size - ImVec2{ scaledFontSize * 0.3f * 2.0f, (contentMinHeightOffsetFromTop + scaledFontSize * 0.3f + contentMaxHeightOffsetFromBottom) }, false, 0);
 			ImGui::SetWindowFontScale(scaleFactorY);
 			DrawMainContent(pDevice, g_UIContext);
@@ -805,30 +805,30 @@ bool updateWeaponWheel = false;
 #pragma region Common
 
 const char* saveNamesDante[] = {
-	"Dante 0000",
-	"Dante 0001",
-	"Dante 0002",
-	"Dante 0003",
-	"Dante 0004",
-	"Dante 0005",
-	"Dante 0006",
-	"Dante 0007",
-	"Dante 0008",
-	"Dante 0009",
+	"但丁 0000",
+	"但丁 0001",
+	"但丁 0002",
+	"但丁 0003",
+	"但丁 0004",
+	"但丁 0005",
+	"但丁 0006",
+	"但丁 0007",
+	"但丁 0008",
+	"但丁 0009",
 };
 
 
 const char* saveNamesVergil[] = {
-	"Vergil 0000",
-	"Vergil 0001",
-	"Vergil 0002",
-	"Vergil 0003",
-	"Vergil 0004",
-	"Vergil 0005",
-	"Vergil 0006",
-	"Vergil 0007",
-	"Vergil 0008",
-	"Vergil 0009",
+	"维吉尔 0000",
+	"维吉尔 0001",
+	"维吉尔 0002",
+	"维吉尔 0003",
+	"维吉尔 0004",
+	"维吉尔 0005",
+	"维吉尔 0006",
+	"维吉尔 0007",
+	"维吉尔 0008",
+	"维吉尔 0009",
 };
 
 
@@ -937,42 +937,42 @@ const char* indexNames[] = {
 
 
 const char* buttonIndexNames[] = {
-	"Button 1",
-	"Button 2",
-	"Button 3",
-	"Button 4",
+	"按键 1",
+	"按键 2",
+	"按键 3",
+	"按键 4",
 };
 
 const char* dataNames[] = {
-	"Data 0",
-	"Data 1",
-	"Data 2",
-	"Data 3",
-	"Data 4",
-	"Data 5",
-	"Data 6",
-	"Data 7",
+	"数据 0",
+	"数据 1",
+	"数据 2",
+	"数据 3",
+	"数据 4",
+	"数据 5",
+	"数据 6",
+	"数据 7",
 };
 
 const char* buttonNames[] = {
-	"Nothing",
-	"Left Trigger",
-	"Right Trigger",
-	"Left Shoulder",
-	"Right Shoulder",
+	"无",
+	"左扳机",
+	"右扳机",
+	"左肩键",
+	"右肩键",
 	"Y",
 	"B",
 	"A",
 	"X",
-	"Back",
-	"Left Stick",
-	"Right Stick",
-	"Left + Right Stick",
-	"Start",
+	"返回",
+	"左摇杆",
+	"右摇杆",
+	"左右摇杆",
+	"开始",
 	"Up",
-	"Right",
-	"Down",
-	"Left",
+	"右",
+	"下",
+	"左",
 };
 const int buttonNamesCount = IM_ARRAYSIZE(buttonNames);
 
@@ -999,9 +999,9 @@ constexpr byte16 buttons[] = {
 
 const char* directionNames[] = {
 	"Up",
-	"Right",
-	"Down",
-	"Left",
+	"右",
+	"下",
+	"左",
 };
 
 const char* playerIndexNames[] = {
@@ -1013,14 +1013,14 @@ const char* playerIndexNames[] = {
 
 
 const char* characterIndexNames[] = {
-	"Character 1",
-	"Character 2",
-	"Character 3",
+	"角色 1",
+	"角色 2",
+	"角色 3",
 };
 
 const char* entityNames[] = {
-	"Main",
-	"Clone",
+	"本体",
+	"分身",
 };
 
 const char* entityEnumNames[] = {
@@ -1029,71 +1029,71 @@ const char* entityEnumNames[] = {
 };
 
 const char* ddmkCharacter2PNames[] = {
-	"Dante",
+	"但丁",
 	"Bob",
-	"Lady",
-	"Vergil",
+	"蕾蒂",
+	"维吉尔",
 };
 
 
 const char* costumeRespectsProgressionNames[] = {
 	"Off",
-	"Vanilla",
+	"原版",
 	"Crimson",
 };
 
 const char* cameraSensitivityNames[] = {
-	"Low (Vanilla Default)",
-	"Medium",
-	"High",
-	"Highest",
+	"低（原版默认）",
+	"中",
+	"高",
+	"最高",
 };
 
 const char* cameraFollowUpSpeedNames[] = {
-	"Low (Vanilla Default)",
-	"Medium",
-	"High",
+	"低（原版默认）",
+	"中",
+	"高",
 };
 
 const char* cameraDistanceNames[] = {
-	"Far (Vanilla Default)",
-	"Closer",
-	"Dynamic",
+	"远（原版默认）",
+	"较近",
+	"动态",
 };
 
 const char* cameraLockOnDistanceNames[] = {
-	"Closer (Vanilla Default)",
+	"较近（原版默认）",
 	"Far",
-	"Dynamic",
+	"动态",
 };
 
 
 const char* cameraTiltNames[] = {
-	"Original (Vanilla Default)",
-	"Closer to Ground",
+	"原始（原版默认）",
+	"更贴近地面",
 };
 
 const char* cameraSmoothingNames[] = {
-	"Highest",
-	"High (Vanilla Default)",
-	"Medium",
+	"最高",
+	"高（原版默认）",
+	"中",
 	"Low",
 };
 
 const char* GUITransparencyNames[] = {
 	"Off",
-	"Static",
-	"Dynamic",
+	"静态",
+	"动态",
 };
 
 
 const char* ddmkCharacterNames[] = {
-	"Dante",
-	"BoB Vergil",
-	"Lady",
-	"Vergil",
-	"Boss Lady",
-	"Boss Vergil",
+	"但丁",
+	"BoB 维吉尔",
+	"蕾蒂",
+	"维吉尔",
+	"Boss 蕾蒂",
+	"Boss 维吉尔",
 };
 
 constexpr uint8 ddmkCharactersMap[] = {
@@ -1106,8 +1106,8 @@ constexpr uint8 ddmkCharactersMap[] = {
 };
 
 const char* crimsonCharacterNames[] = {
-	"Dante",
-	"Vergil",
+	"但丁",
+	"维吉尔",
 };
 
 constexpr uint8 crimsonCharacterMap[] = {
@@ -1115,7 +1115,7 @@ constexpr uint8 crimsonCharacterMap[] = {
 	CHARACTER::VERGIL,
 };
 
-const char* collisionGroupNames[] = { "Player", "Enemy" };
+const char* collisionGroupNames[] = { "玩家", "敌人" };
 
 constexpr uint8 collisionGroups[] = {
 	COLLISION_GROUP::PLAYER,
@@ -1123,21 +1123,21 @@ constexpr uint8 collisionGroups[] = {
 };
 
 const char* styleNamesDante[] = {
-	"Swordmaster",
-	"Gunslinger",
-	"Trickster",
-	"Royalguard",
-	"Quicksilver",
-	"Doppelganger",
+	"剑圣",
+	"枪神",
+	"骗术师",
+	"皇家护卫",
+	"水银",
+	"分身",
 };
 
 const char* styleNamesFX[] = {
-	"Trick",
-	"Sword",
+	"骗术",
+	"剑圣",
 	"Gun",
-	"Royal",
-	"Quick",
-	"Dopp",
+	"皇卫",
+	"水银",
+	"分身",
 	"DT",
 	"DTE",
 	"Ready!"
@@ -1153,27 +1153,27 @@ constexpr uint8 stylesDante[] = {
 };
 
 const char* styleNamesVergil[] = {
-	"Dark Slayer",
-	"Doppelganger",
-	"Quicksilver",
+	"暗黑骑士",
+	"分身",
+	"水银",
 };
 
 const char* styleNamesDanteGameplay[] = {
-	"SWORDMASTER",
-	"GUNSLINGER",
-	"TRICKSTER",
-	"ROYALGUARD",
-	"QUICKSILVER",
-	"DOPPELGANGER",
+	"剑圣",
+	"枪神",
+	"骗术师",
+	"皇家护卫",
+	"水银",
+	"分身",
 };
 
 const char* styleNamesVergilGameplay[] = {
-	"PLACEHOLDER",
-	"PLACEHOLDER",
-	"DARK SLAYER",
-	"PLACEHOLDER",
-	"QUICKSILVER",
-	"DOPPELGANGER",
+	"占位符",
+	"占位符",
+	"暗黑骑士",
+	"占位符",
+	"水银",
+	"分身",
 };
 
 constexpr uint8 stylesVergil[] = {
@@ -1183,11 +1183,11 @@ constexpr uint8 stylesVergil[] = {
 };
 
 const char* meleeWeaponNamesDante[] = {
-	"Rebellion",
-	"Cerberus",
-	"Agni & Rudra",
-	"Nevan",
-	"Beowulf",
+	"叛逆",
+	"刻耳柏洛斯",
+	"阿耆尼与楼陀罗",
+	"涅梵",
+	"贝奥武夫",
 };
 
 constexpr uint8 meleeWeaponsDante[] = {
@@ -1199,9 +1199,9 @@ constexpr uint8 meleeWeaponsDante[] = {
 };
 
 const char* meleeWeaponNamesVergil[] = {
-	"Yamato",
-	"Beowulf",
-	"Force Edge",
+	"阎魔刀",
+	"贝奥武夫",
+	"力量之刃",
 };
 
 constexpr uint8 meleeWeaponsVergil[] = {
@@ -1211,11 +1211,11 @@ constexpr uint8 meleeWeaponsVergil[] = {
 };
 
 const char* rangedWeaponNamesDante[] = {
-	"Ebony & Ivory",
-	"Shotgun",
-	"Artemis",
-	"Spiral",
-	"Kalina Ann",
+	"黑檀木与白象牙",
+	"霰弹枪",
+	"阿尔忒弥斯",
+	"螺旋",
+	"卡琳娜·安",
 };
 
 constexpr uint8 rangedWeaponsDante[] = {
@@ -1228,41 +1228,41 @@ constexpr uint8 rangedWeaponsDante[] = {
 
 const char* costumeNamesDante[] = {
 	"DMC3",
-	"DMC3 Coatless",
-	"DMC3 Torn",
+	"DMC3 无外套",
+	"DMC3 破损",
 	"DMC1",
-	"DMC1 Coatless",
-	"Sparda",
-	"Super Dante",
-	"Super DMC1 Dante",
+	"DMC1 无外套",
+	"斯巴达",
+	"超级但丁",
+	"超级 DMC1 但丁",
 };
 
 const char* costumeNamesVergil[] = {
 	"DMC3",
-	"DMC3 Coatless",
-	"Super Vergil",
-	"Corrupted Vergil",
-	"Super Corrupted Vergil",
+	"DMC3 无外套",
+	"超级维吉尔",
+	"腐化维吉尔",
+	"超级腐化维吉尔",
 };
 
 const char* costumeNamesLady[] = {
 	"DMC3",
-	"Ridersuit",
+	"骑手服",
 };
 
 const char* weaponSwitchTypeNames[] = {
-	"Linear",
-	"Arbitrary",
+	"线性",
+	"任意",
 };
 
 const char* stickNames[] = {
-	"Right Stick",
-	"Left Stick",
+	"右摇杆",
+	"左摇杆",
 };
 
 const char* rightStickCenterCamNames[] = {
 	"Off",
-	"To Nearest Side",
+	"就近侧",
 	"On",
 };
 
@@ -1274,8 +1274,8 @@ uint8 rightStickCenterCamMap[] = {
 
 const char* cameraShakeNames[] = {
 	"Off",
-	"Only in Single Player Cam",
-	"Always On",
+	"仅单人镜头下",
+	"始终开启",
 };
 
 uint8 cameraShakeMap[] = {
@@ -1286,7 +1286,7 @@ uint8 cameraShakeMap[] = {
 
 const char* styleSwitchTypeNames[] = {
 	"Crimson",
-	"DMC3 Switch",
+	"DMC3 切换",
 };
 
 uint8 styleSwitchTypeMap[] = {
@@ -1295,48 +1295,48 @@ uint8 styleSwitchTypeMap[] = {
 };
 
 const char* styleRankNames[] = {
-	"None",
-	"Dope",
-	"Crazy",
-	"Blast",
-	"Alright",
-	"Sweet",
-	"Showtime",
-	"Stylish",
+	"无",
+	"酷",
+	"疯狂",
+	"爆发",
+	"不错",
+	"精彩",
+	"好戏上演",
+	"华丽",
 };
 
 const char* missionNames[] = {
-	"Movie",
-	"Mission 1",
-	"Mission 2",
-	"Mission 3",
-	"Mission 4",
-	"Mission 5",
-	"Mission 6",
-	"Mission 7",
-	"Mission 8",
-	"Mission 9",
-	"Mission 10",
-	"Mission 11",
-	"Mission 12",
-	"Mission 13",
-	"Mission 14",
-	"Mission 15",
-	"Mission 16",
-	"Mission 17",
-	"Mission 18",
-	"Mission 19",
-	"Mission 20",
-	"Bloody Palace",
+	"电影",
+	"任务 1",
+	"任务 2",
+	"任务 3",
+	"任务 4",
+	"任务 5",
+	"任务 6",
+	"任务 7",
+	"任务 8",
+	"任务 9",
+	"任务 10",
+	"任务 11",
+	"任务 12",
+	"任务 13",
+	"任务 14",
+	"任务 15",
+	"任务 16",
+	"任务 17",
+	"任务 18",
+	"任务 19",
+	"任务 20",
+	"血宫",
 };
 
 const char* modeNames[] = {
-	"Easy",
-	"Normal",
-	"Hard",
-	"Very Hard",
-	"Dante Must Die",
-	"Heaven or Hell",
+	"简单",
+	"普通",
+	"困难",
+	"极难",
+	"但丁必须死",
+	"天堂或地狱",
 };
 
 constexpr uint32 modes[] = {
@@ -1349,33 +1349,33 @@ constexpr uint32 modes[] = {
 };
 
 const char* floorNames[] = {
-	"Floor 1",
-	"Floor 2",
-	"Floor 3",
-	"Floor 4",
-	"Floor 5",
-	"Floor 6",
-	"Floor 7",
-	"Floor 8",
-	"Floor 9",
-	"Floor 10",
-	"Cerberus",
-	"Gigapede",
-	"Agni & Rudra",
-	"Nevan",
-	"Beowulf",
-	"Geryon",
-	"Doppelganger",
-	"Leviathan",
-	"Damned Chessmen",
-	"Vergil 1",
-	"Vergil 2",
-	"Vergil 3",
-	"Lady",
-	"Arkham",
-	"Jester 1",
-	"Jester 2",
-	"Jester 3",
+	"第 1 层",
+	"第 2 层",
+	"第 3 层",
+	"第 4 层",
+	"第 5 层",
+	"第 6 层",
+	"第 7 层",
+	"第 8 层",
+	"第 9 层",
+	"第 10 层",
+	"刻耳柏洛斯",
+	"巨蜈蚣",
+	"阿耆尼与楼陀罗",
+	"涅梵",
+	"贝奥武夫",
+	"格里昂",
+	"分身",
+	"利维坦",
+	"诅咒棋子",
+	"维吉尔 1",
+	"维吉尔 2",
+	"维吉尔 3",
+	"蕾蒂",
+	"阿卡姆",
+	"小丑 1",
+	"小丑 2",
+	"小丑 3",
 };
 
 const char* sceneNames[] = {
@@ -1592,11 +1592,11 @@ const char* trackNames[] = {
 	"Boss_08",
 	"Boss_08b",
 	"Boss_09",
-	"Continue",
+	"继续",
 	"dummy",
 	"Hine_01",
 	"Hine_02",
-	"Jester",
+	"小丑",
 	"Jikushinzou",
 	"Kaze_01",
 	"Kaze_02",
@@ -1604,7 +1604,7 @@ const char* trackNames[] = {
 	"Kaze_04",
 	"Kaze_05",
 	"Kaze_06",
-	"Lady",
+	"蕾蒂",
 	"m01_c00",
 	"m01_v00",
 	"m01_v01",
@@ -1694,12 +1694,12 @@ const char* trackNames[] = {
 	"M_start",
 	"M_start2",
 	"Nausica",
-	"Option",
-	"Result",
+	"选项",
+	"结算",
 	"Room_01",
 	"Sm_clear",
 	"Sm_failure",
-	"Staffroll",
+	"制作人员名单",
 	"Stage_01",
 	"Stage_02",
 	"Stage_02b",
@@ -1724,17 +1724,17 @@ const char* trackNames[] = {
 std::vector<std::string> SwordFormationShortcutNames = {
 	"Off",
 	"On",
-	"Inverted",
+	"反转",
 };
 
 std::vector<std::string> weaponWheelThemeNames = {
 	"Crimson",
-	"Crimson Early Beta",
-	"DMC3 Switch",
+	"绯红早期测试版",
+	"DMC3 切换",
 };
 
 const char* hudElementScaleStateNames[] = {
-	"Small",
+	"小",
 	"Big",
 };
 
@@ -1745,8 +1745,8 @@ constexpr uint8 hudElementScaleStateMap[2] = {
 
 const char* hudElementShowStateNames[] = {
 	"Off",
-	"Only in Multiplayer",
-	"Always",
+	"仅多人模式",
+	"始终",
 };
 
 constexpr uint8 hudElementShowStateMap[3] = {
@@ -1757,8 +1757,8 @@ constexpr uint8 hudElementShowStateMap[3] = {
 
 const char* stylesDisplayStateNames[] = {
 	"Off",
-	"With Broken Glass",
-	"No Broken Glass",
+	"有碎玻璃",
+	"无碎玻璃",
 };
 
 constexpr uint8 stylesDisplayStateMap[3] = {
@@ -1769,7 +1769,7 @@ constexpr uint8 stylesDisplayStateMap[3] = {
 
 const char* styleNamesTextureSetNames[] = {
 	"Crimson",
-	"DMC3 Switch",
+	"DMC3 切换",
 };
 
 constexpr uint8 styleNamesTextureSetMap[2] = {
@@ -1779,8 +1779,8 @@ constexpr uint8 styleNamesTextureSetMap[2] = {
 
 const char* missionTimerDisplayStateNames[] = {
 	"Off",
-	"Only in BP",
-	"Always",
+	"仅血宫",
+	"始终",
 };
 
 constexpr uint8 missionTimerDisplayStateMap[3] = {
@@ -1792,8 +1792,8 @@ constexpr uint8 missionTimerDisplayStateMap[3] = {
 const char* ldkModeNames[] = {
 	"Off",
 	"LDK",
-	"Super LDK",
-	"Super LDK + Bosses",
+	"超级 LDK",
+	"超级 LDK + Boss",
 };
 
 constexpr uint8 ldkModes[] = {
@@ -1804,9 +1804,9 @@ constexpr uint8 ldkModes[] = {
 };
 
 const char* enemyDTModeNames[] = {
-	"Default",
-	"Instant Enemy DT",
-	"No Enemy DT",
+	"默认",
+	"敌人立即魔人化",
+	"敌人不魔人化",
 };
 
 constexpr uint8 enemyDTModes[] = {
@@ -1817,12 +1817,12 @@ constexpr uint8 enemyDTModes[] = {
 
 const char* forceDifficultyNames[] = {
 	"Off",
-	"Easy",
-	"Normal",
-	"Hard",
-	"Very Hard",
-	"Dante Must Die",
-	"Heaven or Hell",
+	"简单",
+	"普通",
+	"困难",
+	"极难",
+	"但丁必须死",
+	"天堂或地狱",
 };
 
 constexpr uint32 forceDifficultyModes[] = {
@@ -1841,8 +1841,8 @@ constexpr uint8 delayedComboSFXMap[] = {
 };
 
 const char* delayedComboSFXNames[] = {
-	"Type A",
-	"Type B",
+	"类型 A",
+	"类型 B",
 };
 
 
@@ -2115,7 +2115,7 @@ bool WeaponWheelController(PlayerActorData& actorData, IDXGISwapChain* pSwapChai
 		auto initialTheme = WW::WheelThemes::Neutral;
 		if (activeCrimsonConfig.WeaponWheel.theme == "Crimson") {
 			initialTheme = state.charTheme;
-		} else if (activeCrimsonConfig.WeaponWheel.theme == "Crimson Early Beta") {
+		} else if (activeCrimsonConfig.WeaponWheel.theme == "绯红早期测试版") {
 			initialTheme = state.charTheme == WW::WheelThemes::Dante ? WW::WheelThemes::BetaDante : WW::WheelThemes::BetaVergil;
 		}
 
@@ -2149,7 +2149,7 @@ bool WeaponWheelController(PlayerActorData& actorData, IDXGISwapChain* pSwapChai
 		auto newTheme = WW::WheelThemes::Neutral;
 		if (activeCrimsonConfig.WeaponWheel.theme == "Crimson") {
 			newTheme = state.charTheme;
-		} else if (activeCrimsonConfig.WeaponWheel.theme == "Crimson Early Beta") {
+		} else if (activeCrimsonConfig.WeaponWheel.theme == "绯红早期测试版") {
 			newTheme = state.charTheme == WW::WheelThemes::Dante ? WW::WheelThemes::BetaDante : WW::WheelThemes::BetaVergil;
 		}
 		pWeaponWheel->SetWheelTheme(newTheme);
@@ -2162,7 +2162,7 @@ bool WeaponWheelController(PlayerActorData& actorData, IDXGISwapChain* pSwapChai
 		auto switchTheme = WW::WheelThemes::Neutral;
 		if (activeCrimsonConfig.WeaponWheel.theme == "Crimson") {
 			switchTheme = state.charTheme;
-		} else if (activeCrimsonConfig.WeaponWheel.theme == "Crimson Early Beta") {
+		} else if (activeCrimsonConfig.WeaponWheel.theme == "绯红早期测试版") {
 			switchTheme = state.charTheme == WW::WheelThemes::Dante ? WW::WheelThemes::BetaDante : WW::WheelThemes::BetaVergil;
 		}
 		pWeaponWheel->SetWheelTheme(switchTheme);
@@ -2783,7 +2783,7 @@ void Actor_CharacterTab(uint8 playerIndex, uint8 characterIndex, uint8 entityInd
 			ImGui::PushItemWidth(itemWidth);
 
 			if (!activeCrimsonGameplay.Cheats.General.legacyDDMKCharacters) {
-				if (UI::ComboMapValue("CHARACTER", crimsonCharacterNames, crimsonCharacterMap,
+				if (UI::ComboMapValue("角色", crimsonCharacterNames, crimsonCharacterMap,
 					queuedCharacterData.character)) {
 					ApplyDefaultCharacterData(queuedCharacterData, queuedCharacterData.character, playerIndex, characterIndex);
 					
@@ -2799,7 +2799,7 @@ void Actor_CharacterTab(uint8 playerIndex, uint8 characterIndex, uint8 entityInd
 				
 			} else {
 				if ((playerIndex == 0) && (characterIndex > 0)) {
-					if (UI::ComboMap("CHARACTER", ddmkCharacterNames, ddmkCharactersMap, Actor_newCharacterIndices[playerIndex][characterIndex][entityIndex],
+					if (UI::ComboMap("角色", ddmkCharacterNames, ddmkCharactersMap, Actor_newCharacterIndices[playerIndex][characterIndex][entityIndex],
 						queuedCharacterData.character)) {
 						ApplyDefaultCharacterData(queuedCharacterData, queuedCharacterData.character, playerIndex, characterIndex);
 
@@ -2813,7 +2813,7 @@ void Actor_CharacterTab(uint8 playerIndex, uint8 characterIndex, uint8 entityInd
 						Actor_UpdateIndices();
 					}
 				} else {
-					if (UI::Combo("CHARACTER", ddmkCharacter2PNames, queuedCharacterData.character)) {
+					if (UI::Combo("角色", ddmkCharacter2PNames, queuedCharacterData.character)) {
 						ApplyDefaultCharacterData(queuedCharacterData, queuedCharacterData.character, playerIndex, characterIndex);
 
 						if (queuedCharacterData.character == CHARACTER::DANTE || queuedCharacterData.character == CHARACTER::VERGIL) {
@@ -2848,17 +2848,17 @@ void Actor_CharacterTab(uint8 playerIndex, uint8 characterIndex, uint8 entityInd
 					GUI_PushDisable(condition);
 
 					if (queuedCharacterData.character == CHARACTER::DANTE) {
-						UI::Combo2("Costume", costumeNamesDante, activeCharacterData.costume, queuedCharacterData.costume);
+						UI::Combo2("服装", costumeNamesDante, activeCharacterData.costume, queuedCharacterData.costume);
 					} else if (queuedCharacterData.character == CHARACTER::VERGIL || queuedCharacterData.character == CHARACTER::BOB || 
 						queuedCharacterData.character == CHARACTER::BOSS_VERGIL) {
-						UI::Combo2("Costume", costumeNamesVergil, activeCharacterData.costume, queuedCharacterData.costume);
+						UI::Combo2("服装", costumeNamesVergil, activeCharacterData.costume, queuedCharacterData.costume);
 					} else if (queuedCharacterData.character == CHARACTER::LADY || queuedCharacterData.character == CHARACTER::BOSS_LADY) {
-						UI::Combo2("Costume", costumeNamesLady, activeCharacterData.costume, queuedCharacterData.costume);
+						UI::Combo2("服装", costumeNamesLady, activeCharacterData.costume, queuedCharacterData.costume);
 					}
 					
 					GUI_PopDisable(condition);
 
-					if (GUI_Checkbox("Use In-Game Setting ", queuedCharacterData.ignoreCostume)) {
+					if (GUI_Checkbox("使用游戏内设置", queuedCharacterData.ignoreCostume)) {
 						queuedCharacterDataClone.ignoreCostume = queuedCharacterData.ignoreCostume;
 					}
 					ImGui::SameLine();
@@ -2867,7 +2867,7 @@ void Actor_CharacterTab(uint8 playerIndex, uint8 characterIndex, uint8 entityInd
 				ImGui::SameLine();
 
 
-				if (GUI_Checkbox("Force Specific Model", queuedCharacterData.forceFiles)) {
+				if (GUI_Checkbox("强制指定模型", queuedCharacterData.forceFiles)) {
 					queuedCharacterDataClone.forceFiles = queuedCharacterData.forceFiles;
 				}
 
@@ -2877,21 +2877,21 @@ void Actor_CharacterTab(uint8 playerIndex, uint8 characterIndex, uint8 entityInd
 					ImGui::TableNextRow(0, rowWidth);
 					ImGui::TableNextColumn();
 
-					if (UI::Combo("Force Model Character", ddmkCharacter2PNames, queuedCharacterData.forceFilesCharacter)) {
+					if (UI::Combo("强制模型角色", ddmkCharacter2PNames, queuedCharacterData.forceFilesCharacter)) {
 						queuedCharacterDataClone.forceFilesCharacter = queuedCharacterData.forceFilesCharacter;
 					}
 
 					if (queuedCharacterData.forceFilesCharacter == CHARACTER::DANTE) {
-						UI::Combo2("Force Files Costume", costumeNamesDante, activeCharacterData.forceFilesCostume, queuedCharacterData.forceFilesCostume);
+						UI::Combo2("强制文件服装", costumeNamesDante, activeCharacterData.forceFilesCostume, queuedCharacterData.forceFilesCostume);
 					} else if (queuedCharacterData.forceFilesCharacter == CHARACTER::VERGIL)  {
-						UI::Combo2("Force Files Costume", costumeNamesVergil, activeCharacterData.forceFilesCostume, queuedCharacterData.forceFilesCostume);
+						UI::Combo2("强制文件服装", costumeNamesVergil, activeCharacterData.forceFilesCostume, queuedCharacterData.forceFilesCostume);
 					} else if (queuedCharacterData.forceFilesCharacter == CHARACTER::LADY || queuedCharacterData.forceFilesCharacter == CHARACTER::BOSS_LADY) {
-						UI::Combo2("Force Files Costume", costumeNamesLady, activeCharacterData.forceFilesCostume, queuedCharacterData.forceFilesCostume);
+						UI::Combo2("强制文件服装", costumeNamesLady, activeCharacterData.forceFilesCostume, queuedCharacterData.forceFilesCostume);
 					}
 				}
 				//if we are dante and haven't unlocked doppelganger, we shouldn't show this menu option.
 				if (!queuedCharacterData.character == CHARACTER::DANTE || sessionData.weaponAndStyleUnlocks[WEAPONANDSTYLEUNLOCKS::DOPPELGANGER]) {
-					if (UI::Combo("Doppelganger", ddmkCharacter2PNames, queuedCharacterDataClone.character)) {
+					if (UI::Combo("分身", ddmkCharacter2PNames, queuedCharacterDataClone.character)) {
 						ApplyDefaultCharacterData(queuedCharacterDataClone, queuedCharacterDataClone.character, playerIndex, characterIndex);
 
 						Actor_UpdateIndices();
@@ -2909,7 +2909,7 @@ void Actor_CharacterTab(uint8 playerIndex, uint8 characterIndex, uint8 entityInd
 
 	ImGui::Text("");
 
-	/*ImGui::Text("Styles");
+	/*ImGui::Text("风格");
 
 	old_for_all(uint8, styleIndex, STYLE_COUNT)
 	{
@@ -3002,7 +3002,7 @@ void Actor_CharacterTab(uint8 playerIndex, uint8 characterIndex, uint8 entityInd
 	}
 
 	ImGui::PushFont(UI::g_ImGuiFont_RussoOne[defaultFontSize * 1.1f]);
-	ImGui::Text("WEAPON LOADOUT");
+	ImGui::Text("武器配置");
 	//GUI_SectionEnd(SectionFlags_NoNewLine);
 	ImGui::PopFont();
 
@@ -3020,7 +3020,7 @@ void Actor_CharacterTab(uint8 playerIndex, uint8 characterIndex, uint8 entityInd
 				ImGui::TableNextColumn();
 
 				ImGui::PushFont(UI::g_ImGuiFont_RussoOne[defaultFontSize * 1.0f]);
-				ImGui::Text("RANGED");
+				ImGui::Text("远程武器");
 				ImGui::PopFont();
 
 
@@ -3070,7 +3070,7 @@ void Actor_CharacterTab(uint8 playerIndex, uint8 characterIndex, uint8 entityInd
 			ImGui::TableNextColumn();
 
 			ImGui::PushFont(UI::g_ImGuiFont_RussoOne[defaultFontSize * 1.0f]);
-			ImGui::Text("MELEE");
+			ImGui::Text("近战武器");
 			ImGui::PopFont();
 
 			ImGui::PushItemWidth(itemWidth);
@@ -3187,16 +3187,16 @@ void Actor_PlayerTab(uint8 playerIndex, size_t defaultFontSize) {
 
 	ImGui::PushItemWidth(itemWidth);
 	ImGui::PushFont(UI::g_ImGuiFont_Roboto[defaultFontSize * 0.9f]);
-	if (GUI_Checkbox2("Switch characters mid-mission", activeCrimsonGameplay.Gameplay.General.charHotswap, queuedCrimsonGameplay.Gameplay.General.charHotswap)) {}
+	if (GUI_Checkbox2("任务中切换角色", activeCrimsonGameplay.Gameplay.General.charHotswap, queuedCrimsonGameplay.Gameplay.General.charHotswap)) {}
 	
 	GUI_PushDisable(!activeCrimsonGameplay.Gameplay.General.charHotswap);
 	if (!activeCrimsonGameplay.Gameplay.General.charHotswap) {
 		queuedPlayerData.characterCount = 1;
 	}
-	GUI_Slider<uint8>("Number of Characters", queuedPlayerData.characterCount, 1, CHARACTER_COUNT);
+	GUI_Slider<uint8>("角色数量", queuedPlayerData.characterCount, 1, CHARACTER_COUNT);
 
 
-	UI::ComboMap2("Switch Button", buttonNames, buttons, Actor_buttonIndices[playerIndex], activePlayerData.switchButton, queuedPlayerData.switchButton,
+	UI::ComboMap2("切换按键", buttonNames, buttons, Actor_buttonIndices[playerIndex], activePlayerData.switchButton, queuedPlayerData.switchButton,
 		ImGuiComboFlags_HeightLargest);
 	ImGui::SameLine();
 	TooltipHelper("(?)", "Press to Switch Loadouts or Characters.\n"
@@ -3204,7 +3204,7 @@ void Actor_PlayerTab(uint8 playerIndex, size_t defaultFontSize) {
 
 	if (playerIndex != 0) {
 
-		UI::ComboMap("Type (Collision Group)", collisionGroupNames, collisionGroups, Actor_collisionGroupIndices[playerIndex],
+		UI::ComboMap("类型（碰撞组）", collisionGroupNames, collisionGroups, Actor_collisionGroupIndices[playerIndex],
 			queuedPlayerData.collisionGroup);
 
 	}
@@ -3212,7 +3212,7 @@ void Actor_PlayerTab(uint8 playerIndex, size_t defaultFontSize) {
 	BackgroundPlayerText(playerIndex);
 
 
-	//     if (GUI_Button("Reset")) {
+	//     if (GUI_Button("重置")) {
 	//         CopyMemory(&queuedConfig.Actor.playerData[playerIndex].removeBusyFlag, &defaultConfig.Actor.playerData[playerIndex].removeBusyFlag,
 	//             sizeof(queuedConfig.Actor.playerData[playerIndex].removeBusyFlag));
 	//         CopyMemory(&activeConfig.Actor.playerData[playerIndex].removeBusyFlag, &queuedConfig.Actor.playerData[playerIndex].removeBusyFlag,
@@ -3231,9 +3231,9 @@ void Actor_PlayerTab(uint8 playerIndex, size_t defaultFontSize) {
 	/*    ImGui::Text("");*/
 
 
-	// 	GUI_Checkbox2("Remove Busy Flag", activePlayerData.removeBusyFlag, queuedPlayerData.removeBusyFlag);
+	// 	GUI_Checkbox2("移除忙碌标记", activePlayerData.removeBusyFlag, queuedPlayerData.removeBusyFlag);
 	// 	ImGui::SameLine();
-	// 	TooltipHelper("(?)", "Removes the actor's busy flag which allows you to do insane combos or just look stupid.");
+	// 	TooltipHelper("(?)", "移除角色的忙碌标记，可打出疯狂连段，也可能显得很蠢。");
 	// 	ImGui::Text("");
 	// 
 	// 
@@ -3353,7 +3353,7 @@ void CharacterSection(size_t defaultFontSize) {
 
 	ImGui::PushFont(UI::g_ImGuiFont_RussoOne[defaultFontSize * 1.1f]);
 	GUI_PushDisable(activeCrimsonGameplay.GameMode.preset < GAMEMODEPRESETS::CUSTOM);
-	GUI_Checkbox("CRIMSON CHARACTER SYSTEM (CCS)      ", queuedConfig.Actor.enable);
+	GUI_Checkbox("绯红角色系统（CCS）", queuedConfig.Actor.enable);
 	GUI_PopDisable(activeCrimsonGameplay.GameMode.preset < GAMEMODEPRESETS::CUSTOM);
 	ImGui::PopFont();
 
@@ -3361,7 +3361,7 @@ void CharacterSection(size_t defaultFontSize) {
 		ImGui::SameLine();
 		ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(0.871f, 0.110f, 0.298f, 1.0f));
 		ImGui::PushFont(UI::g_ImGuiFont_Roboto[defaultFontSize * 0.9f]);
-		ImGui::Text("Crimson Character System is disabled. Most Gameplay Options and Multiplayer will not work.");
+		ImGui::Text("绯红角色系统已禁用，大部分玩法选项和多人模式将无法使用。");
 		ImGui::PopStyleColor();
 		ImGui::PopFont();
 	}
@@ -3383,7 +3383,7 @@ void CharacterSection(size_t defaultFontSize) {
 			ImGui::TableNextColumn();
 
 			ImGui::PushFont(UI::g_ImGuiFont_RussoOne[defaultFontSize * 1.1f]);
-			const char* SPMPText = (queuedConfig.Actor.playerCount == 1) ? SPMPText = "SINGLE PLAYER" : SPMPText = "MULTIPLAYER";
+			const char* SPMPText = (queuedConfig.Actor.playerCount == 1) ? SPMPText = "单人游戏" : SPMPText = "多人游戏";
 			ImGui::Text(SPMPText);
 			ImGui::PopFont();
 			BackgroundSPMPText(SPMPText);
@@ -3391,7 +3391,7 @@ void CharacterSection(size_t defaultFontSize) {
 
 			ImGui::PushFont(UI::g_ImGuiFont_Roboto[defaultFontSize * 0.9f]);
 			ImGui::PushItemWidth(itemWidth);
-			if (GUI_Slider<uint8>("Number of Players", queuedConfig.Actor.playerCount, 1, PLAYER_COUNT)) {
+			if (GUI_Slider<uint8>("玩家数量", queuedConfig.Actor.playerCount, 1, PLAYER_COUNT)) {
 				if (queuedConfig.Actor.playerCount > 1) {
 					activeCrimsonConfig.Camera.multiplayerCamera = true;
 					queuedCrimsonConfig.Camera.multiplayerCamera = true;
@@ -3408,17 +3408,17 @@ void CharacterSection(size_t defaultFontSize) {
 
 			ImGui::Text("");
 
-			if (GUI_Button("BUTTON CONFIGURATION")) {
+			if (GUI_Button("按键配置")) {
 				g_showControllerRemap = true;
 			}
 			ImGui::SameLine();
-			TooltipHelper("(?)", "Open the controller button remapping window to customize button bindings for each player and character.");
+			TooltipHelper("(?)", "打开手柄按键重映射窗口，为每位玩家和角色自定义按键。");
 
 			ImGui::TableNextColumn();
 
 
 			ImGui::PushItemWidth(itemWidth);
-			UI::Combo2("DMC3 Costume Game Progression", costumeRespectsProgressionNames, activeConfig.costumeRespectsProgression,
+			UI::Combo2("DMC3 服装游戏进度", costumeRespectsProgressionNames, activeConfig.costumeRespectsProgression,
 				queuedConfig.costumeRespectsProgression);
 			ImGui::PopItemWidth();
 
@@ -3500,11 +3500,11 @@ void CharacterSection(size_t defaultFontSize) {
 			ImGui::Text("");
 
 			GUI_PushDisable(queuedConfig.Actor.playerCount <= 1);
-			GUI_Checkbox2("PVP Fixes", activeConfig.enablePVPFixes, queuedConfig.enablePVPFixes);
+			GUI_Checkbox2("PVP 修复", activeConfig.enablePVPFixes, queuedConfig.enablePVPFixes);
 			ImGui::SameLine();
 			TooltipHelper("(?) WARNING", "Allows you to set up PVP Multiplayer.\n"
 				"Lock On in PVP requires an enemy spawned in order to work properly.\n"
-				"WARNING: This option WILL break actual enemies (they will freeze). Use with caution.", 2048.0f, true);
+				"警告：此选项会导致真实敌人卡死，请谨慎使用。", 2048.0f, true);
 			GUI_PopDisable(queuedConfig.Actor.playerCount <= 1);
 
 			ImGui::EndTable();
@@ -3559,7 +3559,7 @@ void ArcadeSection(size_t defaultFontSize) {
 	ImU32 highlightColorText = UI::SwapColorEndianness(0xFF809FFF);
 
 
-	if (GUI_TitleCheckbox2("ARCADE", activeConfig.Arcade.enable, queuedConfig.Arcade.enable)) {
+	if (GUI_TitleCheckbox2("街机模式", activeConfig.Arcade.enable, queuedConfig.Arcade.enable)) {
 		Arcade::Toggle(activeConfig.Arcade.enable);
 	}
 
@@ -3582,7 +3582,7 @@ void ArcadeSection(size_t defaultFontSize) {
 
 		ImGui::SameLine();
 		ImGui::PushFont(UI::g_ImGuiFont_RussoOne[defaultFontSize * 1.1f]);
-		ImGui::Text("MISSION");
+		ImGui::Text("任务");
 		ImGui::PopFont();
 
 
@@ -3594,7 +3594,7 @@ void ArcadeSection(size_t defaultFontSize) {
 
 			ImGui::SameLine();
 			ImGui::PushFont(UI::g_ImGuiFont_RussoOne[defaultFontSize * 1.1f]);
-			ImGui::Text("DIFFICULTY");
+			ImGui::Text("难度");
 			ImGui::PopFont();
 
 		}
@@ -3604,19 +3604,19 @@ void ArcadeSection(size_t defaultFontSize) {
 
 
 		if (activeConfig.Arcade.mission > 0) {
-			GUI_InputDefault2<float>("Max HP", activeConfig.Arcade.hitPoints, queuedConfig.Arcade.hitPoints,
+			GUI_InputDefault2<float>("最大生命", activeConfig.Arcade.hitPoints, queuedConfig.Arcade.hitPoints,
 				defaultConfig.Arcade.hitPoints, 1000, "%g", ImGuiInputTextFlags_EnterReturnsTrue);
 
 			ImGui::TableNextColumn();
 
-			GUI_InputDefault2<float>("Max Devil Trigger", activeConfig.Arcade.magicPoints, queuedConfig.Arcade.magicPoints,
+			GUI_InputDefault2<float>("最大魔人化", activeConfig.Arcade.magicPoints, queuedConfig.Arcade.magicPoints,
 				defaultConfig.Arcade.magicPoints, 1000, "%g", ImGuiInputTextFlags_EnterReturnsTrue);
 		}
 
 		ImGui::TableNextRow(0, rowWidth);
 		ImGui::TableNextColumn();
 
-		UI::Combo2("Campaign", ddmkCharacter2PNames, activeConfig.Arcade.character, queuedConfig.Arcade.character);
+		UI::Combo2("战役", ddmkCharacter2PNames, activeConfig.Arcade.character, queuedConfig.Arcade.character);
 
 		{
 			auto queuedCharacterData = GetQueuedCharacterData(0, 0, 0);
@@ -3625,11 +3625,11 @@ void ArcadeSection(size_t defaultFontSize) {
 			if (activeConfig.Arcade.mission > 0 && (queuedCharacterData.ignoreCostume || !queuedConfig.Actor.enable)) {
 				ImGui::TableNextColumn();
 				if (queuedConfig.Arcade.character == CHARACTER::DANTE) {
-					UI::Combo2("Costume", costumeNamesDante, activeConfig.Arcade.costume, queuedConfig.Arcade.costume);
+					UI::Combo2("服装", costumeNamesDante, activeConfig.Arcade.costume, queuedConfig.Arcade.costume);
 				} else if (queuedConfig.Arcade.character == CHARACTER::VERGIL) {
-					UI::Combo2("Costume", costumeNamesVergil, activeConfig.Arcade.costume, queuedConfig.Arcade.costume);
+					UI::Combo2("服装", costumeNamesVergil, activeConfig.Arcade.costume, queuedConfig.Arcade.costume);
 				} else if (queuedConfig.Arcade.character == CHARACTER::LADY || queuedConfig.Arcade.character == CHARACTER::BOSS_LADY) {
-					UI::Combo2("Costume", costumeNamesLady, activeConfig.Arcade.costume, queuedConfig.Arcade.costume);
+					UI::Combo2("服装", costumeNamesLady, activeConfig.Arcade.costume, queuedConfig.Arcade.costume);
 				}
 
 			}
@@ -3642,22 +3642,22 @@ void ArcadeSection(size_t defaultFontSize) {
 				UI::Combo2("Style                  ", styleNamesDante, activeConfig.Arcade.style, queuedConfig.Arcade.style);
 
 				ImGui::TableNextColumn();
-				UI::ComboMap2("Ranged 1", rangedWeaponNamesDante, rangedWeaponsDante, Arcade_rangedWeaponIndexDante[0],
+				UI::ComboMap2("远程 1", rangedWeaponNamesDante, rangedWeaponsDante, Arcade_rangedWeaponIndexDante[0],
 					activeConfig.Arcade.weapons[2], queuedConfig.Arcade.weapons[2]);
 
 				ImGui::TableNextRow(0, rowWidth);
 				ImGui::TableNextColumn();
 
-				UI::ComboMap2("Melee 1             ", meleeWeaponNamesDante, meleeWeaponsDante, Arcade_meleeWeaponIndexDante[0],
+				UI::ComboMap2("近战 1", meleeWeaponNamesDante, meleeWeaponsDante, Arcade_meleeWeaponIndexDante[0],
 					activeConfig.Arcade.weapons[0], queuedConfig.Arcade.weapons[0]);
 
 				ImGui::TableNextColumn();
-				UI::ComboMap2("Ranged 2", rangedWeaponNamesDante, rangedWeaponsDante, Arcade_rangedWeaponIndexDante[1],
+				UI::ComboMap2("远程 2", rangedWeaponNamesDante, rangedWeaponsDante, Arcade_rangedWeaponIndexDante[1],
 					activeConfig.Arcade.weapons[3], queuedConfig.Arcade.weapons[3]);
 
 				ImGui::TableNextRow(0, rowWidth);
 				ImGui::TableNextColumn();
-				UI::ComboMap2("Melee 2", meleeWeaponNamesDante, meleeWeaponsDante, Arcade_meleeWeaponIndexDante[1],
+				UI::ComboMap2("近战 2", meleeWeaponNamesDante, meleeWeaponsDante, Arcade_meleeWeaponIndexDante[1],
 					activeConfig.Arcade.weapons[1], queuedConfig.Arcade.weapons[1]);
 
 			}
@@ -3682,7 +3682,7 @@ void ArcadeSection(size_t defaultFontSize) {
 				GUI_PopDisable(condition);
 
 				ImGui::SameLine();
-				ImGui::Text("Room");
+				ImGui::Text("房间");
 
 
 				ImGui::SameLine();
@@ -3703,7 +3703,7 @@ void ArcadeSection(size_t defaultFontSize) {
 				GUI_PopDisable(condition);
 
 				ImGui::SameLine();
-				ImGui::Text("Position");
+				ImGui::Text("位置");
 
 				ImGui::SameLine();
 				GUI_Checkbox2("", activeConfig.Arcade.enablePositionSelection, queuedConfig.Arcade.enablePositionSelection);
@@ -3715,11 +3715,11 @@ void ArcadeSection(size_t defaultFontSize) {
 			ImGui::TableNextRow(0, rowWidth);
 			ImGui::TableNextColumn();
 
-			UI::Combo2("Floor", floorNames, activeConfig.Arcade.floor, queuedConfig.Arcade.floor, ImGuiComboFlags_HeightLargest);
+			UI::Combo2("楼层", floorNames, activeConfig.Arcade.floor, queuedConfig.Arcade.floor, ImGuiComboFlags_HeightLargest);
 
 			ImGui::TableNextColumn();
 
-			GUI_InputDefault2<uint16>("Level", activeConfig.Arcade.level, queuedConfig.Arcade.level, defaultConfig.Arcade.level, 1, "%u",
+			GUI_InputDefault2<uint16>("关卡", activeConfig.Arcade.level, queuedConfig.Arcade.level, defaultConfig.Arcade.level, 1, "%u",
 				ImGuiInputTextFlags_EnterReturnsTrue);
 		}
 
@@ -3920,7 +3920,7 @@ void RenderMissionResultGameModeStats() {
 		break;
 
 	default:
-		missionResultGameModeString = "Unknown";
+		missionResultGameModeString = "未知";
 		gameModeStringColor = applyAlpha(0xFFFFFFFF);
 		break;
 	}
@@ -3977,7 +3977,7 @@ void RenderMissionResultGameModeStats() {
 
 		std::string difficultyDisplay = gameModeData.difficultyModeNames[currentDifficultyMode];
 		if (currentDifficultyMode == DIFFICULTY_MODE::HARD && sessionData.oneHitKill) {
-			difficultyDisplay = "Heaven or Hell";
+			difficultyDisplay = "天堂或地狱";
 		}
 		if (activeCrimsonGameplay.Gameplay.ExtraDifficulty.forceDifficultyMode != DIFFICULTY_MODE::FORCE_DIFFICULTY_OFF) {
 			difficultyDisplay += " (Forced)";
@@ -4030,7 +4030,7 @@ void RenderMissionResultGameModeStats() {
 
 		if (gameModeData.arcadeMissionEnabled) {
 			ImGui::PushFont(g_ImGuiFont_Messenger[25.0f]);
-			ImGui::Text("Arcade");
+			ImGui::Text("街机");
 			ImGui::PopFont();
 		}
 
@@ -4042,7 +4042,7 @@ void RenderMissionResultGameModeStats() {
 		if (gameModeData.bossRushMissionEnabled) {
 			ImGui::SameLine();
 			ImGui::PushFont(g_ImGuiFont_Messenger[25.0f]);
-			ImGui::Text("Boss Rush");
+			ImGui::Text("Boss 连战");
 			ImGui::PopFont();
 		}
 
@@ -4055,7 +4055,7 @@ void RenderMissionResultGameModeStats() {
 		if (gameModeData.characterSwitchingEnabled) {
 			ImGui::SameLine();
 			ImGui::PushFont(g_ImGuiFont_Messenger[25.0f]);
-			ImGui::Text("Char. Switching");
+			ImGui::Text("角色切换");
 			ImGui::PopFont();
 		}
 
@@ -4069,7 +4069,7 @@ void RenderMissionResultGameModeStats() {
 		if (gameModeData.multiplayerEnabled) {
 			ImGui::SameLine();
 			ImGui::PushFont(g_ImGuiFont_Messenger[25.0f]);
-			ImGui::Text("Multiplayer");
+			ImGui::Text("多人模式");
 
 			if (activeCrimsonGameplay.Gameplay.General.multiplayerDamageScaling && 
 				!activeCrimsonGameplay.Cheats.General.customDamage) {
@@ -4305,7 +4305,7 @@ void RenderMissionResultCheatsUsed() {
 		break;
 
 	default:
-		missionResultGameModeString = "Unknown";
+		missionResultGameModeString = "未知";
 		gameModeStringColor = applyAlpha(0xFFFFFFFF);
 		break;
 	}
@@ -4331,7 +4331,7 @@ void RenderMissionResultCheatsUsed() {
 		ImGui::PushFont(font);
 
 		if (gameModeData.missionUsedCheats.size() > 0)
-			ImGui::Text("CHEATS USED:");
+			ImGui::Text("已用作弊：");
 
 		for (auto cheat : gameModeData.missionUsedCheats) {
 			ImGui::PushFont(g_ImGuiFont_Benguiat[23.0f]);
@@ -4648,13 +4648,13 @@ void RenderMultiplayerBar(
 		auto& missionData = *reinterpret_cast<MissionData*>(name_6975);
 		//ImGui::SameLine();
 		if (actorData.dead && missionData.itemCounts[ITEM::GOLD_ORB] > 0) {
-			ImGui::Text("Hold start to revive");
+			ImGui::Text("长按开始键复活");
 			ImGui::Text("  ");
 			ImGui::SameLine();
-			ImGui::Text("Gold orbs left: %u", missionData.itemCounts[ITEM::GOLD_ORB]);
+			ImGui::Text("剩余金魂：%u", missionData.itemCounts[ITEM::GOLD_ORB]);
 		}else
 		if (actorData.dead) {
-			ImGui::Text("Gold orbs left: %u", missionData.itemCounts[ITEM::GOLD_ORB]);
+			ImGui::Text("剩余金魂：%u", missionData.itemCounts[ITEM::GOLD_ORB]);
 		}
 		else
 		if (actorData.character == CHARACTER::DANTE || actorData.character == CHARACTER::VERGIL) {
@@ -5016,7 +5016,7 @@ void BarsSettings(size_t defaultFontSize) {
 			ImGui::TableNextColumn();
 
 
-			std::string title = std::to_string(i + 1) + "P Position";
+			std::string title = std::to_string(i + 1) + "P 位置";
 			ImGui::Text(title.c_str());
 
 			auto& activePos = *reinterpret_cast<ImVec2*>(&activeConfig.barsData[i].pos);
@@ -5091,7 +5091,7 @@ void BarsSection(size_t defaultFontSize) {
 			ImGui::PushFont(UI::g_ImGuiFont_Roboto[defaultFontSize * 0.9f]);
 
 			ImGui::PushItemWidth(itemWidth);
-			UI::ComboMapValue2("Show 1P Attributes", hudElementShowStateNames, hudElementShowStateMap,
+			UI::ComboMapValue2("显示 1P 属性", hudElementShowStateNames, hudElementShowStateMap,
 				activeCrimsonConfig.MultiplayerBars2D.show1PAttributes,
 				queuedCrimsonConfig.MultiplayerBars2D.show1PAttributes);
 			ImGui::PopItemWidth();
@@ -5102,7 +5102,7 @@ void BarsSection(size_t defaultFontSize) {
 
 			ImGui::TableNextColumn();
 
-			GUI_TitleCheckbox2("WORLD SPACE MULTIPLAYER BARS", activeCrimsonConfig.MultiplayerBarsWorldSpace.show,
+			GUI_TitleCheckbox2("世界空间多人血条", activeCrimsonConfig.MultiplayerBarsWorldSpace.show,
 				queuedCrimsonConfig.MultiplayerBarsWorldSpace.show, true);
 
 			ImGui::PushStyleColor(ImGuiCol_CheckMark, checkmarkColorBg);
@@ -5110,15 +5110,15 @@ void BarsSection(size_t defaultFontSize) {
 			ImGui::PushFont(UI::g_ImGuiFont_Roboto[defaultFontSize * 0.9f]);
 
 			ImGui::PushItemWidth(itemWidth);
-			UI::ComboMapValue2("Show 1P Bar", hudElementShowStateNames, hudElementShowStateMap,
+			UI::ComboMapValue2("显示 1P 血条", hudElementShowStateNames, hudElementShowStateMap,
 				activeCrimsonConfig.MultiplayerBarsWorldSpace.show1PBar,
 				queuedCrimsonConfig.MultiplayerBarsWorldSpace.show1PBar);
 			ImGui::PopItemWidth();
 
-			GUI_Checkbox2("Out of View Icons",
+			GUI_Checkbox2("视野外图标",
 				activeCrimsonConfig.MultiplayerBarsWorldSpace.showOutOfViewIcons,
 				queuedCrimsonConfig.MultiplayerBarsWorldSpace.showOutOfViewIcons);
-			GUI_Checkbox2("Show Player Names",
+			GUI_Checkbox2("显示玩家名",
 				activeCrimsonConfig.MultiplayerBarsWorldSpace.showPlayerNames,
 				queuedCrimsonConfig.MultiplayerBarsWorldSpace.showPlayerNames);
 
@@ -5148,7 +5148,7 @@ void BossRushSection(size_t defaultFontSize) {
 
 	ImGui::PushFont(UI::g_ImGuiFont_RussoOne[defaultFontSize * 1.1f]);
 
-	GUI_Checkbox2("BOSS RUSH", activeConfig.BossRush.enable, queuedConfig.BossRush.enable);
+	GUI_Checkbox2("Boss 连战", activeConfig.BossRush.enable, queuedConfig.BossRush.enable);
 
 	ImGui::PopFont();
 
@@ -5173,46 +5173,46 @@ void BossRushSection(size_t defaultFontSize) {
 		ImGui::TableNextRow(0, rowWidth);
 		ImGui::TableNextColumn();
 
-		ImGui::Text("Mission 5");
+		ImGui::Text("任务 5");
 
 		ImGui::TableNextColumn();
-		ImGui::Text("Mission 12");
+		ImGui::Text("任务 12");
 
 		ImGui::TableNextRow(0, rowWidth);
 		ImGui::TableNextColumn();
 
-		GUI_Checkbox2("Skip Jester", activeConfig.BossRush.Mission5.skipJester, queuedConfig.BossRush.Mission5.skipJester);
+		GUI_Checkbox2("跳过小丑", activeConfig.BossRush.Mission5.skipJester, queuedConfig.BossRush.Mission5.skipJester);
 
 		ImGui::TableNextColumn();
-		GUI_Checkbox2("Skip Jester", activeConfig.BossRush.Mission12.skipJester, queuedConfig.BossRush.Mission12.skipJester);
+		GUI_Checkbox2("跳过小丑", activeConfig.BossRush.Mission12.skipJester, queuedConfig.BossRush.Mission12.skipJester);
 
 		ImGui::TableNextRow(0, rowWidth2);
 		ImGui::TableNextColumn();
 
 		ImGui::TableNextColumn();
 		GUI_Checkbox2(
-			"Skip Geryon Part 1", activeConfig.BossRush.Mission12.skipGeryonPart1, queuedConfig.BossRush.Mission12.skipGeryonPart1);
+			"跳过格里昂 第 1 阶段", activeConfig.BossRush.Mission12.skipGeryonPart1, queuedConfig.BossRush.Mission12.skipGeryonPart1);
 
 		ImGui::TableNextRow(0, rowWidth);
 		ImGui::TableNextColumn();
 
-		ImGui::Text("Mission 17");
+		ImGui::Text("任务 17");
 
 		ImGui::TableNextColumn();
-		ImGui::Text("Mission 19");
+		ImGui::Text("任务 19");
 
 		ImGui::TableNextRow(0, rowWidth);
 		ImGui::TableNextColumn();
 
-		GUI_Checkbox2("Skip Jester", activeConfig.BossRush.Mission17.skipJester, queuedConfig.BossRush.Mission17.skipJester);
+		GUI_Checkbox2("跳过小丑", activeConfig.BossRush.Mission17.skipJester, queuedConfig.BossRush.Mission17.skipJester);
 
 		ImGui::TableNextColumn();
 
 		GUI_Checkbox2(
-			"Skip Arkham Part 1", activeConfig.BossRush.Mission19.skipArkhamPart1, queuedConfig.BossRush.Mission19.skipArkhamPart1);
+			"跳过阿卡姆 第 1 阶段", activeConfig.BossRush.Mission19.skipArkhamPart1, queuedConfig.BossRush.Mission19.skipArkhamPart1);
 
 		GUI_Checkbox2(
-			"Skip Arkham Part 2", activeConfig.BossRush.Mission19.skipArkhamPart2, queuedConfig.BossRush.Mission19.skipArkhamPart2);
+			"跳过阿卡姆 第 2 阶段", activeConfig.BossRush.Mission19.skipArkhamPart2, queuedConfig.BossRush.Mission19.skipArkhamPart2);
 
 		ImGui::EndTable();
 
@@ -5229,9 +5229,9 @@ void BossRushSection(size_t defaultFontSize) {
 #pragma region Camera
 
 const char* cameraAutoAdjustNames[] = {
-	"Default",
-	"Manual",
-	"Disable",
+	"默认",
+	"手动",
+	"禁用",
 };
 
 void CameraSection(size_t defaultFontSize) {
@@ -5245,7 +5245,7 @@ void CameraSection(size_t defaultFontSize) {
 	float smallerComboMult = 0.7f;
 
 	{
-		GUI_Title("GENERAL CAMERA OPTIONS");
+		GUI_Title("通用镜头选项");
 		const float columnWidth = 0.5f * queuedConfig.globalScale;
 		const float rowWidth = 40.0f * queuedConfig.globalScale * 0.5f;
 
@@ -5256,20 +5256,20 @@ void CameraSection(size_t defaultFontSize) {
 			ImGui::TableNextColumn();
 
 			ImGui::PushItemWidth(itemWidth * 0.7f);
-			GUI_InputDefault2("FOV Multiplier", activeCrimsonConfig.Camera.fovMultiplier, queuedCrimsonConfig.Camera.fovMultiplier, defaultCrimsonConfig.Camera.fovMultiplier, 0.1f, "%g",
+			GUI_InputDefault2("视野倍率", activeCrimsonConfig.Camera.fovMultiplier, queuedCrimsonConfig.Camera.fovMultiplier, defaultCrimsonConfig.Camera.fovMultiplier, 0.1f, "%g",
 				ImGuiInputTextFlags_EnterReturnsTrue);
 			ImGui::PopItemWidth();
 
 			ImGui::TableNextColumn();
 
 			ImGui::PushItemWidth(itemWidth * 1.1f);
-			UI::Combo2("Sensitivity", cameraSensitivityNames, activeCrimsonConfig.Camera.sensitivity, queuedCrimsonConfig.Camera.sensitivity);
+			UI::Combo2("灵敏度", cameraSensitivityNames, activeCrimsonConfig.Camera.sensitivity, queuedCrimsonConfig.Camera.sensitivity);
 			ImGui::PopItemWidth();
 
 			ImGui::TableNextColumn();
 
 			ImGui::PushItemWidth(itemWidth * 1.1f);
-			UI::Combo2("Follow-Up Speed", cameraFollowUpSpeedNames, activeCrimsonConfig.Camera.followUpSpd, queuedCrimsonConfig.Camera.followUpSpd);
+			UI::Combo2("跟随速度", cameraFollowUpSpeedNames, activeCrimsonConfig.Camera.followUpSpd, queuedCrimsonConfig.Camera.followUpSpd);
 			ImGui::PopItemWidth();
 
 			ImGui::TableNextRow(0, rowWidth);
@@ -5277,29 +5277,29 @@ void CameraSection(size_t defaultFontSize) {
 
 			GUI_PushDisable(activeCrimsonConfig.Camera.panoramicCam);
 			ImGui::PushItemWidth(itemWidth * 1.1f);
-			UI::Combo2("Distance", cameraDistanceNames, activeCrimsonConfig.Camera.distance, queuedCrimsonConfig.Camera.distance);
+			UI::Combo2("距离", cameraDistanceNames, activeCrimsonConfig.Camera.distance, queuedCrimsonConfig.Camera.distance);
 			ImGui::SameLine();
 			TooltipHelper("(?)", "Camera Distance relative to the player outside Lock-On.\n"
 				"\n"
-				"Dynamic Option adjusts based on whether player is airborne.");
+				"动态选项会根据玩家是否滞空自动调整。");
 			ImGui::PopItemWidth();
 
 			ImGui::TableNextColumn();
 
 			ImGui::PushItemWidth(itemWidth * 1.1f);
 			UI::Combo2(
-				"LockOn Distance", cameraLockOnDistanceNames, activeCrimsonConfig.Camera.lockOnDistance, queuedCrimsonConfig.Camera.lockOnDistance);
+				"锁定距离", cameraLockOnDistanceNames, activeCrimsonConfig.Camera.lockOnDistance, queuedCrimsonConfig.Camera.lockOnDistance);
 			ImGui::SameLine();
 			TooltipHelper("(?)", "Camera Distance relative to the player in Lock-On.\n"
 				"\n"
-				"Dynamic Option adjusts based on whether player is airborne.");
+				"动态选项会根据玩家是否滞空自动调整。");
 			ImGui::PopItemWidth();
 			GUI_PopDisable(activeCrimsonConfig.Camera.panoramicCam);
 
 			ImGui::TableNextColumn();
 
 			ImGui::PushItemWidth(itemWidth * 1.1f);
-			UI::Combo2("Vertical Tilt", cameraTiltNames, activeCrimsonConfig.Camera.verticalTilt, queuedCrimsonConfig.Camera.verticalTilt);
+			UI::Combo2("垂直俯仰", cameraTiltNames, activeCrimsonConfig.Camera.verticalTilt, queuedCrimsonConfig.Camera.verticalTilt);
 			ImGui::PopItemWidth();
 
 			ImGui::TableNextRow(0, rowWidth);
@@ -5311,13 +5311,13 @@ void CameraSection(size_t defaultFontSize) {
 
 			ImGui::TableNextColumn();
 
-			GUI_Checkbox2("Locked-Off Camera", activeCrimsonConfig.Camera.lockedOff, queuedCrimsonConfig.Camera.lockedOff);
+			GUI_Checkbox2("解除锁定镜头", activeCrimsonConfig.Camera.lockedOff, queuedCrimsonConfig.Camera.lockedOff);
 			ImGui::SameLine();
-			TooltipHelper("(?)", "Allows you to freely rotate the camera using the right stick in Third Person Camera sections.");
+			TooltipHelper("(?)", "在第三人称镜头模式下可用右摇杆自由旋转镜头。");
 
 			ImGui::TableNextColumn();
 
-			if (GUI_Checkbox2("Invert X", activeCrimsonConfig.Camera.invertX, queuedCrimsonConfig.Camera.invertX)) {
+			if (GUI_Checkbox2("反转 X 轴", activeCrimsonConfig.Camera.invertX, queuedCrimsonConfig.Camera.invertX)) {
 				Camera::ToggleInvertX(activeCrimsonConfig.Camera.invertX);
 			}
 
@@ -5325,20 +5325,20 @@ void CameraSection(size_t defaultFontSize) {
 			ImGui::TableNextColumn();
 
 			ImGui::PushItemWidth(itemWidth * 0.87f);
-			UI::ComboMapValue2("Camera Centering", rightStickCenterCamNames, rightStickCenterCamMap,
+			UI::ComboMapValue2("镜头回中", rightStickCenterCamNames, rightStickCenterCamMap,
 				activeCrimsonConfig.Camera.rightStickCameraCentering, queuedCrimsonConfig.Camera.rightStickCameraCentering);
 			ImGui::PopItemWidth();
 
 			ImGui::TableNextColumn();
 
 			ImGui::PushItemWidth(itemWidth * 1.27f);
-			UI::ComboMapValue2("Camera Shake", cameraShakeNames, cameraShakeMap,
+			UI::ComboMapValue2("镜头震动", cameraShakeNames, cameraShakeMap,
 				activeCrimsonConfig.Camera.cameraShake, queuedCrimsonConfig.Camera.cameraShake);
 			ImGui::PopItemWidth();
 
 			ImGui::TableNextColumn();
 
-			if (GUI_Checkbox2("Disable Boss Camera", activeCrimsonConfig.Camera.disableBossCamera, queuedCrimsonConfig.Camera.disableBossCamera)) {
+			if (GUI_Checkbox2("禁用 Boss 镜头", activeCrimsonConfig.Camera.disableBossCamera, queuedCrimsonConfig.Camera.disableBossCamera)) {
 				Camera::ToggleDisableBossCamera(activeCrimsonConfig.Camera.disableBossCamera);
 			}
 
@@ -5347,7 +5347,7 @@ void CameraSection(size_t defaultFontSize) {
 
 		ImGui::Text("");
 
-		GUI_Title("ADVANCED CAMERA OPTIONS");
+		GUI_Title("高级镜头选项");
 
 		if (ImGui::BeginTable("AdvancedCameraOptionsTable", 3)) {
 
@@ -5356,15 +5356,15 @@ void CameraSection(size_t defaultFontSize) {
 			ImGui::TableNextColumn();
 
 			GUI_PushDisable(activeConfig.Actor.playerCount > 1);
-			GUI_Checkbox2("Third Person Camera", activeCrimsonConfig.Camera.thirdPersonCamera, queuedCrimsonConfig.Camera.thirdPersonCamera);
+			GUI_Checkbox2("第三人称镜头", activeCrimsonConfig.Camera.thirdPersonCamera, queuedCrimsonConfig.Camera.thirdPersonCamera);
 			ImGui::SameLine();
 			TooltipHelper("(?)", "Replaces (almost) every Fixed Camera with the Third Person Camera, switching to Fixed Angles when apropriate.\n"
-				"Will always be enabled on Multiplayer.");
+				"多人模式下始终启用。");
 			GUI_PopDisable(activeConfig.Actor.playerCount > 1);
 
 			ImGui::TableNextColumn();
 
-			if (GUI_Checkbox2("Panoramic Camera", activeCrimsonConfig.Camera.panoramicCam, queuedCrimsonConfig.Camera.panoramicCam)) {
+			if (GUI_Checkbox2("全景镜头", activeCrimsonConfig.Camera.panoramicCam, queuedCrimsonConfig.Camera.panoramicCam)) {
 				if (activeCrimsonConfig.Camera.multiplayerCamera) {
 					activeCrimsonConfig.Camera.distance = 2;
 					queuedCrimsonConfig.Camera.distance = 2;
@@ -5374,16 +5374,16 @@ void CameraSection(size_t defaultFontSize) {
 				}
 			}
 			ImGui::SameLine();
-			TooltipHelper("(?)", "A dynamic camera mode designed to enhance in-combat readability. Distances itself based on enemies' positioning.");
+			TooltipHelper("(?)", "动态镜头模式，提升战斗可读性，并根据敌人位置自动调整距离。");
 
 			ImGui::EndTable();
 		}
 
 		ImGui::Text("");
 
-		GUI_Title("CAMERA PRESETS");
+		GUI_Title("镜头预设");
 
-		if (GUI_Button("Vanilla")) {
+		if (GUI_Button("原版")) {
 			activeCrimsonConfig.Camera.distance = 0;
 			queuedCrimsonConfig.Camera.distance = 0;
 
@@ -5431,7 +5431,7 @@ void CameraSection(size_t defaultFontSize) {
 
 		ImGui::SameLine();
 
-		if (GUI_Button("Vanilla with Third Person")) {
+		if (GUI_Button("原版 + 第三人称")) {
 			activeCrimsonConfig.Camera.distance = 0;
 			queuedCrimsonConfig.Camera.distance = 0;
 
@@ -5533,7 +5533,7 @@ void CameraSection(size_t defaultFontSize) {
 		}
 		auto& cameraData = *reinterpret_cast<CameraData*>(pool_4449[147]);
 
-		GUI_Title("LIVE CAMERA READINGS");
+		GUI_Title("实时镜头数据");
 
 		ImGui::PushFont(UI::g_ImGuiFont_Roboto[defaultFontSize * 0.9f]);
 
@@ -5578,20 +5578,20 @@ void CameraSection(size_t defaultFontSize) {
 					ImGui::TableNextRow(0, rowWidth);
 					ImGui::TableNextColumn();
 
-					GUI_Input("Height", cameraData.height, 10.0f, "%g", ImGuiInputTextFlags_EnterReturnsTrue);
+					GUI_Input("高度", cameraData.height, 10.0f, "%g", ImGuiInputTextFlags_EnterReturnsTrue);
 
 					ImGui::TableNextColumn();
 
-					GUI_Input("Tilt", cameraData.tilt, 0.05f, "%g", ImGuiInputTextFlags_EnterReturnsTrue);
+					GUI_Input("俯仰", cameraData.tilt, 0.05f, "%g", ImGuiInputTextFlags_EnterReturnsTrue);
 
 					ImGui::TableNextRow(0, rowWidth);
 					ImGui::TableNextColumn();
 
-					GUI_Input("Distance", cameraData.distanceCam, 10.0f, "%g", ImGuiInputTextFlags_EnterReturnsTrue);
+					GUI_Input("距离", cameraData.distanceCam, 10.0f, "%g", ImGuiInputTextFlags_EnterReturnsTrue);
 
 					ImGui::TableNextColumn();
 
-					GUI_Input("Distance Lock-On", cameraData.distanceLockOn, 10.0f, "%g", ImGuiInputTextFlags_EnterReturnsTrue);
+					GUI_Input("锁定距离", cameraData.distanceLockOn, 10.0f, "%g", ImGuiInputTextFlags_EnterReturnsTrue);
 
 					ImGui::EndTable();
 				}
@@ -5623,7 +5623,7 @@ void CustomDamageSection() {
 	ImGui::PushFont(UI::g_ImGuiFont_Roboto[defaultFontSize * 0.9f]);
 
 	ImGui::PushFont(UI::g_ImGuiFont_RussoOne[defaultFontSize * 1.1f]);
-	if (GUI_Checkbox2("CUSTOM DAMAGE CHEATS", activeCrimsonGameplay.Cheats.General.customDamage, queuedCrimsonGameplay.Cheats.General.customDamage)) {
+	if (GUI_Checkbox2("自定义伤害作弊", activeCrimsonGameplay.Cheats.General.customDamage, queuedCrimsonGameplay.Cheats.General.customDamage)) {
 		if (!activeCrimsonGameplay.Cheats.General.customDamage) {
 			// Reset damage config to default when the checkbox is unchecked
 			CopyMemory(&queuedCrimsonGameplay.Cheats.Damage.playerReceivedDmgMult, 
@@ -5667,16 +5667,16 @@ void CustomDamageSection() {
 			ImGui::TableSetupColumn("b1", 0, columnWidth);
 			ImGui::TableNextRow(0, rowWidth);
 			ImGui::TableNextColumn();
-			GUI_Checkbox2("Disable Player Damage", activeCrimsonGameplay.Cheats.Damage.playerReceiveDmgDisable, queuedCrimsonGameplay.Cheats.Damage.playerReceiveDmgDisable);
+			GUI_Checkbox2("玩家免疫伤害", activeCrimsonGameplay.Cheats.Damage.playerReceiveDmgDisable, queuedCrimsonGameplay.Cheats.Damage.playerReceiveDmgDisable);
 			ImGui::PushFont(UI::g_ImGuiFont_RussoOne[defaultFontSize * 0.9f]);
-			ImGui::Text("PLAYER RECEIVED DAMAGE MULT.");
+			ImGui::Text("玩家受伤倍率");
 			ImGui::PopFont();
 			DamageDataInput(activeCrimsonGameplay.Cheats.Damage.playerReceivedDmgMult, 
 				queuedCrimsonGameplay.Cheats.Damage.playerReceivedDmgMult, defaultCrimsonGameplay.Cheats.Damage.playerReceivedDmgMult);
 			ImGui::SameLine();
 			{
 				static bool toggled = false;
-				if (GUI_Button("One Hit Kills Player")) {
+				if (GUI_Button("一击杀死玩家")) {
 
 					if (!toggled) {
 						toggled = true;
@@ -5691,16 +5691,16 @@ void CustomDamageSection() {
 			}
 			ImGui::TableNextColumn();
 
-			GUI_Checkbox2("Disable Enemy Damage", activeCrimsonGameplay.Cheats.Damage.enemyRecieveDmgDisable, queuedCrimsonGameplay.Cheats.Damage.enemyRecieveDmgDisable);
+			GUI_Checkbox2("敌人免疫伤害", activeCrimsonGameplay.Cheats.Damage.enemyRecieveDmgDisable, queuedCrimsonGameplay.Cheats.Damage.enemyRecieveDmgDisable);
 			ImGui::PushFont(UI::g_ImGuiFont_RussoOne[defaultFontSize * 0.9f]);
-			ImGui::Text("ENEMY RECEIVED DAMAGE MULT.");
+			ImGui::Text("敌人受伤倍率");
 			ImGui::PopFont();
 			DamageDataInput(activeCrimsonGameplay.Cheats.Damage.enemyReceivedDmgMult, 
 				queuedCrimsonGameplay.Cheats.Damage.enemyReceivedDmgMult, defaultCrimsonGameplay.Cheats.Damage.enemyReceivedDmgMult);
 			ImGui::SameLine();
 			{
 				static bool toggled = false;
-				if (GUI_Button("One Hit Kills Enemy")) {
+				if (GUI_Button("一击杀死敌人")) {
 
 					if (!toggled) {
 						toggled = true;
@@ -5754,13 +5754,13 @@ void ActionData(const char* label, T(&vars)[2], T(&vars2)[2], T(&defaultVars)[2]
 namespace Shop {
 
 const char* tabNames[] = {
-	"Dante Devil Arms",
-	"Dante Guns",
-	"Dante Styles",
-	"Vergil Devil Arms",
-	"Vergil Summoned Swords",
-	"Vergil Style",
-	"Items",
+	"但丁恶魔武器",
+	"但丁枪械",
+	"但丁风格",
+	"维吉尔恶魔武器",
+	"维吉尔幻影剑",
+	"维吉尔风格",
+	"道具",
 };
 
 struct ShopExperienceHelper {
@@ -5788,113 +5788,113 @@ struct ShopExperienceStyleHelper {
 
 
 ShopExperienceHelper shopHelpersDante[] = {
-	{"Sprint","Sprints out of combat, similar to DMC4 and 5's Speed Ability.", UNLOCK_DANTE::SPRINT, 3000, -1, -1,-1,-1, {-1,-1,-1,-1,-1}},
-	{"Sky Launch Air Taunt","With any Weapon or Style: Press Taunt button while in air.", UNLOCK_DANTE::SKY_LAUNCH_AIR_TAUNT, 10000, -1, -1,-1,-1, {-1,-1,-1,-1,-1}},
-	{"Rebellion Stinger Level 1","",UNLOCK_DANTE::REBELLION_STINGER_LEVEL_1, 2500, -1, UNLOCK_DANTE::REBELLION_STINGER_LEVEL_2,-1,-1, {UNLOCK_DANTE::REBELLION_STINGER_AIR,-1,-1,-1,-1}},
-	{"Rebellion Stinger Level 2","",UNLOCK_DANTE::REBELLION_STINGER_LEVEL_2, 10000, UNLOCK_DANTE::REBELLION_STINGER_LEVEL_1, -1,-1,-1, {-1,-1,-1,-1,-1}},
-	{"Rebellion Air Stinger","Lock On + Forward + Melee while in air.",UNLOCK_DANTE::REBELLION_STINGER_AIR, 5000, UNLOCK_DANTE::REBELLION_STINGER_LEVEL_1, -1,-1,-1, {-1,-1,-1,-1,-1}},
-	{"Rebellion Drive","",UNLOCK_DANTE::REBELLION_DRIVE, 10000, -1, UNLOCK_DANTE::REBELLION_OVERDRIVE,-1,-1, {-1,-1,-1,-1,-1}},
-	{"Rebellion Overdrive","Hold Melee during Drive to charge, then while releasing the projectile, press Melee again to perform Overdrive.\nQuick Drive can also be held to charge for 1s, then press Melee during the swing for Overdrive.",UNLOCK_DANTE::REBELLION_OVERDRIVE, 10000, UNLOCK_DANTE::REBELLION_DRIVE, -1,-1,-1, {-1,-1,-1,-1,-1}},
-	{"Air Hike","",UNLOCK_DANTE::REBELLION_AIR_HIKE, 20000, -1, -1,-1,-1, {-1,-1,-1,-1,-1}},
-	{"Cerberus Revolver Level 2","",UNLOCK_DANTE::CERBERUS_REVOLVER_LEVEL_2, 15000, -1, -1,DEVILARMUNLOCKS::CERBERUS,-1, {-1,-1,-1,-1,-1}},
-	{"Cerberus Air Revolver","Lock On + Forward + Melee while in air.",UNLOCK_DANTE::CERBERUS_REVOLVER_AIR, 5000, -1, -1,DEVILARMUNLOCKS::CERBERUS,-1, {-1,-1,-1,-1,-1}},
-	{"Cerberus Windmill","",UNLOCK_DANTE::CERBERUS_WINDMILL, 7500, -1, -1,DEVILARMUNLOCKS::CERBERUS,-1, {-1,-1,-1,-1,-1}},
-	{"Agni & Rudra Jet-Stream Level 2","",UNLOCK_DANTE::AGNI_RUDRA_JET_STREAM_LEVEL_2, 10000, -1, UNLOCK_DANTE::AGNI_RUDRA_JET_STREAM_LEVEL_3,DEVILARMUNLOCKS::AGNI_RUDRA,-1, {-1,-1,-1,-1,-1}},
-	{"Agni & Rudra Jet-Stream Level 3","",UNLOCK_DANTE::AGNI_RUDRA_JET_STREAM_LEVEL_3, 15000, UNLOCK_DANTE::AGNI_RUDRA_JET_STREAM_LEVEL_2, -1,DEVILARMUNLOCKS::AGNI_RUDRA,-1, {-1,-1,-1,-1,-1}},
-	{"Agni & Rudra Whirlwind","",UNLOCK_DANTE::AGNI_RUDRA_WHIRLWIND, 7500, -1, UNLOCK_DANTE::AGNI_RUDRA_WHIRLWIND_AIR,DEVILARMUNLOCKS::AGNI_RUDRA,-1, {-1,-1,-1,-1,-1}},
-	{"Agni & Rudra Air Whirlwind","LockOn + Back + Melee while in air",UNLOCK_DANTE::AGNI_RUDRA_WHIRLWIND_AIR, 10000, UNLOCK_DANTE::AGNI_RUDRA_WHIRLWIND, -1,DEVILARMUNLOCKS::AGNI_RUDRA,-1, {-1,-1,-1,-1,-1}},
-	//{"Agni & Rudra Air Hike",UNLOCK_DANTE::AGNI_RUDRA_AIR_HIKE, 20000, -1, -1,DEVILARMUNLOCKS::AGNI_RUDRA,-1},
-	{"Nevan Reverb Shock Level 1","",UNLOCK_DANTE::NEVAN_REVERB_SHOCK_LEVEL_1, 7500, -1, UNLOCK_DANTE::NEVAN_REVERB_SHOCK_LEVEL_2,DEVILARMUNLOCKS::NEVAN,-1, {-1,-1,-1,-1,-1}},
-	{"Nevan Reverb Shock Level 2","",UNLOCK_DANTE::NEVAN_REVERB_SHOCK_LEVEL_2, 15000, UNLOCK_DANTE::NEVAN_REVERB_SHOCK_LEVEL_1, -1,DEVILARMUNLOCKS::NEVAN,-1, {-1,-1,-1,-1,-1}},
-	{"Nevan Bat Rift Level 2","",UNLOCK_DANTE::NEVAN_BAT_RIFT_LEVEL_2, 10000, -1, -1,DEVILARMUNLOCKS::NEVAN,-1, {-1,-1,-1,-1,-1}},
-	{"Nevan Air Raid","",UNLOCK_DANTE::NEVAN_AIR_RAID, 20000, -1, -1,DEVILARMUNLOCKS::NEVAN,-1, {-1,-1,-1,-1,-1}},
-	{"Nevan Volume Up","",UNLOCK_DANTE::NEVAN_VOLUME_UP, 20000, -1, -1,DEVILARMUNLOCKS::NEVAN,-1, {-1,-1,-1,-1,-1}},
-	{"Beowulf Straight Level 2","",UNLOCK_DANTE::BEOWULF_STRAIGHT_LEVEL_2, 10000, -1, -1,DEVILARMUNLOCKS::BEOWULF,-1, {-1,-1,-1,-1,-1}},
-	{"Beowulf Beast Uppercut","",UNLOCK_DANTE::BEOWULF_BEAST_UPPERCUT, 7500, -1, UNLOCK_DANTE::BEOWULF_RISING_DRAGON,DEVILARMUNLOCKS::BEOWULF,-1, {-1,-1,-1,-1,-1}},
-	{"Beowulf Rising Dragon","",UNLOCK_DANTE::BEOWULF_RISING_DRAGON, 15000, UNLOCK_DANTE::BEOWULF_BEAST_UPPERCUT, UNLOCK_DANTE::BEOWULF_RISING_DRAGON_AIR, DEVILARMUNLOCKS::BEOWULF,-1, {-1,-1,-1,-1,-1}},
-	{"Beowulf Air Dragon","LockOn + Back + Melee while in air",UNLOCK_DANTE::BEOWULF_RISING_DRAGON_AIR, 20000, UNLOCK_DANTE::BEOWULF_RISING_DRAGON, -1,DEVILARMUNLOCKS::BEOWULF,-1, {-1,-1,-1,-1,-1}},
-	//{"Beowulf Air Hike",UNLOCK_DANTE::BEOWULF_AIR_HIKE, 20000, -1, -1,DEVILARMUNLOCKS::BEOWULF,-1},
+	{"冲刺","脱离战斗时冲刺，类似 DMC4/5 的加速能力。", UNLOCK_DANTE::SPRINT, 3000, -1, -1,-1,-1, {-1,-1,-1,-1,-1}},
+	{"空中挑衅·升空","任意武器或风格：空中按挑衅键。", UNLOCK_DANTE::SKY_LAUNCH_AIR_TAUNT, 10000, -1, -1,-1,-1, {-1,-1,-1,-1,-1}},
+	{"叛逆 突刺 1 级","",UNLOCK_DANTE::REBELLION_STINGER_LEVEL_1, 2500, -1, UNLOCK_DANTE::REBELLION_STINGER_LEVEL_2,-1,-1, {UNLOCK_DANTE::REBELLION_STINGER_AIR,-1,-1,-1,-1}},
+	{"叛逆 突刺 2 级","",UNLOCK_DANTE::REBELLION_STINGER_LEVEL_2, 10000, UNLOCK_DANTE::REBELLION_STINGER_LEVEL_1, -1,-1,-1, {-1,-1,-1,-1,-1}},
+	{"叛逆 空中突刺","空中：锁定 + 前 + 近战。",UNLOCK_DANTE::REBELLION_STINGER_AIR, 5000, UNLOCK_DANTE::REBELLION_STINGER_LEVEL_1, -1,-1,-1, {-1,-1,-1,-1,-1}},
+	{"叛逆 驱动","",UNLOCK_DANTE::REBELLION_DRIVE, 10000, -1, UNLOCK_DANTE::REBELLION_OVERDRIVE,-1,-1, {-1,-1,-1,-1,-1}},
+	{"叛逆 超驱动","Hold Melee during Drive to charge, then while releasing the projectile, press Melee again to perform Overdrive.\nQuick Drive can also be held to charge for 1s, then press Melee during the swing for Overdrive.",UNLOCK_DANTE::REBELLION_OVERDRIVE, 10000, UNLOCK_DANTE::REBELLION_DRIVE, -1,-1,-1, {-1,-1,-1,-1,-1}},
+	{"空中跳跃","",UNLOCK_DANTE::REBELLION_AIR_HIKE, 20000, -1, -1,-1,-1, {-1,-1,-1,-1,-1}},
+	{"刻耳柏洛斯 左轮 2 级","",UNLOCK_DANTE::CERBERUS_REVOLVER_LEVEL_2, 15000, -1, -1,DEVILARMUNLOCKS::CERBERUS,-1, {-1,-1,-1,-1,-1}},
+	{"刻耳柏洛斯 空中左轮","空中：锁定 + 前 + 近战。",UNLOCK_DANTE::CERBERUS_REVOLVER_AIR, 5000, -1, -1,DEVILARMUNLOCKS::CERBERUS,-1, {-1,-1,-1,-1,-1}},
+	{"刻耳柏洛斯 风车","",UNLOCK_DANTE::CERBERUS_WINDMILL, 7500, -1, -1,DEVILARMUNLOCKS::CERBERUS,-1, {-1,-1,-1,-1,-1}},
+	{"阿耆尼与楼陀罗 喷射 2 级","",UNLOCK_DANTE::AGNI_RUDRA_JET_STREAM_LEVEL_2, 10000, -1, UNLOCK_DANTE::AGNI_RUDRA_JET_STREAM_LEVEL_3,DEVILARMUNLOCKS::AGNI_RUDRA,-1, {-1,-1,-1,-1,-1}},
+	{"阿耆尼与楼陀罗 喷射 3 级","",UNLOCK_DANTE::AGNI_RUDRA_JET_STREAM_LEVEL_3, 15000, UNLOCK_DANTE::AGNI_RUDRA_JET_STREAM_LEVEL_2, -1,DEVILARMUNLOCKS::AGNI_RUDRA,-1, {-1,-1,-1,-1,-1}},
+	{"阿耆尼与楼陀罗 旋风","",UNLOCK_DANTE::AGNI_RUDRA_WHIRLWIND, 7500, -1, UNLOCK_DANTE::AGNI_RUDRA_WHIRLWIND_AIR,DEVILARMUNLOCKS::AGNI_RUDRA,-1, {-1,-1,-1,-1,-1}},
+	{"阿耆尼与楼陀罗 空中旋风","空中：锁定 + 后 + 近战",UNLOCK_DANTE::AGNI_RUDRA_WHIRLWIND_AIR, 10000, UNLOCK_DANTE::AGNI_RUDRA_WHIRLWIND, -1,DEVILARMUNLOCKS::AGNI_RUDRA,-1, {-1,-1,-1,-1,-1}},
+	//{"阿耆尼与楼陀罗 空中跳跃",UNLOCK_DANTE::AGNI_RUDRA_AIR_HIKE, 20000, -1, -1,DEVILARMUNLOCKS::AGNI_RUDRA,-1},
+	{"涅梵 混响冲击 1 级","",UNLOCK_DANTE::NEVAN_REVERB_SHOCK_LEVEL_1, 7500, -1, UNLOCK_DANTE::NEVAN_REVERB_SHOCK_LEVEL_2,DEVILARMUNLOCKS::NEVAN,-1, {-1,-1,-1,-1,-1}},
+	{"涅梵 混响冲击 2 级","",UNLOCK_DANTE::NEVAN_REVERB_SHOCK_LEVEL_2, 15000, UNLOCK_DANTE::NEVAN_REVERB_SHOCK_LEVEL_1, -1,DEVILARMUNLOCKS::NEVAN,-1, {-1,-1,-1,-1,-1}},
+	{"涅梵 蝙蝠裂隙 2 级","",UNLOCK_DANTE::NEVAN_BAT_RIFT_LEVEL_2, 10000, -1, -1,DEVILARMUNLOCKS::NEVAN,-1, {-1,-1,-1,-1,-1}},
+	{"涅梵 空中突袭","",UNLOCK_DANTE::NEVAN_AIR_RAID, 20000, -1, -1,DEVILARMUNLOCKS::NEVAN,-1, {-1,-1,-1,-1,-1}},
+	{"涅梵 音量提升","",UNLOCK_DANTE::NEVAN_VOLUME_UP, 20000, -1, -1,DEVILARMUNLOCKS::NEVAN,-1, {-1,-1,-1,-1,-1}},
+	{"贝奥武夫 直拳 2 级","",UNLOCK_DANTE::BEOWULF_STRAIGHT_LEVEL_2, 10000, -1, -1,DEVILARMUNLOCKS::BEOWULF,-1, {-1,-1,-1,-1,-1}},
+	{"贝奥武夫 兽性上勾拳","",UNLOCK_DANTE::BEOWULF_BEAST_UPPERCUT, 7500, -1, UNLOCK_DANTE::BEOWULF_RISING_DRAGON,DEVILARMUNLOCKS::BEOWULF,-1, {-1,-1,-1,-1,-1}},
+	{"贝奥武夫 升龙","",UNLOCK_DANTE::BEOWULF_RISING_DRAGON, 15000, UNLOCK_DANTE::BEOWULF_BEAST_UPPERCUT, UNLOCK_DANTE::BEOWULF_RISING_DRAGON_AIR, DEVILARMUNLOCKS::BEOWULF,-1, {-1,-1,-1,-1,-1}},
+	{"贝奥武夫 空中龙","空中：锁定 + 后 + 近战",UNLOCK_DANTE::BEOWULF_RISING_DRAGON_AIR, 20000, UNLOCK_DANTE::BEOWULF_RISING_DRAGON, -1,DEVILARMUNLOCKS::BEOWULF,-1, {-1,-1,-1,-1,-1}},
+	//{"贝奥武夫 空中跳跃",UNLOCK_DANTE::BEOWULF_AIR_HIKE, 20000, -1, -1,DEVILARMUNLOCKS::BEOWULF,-1},
 };
 
 ShopExperienceHelper shopHelpersDanteGuns[] = {
-	{"Ebony & Ivory Level 2","",UNLOCK_DANTE::EBONY_IVORY_LEVEL_2, 5000, -1, UNLOCK_DANTE::EBONY_IVORY_LEVEL_3,-1,-1, {-1,-1,-1,-1,-1}},
-	{"Ebony & Ivory Level 3","",UNLOCK_DANTE::EBONY_IVORY_LEVEL_3, 10000, UNLOCK_DANTE::EBONY_IVORY_LEVEL_2, -1,-1,-1, {-1,-1,-1,-1,-1}},
-	{"Shotgun Level 2","",UNLOCK_DANTE::SHOTGUN_LEVEL_2, 10000, -1, UNLOCK_DANTE::SHOTGUN_LEVEL_3,-1,GUNUNLOCKS::SHOTGUN, {-1,-1,-1,-1,-1}},
-	{"Shotgun Level 3","",UNLOCK_DANTE::SHOTGUN_LEVEL_3, 20000, UNLOCK_DANTE::SHOTGUN_LEVEL_2, -1,-1,GUNUNLOCKS::SHOTGUN, {-1,-1,-1,-1,-1}},
-	{"Artemis Level 2","",UNLOCK_DANTE::ARTEMIS_LEVEL_2, 10000, -1, UNLOCK_DANTE::ARTEMIS_LEVEL_3,-1,GUNUNLOCKS::ARTEMIS, {-1,-1,-1,-1,-1}},
-	{"Artemis Level 3","",UNLOCK_DANTE::ARTEMIS_LEVEL_3, 20000, UNLOCK_DANTE::ARTEMIS_LEVEL_2, -1,-1,GUNUNLOCKS::ARTEMIS, {-1,-1,-1,-1,-1}},
-	{"Spiral Level 2","",UNLOCK_DANTE::SPIRAL_LEVEL_2, 7500, -1, UNLOCK_DANTE::SPIRAL_LEVEL_3,-1,GUNUNLOCKS::SPIRAL, {-1,-1,-1,-1,-1}},
-	{"Spiral Level 3","",UNLOCK_DANTE::SPIRAL_LEVEL_3, 15000, UNLOCK_DANTE::SPIRAL_LEVEL_2, -1,-1,GUNUNLOCKS::SPIRAL, {-1,-1,-1,-1,-1}},
-	{"Kalina Ann Level 2","",UNLOCK_DANTE::KALINA_ANN_LEVEL_2, 5000, -1, UNLOCK_DANTE::KALINA_ANN_LEVEL_3,-1,GUNUNLOCKS::KALINA_ANN, {-1,-1,-1,-1,-1}},
-	{"Kalina Ann Level 3","",UNLOCK_DANTE::KALINA_ANN_LEVEL_3, 10000, UNLOCK_DANTE::KALINA_ANN_LEVEL_2, -1,-1,GUNUNLOCKS::KALINA_ANN, {-1,-1,-1,-1,-1}},
+	{"黑檀木与白象牙 2 级","",UNLOCK_DANTE::EBONY_IVORY_LEVEL_2, 5000, -1, UNLOCK_DANTE::EBONY_IVORY_LEVEL_3,-1,-1, {-1,-1,-1,-1,-1}},
+	{"黑檀木与白象牙 3 级","",UNLOCK_DANTE::EBONY_IVORY_LEVEL_3, 10000, UNLOCK_DANTE::EBONY_IVORY_LEVEL_2, -1,-1,-1, {-1,-1,-1,-1,-1}},
+	{"霰弹枪 2 级","",UNLOCK_DANTE::SHOTGUN_LEVEL_2, 10000, -1, UNLOCK_DANTE::SHOTGUN_LEVEL_3,-1,GUNUNLOCKS::SHOTGUN, {-1,-1,-1,-1,-1}},
+	{"霰弹枪 3 级","",UNLOCK_DANTE::SHOTGUN_LEVEL_3, 20000, UNLOCK_DANTE::SHOTGUN_LEVEL_2, -1,-1,GUNUNLOCKS::SHOTGUN, {-1,-1,-1,-1,-1}},
+	{"阿尔忒弥斯 2 级","",UNLOCK_DANTE::ARTEMIS_LEVEL_2, 10000, -1, UNLOCK_DANTE::ARTEMIS_LEVEL_3,-1,GUNUNLOCKS::ARTEMIS, {-1,-1,-1,-1,-1}},
+	{"阿尔忒弥斯 3 级","",UNLOCK_DANTE::ARTEMIS_LEVEL_3, 20000, UNLOCK_DANTE::ARTEMIS_LEVEL_2, -1,-1,GUNUNLOCKS::ARTEMIS, {-1,-1,-1,-1,-1}},
+	{"螺旋 2 级","",UNLOCK_DANTE::SPIRAL_LEVEL_2, 7500, -1, UNLOCK_DANTE::SPIRAL_LEVEL_3,-1,GUNUNLOCKS::SPIRAL, {-1,-1,-1,-1,-1}},
+	{"螺旋 3 级","",UNLOCK_DANTE::SPIRAL_LEVEL_3, 15000, UNLOCK_DANTE::SPIRAL_LEVEL_2, -1,-1,GUNUNLOCKS::SPIRAL, {-1,-1,-1,-1,-1}},
+	{"卡琳娜·安 2 级","",UNLOCK_DANTE::KALINA_ANN_LEVEL_2, 5000, -1, UNLOCK_DANTE::KALINA_ANN_LEVEL_3,-1,GUNUNLOCKS::KALINA_ANN, {-1,-1,-1,-1,-1}},
+	{"卡琳娜·安 3 级","",UNLOCK_DANTE::KALINA_ANN_LEVEL_3, 10000, UNLOCK_DANTE::KALINA_ANN_LEVEL_2, -1,-1,GUNUNLOCKS::KALINA_ANN, {-1,-1,-1,-1,-1}},
 };
 
 ShopExperienceStyleHelper shopHelpersDanteStyle[] = {
-	//{"Doppelganger Level 2", 20000, STYLE::DOPPELGANGER,STYLE_LEVEL::LEVEL_TWO,STYLE_LEVEL_EXP::LEVEL_TWO},
-//	{"Doppelganger Level 3", 30000, STYLE::DOPPELGANGER,STYLE_LEVEL::LEVEL_THREE,STYLE_LEVEL_EXP::LEVEL_THREE},
+	//{"分身 2 级", 20000, STYLE::DOPPELGANGER,STYLE_LEVEL::LEVEL_TWO,STYLE_LEVEL_EXP::LEVEL_TWO},
+//	{"分身 3 级", 30000, STYLE::DOPPELGANGER,STYLE_LEVEL::LEVEL_THREE,STYLE_LEVEL_EXP::LEVEL_THREE},
 
-//	{"Quicksilver Level 2", 20000, STYLE::QUICKSILVER,STYLE_LEVEL::LEVEL_TWO,STYLE_LEVEL_EXP::LEVEL_TWO},
-//	{"Quicksilver Level 3", 30000, STYLE::QUICKSILVER,STYLE_LEVEL::LEVEL_THREE,STYLE_LEVEL_EXP::LEVEL_THREE},
+//	{"水银 2 级", 20000, STYLE::QUICKSILVER,STYLE_LEVEL::LEVEL_TWO,STYLE_LEVEL_EXP::LEVEL_TWO},
+//	{"水银 3 级", 30000, STYLE::QUICKSILVER,STYLE_LEVEL::LEVEL_THREE,STYLE_LEVEL_EXP::LEVEL_THREE},
 
-	{"Swordmaster Level 2", "",20000, STYLE::SWORDMASTER,STYLE_LEVEL::LEVEL_TWO,STYLE_LEVEL_EXP::LEVEL_TWO,-1,-1},
-	{"Swordmaster Level 3","", 30000, STYLE::SWORDMASTER,STYLE_LEVEL::LEVEL_THREE,STYLE_LEVEL_EXP::LEVEL_THREE,-1,UNLOCK_DANTE::SWORDMASTER_MODDED_MOVES},
-	{"Swordmaster Level 4","Air Tornado: With Beowulf: Neutral + Style while in air. Reduces Tornado damage across the board. Carries inertia.", 15000, STYLE::SWORDMASTER,STYLE_LEVEL::LEVEL_THREE,STYLE_LEVEL_EXP::LEVEL_THREE, UNLOCK_DANTE::SWORDMASTER_MODDED_MOVES,-1},
+	{"剑圣 2 级", "",20000, STYLE::SWORDMASTER,STYLE_LEVEL::LEVEL_TWO,STYLE_LEVEL_EXP::LEVEL_TWO,-1,-1},
+	{"剑圣 3 级","", 30000, STYLE::SWORDMASTER,STYLE_LEVEL::LEVEL_THREE,STYLE_LEVEL_EXP::LEVEL_THREE,-1,UNLOCK_DANTE::SWORDMASTER_MODDED_MOVES},
+	{"剑圣 4 级","空中龙卷（贝奥武夫）：空中不推方向 + 风格键。降低龙卷整体伤害，可继承惯性。", 15000, STYLE::SWORDMASTER,STYLE_LEVEL::LEVEL_THREE,STYLE_LEVEL_EXP::LEVEL_THREE, UNLOCK_DANTE::SWORDMASTER_MODDED_MOVES,-1},
 	
-	{"Gunslinger Level 2", "", 20000, STYLE::GUNSLINGER,STYLE_LEVEL::LEVEL_TWO,STYLE_LEVEL_EXP::LEVEL_TWO,-1,-1},
-	{"Gunslinger Level 3","", 30000, STYLE::GUNSLINGER,STYLE_LEVEL::LEVEL_THREE,STYLE_LEVEL_EXP::LEVEL_THREE,-1,UNLOCK_DANTE::GUNSLINGER_MODDED_MOVES},
-	{"Gunslinger Level 4", "Backslide: With Coyote-A: Lock On + Back + Style. Dante performs backslide, hitting enemies behind him.",15000, STYLE::GUNSLINGER,STYLE_LEVEL::LEVEL_THREE,STYLE_LEVEL_EXP::LEVEL_THREE,UNLOCK_DANTE::GUNSLINGER_MODDED_MOVES,-1},
+	{"枪神 2 级", "", 20000, STYLE::GUNSLINGER,STYLE_LEVEL::LEVEL_TWO,STYLE_LEVEL_EXP::LEVEL_TWO,-1,-1},
+	{"枪神 3 级","", 30000, STYLE::GUNSLINGER,STYLE_LEVEL::LEVEL_THREE,STYLE_LEVEL_EXP::LEVEL_THREE,-1,UNLOCK_DANTE::GUNSLINGER_MODDED_MOVES},
+	{"枪神 4 级", "后滑步（Coyote-A）：锁定 + 后 + 风格键。但丁向后滑步，击中身后敌人。",15000, STYLE::GUNSLINGER,STYLE_LEVEL::LEVEL_THREE,STYLE_LEVEL_EXP::LEVEL_THREE,UNLOCK_DANTE::GUNSLINGER_MODDED_MOVES,-1},
 
 
-	{"Trickster Level 2", "",20000, STYLE::TRICKSTER,STYLE_LEVEL::LEVEL_TWO,STYLE_LEVEL_EXP::LEVEL_TWO,-1,-1},
-	{"Trickster Level 3", "",30000, STYLE::TRICKSTER,STYLE_LEVEL::LEVEL_THREE,STYLE_LEVEL_EXP::LEVEL_THREE,-1,UNLOCK_DANTE::TRICKSTER_MODDED_MOVES},
-	{"Trickster Level 4", "Ground Trick: Lock On + Back to Forward + Style.\n"
-				"Dante Teleports to the Ground near the enemy.",15000, STYLE::TRICKSTER,STYLE_LEVEL::LEVEL_THREE,STYLE_LEVEL_EXP::LEVEL_THREE,UNLOCK_DANTE::TRICKSTER_MODDED_MOVES,-1},
+	{"骗术师 2 级", "",20000, STYLE::TRICKSTER,STYLE_LEVEL::LEVEL_TWO,STYLE_LEVEL_EXP::LEVEL_TWO,-1,-1},
+	{"骗术师 3 级", "",30000, STYLE::TRICKSTER,STYLE_LEVEL::LEVEL_THREE,STYLE_LEVEL_EXP::LEVEL_THREE,-1,UNLOCK_DANTE::TRICKSTER_MODDED_MOVES},
+	{"骗术师 4 级", "Ground Trick: Lock On + Back to Forward + Style.\n"
+				"但丁传送到敌人附近的地面。",15000, STYLE::TRICKSTER,STYLE_LEVEL::LEVEL_THREE,STYLE_LEVEL_EXP::LEVEL_THREE,UNLOCK_DANTE::TRICKSTER_MODDED_MOVES,-1},
 
-	{"Royal Guard Level 2", "",20000, STYLE::ROYALGUARD,STYLE_LEVEL::LEVEL_TWO,STYLE_LEVEL_EXP::LEVEL_TWO,-1,-1},
-	{"Royal Guard Level 3", "",30000, STYLE::ROYALGUARD,STYLE_LEVEL::LEVEL_THREE,STYLE_LEVEL_EXP::LEVEL_THREE,-1,UNLOCK_DANTE::ROYALGUARD_MODDED_MOVES},
-	{"Royal Guard Level 4", "DT-Infused Royalguard: Normal Blocks will consume DT instead, until you're low on DT. This will also prevent Guard Breaks by converting them into Normal Blocks.",15000, STYLE::ROYALGUARD,STYLE_LEVEL::LEVEL_THREE,STYLE_LEVEL_EXP::LEVEL_THREE,UNLOCK_DANTE::ROYALGUARD_MODDED_MOVES,-1},
+	{"皇家护卫 2 级", "",20000, STYLE::ROYALGUARD,STYLE_LEVEL::LEVEL_TWO,STYLE_LEVEL_EXP::LEVEL_TWO,-1,-1},
+	{"皇家护卫 3 级", "",30000, STYLE::ROYALGUARD,STYLE_LEVEL::LEVEL_THREE,STYLE_LEVEL_EXP::LEVEL_THREE,-1,UNLOCK_DANTE::ROYALGUARD_MODDED_MOVES},
+	{"皇家护卫 4 级", "魔力强化皇家护卫：普通格挡改为消耗魔力，直至魔力不足；破防转为普通格挡。",15000, STYLE::ROYALGUARD,STYLE_LEVEL::LEVEL_THREE,STYLE_LEVEL_EXP::LEVEL_THREE,UNLOCK_DANTE::ROYALGUARD_MODDED_MOVES,-1},
 
 
 };
 
 ShopExperienceStyleHelper shopHelpersVergilStyle[] = {
-	{"Dark Slayer Level 2", "",20000,STYLE::DARK_SLAYER,STYLE_LEVEL::LEVEL_TWO,STYLE_LEVEL_EXP::LEVEL_TWO,-1,-1},
-	{"Dark Slayer Level 3", "",30000,STYLE::DARK_SLAYER,STYLE_LEVEL::LEVEL_THREE,STYLE_LEVEL_EXP::LEVEL_THREE,-1,UNLOCK_VERGIL::DARK_SLAYER_MODDED_MOVES},
-	//{"Dark Slayer Level 4", "Allows Vergil to Trick Up instead of Air Tricking when using the Style Button without Lock On.\n"
-	//			"Similar to DMC5.",15000,STYLE::DARK_SLAYER,STYLE_LEVEL::LEVEL_THREE,STYLE_LEVEL_EXP::LEVEL_THREE,UNLOCK_VERGIL::DARK_SLAYER_MODDED_MOVES,-1},
+	{"暗黑骑士 2 级", "",20000,STYLE::DARK_SLAYER,STYLE_LEVEL::LEVEL_TWO,STYLE_LEVEL_EXP::LEVEL_TWO,-1,-1},
+	{"暗黑骑士 3 级", "",30000,STYLE::DARK_SLAYER,STYLE_LEVEL::LEVEL_THREE,STYLE_LEVEL_EXP::LEVEL_THREE,-1,UNLOCK_VERGIL::DARK_SLAYER_MODDED_MOVES},
+	//{"暗黑骑士 4 级", "Allows Vergil to Trick Up instead of Air Tricking when using the Style Button without Lock On.\n"
+	//			"类似《鬼泣5》。",15000,STYLE::DARK_SLAYER,STYLE_LEVEL::LEVEL_THREE,STYLE_LEVEL_EXP::LEVEL_THREE,UNLOCK_VERGIL::DARK_SLAYER_MODDED_MOVES,-1},
 };
 
 
 ShopExperienceHelper shopHelpersVergil[] = {
-	{"Sprint","Sprints out of combat, similar to DMC4 and 5's Speed Ability.", UNLOCK_VERGIL::SPRINT, 3000, -1, -1,-1,-1, {-1,-1,-1,-1,-1}},
-	{"Rising Sun Air Taunt","With any Weapon or Style: Press Taunt button while in air.", UNLOCK_VERGIL::RISING_SUN_AIR_TAUNT, 10000, -1, -1,-1,-1, {-1,-1,-1,-1,-1}},
-	{"Yamato Rapid Slash Level 1","",UNLOCK_VERGIL::YAMATO_RAPID_SLASH_LEVEL_1, 5000, -1, UNLOCK_VERGIL::YAMATO_RAPID_SLASH_LEVEL_2,-1,-1, {UNLOCK_VERGIL::YAMATO_RISING_STAR,-1,-1,-1,-1}},
-	{"Yamato Rapid Slash Level 2","",UNLOCK_VERGIL::YAMATO_RAPID_SLASH_LEVEL_2, 15000, UNLOCK_VERGIL::YAMATO_RAPID_SLASH_LEVEL_1, -1,-1,-1, {-1,-1,-1,-1,-1}},
-	{"Yamato Rising Star","During Rapid Slash HOLD Melee.",UNLOCK_VERGIL::YAMATO_RISING_STAR, 10000, UNLOCK_VERGIL::YAMATO_RAPID_SLASH_LEVEL_1, -1,-1,-1, {-1,-1,-1,-1,-1}},
-	{"Yamato High Time","Lock On + Back + HOLD Melee",UNLOCK_VERGIL::YAMATO_HIGH_TIME, 7500, -1, -1,-1,-1, {-1,-1,-1,-1,-1}},
-	{"Yamato Judgement Cut Level 1","",UNLOCK_VERGIL::YAMATO_JUDGEMENT_CUT_LEVEL_1, 10000, -1, UNLOCK_VERGIL::YAMATO_JUDGEMENT_CUT_LEVEL_2,-1,-1, {-1,-1,-1,-1,-1}},
-	{"Yamato Judgement Cut Level 2","",UNLOCK_VERGIL::YAMATO_JUDGEMENT_CUT_LEVEL_2, 20000, UNLOCK_VERGIL::YAMATO_JUDGEMENT_CUT_LEVEL_1, -1,-1,-1, {-1,-1,-1,-1,-1}},
-	{"Beowulf Starfall Level 2","",UNLOCK_VERGIL::BEOWULF_STARFALL_LEVEL_2, 7500, -1, -1,-1,-1, {-1,-1,-1,-1,-1}},
-	{"Beowulf Rising Sun","",UNLOCK_VERGIL::BEOWULF_RISING_SUN, 5000, -1, UNLOCK_VERGIL::BEOWULF_RISING_SUN_AIR,-1,-1, {-1,-1,-1,-1,-1}},
-	{"Beowulf Air Rising Sun","Lock On + Back + Melee while in air",UNLOCK_VERGIL::BEOWULF_RISING_SUN_AIR, 10000, UNLOCK_VERGIL::BEOWULF_RISING_SUN, -1,-1,-1, {-1,-1,-1,-1,-1}},
-	{"Beowulf Lunar Phase Level 2","",UNLOCK_VERGIL::BEOWULF_LUNAR_PHASE_LEVEL_2, 15000, -1, -1,-1,-1, {-1,-1,-1,-1,-1}},
-	{"Beowulf Air Lunar Phase","Lock On + Forward + Melee while in air.",UNLOCK_VERGIL::BEOWULF_LUNAR_PHASE_AIR, 20000, -1, -1,-1,-1, {-1,-1,-1,-1,-1}},
-	{"Yamato & Force Edge Helm Breaker Level 2","",UNLOCK_VERGIL::YAMATO_FORCE_EDGE_HELM_BREAKER_LEVEL_2, 13000, -1, -1,-1,-1, {-1,-1,-1,-1,-1}},
-	{"Yamato & Force Edge Stinger Level 1","",UNLOCK_VERGIL::YAMATO_FORCE_EDGE_STINGER_LEVEL_1, 5000, -1, UNLOCK_VERGIL::YAMATO_FORCE_EDGE_STINGER_LEVEL_2,-1,-1, {UNLOCK_VERGIL::YAMATO_FORCE_EDGE_STINGER_AIR,-1,-1,-1,-1}},
-	{"Yamato & Force Edge Stinger Level 2","",UNLOCK_VERGIL::YAMATO_FORCE_EDGE_STINGER_LEVEL_2, 10000, UNLOCK_VERGIL::YAMATO_FORCE_EDGE_STINGER_LEVEL_1, -1,-1,-1, {-1,-1,-1,-1,-1}},
-	{"Yamato & Force Edge Air Stinger","Lock On + Forward + Melee while in air.",UNLOCK_VERGIL::YAMATO_FORCE_EDGE_STINGER_AIR, 7500, UNLOCK_VERGIL::YAMATO_FORCE_EDGE_STINGER_LEVEL_1, -1,-1,-1, {-1,-1,-1,-1,-1}},
-	{"Yamato & Force Edge Round Trip","",UNLOCK_VERGIL::YAMATO_FORCE_EDGE_ROUND_TRIP, 10000, -1, -1,-1,-1, {-1,-1,-1,-1,-1}},
+	{"冲刺","脱离战斗时冲刺，类似 DMC4/5 的加速能力。", UNLOCK_VERGIL::SPRINT, 3000, -1, -1,-1,-1, {-1,-1,-1,-1,-1}},
+	{"旭日空中嘲讽","任意武器或风格：空中按挑衅键。", UNLOCK_VERGIL::RISING_SUN_AIR_TAUNT, 10000, -1, -1,-1,-1, {-1,-1,-1,-1,-1}},
+	{"阎魔刀 快速斩 1 级","",UNLOCK_VERGIL::YAMATO_RAPID_SLASH_LEVEL_1, 5000, -1, UNLOCK_VERGIL::YAMATO_RAPID_SLASH_LEVEL_2,-1,-1, {UNLOCK_VERGIL::YAMATO_RISING_STAR,-1,-1,-1,-1}},
+	{"阎魔刀 快速斩 2 级","",UNLOCK_VERGIL::YAMATO_RAPID_SLASH_LEVEL_2, 15000, UNLOCK_VERGIL::YAMATO_RAPID_SLASH_LEVEL_1, -1,-1,-1, {-1,-1,-1,-1,-1}},
+	{"阎魔刀 升星","快速斩期间按住近战键。",UNLOCK_VERGIL::YAMATO_RISING_STAR, 10000, UNLOCK_VERGIL::YAMATO_RAPID_SLASH_LEVEL_1, -1,-1,-1, {-1,-1,-1,-1,-1}},
+	{"阎魔刀 上挑","锁定 + 后 + 按住近战键",UNLOCK_VERGIL::YAMATO_HIGH_TIME, 7500, -1, -1,-1,-1, {-1,-1,-1,-1,-1}},
+	{"阎魔刀 次元斩 1 级","",UNLOCK_VERGIL::YAMATO_JUDGEMENT_CUT_LEVEL_1, 10000, -1, UNLOCK_VERGIL::YAMATO_JUDGEMENT_CUT_LEVEL_2,-1,-1, {-1,-1,-1,-1,-1}},
+	{"阎魔刀 次元斩 2 级","",UNLOCK_VERGIL::YAMATO_JUDGEMENT_CUT_LEVEL_2, 20000, UNLOCK_VERGIL::YAMATO_JUDGEMENT_CUT_LEVEL_1, -1,-1,-1, {-1,-1,-1,-1,-1}},
+	{"贝奥武夫 坠星 2 级","",UNLOCK_VERGIL::BEOWULF_STARFALL_LEVEL_2, 7500, -1, -1,-1,-1, {-1,-1,-1,-1,-1}},
+	{"贝奥武夫 旭日","",UNLOCK_VERGIL::BEOWULF_RISING_SUN, 5000, -1, UNLOCK_VERGIL::BEOWULF_RISING_SUN_AIR,-1,-1, {-1,-1,-1,-1,-1}},
+	{"贝奥武夫 空中旭日","空中：锁定 + 后 + 近战键",UNLOCK_VERGIL::BEOWULF_RISING_SUN_AIR, 10000, UNLOCK_VERGIL::BEOWULF_RISING_SUN, -1,-1,-1, {-1,-1,-1,-1,-1}},
+	{"贝奥武夫 月相 2 级","",UNLOCK_VERGIL::BEOWULF_LUNAR_PHASE_LEVEL_2, 15000, -1, -1,-1,-1, {-1,-1,-1,-1,-1}},
+	{"贝奥武夫 空中月相","空中：锁定 + 前 + 近战。",UNLOCK_VERGIL::BEOWULF_LUNAR_PHASE_AIR, 20000, -1, -1,-1,-1, {-1,-1,-1,-1,-1}},
+	{"阎魔刀与力量之刃 下劈 2 级","",UNLOCK_VERGIL::YAMATO_FORCE_EDGE_HELM_BREAKER_LEVEL_2, 13000, -1, -1,-1,-1, {-1,-1,-1,-1,-1}},
+	{"阎魔刀与力量之刃 突刺 1 级","",UNLOCK_VERGIL::YAMATO_FORCE_EDGE_STINGER_LEVEL_1, 5000, -1, UNLOCK_VERGIL::YAMATO_FORCE_EDGE_STINGER_LEVEL_2,-1,-1, {UNLOCK_VERGIL::YAMATO_FORCE_EDGE_STINGER_AIR,-1,-1,-1,-1}},
+	{"阎魔刀与力量之刃 突刺 2 级","",UNLOCK_VERGIL::YAMATO_FORCE_EDGE_STINGER_LEVEL_2, 10000, UNLOCK_VERGIL::YAMATO_FORCE_EDGE_STINGER_LEVEL_1, -1,-1,-1, {-1,-1,-1,-1,-1}},
+	{"阎魔刀与力量之刃 空中突刺","空中：锁定 + 前 + 近战。",UNLOCK_VERGIL::YAMATO_FORCE_EDGE_STINGER_AIR, 7500, UNLOCK_VERGIL::YAMATO_FORCE_EDGE_STINGER_LEVEL_1, -1,-1,-1, {-1,-1,-1,-1,-1}},
+	{"阎魔刀与力量之刃 回旋投剑","",UNLOCK_VERGIL::YAMATO_FORCE_EDGE_ROUND_TRIP, 10000, -1, -1,-1,-1, {-1,-1,-1,-1,-1}},
 
 };
 
 ShopExperienceHelper shopHelpersVergilGuns[] = {
-	{"Summoned Swords Level 2","", UNLOCK_VERGIL::SUMMONED_SWORDS_LEVEL_2, 7500, -1, UNLOCK_VERGIL::SUMMONED_SWORDS_LEVEL_3,-1,-1, {-1,-1,-1,-1,-1}},
-	{"Summoned Swords Level 3","", UNLOCK_VERGIL::SUMMONED_SWORDS_LEVEL_3, 15000, UNLOCK_VERGIL::SUMMONED_SWORDS_LEVEL_2, UNLOCK_VERGIL::SUMMON_SWORDS_LEVEL_4,-1,-1, {-1,-1,-1,-1,-1}},
-	{"Summoned Swords Level 4","Increases the speed of summoned swords by 2x, decreases their damage by half and increases hitstop from 3.0 to 8.0.\n"
-	"Extra Speed DOES NOT apply to Blistering Swords.",UNLOCK_VERGIL::SUMMON_SWORDS_LEVEL_4, 20000, UNLOCK_VERGIL::SUMMONED_SWORDS_LEVEL_3, -1,-1,-1, {-1,-1,-1,-1,-1}},
-	{"Spiral Swords Level 1","",UNLOCK_VERGIL::SPIRAL_SWORDS, 20000,-1, UNLOCK_VERGIL::STORM_SWORDS_MODDED,-1,-1, {-1,-1,-1,-1,-1}},
-	{"Storm Swords Level 2","Makes Storm Swords Launch Enemies. 60.0 displacement damage per sword hit.\n"
-				"Displacement damage changes to 60.0 per sword from 0.0.",UNLOCK_VERGIL::STORM_SWORDS_MODDED, 10000, UNLOCK_VERGIL::SPIRAL_SWORDS, -1,-1,-1, {-1,-1,-1,-1,-1}},
+	{"幻影剑 2 级","", UNLOCK_VERGIL::SUMMONED_SWORDS_LEVEL_2, 7500, -1, UNLOCK_VERGIL::SUMMONED_SWORDS_LEVEL_3,-1,-1, {-1,-1,-1,-1,-1}},
+	{"幻影剑 3 级","", UNLOCK_VERGIL::SUMMONED_SWORDS_LEVEL_3, 15000, UNLOCK_VERGIL::SUMMONED_SWORDS_LEVEL_2, UNLOCK_VERGIL::SUMMON_SWORDS_LEVEL_4,-1,-1, {-1,-1,-1,-1,-1}},
+	{"幻影剑 4 级","Increases the speed of summoned swords by 2x, decreases their damage by half and increases hitstop from 3.0 to 8.0.\n"
+	"额外速度不适用于炽热剑。",UNLOCK_VERGIL::SUMMON_SWORDS_LEVEL_4, 20000, UNLOCK_VERGIL::SUMMONED_SWORDS_LEVEL_3, -1,-1,-1, {-1,-1,-1,-1,-1}},
+	{"螺旋剑 1 级","",UNLOCK_VERGIL::SPIRAL_SWORDS, 20000,-1, UNLOCK_VERGIL::STORM_SWORDS_MODDED,-1,-1, {-1,-1,-1,-1,-1}},
+	{"风暴剑 2 级","Makes Storm Swords Launch Enemies. 60.0 displacement damage per sword hit.\n"
+				"位移伤害由每剑 0.0 改为 60.0。",UNLOCK_VERGIL::STORM_SWORDS_MODDED, 10000, UNLOCK_VERGIL::SPIRAL_SWORDS, -1,-1,-1, {-1,-1,-1,-1,-1}},
 };
 
 
@@ -6053,7 +6053,7 @@ void ShopWindow() {
 		}
 		ImGui::PopFont();
 		ImGui::Text("");
-		auto BACKGROUND_FADED_TEXT = g_scene != SCENE::MISSION_START ? u8"Divinity Statue" : u8"Customize";
+		auto BACKGROUND_FADED_TEXT = g_scene != SCENE::MISSION_START ? u8"神像" : u8"自定义";
 		ImFont* fadedFont = UI::g_ImGuiFont_Benguiat256;
 		float fadedFontSize = scaledFontSize * 4.8f;
 		
@@ -6146,7 +6146,7 @@ void ShowStyleLevelsTab(ExpConfig::ExpData& expData, MissionData& missionData) {
 // 		ExpConfig::UpdatePlayerActorExps();
 // 		};
 // 
-// 	if (GUI_Button("Swordmaster Level 2", ImVec2(500.0f, 80.0f))) {
+// 	if (GUI_Button("剑圣 2 级", ImVec2(500.0f, 80.0f))) {
 // 		Buy();
 // 	}
 // 
@@ -6259,7 +6259,7 @@ void ShowExperienceTab(int charID, ExpConfig::ExpData& expData, ShopExperienceHe
 			bool result = GUI_Button(helper.name, btnSize);
 			if (alreadyPurchased) {
 				ImGui::PopStyleColor(3);
-				const char* soldOutText = "SOLD OUT";
+				const char* soldOutText = "已售罄";
 				ImGui::PushFont(UI::g_ImGuiFont_Benguiat[UI::g_UIContext.DefaultFontSize * 0.7f]);
 				ImVec2 textSize = ImGui::CalcTextSize(soldOutText);
 				float pad = 6.0f * scaleFactorY;
@@ -6359,7 +6359,7 @@ void ShowExperienceTab(int charID, ExpConfig::ExpData& expData, ShopExperienceHe
 
 				GUI_PushDisable(condition);
 
-				if (GUI_Button("Sell",ImVec2(80.0f * scaleFactorY, 80.0f * scaleFactorY))) {
+				if (GUI_Button("出售",ImVec2(80.0f * scaleFactorY, 80.0f * scaleFactorY))) {
 					Sell();
 				}
 				GUI_PopDisable(condition);
@@ -6478,7 +6478,7 @@ void ShowExperienceStyleTab(ExpConfig::ExpData& expData, ShopExperienceStyleHelp
 				}
 				if (alreadyPurchased) {
 					ImGui::PopStyleColor(3);
-					const char* soldOutText = "SOLD OUT";
+					const char* soldOutText = "已售罄";
 					ImGui::PushFont(UI::g_ImGuiFont_Benguiat[UI::g_UIContext.DefaultFontSize * 0.7f]);
 					ImVec2 textSize = ImGui::CalcTextSize(soldOutText);
 					float pad = 6.0f * scaleFactorY;
@@ -6550,7 +6550,7 @@ void ShowExperienceStyleTab(ExpConfig::ExpData& expData, ShopExperienceStyleHelp
 				bool sellcondition = !expData.unlocks[helper.moddedunlock];
 				GUI_PushDisable(sellcondition);
 
-				if (GUI_Button("Sell", ImVec2(80.0f * scaleFactorY, 80.0f * scaleFactorY))) {
+				if (GUI_Button("出售", ImVec2(80.0f * scaleFactorY, 80.0f * scaleFactorY))) {
 					Sell();
 				}
 				GUI_PopDisable(sellcondition);
@@ -6620,7 +6620,7 @@ void ShowExperienceStyleTab(ExpConfig::ExpData& expData, ShopExperienceStyleHelp
 					ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImVec4(0.25f, 0.25f, 0.25f, 1.0f));
 					ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImVec4(0.25f, 0.25f, 0.25f, 1.0f));
 				}
-				if (GUI_Button(alreadyPurchased ? "SOLD OUT" : helper.name, ImVec2(375.0f * scaleFactorY, 80.0f * scaleFactorY))) {
+				if (GUI_Button(alreadyPurchased ? "已售罄" : helper.name, ImVec2(375.0f * scaleFactorY, 80.0f * scaleFactorY))) {
 					Buy();
 				}
 				if (alreadyPurchased) {
@@ -6677,7 +6677,7 @@ void ShowExperienceStyleTab(ExpConfig::ExpData& expData, ShopExperienceStyleHelp
 						ImGui::Text(" (%u%% off!)", percentage_discount);
 						ImGui::SameLine();
 						GUI_PopDisable(priceCondition);
-						TooltipHelper("(?)", "Discount is based on XP earned for this style. Resets on purchase.");
+						TooltipHelper("(?)", "折扣按该风格获得的经验计算，购买后重置。");
 						GUI_PushDisable(priceCondition);
 					}
 				}
@@ -6693,7 +6693,7 @@ void ShowExperienceStyleTab(ExpConfig::ExpData& expData, ShopExperienceStyleHelp
 				bool sellcondition = (expData.styleLevels[helper.styleid] != helper.stylelevel) || (helper.moddedchild > -1 && expData.unlocks[helper.moddedchild]);
 				GUI_PushDisable(sellcondition);
 
-				if (GUI_Button("Sell", ImVec2(80.0f * scaleFactorY, 80.0f * scaleFactorY))) {
+				if (GUI_Button("出售", ImVec2(80.0f * scaleFactorY, 80.0f * scaleFactorY))) {
 					Sell();
 				}
 				GUI_PopDisable(sellcondition);
@@ -6783,7 +6783,7 @@ void ShowItemTab(MissionData& missionData, QueuedMissionActorData& queuedMission
 
 		if (!(itemHelper.itemIndex == ITEM::BLUE_ORB || itemHelper.itemIndex == ITEM::PURPLE_ORB) && itemCount != 0) {
 			ImGui::SameLine(550);
-			if (GUI_Button("Sell")) {
+			if (GUI_Button("出售")) {
 				HandleItemSale(itemHelperIndex, missionData, activeMissionActorData);
 			}
 		}
@@ -6959,17 +6959,17 @@ void ExpWindow() {
     }
 
 
-    if (ImGui::Begin("Exp Stuff", &showExpWindow)) {
+    if (ImGui::Begin("经验内容", &showExpWindow)) {
 		ImGui::SetWindowFontScale(scaleFactorY);
         ImGui::Text("");
 
 
-        if (GUI_Button("Save")) {
+        if (GUI_Button("保存")) {
             ExpConfig::SaveExp();
         }
         ImGui::SameLine();
 
-        if (GUI_Button("Load")) {
+        if (GUI_Button("读取")) {
             ExpConfig::LoadExp();
         }
         ImGui::Text("");
@@ -7039,14 +7039,14 @@ void ExpWindow() {
         };
 
 
-        FunctionOnce(ExpConfig::missionExpDataDante, "Dante Mission", Shop::shopHelpersDante, countof(Shop::shopHelpersDante));
-        FunctionOnce(ExpConfig::sessionExpDataDante, "Dante Session", Shop::shopHelpersDante, countof(Shop::shopHelpersDante));
+        FunctionOnce(ExpConfig::missionExpDataDante, "但丁任务", Shop::shopHelpersDante, countof(Shop::shopHelpersDante));
+        FunctionOnce(ExpConfig::sessionExpDataDante, "但丁会话", Shop::shopHelpersDante, countof(Shop::shopHelpersDante));
         FunctionLoop(ExpConfig::savedExpDataDante, saveNamesDante, Shop::shopHelpersDante, countof(Shop::shopHelpersDante));
         ImGui::Text("");
 
 
-        FunctionOnce(ExpConfig::missionExpDataVergil, "Vergil Mission", Shop::shopHelpersVergil, countof(Shop::shopHelpersVergil));
-        FunctionOnce(ExpConfig::sessionExpDataVergil, "Vergil Session", Shop::shopHelpersVergil, countof(Shop::shopHelpersVergil));
+        FunctionOnce(ExpConfig::missionExpDataVergil, "维吉尔任务", Shop::shopHelpersVergil, countof(Shop::shopHelpersVergil));
+        FunctionOnce(ExpConfig::sessionExpDataVergil, "维吉尔会话", Shop::shopHelpersVergil, countof(Shop::shopHelpersVergil));
         FunctionLoop(ExpConfig::savedExpDataVergil, saveNamesVergil, Shop::shopHelpersVergil, countof(Shop::shopHelpersVergil));
         ImGui::Text("");
 
@@ -7084,7 +7084,7 @@ void ExpWindow() {
 
 
         [&]() {
-            if (!ImGui::CollapsingHeader("Default")) {
+            if (!ImGui::CollapsingHeader("默认")) {
                 return;
             }
             ImGui::Text("");
@@ -7194,7 +7194,7 @@ void MissionDataWindow() {
 
         ImGui::PushItemWidth(200);
 
-        GUI_Input<uint32>("Red Orbs", missionData.redOrbs, 1000, "%u", ImGuiInputTextFlags_EnterReturnsTrue);
+        GUI_Input<uint32>("红魂", missionData.redOrbs, 1000, "%u", ImGuiInputTextFlags_EnterReturnsTrue);
 
         ImGui::PopItemWidth();
 
@@ -7203,7 +7203,7 @@ void MissionDataWindow() {
 	
         GUI_Checkbox("unlockDevilTrigger", sessionData.unlockDevilTrigger);
 		ImGui::SameLine();
-		TooltipHelper("(?)", "Applies to sessionData. Needs Mission Restart for it to take effect.");
+		TooltipHelper("(?)", "作用于 sessionData，需重启任务才能生效。");
         ImGui::Text("");
 		
 
@@ -7219,14 +7219,14 @@ void MissionDataWindow() {
 
             ImGui::PushItemWidth(200);
 
-            ImGui::Text("Active");
+            ImGui::Text("激活");
             GUI_Input<float>("hitPoints", activeMissionActorData.hitPoints, 1000, "%g", ImGuiInputTextFlags_EnterReturnsTrue);
             GUI_Input<float>("maxHitPoints", activeMissionActorData.maxHitPoints, 1000, "%g", ImGuiInputTextFlags_EnterReturnsTrue);
             GUI_Input<float>("magicPoints", activeMissionActorData.magicPoints, 1000, "%g", ImGuiInputTextFlags_EnterReturnsTrue);
             GUI_Input<float>("maxMagicPoints", activeMissionActorData.maxMagicPoints, 1000, "%g", ImGuiInputTextFlags_EnterReturnsTrue);
             ImGui::Text("");
 
-            ImGui::Text("Queued");
+            ImGui::Text("已排队");
             GUI_Input<float>("hitPoints", queuedMissionActorData.hitPoints, 1000, "%g", ImGuiInputTextFlags_EnterReturnsTrue);
             GUI_Input<float>("magicPoints", queuedMissionActorData.magicPoints, 1000, "%g", ImGuiInputTextFlags_EnterReturnsTrue);
 
@@ -7236,7 +7236,7 @@ void MissionDataWindow() {
         }();
 
 
-        ImGui::Text("Item Count");
+        ImGui::Text("物品数量");
         ImGui::Text("");
 
         ImGui::PushItemWidth(150);
@@ -7253,7 +7253,7 @@ void MissionDataWindow() {
         ImGui::Text("");
 
 
-        ImGui::Text("Buy Count");
+        ImGui::Text("购买数量");
         ImGui::Text("");
 
         ImGui::PushItemWidth(150);
@@ -7270,11 +7270,11 @@ void MissionDataWindow() {
 
         ImGui::Text("");
 
-        if (GUI_Button("Status")) {
+        if (GUI_Button("状态")) {
             eventData.event = EVENT::STATUS;
         }
 
-        if (GUI_Button("Customize")) {
+        if (GUI_Button("自定义")) {
             eventData.event = EVENT::CUSTOMIZE;
         }
 
@@ -7440,7 +7440,7 @@ void FileDataWindow() {
                 ImGui::Text((*fileData.typeDataAddr).typeName);
             }
             GUI_Input<uint64>("file", *reinterpret_cast<uint64*>(&fileData.file), 0, "%.16llX", ImGuiInputTextFlags_EnterReturnsTrue);
-            if (GUI_Button("Reset")) {
+            if (GUI_Button("重置")) {
                 SetMemory(&fileData, 0, sizeof(fileData));
             }
 
@@ -7464,7 +7464,7 @@ void FileDataWindow() {
                 "fileDataAddr", *reinterpret_cast<uint64*>(&metadata.fileDataAddr), 0, "%.16llX", ImGuiInputTextFlags_EnterReturnsTrue);
             GUI_Input<uint32>("category", metadata.category, 1, "%u", ImGuiInputTextFlags_EnterReturnsTrue);
             GUI_Input<uint32>("fileSetIndex", metadata.fileSetIndex, 1, "%u", ImGuiInputTextFlags_EnterReturnsTrue);
-            if (GUI_Button("Reset")) {
+            if (GUI_Button("重置")) {
                 SetMemory(&metadata, 0, sizeof(metadata));
             }
 
@@ -7472,7 +7472,7 @@ void FileDataWindow() {
         };
 
 
-        GUI_SectionStart("Default File Data");
+        GUI_SectionStart("默认文件数据");
 
         uint32 g_itemIndex = 0;
 
@@ -7503,7 +7503,7 @@ void FileDataWindow() {
         GUI_SectionEnd();
         ImGui::Text("");
 
-        GUI_SectionStart("Enemy File Data");
+        GUI_SectionStart("敌人文件数据");
 
         old_for_all(uint32, fileDataIndex, ENEMY_FILE_DATA_COUNT) {
             if (ImGui::CollapsingHeader(enemyFileDataItemNames[fileDataIndex])) {
@@ -7518,7 +7518,7 @@ void FileDataWindow() {
         GUI_SectionEnd();
         ImGui::Text("");
 
-        GUI_SectionStart("Enemy File Data Metadata");
+        GUI_SectionStart("敌人文件数据元数据");
 
         old_for_all(uint32, index, ENEMY::COUNT) {
             if (ImGui::CollapsingHeader(enemyFileDataMetadataItemNames[index])) {
@@ -7557,7 +7557,7 @@ void ActorWindow() {
         ImGui::Text("");
 
 
-        if (ImGui::CollapsingHeader("Default")) {
+        if (ImGui::CollapsingHeader("默认")) {
             ImGui::Text("");
 
             old_for_all(uint8, entityIndex, ENTITY_COUNT) {
@@ -7580,18 +7580,18 @@ void ActorWindow() {
                     }
                     auto& actorData = *reinterpret_cast<PlayerActorData*>(newActorData.baseAddr);
 
-                    GUI_Input("Speed", actorData.speed, 1.0f, "%g", ImGuiInputTextFlags_EnterReturnsTrue);
-                    GUI_Input("Speed Multiplier", actorData.speedMultiplier, 1.0f, "%g", ImGuiInputTextFlags_EnterReturnsTrue);
+                    GUI_Input("速度", actorData.speed, 1.0f, "%g", ImGuiInputTextFlags_EnterReturnsTrue);
+                    GUI_Input("速度倍率", actorData.speedMultiplier, 1.0f, "%g", ImGuiInputTextFlags_EnterReturnsTrue);
 
                     GUI_Input("x", actorData.position.x, 1.0f, "%g", ImGuiInputTextFlags_EnterReturnsTrue);
                     GUI_Input("y", actorData.position.y, 1.0f, "%g", ImGuiInputTextFlags_EnterReturnsTrue);
                     GUI_Input("z", actorData.position.z, 1.0f, "%g", ImGuiInputTextFlags_EnterReturnsTrue);
                     GUI_Input("a", actorData.position.a, 1.0f, "%g", ImGuiInputTextFlags_EnterReturnsTrue);
 
-                    GUI_Input("Hit Points", actorData.hitPoints, 1.0f, "%g", ImGuiInputTextFlags_EnterReturnsTrue);
-                    GUI_Input("Max Hit Points", actorData.maxHitPoints, 1.0f, "%g", ImGuiInputTextFlags_EnterReturnsTrue);
-                    GUI_Input("Magic Points", actorData.magicPoints, 1.0f, "%g", ImGuiInputTextFlags_EnterReturnsTrue);
-                    GUI_Input("Max Magic Points", actorData.maxMagicPoints, 1.0f, "%g", ImGuiInputTextFlags_EnterReturnsTrue);
+                    GUI_Input("生命值", actorData.hitPoints, 1.0f, "%g", ImGuiInputTextFlags_EnterReturnsTrue);
+                    GUI_Input("最大生命值", actorData.maxHitPoints, 1.0f, "%g", ImGuiInputTextFlags_EnterReturnsTrue);
+                    GUI_Input("魔力值", actorData.magicPoints, 1.0f, "%g", ImGuiInputTextFlags_EnterReturnsTrue);
+                    GUI_Input("最大魔力值", actorData.maxMagicPoints, 1.0f, "%g", ImGuiInputTextFlags_EnterReturnsTrue);
                 }();
 
                 ImGui::PopItemWidth();
@@ -7655,18 +7655,18 @@ void ActorWindow() {
                         }
                         auto& actorData = *reinterpret_cast<PlayerActorData*>(newActorData.baseAddr);
 
-                        GUI_Input("Speed", actorData.speed, 1.0f, "%g", ImGuiInputTextFlags_EnterReturnsTrue);
-                        GUI_Input("Speed Multiplier", actorData.speedMultiplier, 1.0f, "%g", ImGuiInputTextFlags_EnterReturnsTrue);
+                        GUI_Input("速度", actorData.speed, 1.0f, "%g", ImGuiInputTextFlags_EnterReturnsTrue);
+                        GUI_Input("速度倍率", actorData.speedMultiplier, 1.0f, "%g", ImGuiInputTextFlags_EnterReturnsTrue);
 
                         GUI_Input("x", actorData.position.x, 1.0f, "%g", ImGuiInputTextFlags_EnterReturnsTrue);
                         GUI_Input("y", actorData.position.y, 1.0f, "%g", ImGuiInputTextFlags_EnterReturnsTrue);
                         GUI_Input("z", actorData.position.z, 1.0f, "%g", ImGuiInputTextFlags_EnterReturnsTrue);
                         GUI_Input("a", actorData.position.a, 1.0f, "%g", ImGuiInputTextFlags_EnterReturnsTrue);
 
-                        GUI_Input("Hit Points", actorData.hitPoints, 1.0f, "%g", ImGuiInputTextFlags_EnterReturnsTrue);
-                        GUI_Input("Max Hit Points", actorData.maxHitPoints, 1.0f, "%g", ImGuiInputTextFlags_EnterReturnsTrue);
-                        GUI_Input("Magic Points", actorData.magicPoints, 1.0f, "%g", ImGuiInputTextFlags_EnterReturnsTrue);
-                        GUI_Input("Max Magic Points", actorData.maxMagicPoints, 1.0f, "%g", ImGuiInputTextFlags_EnterReturnsTrue);
+                        GUI_Input("生命值", actorData.hitPoints, 1.0f, "%g", ImGuiInputTextFlags_EnterReturnsTrue);
+                        GUI_Input("最大生命值", actorData.maxHitPoints, 1.0f, "%g", ImGuiInputTextFlags_EnterReturnsTrue);
+                        GUI_Input("魔力值", actorData.magicPoints, 1.0f, "%g", ImGuiInputTextFlags_EnterReturnsTrue);
+                        GUI_Input("最大魔力值", actorData.maxMagicPoints, 1.0f, "%g", ImGuiInputTextFlags_EnterReturnsTrue);
                     }();
 
                     ImGui::PopItemWidth();
@@ -7728,7 +7728,7 @@ void EventDataWindow() {
 
         ImGui::Text("");
 
-        if (GUI_Button("Apply")) {
+        if (GUI_Button("应用")) {
             eventData.room       = eventData2.room;
             eventData.position   = eventData2.position;
             eventData.event      = eventData2.event;
@@ -7793,7 +7793,7 @@ void RegionDataWindow() {
 
         static uint32 count = 3;
 
-        GUI_Input<uint32>("Count", count, 1, "%u", ImGuiInputTextFlags_EnterReturnsTrue);
+        GUI_Input<uint32>("数量", count, 1, "%u", ImGuiInputTextFlags_EnterReturnsTrue);
 
         old_for_all(uint32, index, count) {
             auto& regionData = regionDataAddr[index];
@@ -7821,7 +7821,7 @@ void SoundWindow() {
         ImGui::SetNextWindowPos(ImVec2(0, 0));
     }
 
-    if (ImGui::Begin("Sound", &showSoundWindow)) {
+    if (ImGui::Begin("音效", &showSoundWindow)) {
 		ImGui::SetWindowFontScale(scaleFactorY);
         ImGui::Text("");
 
@@ -7832,12 +7832,12 @@ void SoundWindow() {
         static FMOD_RESULT fmodResult        = 0;
 
         ImGui::PushItemWidth(200);
-        if (GUI_Input<uint32>("FMOD Channel Index", fmodChannelIndex, 1, "%u", ImGuiInputTextFlags_EnterReturnsTrue)) {
+        if (GUI_Input<uint32>("FMOD 通道索引", fmodChannelIndex, 1, "%u", ImGuiInputTextFlags_EnterReturnsTrue)) {
             fmodChannelAddr = reinterpret_cast<FMOD_CHANNEL**>(appBaseAddr + 0x5DE3E0)[fmodChannelIndex];
         }
-        GUI_Input<uint64>("FMOD Channel Address", *reinterpret_cast<uint64*>(&fmodChannelAddr), 0, "%llX",
+        GUI_Input<uint64>("FMOD 通道地址", *reinterpret_cast<uint64*>(&fmodChannelAddr), 0, "%llX",
             ImGuiInputTextFlags_CharsHexadecimal | ImGuiInputTextFlags_EnterReturnsTrue);
-        GUI_Input<float>("Volume", volume, 0.1f, "%g", ImGuiInputTextFlags_EnterReturnsTrue);
+        GUI_Input<float>("音量", volume, 0.1f, "%g", ImGuiInputTextFlags_EnterReturnsTrue);
         ImGui::PopItemWidth();
         ImGui::Text("");
 
@@ -7851,7 +7851,7 @@ void SoundWindow() {
         static byte8* headMetadataAddr = 0;
 
         ImGui::PushItemWidth(200);
-        GUI_Input<uint64>("Head Metadata Address", *reinterpret_cast<uint64*>(&headMetadataAddr), 0, "%llX",
+        GUI_Input<uint64>("头部元数据地址", *reinterpret_cast<uint64*>(&headMetadataAddr), 0, "%llX",
             ImGuiInputTextFlags_CharsHexadecimal | ImGuiInputTextFlags_EnterReturnsTrue);
         ImGui::PopItemWidth();
         ImGui::Text("");
@@ -7910,7 +7910,7 @@ void DebugSection() {
 	auto defaultFontSize = UI::g_UIContext.DefaultFontSize;
 	ImU32 checkmarkColorBg = UI::SwapColorEndianness(0xFFFFFFFF);
 
-	GUI_Title("DEBUG OPTIONS");
+	GUI_Title("调试选项");
 
 	ImGui::PushItemWidth(itemWidth);
 	ImGui::PushFont(UI::g_ImGuiFont_Roboto[defaultFontSize * 0.9f]);
@@ -7928,7 +7928,7 @@ void DebugSection() {
 			ImGui::TableNextRow(0, rowWidth);
 			ImGui::TableNextColumn();
 
-			if (GUI_Checkbox2("Debug Tools", activeCrimsonGameplay.Debug.debugTools, queuedCrimsonGameplay.Debug.debugTools)) {
+			if (GUI_Checkbox2("调试工具", activeCrimsonGameplay.Debug.debugTools, queuedCrimsonGameplay.Debug.debugTools)) {
 				if (activeCrimsonGameplay.Debug.debugTools) {
 					activeConfig.debugOverlayData.enable = true;
 					queuedConfig.debugOverlayData.enable = true;
@@ -7948,7 +7948,7 @@ void DebugSection() {
 			}
 			
 			ImGui::TableNextColumn();
-			GUI_Checkbox2("Debug Overlay", activeConfig.debugOverlayData.enable, queuedConfig.debugOverlayData.enable);
+			GUI_Checkbox2("调试叠加层", activeConfig.debugOverlayData.enable, queuedConfig.debugOverlayData.enable);
 			ImGui::EndTable();
 		}
 	}
@@ -7956,21 +7956,21 @@ void DebugSection() {
 	
 
 	ImGui::PushFont(UI::g_ImGuiFont_RussoOne[defaultFontSize * 1.1f]);
-	if (ImGui::CollapsingHeader("DEBUG")) {
+	if (ImGui::CollapsingHeader("调试")) {
 
 		ImGui::PushFont(UI::g_ImGuiFont_Roboto[defaultFontSize * 0.9f]);
 		
 
 		ImGui::Text("");
 
-		GUI_Checkbox2("Show Hitboxes", activeCrimsonGameplay.Debug.showHitboxes, queuedCrimsonGameplay.Debug.showHitboxes);
+		GUI_Checkbox2("显示判定框", activeCrimsonGameplay.Debug.showHitboxes, queuedCrimsonGameplay.Debug.showHitboxes);
 
 		bool condition = (!InGame() || activeConfig.Actor.playerCount == 1);
 		GUI_PushDisable(condition);
 		for_each(players, 1, activeConfig.Actor.playerCount) {
 			bool isDead = CrimsonGameplay::CanBeRevived(players);
 			//GUI_PushDisable(!isDead);
-			std::string inputLabel = "Revive Player " + std::to_string(players + 1) + "##playerReviveLabel";
+			std::string inputLabel = "复活玩家 " + std::to_string(players + 1) + "##playerReviveLabel";
 			if (GUI_Button(inputLabel.c_str())) {
 				CrimsonGameplay::RevivePlayer(players);
 			}
@@ -7996,11 +7996,11 @@ void DebugSection() {
 		static int boneIdx = 0;
 		static bool enableCustomColor = false;
 
-		ImGui::InputInt("Effect Bank", &vfxBank);
-		ImGui::InputInt("Effect ID", &vfxId);
-		ImGui::InputInt("Effect Bone", &boneIdx);
+		ImGui::InputInt("效果库", &vfxBank);
+		ImGui::InputInt("效果 ID", &vfxId);
+		ImGui::InputInt("效果骨骼", &boneIdx);
 		static int effectPlayerID = 0;
-		ImGui::InputInt("Player", &effectPlayerID);
+		ImGui::InputInt("玩家", &effectPlayerID);
 		ImGui::Checkbox("CustomColor", &enableCustomColor);
 		auto pPlayer = (void*)crimsonPlayer[effectPlayerID].playerPtr;
 		uint32 vfxColor = CrimsonUtil::Uint8toAABBGGRR(activeCrimsonConfig.StyleSwitchFX.Flux.fluxColor[0]);
@@ -8010,7 +8010,7 @@ void DebugSection() {
 
 		ImGui::Text("");
 
-		GUI_Checkbox2("Original JDC VFX Reference for JF", activeCrimsonConfig.VFX.originalJDCReference,
+		GUI_Checkbox2("JF 的原始 JDC 特效参考", activeCrimsonConfig.VFX.originalJDCReference,
 			queuedCrimsonConfig.VFX.originalJDCReference);
 
 		GUI_Checkbox("g_noTeleport", g_noTeleport);
@@ -8031,7 +8031,7 @@ void DebugSection() {
 			ImGui::PopItemWidth();
 			ImGui::Text("");
 
-			if (GUI_Button("Play Sound")) {
+			if (GUI_Button("播放音效")) {
 				FMOD_PlaySound(group, index);
 			}
 		}
@@ -8039,11 +8039,11 @@ void DebugSection() {
 		ImGui::Text("");
 
 
-		GUI_Checkbox2("Welcome", activeConfig.welcome, queuedConfig.welcome);
+		GUI_Checkbox2("欢迎", activeConfig.welcome, queuedConfig.welcome);
 		ImGui::Text("");
 
 
-		if (GUI_Button("Actor")) {
+		if (GUI_Button("实体")) {
 			showActorWindow = true;
 		}
 		ImGui::SameLine();
@@ -8053,32 +8053,32 @@ void DebugSection() {
 		}
 		ImGui::SameLine();
 
-		if (GUI_Button("Exp Stuff")) {
+		if (GUI_Button("经验内容")) {
 			showExpWindow = true;
 		}
 		ImGui::SameLine();
 
-		if (GUI_Button("File Data")) {
+		if (GUI_Button("文件数据")) {
 			showFileDataWindow = true;
 		}
 		ImGui::SameLine();
 
-		if (GUI_Button("Mission Data")) {
+		if (GUI_Button("任务数据")) {
 			showMissionDataWindow = true;
 		}
 		ImGui::SameLine();
 
-		if (GUI_Button("Region Data")) {
+		if (GUI_Button("区域数据")) {
 			showRegionDataWindow = true;
 		}
 		ImGui::SameLine();
 
-		if (GUI_Button("Sound")) {
+		if (GUI_Button("音效")) {
 			showSoundWindow = true;
 		}
 		ImGui::Text("");
 
-		if (GUI_Button("Close All")) {
+		if (GUI_Button("全部关闭")) {
 			showActorWindow = false;
 			showEventDataWindow = false;
 			showExpWindow = false;
@@ -8093,24 +8093,24 @@ void DebugSection() {
 		auto& sessionData = *reinterpret_cast<SessionData*>(appBaseAddr + 0xC8F250);
 
 
-		GUI_Checkbox("One Hit Kill", sessionData.oneHitKill);
+		GUI_Checkbox("一击必杀", sessionData.oneHitKill);
 		ImGui::Text("");
 
 		GUI_Checkbox("unlockDevilTrigger", sessionData.unlockDevilTrigger);
 		ImGui::SameLine();							
-		if (GUI_Button("Fix Devil Trigger")) {
+		if (GUI_Button("修复魔人化")) {
 			sessionData.unlockDevilTrigger = true;
 			sessionData.magicPoints = 3000;
 		}
 		ImGui::SameLine();
-		TooltipHelper("(?)", "Applies to sessionData. Needs Mission Restart for it to take effect.");
+		TooltipHelper("(?)", "作用于 sessionData，需重启任务才能生效。");
 		ImGui::Text("");
 
 
 		ImGui::Text("");
 
 		if (GUI_Checkbox2(
-			"Disable Player Actor Idle Timer", activeConfig.disablePlayerActorIdleTimer, queuedConfig.disablePlayerActorIdleTimer)) {
+			"禁用玩家实体待机计时器", activeConfig.disablePlayerActorIdleTimer, queuedConfig.disablePlayerActorIdleTimer)) {
 			ToggleDisablePlayerActorIdleTimer(activeConfig.disablePlayerActorIdleTimer);
 		}
 		ImGui::Text("");
@@ -8159,7 +8159,7 @@ void DebugSection() {
 			GUI_Input<uint32>("", fileIndex);
 			ImGui::PopItemWidth();
 			ImGui::SameLine();
-			if (GUI_Button("Set File")) {
+			if (GUI_Button("设置文件")) {
 				[&]() {
 					if (!archiveAddr) {
 						return;
@@ -8193,7 +8193,7 @@ void DebugSection() {
 			ImGui::PopItemWidth();
 			ImGui::SameLine();
 			// @Todo: Update.
-			if (GUI_Button("Set Subfile")) {
+			if (GUI_Button("设置子文件")) {
 				[&]() {
 					auto subarchive = file;
 					if (!subarchive) {
@@ -8204,13 +8204,13 @@ void DebugSection() {
 
 					if ((subarchiveMetadata.signature[0] != 'P') || (subarchiveMetadata.signature[1] != 'A') ||
 						(subarchiveMetadata.signature[2] != 'C')) {
-						MessageBoxA(0, "Wrong Signature", 0, 0);
+						MessageBoxA(0, "签名错误", 0, 0);
 
 						return;
 					}
 
 					if (subfileIndex >= subarchiveMetadata.fileCount) {
-						MessageBoxA(0, "Out of range.", 0, 0);
+						MessageBoxA(0, "超出范围。", 0, 0);
 
 						return;
 					}
@@ -8233,7 +8233,7 @@ void DebugSection() {
 			}
 
 
-			if (GUI_Button("Play File Motion")) {
+			if (GUI_Button("播放文件动作")) {
 				[&]() {
 					// IntroduceMainActorData(actorBaseAddr, actorData, return);
 					if (!modelDataAddr) {
@@ -8249,7 +8249,7 @@ void DebugSection() {
 					}();
 			}
 
-			if (GUI_Button("Play Subfile Motion")) {
+			if (GUI_Button("播放子文件动作")) {
 				[&]() {
 					if (!modelDataAddr) {
 						return;
@@ -8295,7 +8295,7 @@ void DebugSection() {
 			GUI_Input("height a", height.m128_f32[3], 1.0f, "%g", ImGuiInputTextFlags_EnterReturnsTrue);
 
 
-			if (GUI_Button("Grenade")) {
+			if (GUI_Button("手雷")) {
 				// HoboBreak();
 
 				func_175210(&position, &multiplier, height);
@@ -8315,7 +8315,7 @@ void DebugSection() {
 			GUI_Input<decltype(action)>("action", action, 1, "%u", ImGuiInputTextFlags_EnterReturnsTrue);
 
 
-			if (GUI_Button("Event")) {
+			if (GUI_Button("事件")) {
 
 				[&]() {
 					if (!g_playerActorBaseAddrs[actorIndex]) {
@@ -8354,7 +8354,7 @@ void EnemySpawnerToolSection() {
 	ImU32 checkmarkColorBg = UI::SwapColorEndianness(0xFFFFFFFF);
 	float smallerComboMult = 0.8f;
 
-	if (GUI_TitleCheckbox2("ENEMY SPAWNER TOOL", activeCrimsonGameplay.Cheats.General.enemySpawnerTool,
+	if (GUI_TitleCheckbox2("敌人生成器工具", activeCrimsonGameplay.Cheats.General.enemySpawnerTool,
 		queuedCrimsonGameplay.Cheats.General.enemySpawnerTool, false)) {
 		if (!activeCrimsonGameplay.Cheats.General.enemySpawnerTool) {
 			activeConfig.enemyAutoSpawn = false;
@@ -8378,19 +8378,19 @@ void EnemySpawnerToolSection() {
 	const float rowHeight = 40.0f * queuedConfig.globalScale;
 
 	if (ImGui::BeginTable("EnemySpawnerTable", 2)) {
-		ImGui::TableSetupColumn("Left", 0, columnWidth * 2.0f);
-		ImGui::TableSetupColumn("Right", 0, columnWidth * 2.0f);
+		ImGui::TableSetupColumn("左", 0, columnWidth * 2.0f);
+		ImGui::TableSetupColumn("右", 0, columnWidth * 2.0f);
 
 		ImGui::TableNextRow(0, rowHeight);
 		ImGui::TableNextColumn();
-		GUI_Slider2<uint8>("Enemy Quantity", activeConfig.enemyCount, queuedConfig.enemyCount, 1, static_cast<uint8>(countof(activeConfig.configCreateEnemyActorData)));
+		GUI_Slider2<uint8>("敌人数量", activeConfig.enemyCount, queuedConfig.enemyCount, 1, static_cast<uint8>(countof(activeConfig.configCreateEnemyActorData)));
 
 		ImGui::TableNextColumn();
-		GUI_Checkbox2("Auto Spawn", activeConfig.enemyAutoSpawn, queuedConfig.enemyAutoSpawn);
+		GUI_Checkbox2("自动生成", activeConfig.enemyAutoSpawn, queuedConfig.enemyAutoSpawn);
 
 		ImGui::TableNextRow(0, rowHeight * 0.9f);
 		ImGui::TableNextColumn();
-		if (GUI_Button("SPAWN ALL", ImVec2(150.0f * scaleFactorY, 30.0f * scaleFactorY))) {
+		if (GUI_Button("全部生成", ImVec2(150.0f * scaleFactorY, 30.0f * scaleFactorY))) {
 			old_for_all(uint8, index, activeConfig.enemyCount) {
 				auto& data = activeConfig.configCreateEnemyActorData[index];
 				CreateEnemyActor(data);
@@ -8398,7 +8398,7 @@ void EnemySpawnerToolSection() {
 		}
 
 		ImGui::TableNextColumn();
-		if (GUI_Button("Kill All Ladies")) {
+		if (GUI_Button("击杀所有蕾蒂")) {
 			auto pool_9347 = *reinterpret_cast<byte8***>(appBaseAddr + 0xC90E28);
 			if (pool_9347 && pool_9347[8]) {
 				auto& enemyVectorData = *reinterpret_cast<EnemyVectorData*>(pool_9347[8]);
@@ -8423,8 +8423,8 @@ void EnemySpawnerToolSection() {
 	// Enemy Entries
 	ImGui::PushItemWidth(200);
 	if (ImGui::BeginTable("EnemySpawnerTable2", 3)) {
-		ImGui::TableSetupColumn("Left", 0, columnWidth * 2.0f);
-		ImGui::TableSetupColumn("Right", 0, columnWidth * 2.0f);
+		ImGui::TableSetupColumn("左", 0, columnWidth * 2.0f);
+		ImGui::TableSetupColumn("右", 0, columnWidth * 2.0f);
 
 		ImGui::TableNextRow(0, rowHeight);
 		ImGui::TableNextColumn();
@@ -8435,17 +8435,17 @@ void EnemySpawnerToolSection() {
 			ImGui::PushID(index);
 
 			ImGui::PushFont(UI::g_ImGuiFont_RussoOne[defaultFontSize * 0.9f]);
-			ImGui::Text("Enemy Slot %u", index + 1);
+			ImGui::Text("敌人槽位 %u", index + 1);
 			ImGui::PopFont();
 
 			ImGui::PushItemWidth(itemWidth * 1.7f);
-			UI::Combo2("Enemy", enemyNames, activeData.enemy, queuedData.enemy, ImGuiComboFlags_HeightLarge);
+			UI::Combo2("敌人", enemyNames, activeData.enemy, queuedData.enemy, ImGuiComboFlags_HeightLarge);
 			ImGui::PopItemWidth();
 
 			ImGui::PushItemWidth(itemWidth * 0.9f);
-			GUI_Input2<uint32>("Variant", activeData.variant, queuedData.variant, 1, "%u", ImGuiInputTextFlags_EnterReturnsTrue);
+			GUI_Input2<uint32>("变体", activeData.variant, queuedData.variant, 1, "%u", ImGuiInputTextFlags_EnterReturnsTrue);
 			ImGui::PopItemWidth();
-			GUI_Checkbox2("Use 1P Character Position", activeData.useMainActorData, queuedData.useMainActorData);
+			GUI_Checkbox2("使用 1P 角色位置", activeData.useMainActorData, queuedData.useMainActorData);
 
 			bool disablePos = activeData.useMainActorData;
 			GUI_PushDisable(disablePos);
@@ -8460,16 +8460,16 @@ void EnemySpawnerToolSection() {
 			GUI_Input2<float>("Z", activeData.position.z, queuedData.position.z, 10.0f, "%g", ImGuiInputTextFlags_EnterReturnsTrue);
 			ImGui::PopItemWidth();
 			ImGui::PushItemWidth(itemWidth * smallerComboMult);
-			GUI_Input2<uint16>("Rotation", activeData.rotation, queuedData.rotation, 1, "%u", ImGuiInputTextFlags_EnterReturnsTrue);
+			GUI_Input2<uint16>("旋转", activeData.rotation, queuedData.rotation, 1, "%u", ImGuiInputTextFlags_EnterReturnsTrue);
 			ImGui::PopItemWidth();
 
 			GUI_PopDisable(disablePos);
 
 			ImGui::PushItemWidth(itemWidth * smallerComboMult);
-			GUI_Input2<uint16>("Spawn Method", activeData.spawnMethod, queuedData.spawnMethod, 1, "%u", ImGuiInputTextFlags_EnterReturnsTrue);
+			GUI_Input2<uint16>("生成方式", activeData.spawnMethod, queuedData.spawnMethod, 1, "%u", ImGuiInputTextFlags_EnterReturnsTrue);
 			ImGui::PopItemWidth();
 
-			if (GUI_Button("SPAWN", ImVec2(150.0f * scaleFactorY, 50.0f * scaleFactorY))) {
+			if (GUI_Button("生成", ImVec2(150.0f * scaleFactorY, 50.0f * scaleFactorY))) {
 				CreateEnemyActor(activeData);
 			}
 
@@ -8496,7 +8496,7 @@ void FMODJukeboxSection() {
 	float smallerComboMult = 0.8f;
 	ImU32 checkmarkColorBg = UI::SwapColorEndianness(0xFFFFFFFF);
 
-	GUI_Title("FMOD JUKEBOX TOOL", false);
+	GUI_Title("FMOD 点唱机工具", false);
 
 	ImGui::PushFont(UI::g_ImGuiFont_Roboto[defaultFontSize * 0.9f]);
 	ImGui::PushStyleColor(ImGuiCol_CheckMark, checkmarkColorBg);
@@ -8521,12 +8521,12 @@ void FMODJukeboxSection() {
 		ImGui::TableNextRow(0, rowHeight * 0.75f);
 		ImGui::TableNextColumn();
 		ImGui::PushFont(UI::g_ImGuiFont_RussoOne[defaultFontSize * 0.9f]);
-		ImGui::Text("TRACK SELECTION");
+		ImGui::Text("曲目选择");
 		ImGui::PopFont();
 
 		ImGui::TableNextColumn();
 		ImGui::PushFont(UI::g_ImGuiFont_RussoOne[defaultFontSize * 0.9f]);
-		ImGui::Text("CONTROL");
+		ImGui::Text("控制");
 		ImGui::PopFont();
 
 		ImGui::TableNextRow(0, rowHeight);
@@ -8544,12 +8544,12 @@ void FMODJukeboxSection() {
 
 		ImGui::TableNextColumn();
 
-		if (GUI_Button("PLAY", ImVec2(150.0f * scaleFactorY, 50.0f * scaleFactorY))) {
+		if (GUI_Button("播放", ImVec2(150.0f * scaleFactorY, 50.0f * scaleFactorY))) {
 			snprintf(location, sizeof(location), "afs/sound/%s", fileName);
 			PlayTrack(location);
 		}
 
-		if (GUI_Button("STOP", ImVec2(150.0f * scaleFactorY, 50.0f * scaleFactorY))) {
+		if (GUI_Button("停止", ImVec2(150.0f * scaleFactorY, 50.0f * scaleFactorY))) {
 			PlayTrack("");
 		}
 
@@ -8573,9 +8573,9 @@ void LegacyDDMKCharactersSection() {
 	ImGui::PushFont(UI::g_ImGuiFont_Roboto[defaultFontSize * 0.9f]);
 
 	GUI_PushDisable(!activeConfig.Actor.enable);
-	if (GUI_TitleCheckbox2("LEGACY DDMK CHARACTERS", activeCrimsonGameplay.Cheats.General.legacyDDMKCharacters,
+	if (GUI_TitleCheckbox2("旧版 DDMK 角色", activeCrimsonGameplay.Cheats.General.legacyDDMKCharacters,
 		queuedCrimsonGameplay.Cheats.General.legacyDDMKCharacters, true, true, "These are incomplete playable characters adapted from their respective bosses in DDMK.\n"
-		"Enables them to be selected at PLAYER -> CHARACTER.")) {
+		"使其可在 玩家 -> 角色 中选择。")) {
 		if (!activeCrimsonGameplay.Cheats.General.legacyDDMKCharacters) {
 			CopyMemory(&queuedConfig.kalinaAnnHookMultiplier, &defaultConfig.kalinaAnnHookMultiplier,
 				sizeof(queuedConfig.kalinaAnnHookMultiplier));
@@ -8614,7 +8614,7 @@ void LegacyDDMKCharactersSection() {
 
 	GUI_PushDisable(!activeCrimsonGameplay.Cheats.General.legacyDDMKCharacters);
 	ImGui::PushFont(UI::g_ImGuiFont_RussoOne[defaultFontSize * 0.9f]);
-	ImGui::Text("LADY OPTIONS");
+	ImGui::Text("蕾蒂选项");
 	ImGui::PopFont();
 
 	// Table layout for Lady's Kalina Ann options
@@ -8627,27 +8627,27 @@ void LegacyDDMKCharactersSection() {
 
 		ImGui::TableNextRow(0, rowHeight);
 		ImGui::TableNextColumn();
-		LadyInput("Hook Multiplier X", activeConfig.kalinaAnnHookMultiplier.x,
+		LadyInput("钩索倍率 X", activeConfig.kalinaAnnHookMultiplier.x,
 			queuedConfig.kalinaAnnHookMultiplier.x, defaultConfig.kalinaAnnHookMultiplier.x);
 
 		ImGui::TableNextColumn();
-		LadyInput("Hook Multiplier Y", activeConfig.kalinaAnnHookMultiplier.y,
+		LadyInput("钩索倍率 Y", activeConfig.kalinaAnnHookMultiplier.y,
 			queuedConfig.kalinaAnnHookMultiplier.y, defaultConfig.kalinaAnnHookMultiplier.y);
 
 		ImGui::TableNextColumn();
-		LadyInput("Hook Multiplier Z", activeConfig.kalinaAnnHookMultiplier.z,
+		LadyInput("钩索倍率 Z", activeConfig.kalinaAnnHookMultiplier.z,
 			queuedConfig.kalinaAnnHookMultiplier.z, defaultConfig.kalinaAnnHookMultiplier.z);
 
 		ImGui::TableNextColumn();
-		LadyInput("Hook Multiplier A", activeConfig.kalinaAnnHookMultiplier.a,
+		LadyInput("钩索倍率 A", activeConfig.kalinaAnnHookMultiplier.a,
 			queuedConfig.kalinaAnnHookMultiplier.a, defaultConfig.kalinaAnnHookMultiplier.a);
 
 		ImGui::TableNextColumn();
-		LadyInput("Hook Grenade Height", activeConfig.kalinaAnnHookGrenadeHeight,
+		LadyInput("钩索手雷高度", activeConfig.kalinaAnnHookGrenadeHeight,
 			queuedConfig.kalinaAnnHookGrenadeHeight, defaultConfig.kalinaAnnHookGrenadeHeight, 10.0f);
 
 		ImGui::TableNextColumn();
-		LadyInput("Hook Grenade Time", activeConfig.kalinaAnnHookGrenadeTime,
+		LadyInput("钩索手雷时间", activeConfig.kalinaAnnHookGrenadeTime,
 			queuedConfig.kalinaAnnHookGrenadeTime, defaultConfig.kalinaAnnHookGrenadeTime, 10.0f);
 
 		ImGui::EndTable();
@@ -8655,7 +8655,7 @@ void LegacyDDMKCharactersSection() {
 
 	ImGui::Text("");
 	ImGui::PushFont(UI::g_ImGuiFont_RussoOne[defaultFontSize * 0.9f]);
-	ImGui::Text("CHARACTER FIXES");
+	ImGui::Text("角色修复");
 	ImGui::PopFont();
 
 	if (ImGui::BeginTable("CharacterFixesTable", 3)) {
@@ -8664,22 +8664,22 @@ void LegacyDDMKCharactersSection() {
 
 		ImGui::TableNextRow(0, rowHeight);
 		ImGui::TableNextColumn();
-		if (GUI_Checkbox2("Boss Lady Fixes", activeConfig.enableBossLadyFixes, queuedConfig.enableBossLadyFixes)) {
+		if (GUI_Checkbox2("首领蕾蒂修复", activeConfig.enableBossLadyFixes, queuedConfig.enableBossLadyFixes)) {
 			ToggleBossLadyFixes(activeConfig.enableBossLadyFixes);
 		}
 		ImGui::SameLine();
 		TooltipHelper("(?) WARNING", "Allows you to more properly test Legacy Playable Boss Lady.\n"
-			"WARNING: This checkbox WILL break the actual Boss Lady (ENEMY). Use with caution.", 2048.0f, true);
+			"警告：此选项会破坏真正的首领蕾蒂（敌人），请谨慎使用。", 2048.0f, true);
 
 		ImGui::TableNextColumn();
 
 
-		if (GUI_Checkbox2("Boss Vergil Fixes", activeConfig.enableBossVergilFixes, queuedConfig.enableBossVergilFixes)) {
+		if (GUI_Checkbox2("首领维吉尔修复", activeConfig.enableBossVergilFixes, queuedConfig.enableBossVergilFixes)) {
 			ToggleBossVergilFixes(activeConfig.enableBossVergilFixes);
 		}
 		ImGui::SameLine();
 		TooltipHelper("(?) WARNING", "Allows you to more properly test Legacy Playable Boss Vergil.\n"
-			"WARNING: This checkbox WILL break the actual Boss Vergil (ENEMY). Use with caution.", 2048.0f, true);
+			"警告：此选项会破坏真正的首领维吉尔（敌人），请谨慎使用。", 2048.0f, true);
 
 		ImGui::EndTable();
 	}
@@ -8707,7 +8707,7 @@ void CustomMobilitySection() {
 	//Gui::PushStyleColor(ImGuiCol_CheckMark, checkmarkColorBg);
 	ImGui::PushItemWidth(itemWidth);
 
-	if (GUI_TitleCheckbox2("CUSTOM MOBILITY", activeCrimsonGameplay.Cheats.General.customMobility,
+	if (GUI_TitleCheckbox2("自定义移动", activeCrimsonGameplay.Cheats.General.customMobility,
 		queuedCrimsonGameplay.Cheats.General.customMobility, true)) {
 		if (!activeCrimsonGameplay.Cheats.General.customMobility) {
 			CopyMemory(&queuedCrimsonGameplay.Cheats.Mobility, &defaultCrimsonGameplay.Cheats.Mobility, sizeof(queuedCrimsonGameplay.Cheats.Mobility));
@@ -8770,21 +8770,21 @@ void CustomMobilitySection() {
 			ImGui::TableNextColumn();
 
 			ImGui::PushFont(UI::g_ImGuiFont_RussoOne[defaultFontSize * 0.9f]);
-			ImGui::Text("HUMAN");
+			ImGui::Text("人类");
 			ImGui::TableNextColumn();
-			ImGui::Text("DEVIL TRIGGER");
+			ImGui::Text("魔人化");
 			ImGui::PopFont();
 
 			// First half of mobility options
-			MobilityDataInput("Air Hike Count", activeCrimsonGameplay.Cheats.Mobility.airHikeCount, 
+			MobilityDataInput("二段跳次数", activeCrimsonGameplay.Cheats.Mobility.airHikeCount, 
 				queuedCrimsonGameplay.Cheats.Mobility.airHikeCount, defaultCrimsonGameplay.Cheats.Mobility.airHikeCount);
-			MobilityDataInput("Kick Jump Count", activeCrimsonGameplay.Cheats.Mobility.kickJumpCount, 
+			MobilityDataInput("踩跳次数", activeCrimsonGameplay.Cheats.Mobility.kickJumpCount, 
 				queuedCrimsonGameplay.Cheats.Mobility.kickJumpCount, defaultCrimsonGameplay.Cheats.Mobility.kickJumpCount);
-			MobilityDataInput("Wall Hike Count", activeCrimsonGameplay.Cheats.Mobility.wallHikeCount, 
+			MobilityDataInput("蹬墙跳次数", activeCrimsonGameplay.Cheats.Mobility.wallHikeCount, 
 				queuedCrimsonGameplay.Cheats.Mobility.wallHikeCount, defaultCrimsonGameplay.Cheats.Mobility.wallHikeCount);
-			MobilityDataInput("Dash Count", activeCrimsonGameplay.Cheats.Mobility.dashCount, 
+			MobilityDataInput("冲刺次数", activeCrimsonGameplay.Cheats.Mobility.dashCount, 
 				queuedCrimsonGameplay.Cheats.Mobility.dashCount, defaultCrimsonGameplay.Cheats.Mobility.dashCount);
-			MobilityDataInput("Sky Star Count", activeCrimsonGameplay.Cheats.Mobility.skyStarCount, 
+			MobilityDataInput("空中冲刺次数", activeCrimsonGameplay.Cheats.Mobility.skyStarCount, 
 				queuedCrimsonGameplay.Cheats.Mobility.skyStarCount, defaultCrimsonGameplay.Cheats.Mobility.skyStarCount);
 
 			ImGui::EndTable();
@@ -8800,19 +8800,19 @@ void CustomMobilitySection() {
 			ImGui::TableNextColumn();
 
 			ImGui::PushFont(UI::g_ImGuiFont_RussoOne[defaultFontSize * 0.9f]);
-			ImGui::Text("HUMAN");
+			ImGui::Text("人类");
 			ImGui::TableNextColumn();
-			ImGui::Text("DEVIL TRIGGER");
+			ImGui::Text("魔人化");
 			ImGui::PopFont();
 
 			// Second half of mobility options
-			MobilityDataInput("Dante Air Trick Count", activeCrimsonGameplay.Cheats.Mobility.danteAirTrickCount, 
+			MobilityDataInput("但丁空中骗术次数", activeCrimsonGameplay.Cheats.Mobility.danteAirTrickCount, 
 				queuedCrimsonGameplay.Cheats.Mobility.danteAirTrickCount, defaultCrimsonGameplay.Cheats.Mobility.danteAirTrickCount);
-			MobilityDataInput("Vergil Air Trick Count", activeCrimsonGameplay.Cheats.Mobility.vergilAirTrickCount, 
+			MobilityDataInput("维吉尔空中骗术次数", activeCrimsonGameplay.Cheats.Mobility.vergilAirTrickCount, 
 				queuedCrimsonGameplay.Cheats.Mobility.vergilAirTrickCount, defaultCrimsonGameplay.Cheats.Mobility.vergilAirTrickCount);
-			MobilityDataInput("Trick Up Count", activeCrimsonGameplay.Cheats.Mobility.trickUpCount, 
+			MobilityDataInput("上移次数", activeCrimsonGameplay.Cheats.Mobility.trickUpCount, 
 				queuedCrimsonGameplay.Cheats.Mobility.trickUpCount, defaultCrimsonGameplay.Cheats.Mobility.trickUpCount);
-			MobilityDataInput("Trick Down Count", activeCrimsonGameplay.Cheats.Mobility.trickDownCount, 
+			MobilityDataInput("下移次数", activeCrimsonGameplay.Cheats.Mobility.trickDownCount, 
 				queuedCrimsonGameplay.Cheats.Mobility.trickDownCount, defaultCrimsonGameplay.Cheats.Mobility.trickDownCount);
 
 			ImGui::EndTable();
@@ -8834,7 +8834,7 @@ void CustomMobilitySection() {
 
 #pragma region MiscCheats
 
-const char* dotShadowNames[] = {"Default", "Disable", "Disable Player Actors Only"};
+const char* dotShadowNames[] = {"默认", "禁用", "仅禁用玩家实体"};
 
 
 void MiscCheatsSection() {
@@ -8842,7 +8842,7 @@ void MiscCheatsSection() {
 	ImGui::Text("");
 	ImU32 checkmarkColorBg = UI::SwapColorEndianness(0xFFFFFFFF);
 
-	if (GUI_TitleCheckbox2("MISC CHEATS", activeCrimsonGameplay.Cheats.General.miscCheats,
+	if (GUI_TitleCheckbox2("其他作弊", activeCrimsonGameplay.Cheats.General.miscCheats,
 		queuedCrimsonGameplay.Cheats.General.miscCheats, false)) {
 		if (!activeCrimsonGameplay.Cheats.General.miscCheats) {
 			CopyMemory(&queuedCrimsonGameplay.Cheats.Misc, &defaultCrimsonGameplay.Cheats.Misc, sizeof(queuedCrimsonGameplay.Cheats.Misc));
@@ -8886,42 +8886,42 @@ void MiscCheatsSection() {
 		else {
 			auto& missionData = *reinterpret_cast<MissionData*>(name_6975);
 			ImGui::PushItemWidth(200);
-			GUI_Input<uint32>("Red Orbs", missionData.redOrbs, 1000, "%u", ImGuiInputTextFlags_EnterReturnsTrue);
-			GUI_Input<uint8>("Gold Orbs", missionData.itemCounts[ITEM::GOLD_ORB], 1, "%u", ImGuiInputTextFlags_EnterReturnsTrue);
-			GUI_Input<uint8>("Vital Stars Small", missionData.itemCounts[ITEM::VITAL_STAR_SMALL], 1, "%u", ImGuiInputTextFlags_EnterReturnsTrue);
-			GUI_Input<uint8>("Vital Stars Large", missionData.itemCounts[ITEM::VITAL_STAR_LARGE], 1, "%u", ImGuiInputTextFlags_EnterReturnsTrue);
-			GUI_Input<uint8>("Devil Stars", missionData.itemCounts[ITEM::DEVIL_STAR], 1, "%u", ImGuiInputTextFlags_EnterReturnsTrue);
-			GUI_Input<uint8>("Holy Waters", missionData.itemCounts[ITEM::HOLY_WATER], 1, "%u", ImGuiInputTextFlags_EnterReturnsTrue);
+			GUI_Input<uint32>("红魂", missionData.redOrbs, 1000, "%u", ImGuiInputTextFlags_EnterReturnsTrue);
+			GUI_Input<uint8>("金魂", missionData.itemCounts[ITEM::GOLD_ORB], 1, "%u", ImGuiInputTextFlags_EnterReturnsTrue);
+			GUI_Input<uint8>("小生命之星", missionData.itemCounts[ITEM::VITAL_STAR_SMALL], 1, "%u", ImGuiInputTextFlags_EnterReturnsTrue);
+			GUI_Input<uint8>("大生命之星", missionData.itemCounts[ITEM::VITAL_STAR_LARGE], 1, "%u", ImGuiInputTextFlags_EnterReturnsTrue);
+			GUI_Input<uint8>("魔力之星", missionData.itemCounts[ITEM::DEVIL_STAR], 1, "%u", ImGuiInputTextFlags_EnterReturnsTrue);
+			GUI_Input<uint8>("圣水", missionData.itemCounts[ITEM::HOLY_WATER], 1, "%u", ImGuiInputTextFlags_EnterReturnsTrue);
 			ImGui::PopItemWidth();
 		}
 
 
-		MiscCheatInput("Quicksilver Depletion", activeCrimsonGameplay.Cheats.Misc.quicksilverDepletion, queuedCrimsonGameplay.Cheats.Misc.quicksilverDepletion,
+		MiscCheatInput("水银消耗", activeCrimsonGameplay.Cheats.Misc.quicksilverDepletion, queuedCrimsonGameplay.Cheats.Misc.quicksilverDepletion,
 			defaultCrimsonGameplay.Cheats.Misc.quicksilverDepletion);
 
 		ImGui::TableNextColumn();
-		MiscCheatInput("Doppelganger Depletion", activeCrimsonGameplay.Cheats.Misc.doppelgangerDepletion, queuedCrimsonGameplay.Cheats.Misc.doppelgangerDepletion,
+		MiscCheatInput("分身消耗", activeCrimsonGameplay.Cheats.Misc.doppelgangerDepletion, queuedCrimsonGameplay.Cheats.Misc.doppelgangerDepletion,
 			defaultCrimsonGameplay.Cheats.Misc.doppelgangerDepletion);
 
 		ImGui::TableNextColumn();
-		MiscCheatInput("DT Depletion", activeCrimsonGameplay.Cheats.Misc.dTDepletion, queuedCrimsonGameplay.Cheats.Misc.dTDepletion,
+		MiscCheatInput("魔力消耗", activeCrimsonGameplay.Cheats.Misc.dTDepletion, queuedCrimsonGameplay.Cheats.Misc.dTDepletion,
 			defaultCrimsonGameplay.Cheats.Misc.dTDepletion);
 
 		ImGui::TableNextColumn();
-		MiscCheatInput("Orb Reach Distance", activeCrimsonGameplay.Cheats.Misc.orbReach, queuedCrimsonGameplay.Cheats.Misc.orbReach,
+		MiscCheatInput("魂吸取距离", activeCrimsonGameplay.Cheats.Misc.orbReach, queuedCrimsonGameplay.Cheats.Misc.orbReach,
 			defaultCrimsonGameplay.Cheats.Misc.orbReach);
 
 		ImGui::TableNextColumn();
 
 		GUI_PushDisable(!activeConfig.Actor.enable);
-		GUI_Checkbox2("Reset Motion State", activeCrimsonGameplay.Cheats.Misc.resetMotionState, queuedCrimsonGameplay.Cheats.Misc.resetMotionState);
+		GUI_Checkbox2("重置动作状态", activeCrimsonGameplay.Cheats.Misc.resetMotionState, queuedCrimsonGameplay.Cheats.Misc.resetMotionState);
 		ImGui::SameLine();
 		GUI_CCSRequirementButton();
 		ImGui::SameLine();
 		GUI_LegacyButton();
 		ImGui::SameLine();
 		TooltipHelper("(?)", "Deprecated in favor of 'Improved Cancels'. Also called 'Remove Busy Flag'.\n"
-			"Allows you to cancel any move by pressing any direction on the d-pad. AFFECTS game balance significantly.");
+			"按方向键任意方向可取消任何动作，会显著影响游戏平衡。");
 		GUI_PopDisable(!activeConfig.Actor.enable);
 
 		ImGui::EndTable();
@@ -8952,7 +8952,7 @@ void DebugOverlayWindow(size_t defaultFontSize) {
                 color = ImVec4(1, 0, 0, 1);
             }
             ImGui::PushStyleColor(ImGuiCol_Text, color);
-            ImGui::Text("Focus");
+            ImGui::Text("专注");
             ImGui::PopStyleColor();
         }
 
@@ -8981,7 +8981,7 @@ void DebugOverlayWindow(size_t defaultFontSize) {
 
         if (activeConfig.debugOverlayData.showEventData) {
             if (g_scene >= SCENE::COUNT) {
-                ImGui::Text("Unknown");
+                ImGui::Text("未知");
             } else {
                 auto& sessionData = *reinterpret_cast<SessionData*>(appBaseAddr + 0xC8F250);
 				auto& gamepad = GetGamepad(0);
@@ -8993,7 +8993,7 @@ void DebugOverlayWindow(size_t defaultFontSize) {
 				ImGui::Text("inMissionResultScreen: %u", g_inMissionResultScreen);
                 ImGui::Text(sceneNames[g_scene]);
                 ImGui::Text("sessionData mission:  %u", sessionData.mission);
-                ImGui::Text("SCENE:  %u", g_scene);
+                ImGui::Text("场景：  %u", g_scene);
                 ImGui::Text("TRACK PLAYING: %s", g_gameTrackPlaying.c_str());
 				ImGui::Text("sessionData.expertise[1]: %x", sessionData.expertise[1]);
 
@@ -9008,13 +9008,13 @@ void DebugOverlayWindow(size_t defaultFontSize) {
 //                 for (int i = 0; i < 14; i++) {
 //                     ImGui::Text("sessionData unlock[%u] : %u", i, sessionData.weaponStyleUnlocks[i]);
 //                 }
-//                 ImGui::Text("SessionData Style Level Royalguard: %u", ExpConfig::missionExpDataDante.styleLevels[3]);
-// 				ImGui::Text("Cerbus Unlocked Session? %u", sessionData.weaponAndStyleUnlocks[WEAPONANDSTYLEUNLOCKS::CERBERUS]);
+//                 ImGui::Text("SessionData 皇家护卫风格等级：%u", ExpConfig::missionExpDataDante.styleLevels[3]);
+// 				ImGui::Text("Cerbus 已解锁会话？%u", sessionData.weaponAndStyleUnlocks[WEAPONANDSTYLEUNLOCKS::CERBERUS]);
 // 				ImGui::Text("sessionData.quicksilver? %u", sessionData.weaponAndStyleUnlocks[WEAPONANDSTYLEUNLOCKS::QUICKSILVER]);
 // 				ImGui::Text("sessionData.doppelganger? %u", sessionData.weaponAndStyleUnlocks[WEAPONANDSTYLEUNLOCKS::DOPPELGANGER]);
 // 				ImGui::Text("sessionData.quicksilverLevel: %u", sessionData.styleLevels[STYLE::QUICKSILVER]);
 // 				ImGui::Text("sessionData.doppelgangerLevel: %u", sessionData.styleLevels[STYLE::DOPPELGANGER]);
-				ImGui::Text("GunUnlockedQtt: %u", weaponProgression.gunsUnlockedQtt);
+				ImGui::Text("GunUnlockedQtt：%u", weaponProgression.gunsUnlockedQtt);
 				ImGui::Text("sessionData.character: %u", sessionData.character);
 				ImGui::Text("sessionData.unlockDevilTrigger: %u", sessionData.unlockDevilTrigger);
 				ImGui::Text("sessionData.magicPoints: %g", sessionData.magicPoints);
@@ -9026,28 +9026,28 @@ void DebugOverlayWindow(size_t defaultFontSize) {
 // 					ImGui::Text("Mission Cheat: %s", gameModeData.cheatsNames[cheat]);
 // 				}
 // 				for (int i = 0; i < weaponProgression.rangedWeaponIds.size(); i++) {
-// 					ImGui::Text("RangedWeaponId[%u]: %u", i, weaponProgression.rangedWeaponIds[i]);
+// 					ImGui::Text("RangedWeaponId[%u]：%u", i, weaponProgression.rangedWeaponIds[i]);
 // 				}
 //  				for (int i = 0; i < weaponProgression.meleeWeaponIds.size(); i++) {
 // 					ImGui::Text("MeleeWeaponName[%u]: %s", i, weaponProgression.meleeWeaponNames[i]);
 //  				}
 // 				for (size_t i = 0; i < queuedConfig.Actor.playerData[0].characterData[0][0].rangedWeaponCount; i++) {
-// 					ImGui::Text("RangedWeaponQeued[%u]: %u", i, queuedConfig.Actor.playerData[0].characterData[0][0].rangedWeapons[i]);
+// 					ImGui::Text("RangedWeaponQeued[%u]：%u", i, queuedConfig.Actor.playerData[0].characterData[0][0].rangedWeapons[i]);
 // 				} 
 				
-               // ImGui::Text("Gamepad Style Button: %u", gamepad.buttons[0] & GetBinding(BINDING::STYLE_ACTION));
+               // ImGui::Text("手柄风格键：%u", gamepad.buttons[0] & GetBinding(BINDING::STYLE_ACTION));
 // 				ImGui::Text("activePreset: %u", activeCrimsonGameplay.GameMode.preset);
 // 				ImGui::Text("queuedPreset: %u", queuedCrimsonGameplay.GameMode.preset);
-//                 ImGui::Text("Quicksilver Level: %u", sessionData.styleLevels[4]);
+//                 ImGui::Text("水银等级：%u", sessionData.styleLevels[4]);
 
 
-                /*ImGui::Text("Sky Launch:  %u", executingSkyLaunch);
-                ImGui::Text("Sky Launch Tracker Running:  %u", skyLaunchTrackerRunning);
-                ImGui::Text("Royal Release:  %u", executingRoyalRelease);
-                ImGui::Text("Royal Release Tracker Running:  %u", royalReleaseTrackerRunning);
-                ImGui::Text("Forcing Just Frame Royal Release:  %u", forcingJustFrameRoyalRelease);
+                /*ImGui::Text("空中起跳：  %u", executingSkyLaunch);
+                ImGui::Text("空中起跳追踪运行中：  %u", skyLaunchTrackerRunning);
+                ImGui::Text("皇家释放：  %u", executingRoyalRelease);
+                ImGui::Text("皇家释放追踪运行中：  %u", royalReleaseTrackerRunning);
+                ImGui::Text("强制精准帧皇家释放：  %u", forcingJustFrameRoyalRelease);
                 ImGui::Text("skyLaunchSetJustFrameTrue:  %u", skyLaunchSetJustFrameTrue);
-                ImGui::Text("Royal Release Executed:  %u", royalReleaseExecuted);*/
+                ImGui::Text("皇家释放已执行：  %u", royalReleaseExecuted);*/
 
 
                 /*ImGui::Text("backtoforward Back:  %u", b2F.backCommand);
@@ -9064,8 +9064,8 @@ void DebugOverlayWindow(size_t defaultFontSize) {
                 // delayedComboFX.weaponThatStartedMove); 					ImGui::Text("trickCancel Cooldown:  %u", trickUpCancel.cooldown);
 
                 ImGui::Text("sprint Can Sprint:  %u", crimsonPlayer[0].sprint.canSprint);
-                ImGui::Text("Sprint Timer:  %g", crimsonPlayer[0].sprint.timer);
-                ImGui::Text("Sprint Run Timer:  %u", crimsonPlayer[0].sprint.runTimer);
+                ImGui::Text("冲刺计时器：%g", crimsonPlayer[0].sprint.timer);
+                ImGui::Text("冲刺跑计时器：%u", crimsonPlayer[0].sprint.runTimer);
 				ImGui::Text("missionStyleLevels sword: %u", heldStyleExpDataDante.missionStyleLevels[0]);
 				ImGui::Text("missionStyleLevels gun: %u", heldStyleExpDataDante.missionStyleLevels[1]);
 				ImGui::Text("missionStyleLevels trick: %u", heldStyleExpDataDante.missionStyleLevels[2]);
@@ -9076,7 +9076,7 @@ void DebugOverlayWindow(size_t defaultFontSize) {
                 if (CrimsonSDL::IsMusicPlaying() == 0) {
                     ImGui::Text("no music playing");
                 } else {
-                    ImGui::Text("MUSICPLAYING");
+                    ImGui::Text("音乐播放中");
                 }
             }
 
@@ -9099,7 +9099,7 @@ void DebugOverlayWindow(size_t defaultFontSize) {
 
 
                 if (eventData.event >= EVENT::COUNT) {
-                    ImGui::Text("Unknown");
+                    ImGui::Text("未知");
                 } else {
                     ImGui::Text(eventNames[eventData.event]);
                 }
@@ -9113,18 +9113,18 @@ void DebugOverlayWindow(size_t defaultFontSize) {
                 ImGui::Text("event	      %u", eventData.event);
                 ImGui::Text("nextRoom     %u", nextEventData.room);
                 ImGui::Text("nextPosition %u", nextEventData.position);
-				ImGui::Text("Camera Index %u", CrimsonCameraController::g_currentCameraIndex);
-				ImGui::Text("Camera Type %u", CrimsonCameraController::g_currentCameraType);
+				ImGui::Text("镜头索引 %u", CrimsonCameraController::g_currentCameraIndex);
+				ImGui::Text("镜头类型 %u", CrimsonCameraController::g_currentCameraType);
             }();
 
             ImGui::Text("");
         }
 // 		if (activeConfig.Actor.enable) {
 // 			[&]() {
-// 				ImGui::Text("Arkham CCS Fight Phase			%u", arkhamFightData.fightPhase);
-// 				ImGui::Text("Arkham CCS Next Fight Phase	%u", arkhamFightData.nextFightPhase);
-// 				ImGui::Text("Arkham CCS Fight Active		%u", arkhamFightData.fightActive);
-// 				ImGui::Text("Arkham CCS Fight Ending		%u", arkhamFightData.fightEnding);
+// 				ImGui::Text("阿卡姆 CCS 战斗阶段			%u", arkhamFightData.fightPhase);
+// 				ImGui::Text("阿卡姆 CCS 下一战斗阶段	%u", arkhamFightData.nextFightPhase);
+// 				ImGui::Text("阿卡姆 CCS 战斗激活		%u", arkhamFightData.fightActive);
+// 				ImGui::Text("阿卡姆 CCS 战斗结束		%u", arkhamFightData.fightEnding);
 // 				}();
 // 		}
         if (activeConfig.debugOverlayData.showPosition) {
@@ -9138,7 +9138,7 @@ void DebugOverlayWindow(size_t defaultFontSize) {
                 ImGui::Text("X        %g", actorData.position.x);
                 ImGui::Text("Y        %g", actorData.position.y);
                 ImGui::Text("Z        %g", actorData.position.z);
-                ImGui::Text("Rotation %u", actorData.rotation);
+                ImGui::Text("旋转 %u", actorData.rotation);
             }();
 
 
@@ -9194,7 +9194,7 @@ void DebugOverlayWindow(size_t defaultFontSize) {
 // 
 // 			auto& lockedOnEnemyData = *reinterpret_cast<EnemyActorData*>(actorData.lockOnData.targetBaseAddr60 - 0x60);
 
-			//ImGui::Text("TargetPosZ %g", actorData.lockOnData.targetPosition.z);
+			//ImGui::Text("目标位置Z %g", actorData.lockOnData.targetPosition.z);
 
 //             for (int i = 0; i < 8; i++) {
 //                 ImGui::Text("expertise[%u]:  %x", i, actorData.activeExpertise[i]);
@@ -9217,10 +9217,10 @@ void DebugOverlayWindow(size_t defaultFontSize) {
 			
             // crazyComboHold = g_HoldToCrazyComboFuncA();
 // 			if (meleeWeaponWheel[0]) {
-// 				ImGui::Text("Wheel 0 timer: %g", meleeWeaponWheel[0]->m_SinceLatestChangeMs);
+// 				ImGui::Text("轮盘 0 计时: %g", meleeWeaponWheel[0]->m_SinceLatestChangeMs);
 // 			}
 // 			if (meleeWeaponWheel[1]) {
-// 				ImGui::Text("Wheel 1 timer: %g", meleeWeaponWheel[1]->m_SinceLatestChangeMs);
+// 				ImGui::Text("轮盘 1 计时: %g", meleeWeaponWheel[1]->m_SinceLatestChangeMs);
 // 			}
 			auto savingInGameDataAddr = *reinterpret_cast<byte8**>(appBaseAddr + 0xCF2548);
 			if (!savingInGameDataAddr) {
@@ -9234,22 +9234,22 @@ void DebugOverlayWindow(size_t defaultFontSize) {
 			ImGui::Text("gracePeriodTimer: %g", crimsonPlayer[0].swordFormationTracker.gracePeriodTimer);
 			ImGui::Text("formationBuffered: %u", crimsonPlayer[0].swordFormationTracker.formationBuffered);
 			ImGui::Text("trickUpCount: %u", actorData.newTrickUpCount);
-			ImGui::Text("Horizontal Pull  %g", actorData.horizontalPull);
-			ImGui::Text("Horizontal Pull Multiplier %g", actorData.horizontalPullMultiplier);
-			ImGui::Text("Vertical Pull  %g", actorData.verticalPull);
-			ImGui::Text("Vertical Pull Multiplier %g", actorData.verticalPullMultiplier);
+			ImGui::Text("水平拉力  %g", actorData.horizontalPull);
+			ImGui::Text("水平拉力倍率 %g", actorData.horizontalPullMultiplier);
+			ImGui::Text("垂直拉力  %g", actorData.verticalPull);
+			ImGui::Text("垂直拉力倍率 %g", actorData.verticalPullMultiplier);
 			ImGui::Text("action Timer Main Actor:  %g", crimsonPlayer[0].actionTimer);
-			ImGui::Text("ACTION:  %u", actorData.action);
-			ImGui::Text("MovePart %u", actorData.recoverState[0]);
+			ImGui::Text("动作:  %u", actorData.action);
+			ImGui::Text("移动部件 %u", actorData.recoverState[0]);
 			ImGui::Text("cameraLag: %g", cameraData.cameraLag);
 			ImGui::Text("fixedCamAddr: %x", cameraControlMetadata.fixedCameraAddr);
 			ImGui::Text("in JustFrame JDC:  %u", crimsonPlayer[0].jCut.inJustFrameJDC);
 			ImGui::Text("bufferedAction:  %u", actorData.bufferedAction);
 			ImGui::Text("gunButtonTimer : % g", crimsonPlayer[0].bulletMagnetism.gunButtonTimer);
 			ImGui::Text("inertiaRotation : % x", actorData.inertiaRotation);
-			ImGui::Text("MOTION TIMER:  %g", crimsonPlayer[0].motionTimer);
-			ImGui::Text("MOTION GROUP:  %u", actorData.motionData[0].group);
-			ImGui::Text("MOTION INDEX:  %u", actorData.motionData[0].index);
+			ImGui::Text("动作计时:  %g", crimsonPlayer[0].motionTimer);
+			ImGui::Text("动作组:  %u", actorData.motionData[0].group);
+			ImGui::Text("动作索引:  %u", actorData.motionData[0].index);
 			ImGui::Text("drive inPart2 : %d", crimsonPlayer[0].drive.inPart2);
 			ImGui::Text("drive inPart3 : %d", crimsonPlayer[0].drive.inPart3);
 			ImGui::Text("yamatoHighTimeClone : %d", crimsonPlayer[0].inYamatoHighTimeClone);
@@ -9260,16 +9260,16 @@ void DebugOverlayWindow(size_t defaultFontSize) {
 			ImGui::Text("drive levelTimer: %g", crimsonPlayer[0].drive.levelTimer);
 			ImGui::Text("actor speed: %g", actorData.speed);
 			ImGui::Text("inertia Rotation : %g", actorData.inertiaRotation);
-			ImGui::Text("Jcut MeleeHoldTime:  %g", crimsonPlayer[0].jCut.meleeHoldTime);
+			ImGui::Text("Jcut 近战保持时间:  %g", crimsonPlayer[0].jCut.meleeHoldTime);
 			ImGui::Text("meleeHold jcut %g", crimsonPlayer[0].jCut.meleeButtonHold);
 			ImGui::Text("meleeHold stinger %g", crimsonPlayer[0].stingerInput.meleeButtonHold);
 			ImGui::Text("melee Released Stinger %u", crimsonPlayer[0].stingerInput.meleeReleasedStinger);
 			ImGui::Text("action Timer Trick not change:  %g", crimsonPlayer[0].actionTimerNotTrickChange);
-			ImGui::Text("Event Data %u", actorData.eventData[0].event);
+			ImGui::Text("事件数据 %u", actorData.eventData[0].event);
 			ImGui::Text("Actor Data Permissions: %d", actorData.permissions);
 			ImGui::Text("isAJustFrameCharged %d", crimsonPlayer[0].jCut.isJustFrameCharged);
 			ImGui::Text("isAfterJustFrameCharged %d", crimsonPlayer[0].jCut.isAfterJustFrameCharged);
-			ImGui::Text("Motion Data 1: %u", crimsonPlayer[0].motion);
+			ImGui::Text("动作数据 1: %u", crimsonPlayer[0].motion);
 			ImGui::Text("characterData.weapon %d", characterData.meleeWeapons[characterData.meleeWeaponIndex]);
 			ImGui::Text("Crazy announcer timer %g \ was hit %d", rankAnnouncer[1].timer, rankAnnouncer[1].wasHit);
 			ImGui::Text("actorData event %d", actorData.eventData[0].event);
@@ -9284,7 +9284,7 @@ void DebugOverlayWindow(size_t defaultFontSize) {
 			ImGui::Text("inertia airguard %g", crimsonPlayer[0].inertia.airGuard.cachedPull);
 			ImGui::Text("mirageGauge %g", crimsonPlayer[0].vergilDoppelganger.miragePoints);
 			ImGui::Text("maxMirageGauge %g", crimsonPlayer[0].vergilDoppelganger.maxMiragePoints);
-			ImGui::Text("Vertical Pull Multiplier %g", actorData.verticalPullMultiplier);
+			ImGui::Text("垂直拉力倍率 %g", actorData.verticalPullMultiplier);
 			ImGui::Text("cameraHittingWall: %u", g_cameraHittingWall);
 			ImGui::Text("actorData styleLevel: %u", actorData.styleLevel);
 			ImGui::Text("frameCOunt Mission: %u", missionData.frameCount);
@@ -9292,8 +9292,8 @@ void DebugOverlayWindow(size_t defaultFontSize) {
 			ImGui::Text("expDataStyleLevels sword: %u", ExpConfig::missionExpDataDante.styleLevels[0]);
 			ImGui::Text("royalguardDamage: %g", actorData.royalguardReleaseDamage);
 			ImGui::Text("styleExpPoints: %g", actorData.styleExpPoints);
-			ImGui::Text("Actor Base Addr: %x", actorData.baseAddr);
-			ImGui::Text("TrickDash Timer: %g", crimsonPlayer[0].trickDashTimer);
+			ImGui::Text("角色基址: %x", actorData.baseAddr);
+			ImGui::Text("骗术冲刺计时: %g", crimsonPlayer[0].trickDashTimer);
 			ImGui::Text("lockOnEnemyMinusStun: %g", crimsonPlayer[0].lockedOnEnemyMinusStun);
 			ImGui::Text("lockOnEnemyMinusDisplacement: %g", crimsonPlayer[0].lockedOnEnemyMinusDisplacement);
 			ImGui::Text("gameModeData.mustStyleMissionResult: %u", gameModeData.mustStyleMissionResult);
@@ -9308,128 +9308,128 @@ void DebugOverlayWindow(size_t defaultFontSize) {
 			ImGui::Text("missionData frameCount: %u", missionData.frameCount);
 			ImGui::Text("artemis Charge: %g", actorData.artemisCharge);
 			ImGui::Text("fixedCameraAddr: %x", cameraControlMetadata.fixedCameraAddr);
-			ImGui::Text("Starting From Ground: %u", crimsonPlayer[0].vergilMoves.startingRisingSunFromGround);
-// 			ImGui::Text("Enemy Speed: %g", enemyData.speed);
-// 			ImGui::Text("Enemy Base Addr: %x", enemyData.baseAddr);
-// 			ImGui::Text("Enemy's Target Pos Y: %g", enemyData.targetPosition.y);
-			ImGui::Text("AllActorsSpawned: %u", g_allActorsSpawned);
+			ImGui::Text("地面起步: %u", crimsonPlayer[0].vergilMoves.startingRisingSunFromGround);
+// 			ImGui::Text("敌人速度: %g", enemyData.speed);
+// 			ImGui::Text("敌人基址: %x", enemyData.baseAddr);
+// 			ImGui::Text("敌人目标位置 Y: %g", enemyData.targetPosition.y);
+			ImGui::Text("全部角色已生成: %u", g_allActorsSpawned);
 			ImGui::Text("costume: %u", costume);
-			ImGui::Text("NextActionPolicyTrickster: %u", actorData.nextActionRequestPolicy[NEXT_ACTION_REQUEST_POLICY::TRICKSTER_DARK_SLAYER]);
-			ImGui::Text("NextActionPolicyMelee: %u", actorData.nextActionRequestPolicy[NEXT_ACTION_REQUEST_POLICY::MELEE_ATTACK]);
-			ImGui::Text("BufferedAction: %u", actorData.bufferedAction);
-			ImGui::Text("Air Trick Count : %u", actorData.newAirTrickCount);
+			ImGui::Text("下一动作策略·骗术师: %u", actorData.nextActionRequestPolicy[NEXT_ACTION_REQUEST_POLICY::TRICKSTER_DARK_SLAYER]);
+			ImGui::Text("下一动作策略·近战: %u", actorData.nextActionRequestPolicy[NEXT_ACTION_REQUEST_POLICY::MELEE_ATTACK]);
+			ImGui::Text("预输入动作: %u", actorData.bufferedAction);
+			ImGui::Text("空中骗术次数 : %u", actorData.newAirTrickCount);
 			ImGui::Text("rainstorm cached inertia:  %g", crimsonPlayer[0].inertia.rainstorm.cachedPull);
-			ImGui::Text("AIR SWORD COUNT: %u", actorData.airSwordAttackCount);
-			ImGui::Text("Back Buffer: %g", crimsonPlayer[0].b2F.backBuffer);
-			ImGui::Text("Forward Buffer: %g", crimsonPlayer[0].b2F.forwardBuffer);
-			ImGui::Text("Forward Command: %u", crimsonPlayer[0].b2F.forwardCommand);
-			ImGui::Text("Back Buffer Clone: %g", crimsonPlayer[0].b2FClone.backBuffer);
-			ImGui::Text("Forward Buffer Clone: %g", crimsonPlayer[0].b2FClone.forwardBuffer);
-			ImGui::Text("Forward Command Clone: %u", crimsonPlayer[0].b2FClone.forwardCommand);
-			ImGui::Text("Royal Block: %u", actorData.royalBlock);
-			ImGui::Text("Guard: %u", actorData.guard);
+			ImGui::Text("空中剑击次数: %u", actorData.airSwordAttackCount);
+			ImGui::Text("后退预输入: %g", crimsonPlayer[0].b2F.backBuffer);
+			ImGui::Text("前进预输入: %g", crimsonPlayer[0].b2F.forwardBuffer);
+			ImGui::Text("前进指令: %u", crimsonPlayer[0].b2F.forwardCommand);
+			ImGui::Text("后退预输入·分身: %g", crimsonPlayer[0].b2FClone.backBuffer);
+			ImGui::Text("前进预输入·分身: %g", crimsonPlayer[0].b2FClone.forwardBuffer);
+			ImGui::Text("前进指令·分身: %u", crimsonPlayer[0].b2FClone.forwardCommand);
+			ImGui::Text("皇家格挡: %u", actorData.royalBlock);
+			ImGui::Text("防御: %u", actorData.guard);
 			ImGui::Text("maxDT: %g", actorData.maxMagicPoints);
 			ImGui::Text("anim Timer Clone:  %g", crimsonPlayer[0].motionTimerClone);
 			ImGui::Text("action Timer Clone:  %g", crimsonPlayer[0].actionTimerClone);
-			ImGui::Text("AIR GUARD: %u", actorData.airGuard);
-			ImGui::Text("GUARDFLY PULL: %g", crimsonPlayer[0].inertia.airGuard.cachedPull);
-			ImGui::Text("GUARDFLY TIMER: %g", crimsonPlayer[0].inertia.guardflyTimer);
+			ImGui::Text("空中防御: %u", actorData.airGuard);
+			ImGui::Text("防御飞行拉力: %g", crimsonPlayer[0].inertia.airGuard.cachedPull);
+			ImGui::Text("防御飞行计时: %g", crimsonPlayer[0].inertia.guardflyTimer);
 			ImGui::Text("actorCameraDirection: %u", actorData.actorCameraDirection);
-			ImGui::Text("Rotation Offset: %u", actorData.rotationOffset);
-			ImGui::Text("Rotation Towards Enemy2: %u", crimsonPlayer[0].rotationTowardsEnemy);
+			ImGui::Text("旋转偏移: %u", actorData.rotationOffset);
+			ImGui::Text("朝向敌人2旋转: %u", crimsonPlayer[0].rotationTowardsEnemy);
 			ImGui::Text("isMPActive:  %u", g_isMPCamActive);
 			ImGui::Text("isPanoramicCamActive:  %u", g_isParanoramicCamActive);
-			ImGui::Text("CAMERA LAG:  %g", cameraData.cameraLag);
-			ImGui::Text("LOCK ON CAM:  %u", cameraData.transitionToLockOnCam);
-			ImGui::Text("ACTOR SPEED:  %g", actorData.speed);
-			ImGui::Text("ALL ENTITY COUNT:  %u", g_activeAllEntitiesCount);
-			ImGui::Text("PLAYABLE ENTITY COUNT:  %u", g_activePlayableEntitiesCount);
+			ImGui::Text("镜头延迟:  %g", cameraData.cameraLag);
+			ImGui::Text("锁定镜头:  %u", cameraData.transitionToLockOnCam);
+			ImGui::Text("角色速度:  %g", actorData.speed);
+			ImGui::Text("全部实体数:  %u", g_activeAllEntitiesCount);
+			ImGui::Text("可操作实体数:  %u", g_activePlayableEntitiesCount);
 			ImGui::Text("avgPos x: %g", g_customCameraPos[0]);
 			ImGui::Text("avgPos y: %g", g_customCameraPos[1]);
 			ImGui::Text("avgPos z: %g", g_customCameraPos[2]);
-			ImGui::Text("RED ORB ALPHA:  %u", crimsonHud.redOrbAlpha);
-			ImGui::Text("SKY LAUNCH EXECUTING:  %u", crimsonPlayer[0].skyLaunch.executing);
-			ImGui::Text("ROYAL RELEASE EXECUTING:  %u", crimsonPlayer[0].royalRelease.executing);
-			ImGui::Text("STORED RELEASE LEVEL:  %u", crimsonPlayer[0].skyLaunch.storedReleaseLevel);
-			ImGui::Text("ROYAL GAUGE:  %g", actorData.royalguardReleaseDamage);
+			ImGui::Text("红魂透明度:  %u", crimsonHud.redOrbAlpha);
+			ImGui::Text("空中起击执行中:  %u", crimsonPlayer[0].skyLaunch.executing);
+			ImGui::Text("皇家释放执行中:  %u", crimsonPlayer[0].royalRelease.executing);
+			ImGui::Text("蓄能释放等级:  %u", crimsonPlayer[0].skyLaunch.storedReleaseLevel);
+			ImGui::Text("皇家计量:  %g", actorData.royalguardReleaseDamage);
             ImGui::Text("action Timer Main Actor:  %g", crimsonPlayer[0].actionTimer);
-            ImGui::Text("DTE CHARGE: %g", actorData.dtExplosionCharge);
-            ImGui::Text("DTE CHARGE: %g", crimsonPlayer[0].dtExplosionCharge);
+            ImGui::Text("DTE 充能: %g", actorData.dtExplosionCharge);
+            ImGui::Text("DTE 充能: %g", crimsonPlayer[0].dtExplosionCharge);
             // ImGui::Text("crazy combo hold:  %u", crazyComboHold);
-            ImGui::Text("Chain Count (weight):  %u", actorData.airSwordAttackCount);
-            ImGui::Text("Air Guard:  %u", actorData.airGuard);
-            // ImGui::Text("Gravity Tweak:  %g", crimsonPlayer[0].airRaveTweak.gravity);
+            ImGui::Text("连击数（权重）:  %u", actorData.airSwordAttackCount);
+            ImGui::Text("空中防御:  %u", actorData.airGuard);
+            // ImGui::Text("重力微调:  %g", crimsonPlayer[0].airRaveTweak.gravity);
             // ImGui::Text("drive timer:  %g", crimsonPlayer[0].drive.timer);
-            // ImGui::Text("Actor Speed %g", actorData.speed);
-            ImGui::Text("TOP LEFT ALPHA: %u", hudData.topLeftAlpha);
+            // ImGui::Text("角色速度 %g", actorData.speed);
+            ImGui::Text("左上透明度: %u", hudData.topLeftAlpha);
             ImGui::Text("distance: %u", crimsonPlayer[0].cameraPlayerDistanceClamped);
-            ImGui::Text("Release Damage: %g", actorData.royalguardReleaseDamage);
-			ImGui::Text("ACTOR STATUS: %u", actorData.status);
-            ImGui::Text("MIRAGE GAUGE: %g", crimsonPlayer[0].vergilDoppelganger.miragePoints);
-            ImGui::Text("Vergil Dopp Timer Start: %u", crimsonPlayer[0].vergilDoppelganger.drainStart);
-            ImGui::Text("Vergil Dopp Timer: %g", crimsonPlayer[0].vergilDoppelganger.drainTime);
+            ImGui::Text("释放伤害: %g", actorData.royalguardReleaseDamage);
+			ImGui::Text("角色状态: %u", actorData.status);
+            ImGui::Text("幻影计量: %g", crimsonPlayer[0].vergilDoppelganger.miragePoints);
+            ImGui::Text("维吉尔分身计时启动: %u", crimsonPlayer[0].vergilDoppelganger.drainStart);
+            ImGui::Text("维吉尔分身计时: %g", crimsonPlayer[0].vergilDoppelganger.drainTime);
             ImGui::Text("HP: %g", actorData.hitPoints);
             ImGui::Text("DT: %g", actorData.magicPoints);
             ImGui::Text("storedHP: %g", storedHP);
             ImGui::Text("storedDT: %g", storedDT);
             ImGui::Text("missionData DAMAGE: %u", missionData.damage);
             ImGui::Text("missionData FRAME: %u", missionData.frameCount);
-            ImGui::Text("IN ROYAL BLOCK: %u", ((actorData.eventData[0].event == 20 && actorData.motionData[0].index == 32) || (actorData.eventData[0].event == 20 && actorData.motionData[0].index == 34)));
-            ImGui::Text("IN NORMAL BLOCK: %u", ((actorData.eventData[0].event == 20 && actorData.motionData[0].index == 2) || (actorData.eventData[0].event == 20 && actorData.motionData[0].index == 7) || (actorData.eventData[0].event == 20 && actorData.motionData[0].index == 12)));
-            ImGui::Text("IN GUARD: %u", actorData.guard);
-            ImGui::Text("IN COMBAT: %u", g_inCombat);
-            ImGui::Text("FLUX TIME: %g", crimsonPlayer[0].fluxtime);
-            ImGui::Text("TRICKSTER TIME: %g", crimsonPlayer[0].styleSwitchText.time[0]);
-            ImGui::Text("TRICKSTER ALPHA: %g", crimsonPlayer[0].styleSwitchText.alpha[0]);
-            // 					ImGui::Text("Trick Cooldown %g", crimsonPlayer[1].cancels.trickCooldown);
-            // 					ImGui::Text("Guns Cooldown %g", crimsonPlayer[1].cancels.gunsCooldown);
-            // 					ImGui::Text("Rainstorm Cooldown %g", crimsonPlayer[1].cancels.rainstormCooldown);
-            // ImGui::Text("Weapon %u", actorData.newWeapons[actorData.meleeWeaponIndex]);
-            ImGui::Text("Weapon Ranged %u", actorData.newWeapons[actorData.rangedWeaponIndex]);
-            ImGui::Text("Weapon Melee actual %u", characterData.lastMeleeWeaponIndex);
-            ImGui::Text("Artemis Status %u", mainActorData.artemisStatus);
+            ImGui::Text("处于皇家格挡: %u", ((actorData.eventData[0].event == 20 && actorData.motionData[0].index == 32) || (actorData.eventData[0].event == 20 && actorData.motionData[0].index == 34)));
+            ImGui::Text("处于普通格挡: %u", ((actorData.eventData[0].event == 20 && actorData.motionData[0].index == 2) || (actorData.eventData[0].event == 20 && actorData.motionData[0].index == 7) || (actorData.eventData[0].event == 20 && actorData.motionData[0].index == 12)));
+            ImGui::Text("处于防御: %u", actorData.guard);
+            ImGui::Text("处于战斗: %u", g_inCombat);
+            ImGui::Text("时间扭曲: %g", crimsonPlayer[0].fluxtime);
+            ImGui::Text("骗术师时间: %g", crimsonPlayer[0].styleSwitchText.time[0]);
+            ImGui::Text("骗术师透明度: %g", crimsonPlayer[0].styleSwitchText.alpha[0]);
+            // 					ImGui::Text("骗术冷却 %g", crimsonPlayer[1].cancels.trickCooldown);
+            // 					ImGui::Text("枪械冷却 %g", crimsonPlayer[1].cancels.gunsCooldown);
+            // 					ImGui::Text("弹雨冷却 %g", crimsonPlayer[1].cancels.rainstormCooldown);
+            // ImGui::Text("武器 %u", actorData.newWeapons[actorData.meleeWeaponIndex]);
+            ImGui::Text("远程武器 %u", actorData.newWeapons[actorData.rangedWeaponIndex]);
+            ImGui::Text("实际近战武器 %u", characterData.lastMeleeWeaponIndex);
+            ImGui::Text("阿尔忒弥斯状态 %u", mainActorData.artemisStatus);
             ImGui::Text("lock On: %u", crimsonPlayer[1].lockOn);
             ImGui::Text("tilt direction %u", crimsonPlayer[1].tiltDirection);
-            ImGui::Text("Enemy Count %u", enemyVectorData.count);
+            ImGui::Text("敌人数量 %u", enemyVectorData.count);
             ImGui::Text("enemy distance %g", distanceToEnemy);
             // ImGui::Text("enemy vertical Pull Multiplier %g", enemyData.verticalPullMultiplier);
             ImGui::Text("rainstormCancel Cooldown %u", rainstormCancel.cooldown);
-            ImGui::Text("In Royal Block:  %u", inRoyalBlock);
-            ImGui::Text("Gun Shoot Inverted %u", gunShootInverted);
-            ImGui::Text("Gun Shoot Normalized %u", gunShootNormalized);
+            ImGui::Text("处于皇家格挡:  %u", inRoyalBlock);
+            ImGui::Text("枪击反向 %u", gunShootInverted);
+            ImGui::Text("枪击归一化 %u", gunShootNormalized);
 
             ImGui::Text("new speed Set Rapid Slash %u", fasterRapidSlash.newSpeedSet);
             ImGui::Text("inRapidSlash %u", inRapidSlash);
             ImGui::Text("fRapidSlash storedSpeedDevil %g", fasterRapidSlash.storedSpeedDevil[0]);
             ImGui::Text("fDarklasyer storedSpeedDevil %g", fasterDarkslayer.storedSpeedDevil[0]);
-            ImGui::Text("Last Event Data %u", actorData.eventData[0].lastEvent);
-            ImGui::Text("Last Last Event %u", crimsonPlayer[0].lastLastEvent);
-            ImGui::Text("State %u", actorData.state);
-            ImGui::Text("Last State %u", actorData.lastState);
-            ImGui::Text("Last Last State %u", crimsonPlayer[0].lastLastState);
-            ImGui::Text("Character Action %u", crimsonPlayer[0].action);
-            ImGui::Text("Character Last Action %u", actorData.lastAction);
-            ImGui::Text("Position  %g", actorData.position);
-            ImGui::Text("Rotation %g", actorData.rotation);
-            ImGui::Text("Camera Direction %u", actorData.cameraDirection);
-            ImGui::Text("Actor Camera Direction %u", actorData.actorCameraDirection);
-            ImGui::Text("RelativeTilt %u", relativeTiltController);
-            ImGui::Text("LeftStick Position %u", gamepad.leftStickPosition);
+            ImGui::Text("上一事件数据 %u", actorData.eventData[0].lastEvent);
+            ImGui::Text("上上次事件 %u", crimsonPlayer[0].lastLastEvent);
+            ImGui::Text("状态 %u", actorData.state);
+            ImGui::Text("上一状态 %u", actorData.lastState);
+            ImGui::Text("上上次状态 %u", crimsonPlayer[0].lastLastState);
+            ImGui::Text("角色动作 %u", crimsonPlayer[0].action);
+            ImGui::Text("角色上一动作 %u", actorData.lastAction);
+            ImGui::Text("位置  %g", actorData.position);
+            ImGui::Text("旋转 %g", actorData.rotation);
+            ImGui::Text("镜头方向 %u", actorData.cameraDirection);
+            ImGui::Text("角色镜头方向 %u", actorData.actorCameraDirection);
+            ImGui::Text("相对倾斜 %u", relativeTiltController);
+            ImGui::Text("左摇杆位置 %u", gamepad.leftStickPosition);
 		
-            ImGui::Text("Royal Block Type:  %u", actorData.royalguardBlockType);
-            ImGui::Text("Guardflying:  %u", inGuardfly);
+            ImGui::Text("皇家格挡类型:  %u", actorData.royalguardBlockType);
+            ImGui::Text("防御飞行:  %u", inGuardfly);
             // ImGui::Text("Track %s", eventData.track);
 
-            ImGui::Text("Air Guard Inertia  %g", crimsonPlayer[0].inertia.airGuard.cachedPull);
-            ImGui::Text("Weapon Character Data %u", characterData.meleeWeaponIndex);
-            ImGui::Text("Active Weapon %u", actorData.activeWeapon);
-            ImGui::Text("Trick Up Count %u", actorData.newTrickUpCount);
-            ImGui::Text("Sky Star Count %u", actorData.newSkyStarCount);
-            ImGui::Text("Air Hike Count %u", actorData.newAirHikeCount);
-            ImGui::Text("Air Rising Sun Count %u", actorData.newAirRisingSunCount);
+            ImGui::Text("空中防御惯性  %g", crimsonPlayer[0].inertia.airGuard.cachedPull);
+            ImGui::Text("武器角色数据 %u", characterData.meleeWeaponIndex);
+            ImGui::Text("当前武器 %u", actorData.activeWeapon);
+            ImGui::Text("上挑骗术次数 %u", actorData.newTrickUpCount);
+            ImGui::Text("天星次数 %u", actorData.newSkyStarCount);
+            ImGui::Text("二段跳次数 %u", actorData.newAirHikeCount);
+            ImGui::Text("空中旭日次数 %u", actorData.newAirRisingSunCount);
 
 
-            ImGui::Text("Config Inf HP: %u", activeCrimsonGameplay.Cheats.Training.infiniteDT);
+            ImGui::Text("配置无限生命: %u", activeCrimsonGameplay.Cheats.Training.infiniteDT);
 
             /*ImGui::Text("styleRankCount Dismal %u", rankAnnouncer[0].count);
             ImGui::Text("styleRankCount Crazy %u", rankAnnouncer[1].count);
@@ -9440,14 +9440,14 @@ void DebugOverlayWindow(size_t defaultFontSize) {
             ImGui::Text("Mixer  %s", MixerInitialization);
             ImGui::Text("Mixer2  %s", MixerInitialization2);*/
 
-            ImGui::Text("Quick Double Tap Buffer %u", quickDoubleTap[0].buffer);
-            ImGui::Text("Dopp Double Tap Buffer %u", doppDoubleTap[0].buffer);
+            ImGui::Text("快速双击预输入 %u", quickDoubleTap[0].buffer);
+            ImGui::Text("分身双击预输入 %u", doppDoubleTap[0].buffer);
 
-            ImGui::Text("Magic Points Dopp %g", currentDTDoppOn);
-            ImGui::Text("Magic Points Dopp DT %g", currentDTDoppDTOn);
-            ImGui::Text("Dopp Milliseconds %g", doppSeconds);
-            ImGui::Text("Dopp DT Milliseconds %g", doppSecondsDT);
-            ImGui::Text("Dopp Tracker Running %u", doppTimeTrackerRunning);
+            ImGui::Text("分身魔力值 %g", currentDTDoppOn);
+            ImGui::Text("分身魔人魔力值 %g", currentDTDoppDTOn);
+            ImGui::Text("分身毫秒 %g", doppSeconds);
+            ImGui::Text("分身魔人毫秒 %g", doppSecondsDT);
+            ImGui::Text("分身追踪运行中 %u", doppTimeTrackerRunning);
             ImGui::Text("styleVFXCount %u", styleVFXCount);
 
 
@@ -9461,32 +9461,32 @@ void DebugOverlayWindow(size_t defaultFontSize) {
            
 
 
-            ImGui::Text("Doppelganger active %u", actorData.doppelganger);
-            ImGui::Text("Actor Mode %u", actorData.mode);
+            ImGui::Text("分身激活 %u", actorData.doppelganger);
+            ImGui::Text("角色模式 %u", actorData.mode);
 
 
-            ImGui::Text("IsDevil2 %u", actorData.devil);
-            ImGui::Text("Style %u", actorData.style);
-            ImGui::Text("StyleRank %u", actorData.styleData.rank);
-            ImGui::Text("StyleRank Meter %g", actorData.styleData.meter);
-            ImGui::Text("StyleRank Quotient %g", actorData.styleData.quotient);
-            ImGui::Text("StyleRank Divident %g", actorData.styleData.dividend);
-            ImGui::Text("StyleRank Divisor %g", actorData.styleData.divisor);
-            ImGui::Text("Permissions %u", actorData.permissions);
+            ImGui::Text("是否真·魔人 %u", actorData.devil);
+            ImGui::Text("风格 %u", actorData.style);
+            ImGui::Text("风格评级 %u", actorData.styleData.rank);
+            ImGui::Text("风格评级计量 %g", actorData.styleData.meter);
+            ImGui::Text("风格评级商 %g", actorData.styleData.quotient);
+            ImGui::Text("风格评级被除数 %g", actorData.styleData.dividend);
+            ImGui::Text("风格评级除数 %g", actorData.styleData.divisor);
+            ImGui::Text("权限 %u", actorData.permissions);
             if (actorData.cloneActorBaseAddr) {
-                ImGui::Text("StyleRankClone %u", cloneActorData.styleData.rank);
-                ImGui::Text("StyleRankClone Meter %g", cloneActorData.styleData.meter);
-                ImGui::Text("StyleRankClone Quotient %g", cloneActorData.styleData.quotient);
+                ImGui::Text("分身风格评级 %u", cloneActorData.styleData.rank);
+                ImGui::Text("分身风格评级计量 %g", cloneActorData.styleData.meter);
+                ImGui::Text("分身风格评级商 %g", cloneActorData.styleData.quotient);
             }
 
 
             /*
-            ImGui::Text("Style Indice 0 %u", characterData.styleButtons[0]);
-            ImGui::Text("Style Indice 1 %u", characterData.styleButtons[1]);
-            ImGui::Text("Style Indice 2 %u", characterData.styleButtons[2]);
-            ImGui::Text("Style Indice 3 %u", characterData.styleButtons[3]);
-            ImGui::Text("Style Indice 4 %u", characterData.styleButtons[4]);
-            ImGui::Text("Style Indice 5 %u", characterData.styleButtons[5]);*/
+            ImGui::Text("风格索引 0 %u", characterData.styleButtons[0]);
+            ImGui::Text("风格索引 1 %u", characterData.styleButtons[1]);
+            ImGui::Text("风格索引 2 %u", characterData.styleButtons[2]);
+            ImGui::Text("风格索引 3 %u", characterData.styleButtons[3]);
+            ImGui::Text("风格索引 4 %u", characterData.styleButtons[4]);
+            ImGui::Text("风格索引 5 %u", characterData.styleButtons[5]);*/
 
 
             ImGui::Text("");
@@ -9494,7 +9494,7 @@ void DebugOverlayWindow(size_t defaultFontSize) {
 
 
         if (activeConfig.debugOverlayData.showRegionData) {
-            ImGui::Text("Region Data");
+            ImGui::Text("区域数据");
 
             auto Function = [&](RegionData& regionData) -> void {
                 ImGui::Text("metadataAddr %llX", regionData.metadataAddr);
@@ -9613,14 +9613,14 @@ void DebugOverlayWindow(size_t defaultFontSize) {
 
 void MainOverlaySettings() {
     auto Function = [&]() {
-        GUI_Checkbox2("Show Focus", activeConfig.debugOverlayData.showFocus, queuedConfig.debugOverlayData.showFocus);
-        GUI_Checkbox2("Show FPS", activeConfig.debugOverlayData.showFPS, queuedConfig.debugOverlayData.showFPS);
-        GUI_Checkbox2("Show Sizes", activeConfig.debugOverlayData.showSizes, queuedConfig.debugOverlayData.showSizes);
-        GUI_Checkbox2("Show Frame Rate Multiplier", activeConfig.debugOverlayData.showFrameRateMultiplier,
+        GUI_Checkbox2("显示焦点", activeConfig.debugOverlayData.showFocus, queuedConfig.debugOverlayData.showFocus);
+        GUI_Checkbox2("显示 FPS", activeConfig.debugOverlayData.showFPS, queuedConfig.debugOverlayData.showFPS);
+        GUI_Checkbox2("显示尺寸", activeConfig.debugOverlayData.showSizes, queuedConfig.debugOverlayData.showSizes);
+        GUI_Checkbox2("显示帧率倍率", activeConfig.debugOverlayData.showFrameRateMultiplier,
             queuedConfig.debugOverlayData.showFrameRateMultiplier);
-        GUI_Checkbox2("Show Event Data", activeConfig.debugOverlayData.showEventData, queuedConfig.debugOverlayData.showEventData);
-        GUI_Checkbox2("Show Position", activeConfig.debugOverlayData.showPosition, queuedConfig.debugOverlayData.showPosition);
-        GUI_Checkbox2("Show Region Data", activeConfig.debugOverlayData.showRegionData, queuedConfig.debugOverlayData.showRegionData);
+        GUI_Checkbox2("显示事件数据", activeConfig.debugOverlayData.showEventData, queuedConfig.debugOverlayData.showEventData);
+        GUI_Checkbox2("显示位置", activeConfig.debugOverlayData.showPosition, queuedConfig.debugOverlayData.showPosition);
+        GUI_Checkbox2("显示区域数据", activeConfig.debugOverlayData.showRegionData, queuedConfig.debugOverlayData.showRegionData);
     };
 
     OverlaySettings(mainOverlayLabel, activeConfig.debugOverlayData, queuedConfig.debugOverlayData, defaultConfig.debugOverlayData, Function);
@@ -9631,7 +9631,7 @@ const char* missionOverlayLabel = "MissionOverlay";
 
 void MissionOverlayWindow(size_t defaultFontSize) {
     auto Function = [&]() {
-        ImGui::Text("Mission");
+        ImGui::Text("任务");
 
         ImGui::PushFont(UI::g_ImGuiFont_Roboto[defaultFontSize * 1.1f]);
 
@@ -9647,13 +9647,13 @@ void MissionOverlayWindow(size_t defaultFontSize) {
             // 60.0f // @Update
         );
 
-        ImGui::Text("Time           %02u:%02u:%02u.%03u", timeData.hours, timeData.minutes, timeData.seconds, timeData.milliseconds);
+        ImGui::Text("时间           %02u:%02u:%02u.%03u", timeData.hours, timeData.minutes, timeData.seconds, timeData.milliseconds);
 
 
-        ImGui::Text("Damage         %u", missionData.damage);
-        ImGui::Text("Orbs Collected %u", missionData.orbsCollected);
-        ImGui::Text("Items Used     %u", missionData.itemsUsed);
-        ImGui::Text("Kill Count     %u", missionData.killCount);
+        ImGui::Text("伤害         %u", missionData.damage);
+        ImGui::Text("红魂收集 %u", missionData.orbsCollected);
+        ImGui::Text("道具使用     %u", missionData.itemsUsed);
+        ImGui::Text("击杀数     %u", missionData.killCount);
 
         auto pool_10621 = *reinterpret_cast<byte8***>(appBaseAddr + 0xC90E28);
         if (!pool_10621 || !pool_10621[3]) {
@@ -9663,7 +9663,7 @@ void MissionOverlayWindow(size_t defaultFontSize) {
 
         auto stylePoints = (actorData.styleData.quotient * 100.0f);
 
-        ImGui::Text("Style Points   %.2f", stylePoints);
+        ImGui::Text("风格分   %.2f", stylePoints);
     };
 
     OverlayFunction(missionOverlayLabel, activeConfig.missionOverlayData, queuedConfig.missionOverlayData, Function);
@@ -9781,7 +9781,7 @@ void InterfaceSection(size_t defaultFontSize, ID3D11Device* pDevice) {
 	ImGui::PushFont(UI::g_ImGuiFont_RussoOne[defaultFontSize * 1.1f]);
 
 
-    ImGui::Text("CRIMSON GUI OPTIONS");
+    ImGui::Text("CRIMSON 界面选项");
 
 	ImGui::PopFont();
 
@@ -9806,15 +9806,15 @@ void InterfaceSection(size_t defaultFontSize, ID3D11Device* pDevice) {
 			ImGui::TableNextColumn();
 
 			ImGui::PushItemWidth(itemWidth * 0.6f);
-			UI::Combo2("Transparency Mode", GUITransparencyNames, activeCrimsonConfig.GUI.transparencyMode, queuedCrimsonConfig.GUI.transparencyMode);
+			UI::Combo2("透明模式", GUITransparencyNames, activeCrimsonConfig.GUI.transparencyMode, queuedCrimsonConfig.GUI.transparencyMode);
 			ImGui::PopItemWidth();
 			ImGui::SameLine();
-			TooltipHelper("(?)", "Dynamic will apply transparency only in-game.");
+			TooltipHelper("(?)", "动态：仅在游戏内应用透明。");
 
 			ImGui::TableNextColumn();
 
 			ImGui::PushItemWidth(itemWidth * 0.8f);
-			GUI_InputDefault2<float>("Opacity", activeCrimsonConfig.GUI.opacity, queuedCrimsonConfig.GUI.opacity,defaultCrimsonConfig.GUI.opacity, 0.1f, "%g",
+			GUI_InputDefault2<float>("不透明度", activeCrimsonConfig.GUI.opacity, queuedCrimsonConfig.GUI.opacity,defaultCrimsonConfig.GUI.opacity, 0.1f, "%g",
 				ImGuiInputTextFlags_EnterReturnsTrue);
 			ImGui::PopItemWidth();
 
@@ -9822,7 +9822,7 @@ void InterfaceSection(size_t defaultFontSize, ID3D11Device* pDevice) {
 			ImGui::TableNextColumn();
 
 			ImGui::PushItemWidth(itemWidth * 0.8f);
-			if (GUI_InputDefault2("Global Scale", activeConfig.globalScale, queuedConfig.globalScale, defaultConfig.globalScale, 0.1f, "%g",
+			if (GUI_InputDefault2("全局缩放", activeConfig.globalScale, queuedConfig.globalScale, defaultConfig.globalScale, 0.1f, "%g",
 				ImGuiInputTextFlags_EnterReturnsTrue)) {
 				UpdateGlobalScale();
 			}
@@ -9830,7 +9830,7 @@ void InterfaceSection(size_t defaultFontSize, ID3D11Device* pDevice) {
 
 			ImGui::TableNextColumn();
 
-			if (GUI_Checkbox2("Pause When Opened", activeCrimsonConfig.GUI.pauseWhenOpened, queuedCrimsonConfig.GUI.pauseWhenOpened)) {
+			if (GUI_Checkbox2("打开时暂停", activeCrimsonConfig.GUI.pauseWhenOpened, queuedCrimsonConfig.GUI.pauseWhenOpened)) {
 				if (g_inGameDelayed) {
 					activeCrimsonGameplay.Cheats.Speed.defaultGame = queuedCrimsonGameplay.Cheats.Speed.defaultGame; // This resumes the game speed
 					activeCrimsonGameplay.Cheats.Speed.turboGame = queuedCrimsonGameplay.Cheats.Speed.turboGame;
@@ -9841,20 +9841,20 @@ void InterfaceSection(size_t defaultFontSize, ID3D11Device* pDevice) {
 
 			ImGui::TableNextColumn();
 
-			GUI_Checkbox2("GUI Sounds", 
+			GUI_Checkbox2("界面音效", 
 				activeCrimsonConfig.GUI.sounds, queuedCrimsonConfig.GUI.sounds);
 
 			ImGui::TableNextColumn();
 
-			GUI_Checkbox2("Hotkey Cheats Pop Up",
+			GUI_Checkbox2("快捷键作弊弹窗",
 				activeCrimsonConfig.GUI.cheatsPopup, queuedCrimsonConfig.GUI.cheatsPopup);
 
 			ImGui::TableNextColumn();
 
-			GUI_Checkbox2("Disable Gamepad Shortcut",
+			GUI_Checkbox2("禁用手柄快捷键",
 				activeCrimsonConfig.GUI.disableGamepadShortcut, queuedCrimsonConfig.GUI.disableGamepadShortcut);
 			ImGui::SameLine();
-			TooltipHelper("(?)", "Helpful for those who want to use LS + RS as the Switch Button.");
+			TooltipHelper("(?)", "适合想把 LS + RS 用作切换键的玩家。");
 	
 
 			ImGui::EndTable();
@@ -9869,7 +9869,7 @@ void InterfaceSection(size_t defaultFontSize, ID3D11Device* pDevice) {
 	ImGui::PushFont(UI::g_ImGuiFont_RussoOne[defaultFontSize * 1.1f]);
 
 
-	ImGui::Text("HUD OPTIONS");
+	ImGui::Text("HUD 选项");
 
 	ImGui::PopFont();
 
@@ -9892,7 +9892,7 @@ void InterfaceSection(size_t defaultFontSize, ID3D11Device* pDevice) {
 			ImGui::TableNextColumn();
 
 			ImGui::PushItemWidth(itemWidth);
-			UI::ComboVectorString("Select HUD", CrimsonFiles::HUDdirectories, queuedCrimsonConfig.HudOptions.selectedHUD);
+			UI::ComboVectorString("选择 HUD", CrimsonFiles::HUDdirectories, queuedCrimsonConfig.HudOptions.selectedHUD);
 			if (queuedCrimsonConfig.HudOptions.selectedHUD != activeCrimsonConfig.HudOptions.selectedHUD) {
 				activeCrimsonConfig.HudOptions.selectedHUD = queuedCrimsonConfig.HudOptions.selectedHUD;
 				// Copy renamed files to GData.afs for backward compatibility
@@ -9906,7 +9906,7 @@ void InterfaceSection(size_t defaultFontSize, ID3D11Device* pDevice) {
 			ImGui::TableNextColumn();
 
 			ImGui::PushItemWidth(itemWidth);
-			if (GUI_Checkbox2("Hide Main HUD", activeCrimsonConfig.HudOptions.hideMainHUD, queuedCrimsonConfig.HudOptions.hideMainHUD)) {
+			if (GUI_Checkbox2("隐藏主 HUD", activeCrimsonConfig.HudOptions.hideMainHUD, queuedCrimsonConfig.HudOptions.hideMainHUD)) {
 				ToggleHideMainHUD(activeCrimsonConfig.HudOptions.hideMainHUD);
 			}
 			ImGui::PopItemWidth();
@@ -9915,7 +9915,7 @@ void InterfaceSection(size_t defaultFontSize, ID3D11Device* pDevice) {
 			ImGui::TableNextColumn();
 
 			ImGui::PushItemWidth(itemWidth);
-			if (GUI_Checkbox2("Always Show Main HUD", activeCrimsonConfig.HudOptions.forceVisibleHUD, queuedCrimsonConfig.HudOptions.forceVisibleHUD)) {
+			if (GUI_Checkbox2("始终显示主 HUD", activeCrimsonConfig.HudOptions.forceVisibleHUD, queuedCrimsonConfig.HudOptions.forceVisibleHUD)) {
 				ToggleForceVisibleHUD(activeCrimsonConfig.HudOptions.forceVisibleHUD);
 			}
 
@@ -9924,25 +9924,25 @@ void InterfaceSection(size_t defaultFontSize, ID3D11Device* pDevice) {
 			ImGui::TableNextRow(0, rowWidth);
 			ImGui::TableNextColumn();
 
-			if (GUI_Checkbox2("Hide Lock-On", activeCrimsonConfig.HudOptions.hideLockOn, queuedCrimsonConfig.HudOptions.hideLockOn)) {
+			if (GUI_Checkbox2("隐藏锁定", activeCrimsonConfig.HudOptions.hideLockOn, queuedCrimsonConfig.HudOptions.hideLockOn)) {
 				CrimsonPatches::ToggleHideLockOn(activeCrimsonConfig.HudOptions.hideLockOn);
 			}
 
 			ImGui::TableNextColumn();
 
-			if (GUI_Checkbox2("Hide Style Meter", activeCrimsonConfig.HudOptions.hideStyleMeter, queuedCrimsonConfig.HudOptions.hideStyleMeter)) {
+			if (GUI_Checkbox2("隐藏风格槽", activeCrimsonConfig.HudOptions.hideStyleMeter, queuedCrimsonConfig.HudOptions.hideStyleMeter)) {
 				CrimsonDetours::ToggleHideStyleRankHUD(activeCrimsonConfig.HudOptions.hideStyleMeter);
 			}
 
 			ImGui::TableNextColumn();
 
-			if (GUI_Checkbox2("Hide Boss Damage Bar", activeCrimsonConfig.HudOptions.hideBossHUD, queuedCrimsonConfig.HudOptions.hideBossHUD)) {
+			if (GUI_Checkbox2("隐藏首领血条", activeCrimsonConfig.HudOptions.hideBossHUD, queuedCrimsonConfig.HudOptions.hideBossHUD)) {
 				ToggleHideBossHUD(activeCrimsonConfig.HudOptions.hideBossHUD);
 			}
 
 			ImGui::TableNextColumn();
 
-			GUI_Checkbox2("Disable Style Rank Fadeout", activeCrimsonConfig.HudOptions.disableStyleRankHudFadeout, queuedCrimsonConfig.HudOptions.disableStyleRankHudFadeout);
+			GUI_Checkbox2("禁用风格评级淡出", activeCrimsonConfig.HudOptions.disableStyleRankHudFadeout, queuedCrimsonConfig.HudOptions.disableStyleRankHudFadeout);
 
 			ImGui::EndTable();
 		}
@@ -9953,7 +9953,7 @@ void InterfaceSection(size_t defaultFontSize, ID3D11Device* pDevice) {
     ImGui::PopStyleColor();
     
 	ImGui::PushFont(UI::g_ImGuiFont_RussoOne[defaultFontSize * 1.1f]);
-	ImGui::Text("CRIMSON HUD 1.0 ADDONS");
+	ImGui::Text("CRIMSON HUD 1.0 附加项");
 	ImGui::PopFont();
 	
 
@@ -9975,26 +9975,26 @@ void InterfaceSection(size_t defaultFontSize, ID3D11Device* pDevice) {
 			ImGui::TableNextRow(0, rowWidth * 0.5f);
 			ImGui::TableNextColumn();
 
-			if (GUI_Checkbox2("HUD Positionings", activeCrimsonConfig.CrimsonHudAddons.positionings, queuedCrimsonConfig.CrimsonHudAddons.positionings)) {
+			if (GUI_Checkbox2("HUD 位置", activeCrimsonConfig.CrimsonHudAddons.positionings, queuedCrimsonConfig.CrimsonHudAddons.positionings)) {
 				CrimsonDetours::ToggleClassicHUDPositionings(!activeCrimsonConfig.CrimsonHudAddons.positionings);
 			}
 			ImGui::SameLine();
-			TooltipHelper("(?)", "Uncheck this if you're using Classic HUD.");
+			TooltipHelper("(?)", "使用经典 HUD 时请取消勾选。");
 
 			ImGui::TableNextColumn();
 
-			UI::ComboMapValue2("Styles Display", stylesDisplayStateNames, stylesDisplayStateMap,
+			UI::ComboMapValue2("风格显示", stylesDisplayStateNames, stylesDisplayStateMap,
 				activeCrimsonConfig.CrimsonHudAddons.stylesDisplay,
 				queuedCrimsonConfig.CrimsonHudAddons.stylesDisplay);
 				
 
 			ImGui::TableNextColumn();
 
-			GUI_Checkbox2("Show Style Names", activeCrimsonConfig.CrimsonHudAddons.displayStyleNames, queuedCrimsonConfig.CrimsonHudAddons.displayStyleNames);
+			GUI_Checkbox2("显示风格名称", activeCrimsonConfig.CrimsonHudAddons.displayStyleNames, queuedCrimsonConfig.CrimsonHudAddons.displayStyleNames);
 
 			ImGui::TableNextColumn();
 
-			if (UI::ComboMapValue2("Style Names Set", styleNamesTextureSetNames, styleNamesTextureSetMap,
+			if (UI::ComboMapValue2("风格名称集", styleNamesTextureSetNames, styleNamesTextureSetMap,
 				activeCrimsonConfig.CrimsonHudAddons.styleNamesSet,
 				queuedCrimsonConfig.CrimsonHudAddons.styleNamesSet)) {
 				activeCrimsonConfig.CrimsonHudAddons.styleNamesSet = queuedCrimsonConfig.CrimsonHudAddons.styleNamesSet;
@@ -10005,24 +10005,24 @@ void InterfaceSection(size_t defaultFontSize, ID3D11Device* pDevice) {
 
 			//GUI_PushDisable((activeCrimsonGameplay.GameMode.preset >= GAMEMODEPRESETS::STYLE_SWITCHER) || (activeConfig.Actor.enable != queuedConfig.Actor.enable));
 
-			GUI_Checkbox2("Red Orb Counter", activeCrimsonConfig.CrimsonHudAddons.redOrbCounter, queuedCrimsonConfig.CrimsonHudAddons.redOrbCounter);
+			GUI_Checkbox2("红魂计数器", activeCrimsonConfig.CrimsonHudAddons.redOrbCounter, queuedCrimsonConfig.CrimsonHudAddons.redOrbCounter);
 
 			//GUI_PopDisable((activeCrimsonGameplay.GameMode.preset >= GAMEMODEPRESETS::STYLE_SWITCHER) || (activeConfig.Actor.enable != queuedConfig.Actor.enable));
 
 			ImGui::TableNextColumn();
 
-			GUI_Checkbox2("Royal Gauge", activeCrimsonConfig.CrimsonHudAddons.royalGauge, queuedCrimsonConfig.CrimsonHudAddons.royalGauge);
+			GUI_Checkbox2("皇家计量表", activeCrimsonConfig.CrimsonHudAddons.royalGauge, queuedCrimsonConfig.CrimsonHudAddons.royalGauge);
 
 			ImGui::TableNextColumn();
 
-			if (GUI_Checkbox2("Style Ranks Meter", activeCrimsonConfig.CrimsonHudAddons.styleRanksMeter, queuedCrimsonConfig.CrimsonHudAddons.styleRanksMeter)) {
+			if (GUI_Checkbox2("风格评级槽", activeCrimsonConfig.CrimsonHudAddons.styleRanksMeter, queuedCrimsonConfig.CrimsonHudAddons.styleRanksMeter)) {
 				CrimsonDetours::ToggleHideStyleRankHUD(activeCrimsonConfig.CrimsonHudAddons.styleRanksMeter);
 			}
 
 			ImGui::TableNextColumn();
 
 			ImGui::PushItemWidth(itemWidth);
-			if (UI::ComboVectorString2("Select Meter", CrimsonFiles::StyleRanksdirectories, activeCrimsonConfig.CrimsonHudAddons.selectedStyleRanks,
+			if (UI::ComboVectorString2("选择计量表", CrimsonFiles::StyleRanksdirectories, activeCrimsonConfig.CrimsonHudAddons.selectedStyleRanks,
 				queuedCrimsonConfig.CrimsonHudAddons.selectedStyleRanks)) {
 				CrimsonFiles::GetStyleRanksAccoladesDirectories();
 				activeCrimsonConfig.CrimsonHudAddons.selectedStyleRanksAccolades = CrimsonFiles::StyleRanksAccoladesdirectories[0];
@@ -10034,7 +10034,7 @@ void InterfaceSection(size_t defaultFontSize, ID3D11Device* pDevice) {
 			ImGui::TableNextColumn();
 
 			ImGui::PushItemWidth(itemWidth);
-			if (UI::ComboVectorString2("Select Meter Accolades", CrimsonFiles::StyleRanksAccoladesdirectories, activeCrimsonConfig.CrimsonHudAddons.selectedStyleRanksAccolades,
+			if (UI::ComboVectorString2("选择计量表称号", CrimsonFiles::StyleRanksAccoladesdirectories, activeCrimsonConfig.CrimsonHudAddons.selectedStyleRanksAccolades,
 				queuedCrimsonConfig.CrimsonHudAddons.selectedStyleRanksAccolades)) {
 				CrimsonHUD::InitStyleRankTextures(pDevice);
 			}
@@ -10042,11 +10042,11 @@ void InterfaceSection(size_t defaultFontSize, ID3D11Device* pDevice) {
 
 			ImGui::TableNextColumn();
 
-			GUI_Checkbox2("Stylish Pts Counter", activeCrimsonConfig.CrimsonHudAddons.stylishPtsCounter, queuedCrimsonConfig.CrimsonHudAddons.stylishPtsCounter);
+			GUI_Checkbox2("风格分计数器", activeCrimsonConfig.CrimsonHudAddons.stylishPtsCounter, queuedCrimsonConfig.CrimsonHudAddons.stylishPtsCounter);
 
 			ImGui::TableNextColumn();
 
-			UI::ComboMapValue2("Mission Timer Display", missionTimerDisplayStateNames, missionTimerDisplayStateMap,
+			UI::ComboMapValue2("任务计时显示", missionTimerDisplayStateNames, missionTimerDisplayStateMap,
 				activeCrimsonConfig.CrimsonHudAddons.missionTimerDisplay, queuedCrimsonConfig.CrimsonHudAddons.missionTimerDisplay);
 
 			ImGui::TableNextColumn();
@@ -10071,12 +10071,12 @@ void InterfaceSection(size_t defaultFontSize, ID3D11Device* pDevice) {
 
 			GUI_PushDisable(!activeCrimsonConfig.CrimsonHudAddons.lockOn);
 
-			GUI_Checkbox2("Lock On Colors on Characters", activeCrimsonConfig.CrimsonHudAddons.lockOnColorsCharacter, 
+			GUI_Checkbox2("角色锁定颜色", activeCrimsonConfig.CrimsonHudAddons.lockOnColorsCharacter, 
 				queuedCrimsonConfig.CrimsonHudAddons.lockOnColorsCharacter);
 			ImGui::SameLine();
 			TooltipHelper("(?)", "SINGLE PLAYER ONLY: Changes the color of the Lock-On reticle to match the character's color.\n"
 				"Disabling this effectively allows you to change the Lock-On color at your will.\n"
-				"In Multiplayer or with this option disabled, Lock-On color is always based on PLAYER COLOR.");
+				"多人游戏或关闭此项时，锁定颜色始终基于玩家颜色。");
 
 			GUI_PopDisable(!activeCrimsonConfig.CrimsonHudAddons.lockOn);
 
@@ -10088,7 +10088,7 @@ void InterfaceSection(size_t defaultFontSize, ID3D11Device* pDevice) {
 	ImGui::Text("");
 
 	GUI_PushDisable(!activeConfig.Actor.enable);
-	GUI_Title("WEAPON WHEEL", true);
+	GUI_Title("武器轮盘", true);
 
 	ImGui::PushStyleColor(ImGuiCol_CheckMark, checkmarkColorBg);
 
@@ -10105,7 +10105,7 @@ void InterfaceSection(size_t defaultFontSize, ID3D11Device* pDevice) {
 			// First Row - Analog Switching & Disable Camera Control
 			ImGui::PushItemWidth(itemWidth * 0.8f);
 			if (GUI_Checkbox2(
-				"Analog Switching", activeCrimsonConfig.WeaponWheel.analogSwitching,
+				"摇杆切换", activeCrimsonConfig.WeaponWheel.analogSwitching,
 				queuedCrimsonConfig.WeaponWheel.analogSwitching)) {
 
 				if (!queuedCrimsonConfig.WeaponWheel.analogSwitching) {
@@ -10122,7 +10122,7 @@ void InterfaceSection(size_t defaultFontSize, ID3D11Device* pDevice) {
 
 			GUI_PushDisable(!activeCrimsonConfig.WeaponWheel.analogSwitching);
 			ImGui::PushItemWidth(itemWidth * 0.8f);
-			GUI_Checkbox2("Disable Camera Control While Open",
+			GUI_Checkbox2("打开时禁用镜头控制",
 				activeCrimsonConfig.WeaponWheel.disableCameraRotation,
 				queuedCrimsonConfig.WeaponWheel.disableCameraRotation);
 			ImGui::PopItemWidth();
@@ -10130,7 +10130,7 @@ void InterfaceSection(size_t defaultFontSize, ID3D11Device* pDevice) {
 
 			ImGui::TableNextColumn();
 			ImGui::PushItemWidth(itemWidth * 0.8f);
-			UI::ComboVectorString2("Theme", weaponWheelThemeNames,
+			UI::ComboVectorString2("主题", weaponWheelThemeNames,
 				activeCrimsonConfig.WeaponWheel.theme,
 				queuedCrimsonConfig.WeaponWheel.theme);
 			ImGui::PopItemWidth();
@@ -10139,14 +10139,14 @@ void InterfaceSection(size_t defaultFontSize, ID3D11Device* pDevice) {
 			ImGui::TableNextRow(0, rowWidth * 0.5f);
 			ImGui::TableNextColumn();
 
-			UI::ComboMapValue2("Wheel Always Show", hudElementShowStateNames, hudElementShowStateMap,
+			UI::ComboMapValue2("轮盘始终显示", hudElementShowStateNames, hudElementShowStateMap,
 				activeCrimsonConfig.WeaponWheel.alwaysShow,
 				queuedCrimsonConfig.WeaponWheel.alwaysShow);
 
 			ImGui::TableNextColumn();
 		
 			ImGui::PushItemWidth(itemWidth * 0.8f);
-			UI::ComboMapValue2("Scale", hudElementScaleStateNames, hudElementScaleStateMap,
+			UI::ComboMapValue2("缩放", hudElementScaleStateNames, hudElementScaleStateMap,
 				activeCrimsonConfig.WeaponWheel.scale,
 				queuedCrimsonConfig.WeaponWheel.scale);
 			ImGui::PopItemWidth();
@@ -10159,20 +10159,20 @@ void InterfaceSection(size_t defaultFontSize, ID3D11Device* pDevice) {
 			ImGui::TableNextRow(0, rowWidth * 0.5f);
 
 			ImGui::TableNextColumn();
-			GUI_Checkbox2("Hide Weapon Wheel HUD",
+			GUI_Checkbox2("隐藏武器轮盘 HUD",
 				activeCrimsonConfig.WeaponWheel.hide,
 				queuedCrimsonConfig.WeaponWheel.hide);
 
 			ImGui::TableNextColumn();
 			ImGui::PushItemWidth(itemWidth * 1.0f);
-			UI::ComboMapValue2("World Space Wheels", hudElementShowStateNames, hudElementShowStateMap,
+			UI::ComboMapValue2("世界空间轮盘", hudElementShowStateNames, hudElementShowStateMap,
 				activeCrimsonConfig.WeaponWheel.worldSpaceWheels,
 				queuedCrimsonConfig.WeaponWheel.worldSpaceWheels);
 			ImGui::PopItemWidth();
 
 			ImGui::TableNextColumn();
 
-			UI::ComboMapValue2("WS Wheel Always Show", hudElementShowStateNames, hudElementShowStateMap,
+			UI::ComboMapValue2("世界轮盘始终显示", hudElementShowStateNames, hudElementShowStateMap,
 				activeCrimsonConfig.WeaponWheel.worldSpaceAlwaysShow,
 				queuedCrimsonConfig.WeaponWheel.worldSpaceAlwaysShow);
 
@@ -10202,12 +10202,12 @@ void InterfaceSection(size_t defaultFontSize, ID3D11Device* pDevice) {
 #pragma region Repair
 
 void Repair() {
-    if (ImGui::CollapsingHeader("Repair")) {
+    if (ImGui::CollapsingHeader("修复")) {
         ImGui::Text("");
 
-        DescriptionHelper("Fix wrong values. "
-                          "Can be accessed while in the mission select menu. "
-                          "Save your game after applying a fix.");
+        DescriptionHelper("修正错误数值。"
+                          "可在任务选择菜单中访问。"
+                          "应用修复后请保存游戏。");
         ImGui::Text("");
 
 
@@ -10215,7 +10215,7 @@ void Repair() {
 
         GUI_PushDisable(condition);
 
-        if (GUI_Button("Reset Weapons")) {
+        if (GUI_Button("重置武器")) {
             [&]() {
                 auto& sessionData = *reinterpret_cast<SessionData*>(appBaseAddr + 0xC8F250);
 
@@ -10249,7 +10249,7 @@ void Repair() {
         }
 
 
-        if (GUI_Button("Reset Weapon Levels")) {
+        if (GUI_Button("重置武器等级")) {
             [&]() {
                 auto& sessionData = *reinterpret_cast<SessionData*>(appBaseAddr + 0xC8F250);
 
@@ -10270,20 +10270,20 @@ void Repair() {
 #pragma region Speed
 
 const char* devilSpeedNamesDante[] = {
-    "Rebellion",
-    "Cerberus",
-    "Agni & Rudra",
-    "Nevan",
-    "Beowulf",
-    "Sparda",
+    "叛逆",
+    "刻耳柏洛斯",
+    "阿耆尼与楼陀罗",
+    "涅梵",
+    "贝奥武夫",
+    "斯巴达",
 };
 
 const char* devilSpeedNamesVergil[] = {
-    "Yamato",
-    "Beowulf",
-    "Yamato & Force Edge",
-    "Nero Angelo Yamato",
-    "Nero Angelo Beowulf",
+    "阎魔刀",
+    "贝奥武夫",
+    "阎魔刀与力量之刃",
+    "尼禄·安杰洛阎魔刀",
+    "尼禄·安杰洛贝奥武夫",
 };
 
 
@@ -10297,7 +10297,7 @@ void CustomSpeedSection() {
 	float smallerComboMult = 0.7f;
 	ImGui::PushItemWidth(itemWidth);
 	// Speed Group Title
-	if (GUI_TitleCheckbox2("CUSTOM GAME SPEED CHEATS", activeCrimsonGameplay.Cheats.General.customSpeed,
+	if (GUI_TitleCheckbox2("自定义游戏速度作弊", activeCrimsonGameplay.Cheats.General.customSpeed,
 		queuedCrimsonGameplay.Cheats.General.customSpeed)) {
 		if (!activeCrimsonGameplay.Cheats.General.customSpeed) {
 			CopyMemory(&queuedCrimsonGameplay.Cheats.Speed, &defaultCrimsonGameplay.Cheats.Speed, sizeof(queuedCrimsonGameplay.Cheats.Speed));
@@ -10316,16 +10316,16 @@ void CustomSpeedSection() {
 	GUI_PushDisable(!activeCrimsonGameplay.Cheats.General.customSpeed);
 	// --- Main Speed Table ---
 	if (ImGui::BeginTable("SpeedTable", 2)) {
-		ImGui::TableSetupColumn("Left", 0, columnWidth * 3.5f);
-		ImGui::TableSetupColumn("Right", 0, columnWidth * 3.5f);
+		ImGui::TableSetupColumn("左", 0, columnWidth * 3.5f);
+		ImGui::TableSetupColumn("右", 0, columnWidth * 3.5f);
 		ImGui::TableNextRow(0, rowHeight);
 		ImGui::TableNextColumn();
 		ImGui::PushFont(UI::g_ImGuiFont_RussoOne[defaultFontSize * 0.9f]);
-		ImGui::Text("DEFAULT GAME");
+		ImGui::Text("默认游戏");
 		ImGui::PopFont();
 		ImGui::TableNextColumn();
 		ImGui::PushFont(UI::g_ImGuiFont_RussoOne[defaultFontSize * 0.9f]);
-		ImGui::Text("TURBO GAME"); ImGui::SameLine();
+		ImGui::Text("加速游戏"); ImGui::SameLine();
 		ImGui::PopFont();
 
 		ImGui::TableNextRow(0, rowHeight);
@@ -10356,36 +10356,36 @@ void CustomSpeedSection() {
 
 	// --- Main Speed Table ---
 	if (ImGui::BeginTable("SpeedTable2", 2)) {
-		ImGui::TableSetupColumn("Left", 0, columnWidth * 3.5f);
-		ImGui::TableSetupColumn("Right", 0, columnWidth * 3.5f);
+		ImGui::TableSetupColumn("左", 0, columnWidth * 3.5f);
+		ImGui::TableSetupColumn("右", 0, columnWidth * 3.5f);
 		ImGui::TableNextRow(0, rowHeight);
 		ImGui::TableNextColumn();
 		ImGui::PushFont(UI::g_ImGuiFont_RussoOne[defaultFontSize * 0.9f]);
-		ImGui::Text("ENEMY CHARACTER");
+		ImGui::Text("敌人角色");
 		ImGui::PopFont();
 		ImGui::TableNextColumn();
 		ImGui::PushFont(UI::g_ImGuiFont_RussoOne[defaultFontSize * 0.9f]);
-		ImGui::Text("PLAYER CHARACTER"); ImGui::SameLine();
+		ImGui::Text("玩家角色"); ImGui::SameLine();
 		ImGui::PopFont();
 		GUI_CCSRequirementButton();
 		ImGui::TableNextRow(0, rowHeight);
 		ImGui::TableNextColumn();
-		SpeedInput("Enemy", activeCrimsonGameplay.Cheats.Speed.enemy,
+		SpeedInput("敌人", activeCrimsonGameplay.Cheats.Speed.enemy,
 			queuedCrimsonGameplay.Cheats.Speed.enemy, defaultCrimsonGameplay.Cheats.Speed.enemy);
 		ImGui::TableNextColumn();
-		SpeedInput("Human", activeCrimsonGameplay.Cheats.Speed.human, 
+		SpeedInput("人类", activeCrimsonGameplay.Cheats.Speed.human, 
 			queuedCrimsonGameplay.Cheats.Speed.human, defaultCrimsonGameplay.Cheats.Speed.human);
 		ImGui::EndTable();
 	}
 	ImGui::Text("");
 	if (ImGui::BeginTable("SpeedTableDT", 2)) {
-		ImGui::TableSetupColumn("Left", 0, columnWidth * 3.5f);
-		ImGui::TableSetupColumn("Right", 0, columnWidth * 3.5f);
+		ImGui::TableSetupColumn("左", 0, columnWidth * 3.5f);
+		ImGui::TableSetupColumn("右", 0, columnWidth * 3.5f);
 		// Row 1 - Dante
 		ImGui::TableNextRow(0, rowHeight);
 		ImGui::TableNextColumn();
 		ImGui::PushFont(UI::g_ImGuiFont_RussoOne[defaultFontSize * 0.9f]);
-		ImGui::Text("DEVIL TRIGGERED DANTE");
+		ImGui::Text("魔人化但丁");
 		ImGui::PopFont();
 		for (uint8 i = 0; i < countof(activeCrimsonGameplay.Cheats.Speed.dTDante); ++i) {
 			SpeedInput(devilSpeedNamesDante[i], activeCrimsonGameplay.Cheats.Speed.dTDante[i], 
@@ -10394,7 +10394,7 @@ void CustomSpeedSection() {
 		// Row 1 - Vergil
 		ImGui::TableNextColumn();
 		ImGui::PushFont(UI::g_ImGuiFont_RussoOne[defaultFontSize * 0.9f]);
-		ImGui::Text("DEVIL TRIGGERED VERGIL");
+		ImGui::Text("魔人化维吉尔");
 		ImGui::PopFont();
 		for (uint8 i = 0; i < countof(activeCrimsonGameplay.Cheats.Speed.dTVergil); ++i) {
 			SpeedInput(devilSpeedNamesVergil[i], activeCrimsonGameplay.Cheats.Speed.dTVergil[i], 
@@ -10405,11 +10405,11 @@ void CustomSpeedSection() {
 		ImGui::TableNextColumn();
 		ImGui::Text("");
 		ImGui::PushFont(UI::g_ImGuiFont_RussoOne[defaultFontSize * 0.9f]);
-		ImGui::Text("QUICKSILVER");
+		ImGui::Text("水银");
 		ImGui::PopFont();
-		SpeedInput("Player Character", activeCrimsonGameplay.Cheats.Speed.quicksilverPlayer, 
+		SpeedInput("玩家角色", activeCrimsonGameplay.Cheats.Speed.quicksilverPlayer, 
 			queuedCrimsonGameplay.Cheats.Speed.quicksilverPlayer, defaultCrimsonGameplay.Cheats.Speed.quicksilverPlayer);
-		SpeedInput("Enemy Character", activeCrimsonGameplay.Cheats.Speed.quicksilverEnemy, 
+		SpeedInput("敌人角色", activeCrimsonGameplay.Cheats.Speed.quicksilverEnemy, 
 			queuedCrimsonGameplay.Cheats.Speed.quicksilverEnemy, defaultCrimsonGameplay.Cheats.Speed.quicksilverEnemy);
 		ImGui::EndTable();
 	}
@@ -10424,23 +10424,23 @@ void CustomSpeedSection() {
 #pragma region System
 
 const char* Graphics_vSyncNames[] = {
-    "Auto",
-    "Force Off",
-    "Force On",
+    "自动",
+    "强制关闭",
+    "强制开启",
 };
 
 const char* Sound_channelNames[CHANNEL::MAX] = {
-    "System",
-    "Common",
-    "Style Weapon",
-    "Weapon 1",
-    "Weapon 2",
-    "Weapon 3",
-    "Weapon 4",
-    "Enemy",
-    "Room",
-    "Music",
-    "Demo",
+    "系统",
+    "通用",
+    "风格武器",
+    "武器 1",
+    "武器 2",
+    "武器 3",
+    "武器 4",
+    "敌人",
+    "房间",
+    "音乐",
+    "演示",
 };
 
 
@@ -10477,7 +10477,7 @@ void SystemSection(size_t defaultFontSize) {
 			ImGui::TableNextColumn();
 
 			ImGui::PushItemWidth(itemWidth * 0.9f);
-			if (GUI_InputDefault2<float>("Frame Rate", activeCrimsonConfig.System.fpsCap, queuedCrimsonConfig.System.fpsCap, defaultCrimsonConfig.System.fpsCap, 1, "%.2f",
+			if (GUI_InputDefault2<float>("帧率", activeCrimsonConfig.System.fpsCap, queuedCrimsonConfig.System.fpsCap, defaultCrimsonConfig.System.fpsCap, 1, "%.2f",
 				ImGuiInputTextFlags_EnterReturnsTrue)) {
 				Speed::Toggle(true);
 				CrimsonOnTick::inputtingFPS = true;
@@ -10503,11 +10503,11 @@ void SystemSection(size_t defaultFontSize) {
 
             ImGui::TableNextColumn();
 
-			GUI_Checkbox2("Unlocked Frame Rate", activeCrimsonConfig.System.fpsUnlocked, queuedCrimsonConfig.System.fpsUnlocked);
+			GUI_Checkbox2("解锁帧率", activeCrimsonConfig.System.fpsUnlocked, queuedCrimsonConfig.System.fpsUnlocked);
 			if (ImGui::IsItemHovered()) {
 				ImGui::SetTooltip("This neat experimental feature completely eliminates input lag and greatly boosts game responsiveness.\n"
 					"We're actively polishing it, some bugs may still occur.\n"
-					"If you find any, please report them on our GitHub issue tracker or Discord server.");
+					"如发现问题，请在我们的 GitHub 问题追踪器或 Discord 服务器上报告。");
 			}
 			ImGui::SameLine();
 			GUI_WIPButton();
@@ -10519,14 +10519,14 @@ void SystemSection(size_t defaultFontSize) {
 			UI::Combo2("V-Sync", Graphics_vSyncNames, activeConfig.vSync, queuedConfig.vSync);
 			if (ImGui::IsItemHovered()) {
 				ImGui::SetTooltip("Synchronizes Monitor Refresh Rate with Frame Rate to eliminate Screen Tearing.\n"
-					"WARNING: if On, will introduce a considerable amount of input lag. Keep this on 'Force Off' for lower latency.");
+					"警告：开启会引入大量输入延迟。想降低延迟请保持“强制关闭”。");
 			}
 
 			ImGui::PopItemWidth();
 
 			ImGui::TableNextColumn();
 
-			GUI_Checkbox("DXGI Flip Model Presentation", queuedCrimsonConfig.System.flipModelPresentation);
+			GUI_Checkbox("DXGI 翻转模型呈现", queuedCrimsonConfig.System.flipModelPresentation);
 			if (ImGui::IsItemHovered()) {
 				ImGui::SetTooltip("Alters how Exclusive Fullscreen works by forcing usage of Flip Model Presentation.\n"
 					"This setting may improve alt-tab issues, latency, enables quicker toggling between fullscreen/windowed with Alt + Enter,"
@@ -10534,25 +10534,25 @@ void SystemSection(size_t defaultFontSize) {
 			}
 
 			if (queuedCrimsonConfig.System.flipModelPresentation != activeCrimsonConfig.System.flipModelPresentation) {
-				ImGui::TextColored(CrimsonUtil::HexToImVec4(0x1DD6FFFF), "Requires Game Restart.");
+				ImGui::TextColored(CrimsonUtil::HexToImVec4(0x1DD6FFFF), "需重启游戏。");
 			}
 
 			ImGui::TableNextColumn();
 
 	
-			GUI_Checkbox2("Disable Menu Fadeouts", activeCrimsonConfig.System.disableMenuFadeouts, queuedCrimsonConfig.System.disableMenuFadeouts);
+			GUI_Checkbox2("禁用菜单淡出", activeCrimsonConfig.System.disableMenuFadeouts, queuedCrimsonConfig.System.disableMenuFadeouts);
 				
 			
 			ImGui::TableNextColumn();
 
 
-			if (GUI_Checkbox2("Force Focus", activeConfig.forceWindowFocus, queuedConfig.forceWindowFocus)) {
+			if (GUI_Checkbox2("强制聚焦", activeConfig.forceWindowFocus, queuedConfig.forceWindowFocus)) {
 				ToggleForceWindowFocus(activeConfig.forceWindowFocus);
 			}
 
 			ImGui::TableNextColumn();
 
-			GUI_Checkbox2("Hide Mouse Cursor", activeConfig.hideMouseCursor, queuedConfig.hideMouseCursor);
+			GUI_Checkbox2("隐藏鼠标光标", activeConfig.hideMouseCursor, queuedConfig.hideMouseCursor);
 
 
 			ImGui::EndTable();
@@ -10565,7 +10565,7 @@ void SystemSection(size_t defaultFontSize) {
 	ImGui::PushFont(UI::g_ImGuiFont_RussoOne[defaultFontSize * 1.1f]);
 
 
-	ImGui::Text("MISC");
+	ImGui::Text("杂项");
 
 	ImGui::PopFont();
 
@@ -10583,14 +10583,14 @@ void SystemSection(size_t defaultFontSize) {
 			ImGui::TableNextColumn();
 
 			ImGui::PushItemWidth(itemWidth * 0.8f);
-			if (GUI_Checkbox2("Skip Intro", activeConfig.skipIntro, queuedConfig.skipIntro)) {
+			if (GUI_Checkbox2("跳过片头", activeConfig.skipIntro, queuedConfig.skipIntro)) {
 				ToggleSkipIntro(activeConfig.skipIntro);
 			}
 			ImGui::PopItemWidth();
 
 			ImGui::TableNextColumn();
 
-			if (GUI_Checkbox2("Skip Cutscenes", activeConfig.skipCutscenes, queuedConfig.skipCutscenes)) {
+			if (GUI_Checkbox2("跳过过场", activeConfig.skipCutscenes, queuedConfig.skipCutscenes)) {
 				ToggleSkipCutscenes(activeConfig.skipCutscenes);
 			}
 			ImGui::SameLine();
@@ -10601,13 +10601,13 @@ void SystemSection(size_t defaultFontSize) {
 
 			bool* turboSetting = reinterpret_cast<bool*>(appBaseAddr + 0xD6CEA9);
 
-			GUI_Checkbox("Turbo Mode", *turboSetting);
+			GUI_Checkbox("加速模式", *turboSetting);
 
 			// Enable File Mods will be a json file only option for now, don't see much need for it in the GUI. - Mia
 // 			ImGui::TableNextRow(0, rowWidth);
 // 			ImGui::TableNextColumn();
 // 
-//             GUI_Checkbox2("Enable File Mods", activeConfig.enableFileMods, queuedConfig.enableFileMods);
+//             GUI_Checkbox2("启用文件模组", activeConfig.enableFileMods, queuedConfig.enableFileMods);
 //             ImGui::SameLine();
 // 			TooltipHelper("(?)", "WARNING: Necessary for any and all file mods you may have, \n"
 // 				"disabling this will disable any file replacement mod, including custom HUDs and Models.");
@@ -10620,7 +10620,7 @@ void SystemSection(size_t defaultFontSize) {
 		ImGui::PushFont(UI::g_ImGuiFont_RussoOne[defaultFontSize * 1.1f]);
 
 
-		ImGui::Text("BLENDING EFFECTS");
+		ImGui::Text("混合特效");
 
 		ImGui::PopFont();
 
@@ -10639,29 +10639,29 @@ void SystemSection(size_t defaultFontSize) {
 
 				GUI_PushDisable(activeCrimsonConfig.System.BlendingEffects.disableAll);
 
-				GUI_Checkbox2("Ghosting", activeCrimsonConfig.System.BlendingEffects.ghosting,
+				GUI_Checkbox2("重影", activeCrimsonConfig.System.BlendingEffects.ghosting,
 					queuedCrimsonConfig.System.BlendingEffects.ghosting);
 				if (ImGui::IsItemHovered()) {
 					ImGui::SetTooltip("PS2-like Ghosting Blur present in some scenes, making the game feel kind of ethereal in movement.\n"
 						"This toggle won't apply to screen transitions or cutscenes. Needs room reload to apply.\n"
-						"WARNING: Keeping this disabled is recommended for a smoother, lag-free gameplay feel. -Berthrage.");
+						"警告：建议保持关闭，以获得更流畅、无卡顿的游玩体验。——Berthrage");
 				}
 
 				ImGui::TableNextColumn();
 
-				GUI_Checkbox2("Color Filter", activeCrimsonConfig.System.BlendingEffects.colorFilter,
+				GUI_Checkbox2("色彩滤镜", activeCrimsonConfig.System.BlendingEffects.colorFilter,
 					queuedCrimsonConfig.System.BlendingEffects.colorFilter);
 				if (ImGui::IsItemHovered()) {
 					ImGui::SetTooltip("Color filter applied in some scenes.\n" 
-						"This toggle won't apply to screen transitions or cutscenes. Needs room reload to apply.");
+						"此开关不影响场景切换或过场动画，需重新加载房间生效。");
 				}
 
 				ImGui::TableNextColumn();
 
-				GUI_Checkbox2("Bloom", activeCrimsonConfig.System.BlendingEffects.bloom,
+				GUI_Checkbox2("泛光", activeCrimsonConfig.System.BlendingEffects.bloom,
 					queuedCrimsonConfig.System.BlendingEffects.bloom);
 				if (ImGui::IsItemHovered()) {
-					ImGui::SetTooltip("This toggle won't apply to screen transitions or cutscenes. Needs room reload to apply.");
+					ImGui::SetTooltip("此开关不影响场景切换或过场动画，需重新加载房间生效。");
 				}
 
 				ImGui::TableNextColumn();
@@ -10670,26 +10670,26 @@ void SystemSection(size_t defaultFontSize) {
 // 				GUI_Checkbox2("Fog / Mist", activeCrimsonConfig.System.BlendingEffects.fogMist,
 // 					queuedCrimsonConfig.System.BlendingEffects.fogMist);
 // 				if (ImGui::IsItemHovered()) {
-// 					ImGui::SetTooltip("This toggle won't apply to screen transitions or cutscenes. Needs room reload to apply.");
+// 					ImGui::SetTooltip("此开关不影响场景切换或过场动画，需重新加载房间生效。");
 // 				}
 // 
 // 				ImGui::TableNextColumn();
 
-				GUI_Checkbox2("Warping", activeCrimsonConfig.System.BlendingEffects.warp,
+				GUI_Checkbox2("扭曲", activeCrimsonConfig.System.BlendingEffects.warp,
 					queuedCrimsonConfig.System.BlendingEffects.warp);
 				if (ImGui::IsItemHovered()) {
-					ImGui::SetTooltip("This toggle won't apply to screen transitions or cutscenes. Needs room reload to apply.");
+					ImGui::SetTooltip("此开关不影响场景切换或过场动画，需重新加载房间生效。");
 				}
 
 				ImGui::TableNextColumn();
 
 				GUI_PopDisable(activeCrimsonConfig.System.BlendingEffects.disableAll);
 
-				GUI_Checkbox2("Disable All Blending Effects", activeCrimsonConfig.System.BlendingEffects.disableAll,
+				GUI_Checkbox2("禁用所有混合特效", activeCrimsonConfig.System.BlendingEffects.disableAll,
 					queuedCrimsonConfig.System.BlendingEffects.disableAll);
 				ImGui::SameLine();
 				if (ImGui::IsItemHovered()) {
-					ImGui::SetTooltip("Disables all post processing effects. Can be useful to gain some slight performance."
+					ImGui::SetTooltip("禁用所有后期处理特效，可略微提升性能。"
 						"\nThis toggle won't apply to screen transitions or cutscenes. Doesn't need room reload to apply.");
 				}
 
@@ -10716,7 +10716,7 @@ void TeleporterToolSection() {
 	float smallerComboMult = 0.8f;
 	ImU32 checkmarkColorBg = UI::SwapColorEndianness(0xFFFFFFFF);
 
-	GUI_TitleCheckbox2("TELEPORTER TOOL", activeCrimsonGameplay.Cheats.General.teleporterTool,
+	GUI_TitleCheckbox2("传送工具", activeCrimsonGameplay.Cheats.General.teleporterTool,
 		queuedCrimsonGameplay.Cheats.General.teleporterTool, false);
 
 	ImGui::PushFont(UI::g_ImGuiFont_Roboto[defaultFontSize * 0.9f]);
@@ -10725,7 +10725,7 @@ void TeleporterToolSection() {
 	GUI_PushDisable(!activeCrimsonGameplay.Cheats.General.teleporterTool);
 
 	if (!InGame()) {
-		ImGui::Text("Invalid pointer. Needs to be in-game.");
+		ImGui::Text("指针无效，需在游戏内使用。");
 		ImGui::PopStyleColor();
 		GUI_PopDisable(!activeCrimsonGameplay.Cheats.General.teleporterTool);
 		ImGui::PopFont();
@@ -10761,13 +10761,13 @@ void TeleporterToolSection() {
 		ImGui::TableNextColumn();
 
 		ImGui::PushFont(UI::g_ImGuiFont_RussoOne[defaultFontSize * 0.9f]);
-		ImGui::Text("CURRENT ROOM");
+		ImGui::Text("当前房间");
 		ImGui::PopFont();
 
 		ImGui::TableNextColumn();
 		
 		ImGui::PushFont(UI::g_ImGuiFont_RussoOne[defaultFontSize * 0.9f]);
-		ImGui::Text("NEXT ROOM");
+		ImGui::Text("下一房间");
 		ImGui::PopFont();
 
 		ImGui::TableNextRow(0, rowHeight);
@@ -10792,7 +10792,7 @@ void TeleporterToolSection() {
 		}
 		ImGui::PopFont();
 		
-		GUI_Input<uint32>("Position", eventData.position, 0, "%u", ImGuiInputTextFlags_ReadOnly);
+		GUI_Input<uint32>("位置", eventData.position, 0, "%u", ImGuiInputTextFlags_ReadOnly);
 		ImGui::PopItemWidth();
 
 		ImGui::TableNextColumn();
@@ -10807,22 +10807,22 @@ void TeleporterToolSection() {
 		ImGui::PopItemWidth();
 
 		ImGui::SameLine();
-		ImGui::Text("Room");
+		ImGui::Text("房间");
 
 		ImGui::PushItemWidth(itemWidth * 1.1f);
-		bool updatedPos = GUI_Input<uint16>("Position", nextEventData.position, 1, "%u", ImGuiInputTextFlags_EnterReturnsTrue);
+		bool updatedPos = GUI_Input<uint16>("位置", nextEventData.position, 1, "%u", ImGuiInputTextFlags_EnterReturnsTrue);
 		ImGui::PopItemWidth();
 
-		if (GUI_Button("TELEPORT", ImVec2(150.0f * scaleFactorY, 50.0f * scaleFactorY))) {
+		if (GUI_Button("传送", ImVec2(150.0f * scaleFactorY, 50.0f * scaleFactorY))) {
 			eventData.event = EVENT::TELEPORT;
 		}
 
-		if (GUI_Button("Use Current Location")) {
+		if (GUI_Button("使用当前位置")) {
 			nextEventData.room = static_cast<uint16>(eventData.room);
 			nextEventData.position = static_cast<uint16>(eventData.position);
 		}
 		ImGui::SameLine();
-		if (GUI_Button("Clear")) {
+		if (GUI_Button("清除")) {
 			nextEventData.position = nextEventData.room = 0;
 		}
 
@@ -10843,7 +10843,7 @@ void TrainingSection() {
 
 	ImU32 checkmarkColorBg = UI::SwapColorEndianness(0xFFFFFFFF);
 
-	GUI_Title("TRAINING CHEATS");
+	GUI_Title("训练作弊");
 	ImGui::PushFont(UI::g_ImGuiFont_Roboto[defaultFontSize * 0.9f]);
 	ImGui::PushStyleColor(ImGuiCol_CheckMark, checkmarkColorBg);
 
@@ -10861,13 +10861,13 @@ void TrainingSection() {
 			ImGui::TableNextRow(0, rowWidth);
 			ImGui::TableNextColumn();
 
-			if (GUI_Checkbox2("Disable All Damage", activeCrimsonGameplay.Cheats.Training.infiniteHP, queuedCrimsonGameplay.Cheats.Training.infiniteHP)) {
+			if (GUI_Checkbox2("禁用所有伤害", activeCrimsonGameplay.Cheats.Training.infiniteHP, queuedCrimsonGameplay.Cheats.Training.infiniteHP)) {
 				ToggleInfiniteHitPoints(activeCrimsonGameplay.Cheats.Training.infiniteHP);
 			}
 
 			ImGui::TableNextColumn();
 
-			if (GUI_Checkbox2("Infinite Devil Trigger", activeCrimsonGameplay.Cheats.Training.infiniteDT, queuedCrimsonGameplay.Cheats.Training.infiniteDT)) {
+			if (GUI_Checkbox2("无限魔人化", activeCrimsonGameplay.Cheats.Training.infiniteDT, queuedCrimsonGameplay.Cheats.Training.infiniteDT)) {
 				ToggleInfiniteMagicPoints(activeCrimsonGameplay.Cheats.Training.infiniteDT);
 				//This might cause vanilla to crash I don't care though sucks to suck
 				if (activeCrimsonGameplay.Cheats.Training.infiniteDT && InGame() && activeConfig.Actor.enable) {
@@ -10884,17 +10884,17 @@ void TrainingSection() {
 
 			ImGui::TableNextColumn();
 
-			if (GUI_Checkbox2("Disable Regular Enemy Attacks", activeCrimsonGameplay.Cheats.Training.disableRegularEnemyAttacks, queuedCrimsonGameplay.Cheats.Training.disableRegularEnemyAttacks)) {
+			if (GUI_Checkbox2("禁用普通敌人攻击", activeCrimsonGameplay.Cheats.Training.disableRegularEnemyAttacks, queuedCrimsonGameplay.Cheats.Training.disableRegularEnemyAttacks)) {
 				CrimsonPatches::DisableRegularEnemyAttacks(activeCrimsonGameplay.Cheats.Training.disableRegularEnemyAttacks);
 			}
 			ImGui::SameLine();
 			GUI_WIPButton();
 			ImGui::SameLine();
-			TooltipHelper("(?)", "Does not work for all regular enemies.");
+			TooltipHelper("(?)", "并非对所有普通敌人生效。");
 
 			ImGui::TableNextColumn();
 
-			if (GUI_Checkbox2("Disable Timer", activeCrimsonGameplay.Cheats.Training.disableTimers, queuedCrimsonGameplay.Cheats.Training.disableTimers)) {
+			if (GUI_Checkbox2("禁用计时器", activeCrimsonGameplay.Cheats.Training.disableTimers, queuedCrimsonGameplay.Cheats.Training.disableTimers)) {
 				ToggleDisableTimer(activeCrimsonGameplay.Cheats.Training.disableTimers);
 			}
 			
@@ -10902,13 +10902,13 @@ void TrainingSection() {
 				ImGui::TableNextColumn();
 
 				GUI_PushDisable(!activeCrimsonGameplay.Cheats.General.legacyDDMKCharacters);
-				if (GUI_Checkbox2("Infinite B. Lady Bullets", activeCrimsonGameplay.Cheats.Training.infiniteBossLadyBullets, 
+				if (GUI_Checkbox2("无限 B. Lady 子弹", activeCrimsonGameplay.Cheats.Training.infiniteBossLadyBullets, 
 					queuedCrimsonGameplay.Cheats.Training.infiniteBossLadyBullets)) {
 					ToggleInfiniteBullets(activeCrimsonGameplay.Cheats.Training.infiniteBossLadyBullets);
 				}
 				ImGui::SameLine();
 				GUI_PopDisable(!activeCrimsonGameplay.Cheats.General.legacyDDMKCharacters);
-				TooltipHelper("(?)", "For Boss Lady (Legacy DDMK Character).");
+				TooltipHelper("(?)", "用于 Boss Lady（旧版 DDMK 角色）。");
 			}
 			
 
@@ -10929,10 +10929,10 @@ void TrainingSection() {
 #pragma region Training
 
 void SoundSection(size_t defaultFontSize) {
-	const char* changeGunNewNames[] = { "DMC3 Default", "Crimson" };
-	const char* changeDevilArmNewNames[] = { "DMC3 Default", "Crimson" };
+	const char* changeGunNewNames[] = { "DMC3 默认", "Crimson" };
+	const char* changeDevilArmNewNames[] = { "DMC3 默认", "Crimson" };
 
-	const char* styleSwitchNewNames[] = { "DMC3 Switch", "Crimson" };
+	const char* styleSwitchNewNames[] = { "DMC3 切换", "Crimson" };
 
 	float smallerComboMult = 0.7f;
 
@@ -10940,7 +10940,7 @@ void SoundSection(size_t defaultFontSize) {
 
 	ImGui::PushFont(UI::g_ImGuiFont_RussoOne[defaultFontSize * 1.1f]);
 
-	ImGui::Text("CRIMSON SFX OPTIONS");
+	ImGui::Text("Crimson 音效选项");
 
 	ImGui::PopFont();
 
@@ -10962,84 +10962,84 @@ void SoundSection(size_t defaultFontSize) {
 			ImGui::TableNextColumn();
 
 			ImGui::PushFont(UI::g_ImGuiFont_RussoOne[defaultFontSize * 0.9f]);
-			ImGui::Text("WEAPON WHEEL SFX");
+			ImGui::Text("武器轮盘音效");
 			ImGui::PopFont();
 
 			ImGui::PushItemWidth(itemWidth * smallerComboMult);
-			UI::Combo2<uint8>("Change Gun", changeGunNewNames, activeCrimsonConfig.SFX.changeGunNew, queuedCrimsonConfig.SFX.changeGunNew);
+			UI::Combo2<uint8>("切换枪械", changeGunNewNames, activeCrimsonConfig.SFX.changeGunNew, queuedCrimsonConfig.SFX.changeGunNew);
 			ImGui::PopItemWidth();
 
 			ImGui::PushItemWidth(itemWidth * smallerComboMult);
-			UI::Combo2<uint8>("Change Devil Arm", changeDevilArmNewNames, activeCrimsonConfig.SFX.changeDevilArmNew, queuedCrimsonConfig.SFX.changeDevilArmNew);
+			UI::Combo2<uint8>("切换魔具", changeDevilArmNewNames, activeCrimsonConfig.SFX.changeDevilArmNew, queuedCrimsonConfig.SFX.changeDevilArmNew);
 			ImGui::PopItemWidth();
 
 			ImGui::PushItemWidth(itemWidth * smallerComboMult);
-			GUI_Slider2<uint8>("Volume", activeCrimsonConfig.SFX.changeWeaponEffectVolume, queuedCrimsonConfig.SFX.changeWeaponEffectVolume, 0, 100);
+			GUI_Slider2<uint8>("音量", activeCrimsonConfig.SFX.changeWeaponEffectVolume, queuedCrimsonConfig.SFX.changeWeaponEffectVolume, 0, 100);
 			ImGui::PopItemWidth();
 
 			ImGui::TableNextColumn();
 
 			ImGui::PushFont(UI::g_ImGuiFont_RussoOne[defaultFontSize * 0.9f]);
-			ImGui::Text("STYLE SWITCH SFX");
+			ImGui::Text("风格切换音效");
 			ImGui::PopFont();
 
 			ImGui::PushItemWidth(itemWidth * smallerComboMult);
-			UI::Combo2<uint8>("Style Change Effect", styleSwitchNewNames, activeCrimsonConfig.SFX.styleChangeNew, queuedCrimsonConfig.SFX.styleChangeNew);
+			UI::Combo2<uint8>("风格切换特效", styleSwitchNewNames, activeCrimsonConfig.SFX.styleChangeNew, queuedCrimsonConfig.SFX.styleChangeNew);
 			ImGui::PopItemWidth();
 
 			ImGui::PushItemWidth(itemWidth * smallerComboMult);
-			GUI_Slider2<uint8>("Effect Volume", activeCrimsonConfig.SFX.styleChangeVolume, queuedCrimsonConfig.SFX.styleChangeVolume, 0, 100);
+			GUI_Slider2<uint8>("特效音量", activeCrimsonConfig.SFX.styleChangeVolume, queuedCrimsonConfig.SFX.styleChangeVolume, 0, 100);
 			ImGui::PopItemWidth();
 			ImGui::PushItemWidth(itemWidth * smallerComboMult);
-			GUI_Slider2<uint8>("Snap Volume", activeCrimsonConfig.SFX.styleChangeSnapVolume, queuedCrimsonConfig.SFX.styleChangeSnapVolume, 0, 100);
+			GUI_Slider2<uint8>("切换音量", activeCrimsonConfig.SFX.styleChangeSnapVolume, queuedCrimsonConfig.SFX.styleChangeSnapVolume, 0, 100);
 			ImGui::PopItemWidth();
 
 			ImGui::PushItemWidth(itemWidth * smallerComboMult);
-			GUI_Slider2<uint8>("VO Volume", activeCrimsonConfig.SFX.styleChangeVoiceOverVolume, queuedCrimsonConfig.SFX.styleChangeVoiceOverVolume, 0, 100);
+			GUI_Slider2<uint8>("语音音量", activeCrimsonConfig.SFX.styleChangeVoiceOverVolume, queuedCrimsonConfig.SFX.styleChangeVoiceOverVolume, 0, 100);
 			ImGui::PopItemWidth();
 
 			ImGui::TableNextColumn();
 
 			ImGui::PushFont(UI::g_ImGuiFont_RussoOne[defaultFontSize * 0.9f]);
-			ImGui::Text("STYLE RANK ANNOUNCER");
+			ImGui::Text("风格评级播报");
 			ImGui::PopFont();
 
 			ImGui::PushItemWidth(itemWidth * smallerComboMult);
-			GUI_Slider2<uint8>("Volume", activeCrimsonConfig.SFX.announcerVolume, queuedCrimsonConfig.SFX.announcerVolume, 0, 100);
+			GUI_Slider2<uint8>("音量", activeCrimsonConfig.SFX.announcerVolume, queuedCrimsonConfig.SFX.announcerVolume, 0, 100);
 			ImGui::PopItemWidth();
 
 			ImGui::PushItemWidth(itemWidth * smallerComboMult);
-			GUI_InputDefault2<uint32>("Cooldown", activeCrimsonConfig.SFX.styleRankAnnouncerCooldownSec, queuedCrimsonConfig.SFX.styleRankAnnouncerCooldownSec, defaultCrimsonConfig.SFX.styleRankAnnouncerCooldownSec, 1, "%u", ImGuiInputTextFlags_EnterReturnsTrue);
+			GUI_InputDefault2<uint32>("冷却", activeCrimsonConfig.SFX.styleRankAnnouncerCooldownSec, queuedCrimsonConfig.SFX.styleRankAnnouncerCooldownSec, defaultCrimsonConfig.SFX.styleRankAnnouncerCooldownSec, 1, "%u", ImGuiInputTextFlags_EnterReturnsTrue);
 			ImGui::SameLine();
 			TooltipHelper("(?)", "Duration until the Announcer can repeat the same line.\n\n(in Seconds)");
 			ImGui::PopItemWidth();
 
-			GUI_Checkbox2("Only Reset Cooldown When Hit", activeCrimsonConfig.SFX.onlyResetAnnouncerWhenHit, queuedCrimsonConfig.SFX.onlyResetAnnouncerWhenHit);
+			GUI_Checkbox2("仅受击时重置冷却", activeCrimsonConfig.SFX.onlyResetAnnouncerWhenHit, queuedCrimsonConfig.SFX.onlyResetAnnouncerWhenHit);
 			ImGui::SameLine();
-			TooltipHelper("(?)", "Mimics DMC5 Behavior: Announcer is only truly reset when it's off cooldown AND you got hit by an enemy");
+			TooltipHelper("(?)", "模仿 DMC5：仅在冷却结束且被敌人击中时真正重置播报");
 
 			ImGui::TableNextRow(0, rowWidth);
 			ImGui::TableNextColumn();
 
 			ImGui::Text("");
 			ImGui::PushFont(UI::g_ImGuiFont_RussoOne[defaultFontSize * 0.9f]);
-			ImGui::Text("DEVIL TRIGGER SFX");
+			ImGui::Text("魔人化音效");
 			ImGui::PopFont();
 
 			ImGui::PushItemWidth(itemWidth * smallerComboMult);
-			GUI_Slider2<uint8>("In L1 Volume", activeCrimsonConfig.SFX.dTInL1Volume, queuedCrimsonConfig.SFX.dTInL1Volume, 0, 100);
+			GUI_Slider2<uint8>("入 L1 音量", activeCrimsonConfig.SFX.dTInL1Volume, queuedCrimsonConfig.SFX.dTInL1Volume, 0, 100);
 			ImGui::PopItemWidth();
 
 			ImGui::PushItemWidth(itemWidth * smallerComboMult);
-			GUI_Slider2<uint8>("In L2 Volume", activeCrimsonConfig.SFX.dTInL2Volume, queuedCrimsonConfig.SFX.dTInL2Volume, 0, 100);
+			GUI_Slider2<uint8>("入 L2 音量", activeCrimsonConfig.SFX.dTInL2Volume, queuedCrimsonConfig.SFX.dTInL2Volume, 0, 100);
 			ImGui::PopItemWidth();
 
 			ImGui::PushItemWidth(itemWidth * smallerComboMult);
-			GUI_Slider2<uint8>("Out Volume", activeCrimsonConfig.SFX.dTOutVolume, queuedCrimsonConfig.SFX.dTOutVolume, 0, 100);
+			GUI_Slider2<uint8>("退出音量", activeCrimsonConfig.SFX.dTOutVolume, queuedCrimsonConfig.SFX.dTOutVolume, 0, 100);
 			ImGui::PopItemWidth();
 
 			ImGui::PushItemWidth(itemWidth * smallerComboMult);
-			GUI_Slider2<uint8>("DT Ready Volume", activeCrimsonConfig.SFX.dTReadyVolume, queuedCrimsonConfig.SFX.dTReadyVolume, 0, 100);
+			GUI_Slider2<uint8>("魔人待命音量", activeCrimsonConfig.SFX.dTReadyVolume, queuedCrimsonConfig.SFX.dTReadyVolume, 0, 100);
 			ImGui::PopItemWidth();
 
 			ImGui::TableNextColumn();
@@ -11047,15 +11047,15 @@ void SoundSection(size_t defaultFontSize) {
 			ImGui::Text("");
 
 			ImGui::PushFont(UI::g_ImGuiFont_RussoOne[defaultFontSize * 0.9f]);
-			ImGui::Text("DOPPELGANGER SFX");
+			ImGui::Text("分身音效");
 			ImGui::PopFont();
 
 			ImGui::PushItemWidth(itemWidth * smallerComboMult);
-			GUI_Slider2<uint8>("In Volume", activeCrimsonConfig.SFX.doppelInVolume, queuedCrimsonConfig.SFX.doppelInVolume, 0, 100);
+			GUI_Slider2<uint8>("进入音量", activeCrimsonConfig.SFX.doppelInVolume, queuedCrimsonConfig.SFX.doppelInVolume, 0, 100);
 			ImGui::PopItemWidth();
 
 			ImGui::PushItemWidth(itemWidth * smallerComboMult);
-			GUI_Slider2<uint8>("Out Volume", activeCrimsonConfig.SFX.doppelOutVolume, queuedCrimsonConfig.SFX.doppelOutVolume, 0, 100);
+			GUI_Slider2<uint8>("退出音量", activeCrimsonConfig.SFX.doppelOutVolume, queuedCrimsonConfig.SFX.doppelOutVolume, 0, 100);
 			ImGui::PopItemWidth();
 
 			ImGui::TableNextColumn();
@@ -11063,15 +11063,15 @@ void SoundSection(size_t defaultFontSize) {
 			ImGui::Text("");
 
 			ImGui::PushFont(UI::g_ImGuiFont_RussoOne[defaultFontSize * 0.9f]);
-			ImGui::Text("QUICKSILVER SFX");
+			ImGui::Text("水银音效");
 			ImGui::PopFont();
 
 			ImGui::PushItemWidth(itemWidth * smallerComboMult);
-			GUI_Slider2<uint8>("In Volume", activeCrimsonConfig.SFX.quickInVolume, queuedCrimsonConfig.SFX.quickInVolume, 0, 100);
+			GUI_Slider2<uint8>("进入音量", activeCrimsonConfig.SFX.quickInVolume, queuedCrimsonConfig.SFX.quickInVolume, 0, 100);
 			ImGui::PopItemWidth();
 
 			ImGui::PushItemWidth(itemWidth* smallerComboMult);
-			GUI_Slider2<uint8>("Out Volume", activeCrimsonConfig.SFX.quickOutVolume, queuedCrimsonConfig.SFX.quickOutVolume, 0, 100);
+			GUI_Slider2<uint8>("退出音量", activeCrimsonConfig.SFX.quickOutVolume, queuedCrimsonConfig.SFX.quickOutVolume, 0, 100);
 			ImGui::PopItemWidth();
 
 			ImGui::TableNextColumn();
@@ -11079,39 +11079,39 @@ void SoundSection(size_t defaultFontSize) {
 			ImGui::Text("");
 
 			ImGui::PushFont(UI::g_ImGuiFont_RussoOne[defaultFontSize * 0.9f]);
-			ImGui::Text("DELAYED COMBO SFX");
+			ImGui::Text("延迟连击音效");
 			ImGui::PopFont();
 
 			ImGui::PushItemWidth(itemWidth* smallerComboMult);
-			UI::ComboMapValue2("SFX Type",
+			UI::ComboMapValue2("音效类型",
 				delayedComboSFXNames,
 				delayedComboSFXMap,
 				activeCrimsonConfig.SFX.delayedComboEffectType,
 				queuedCrimsonConfig.SFX.delayedComboEffectType);
 
-			GUI_Slider2<uint8>("Volume", activeCrimsonConfig.SFX.delayedComboIndicatorVolume, queuedCrimsonConfig.SFX.delayedComboIndicatorVolume, 0, 100);
+			GUI_Slider2<uint8>("音量", activeCrimsonConfig.SFX.delayedComboIndicatorVolume, queuedCrimsonConfig.SFX.delayedComboIndicatorVolume, 0, 100);
 			ImGui::PopItemWidth();
 
 			ImGui::TableNextColumn();
 			ImGui::Text("");
 
 			ImGui::PushFont(UI::g_ImGuiFont_RussoOne[defaultFontSize * 0.9f]);
-			ImGui::Text("ROYALGUARD SFX");
+			ImGui::Text("皇家护卫音效");
 			ImGui::PopFont();
 
 			ImGui::PushItemWidth(itemWidth* smallerComboMult);
-			GUI_Slider2<uint8>("Royal Block Volume", activeCrimsonConfig.SFX.royalBlockVolume, queuedCrimsonConfig.SFX.royalBlockVolume, 0, 100);
+			GUI_Slider2<uint8>("皇家格挡音量", activeCrimsonConfig.SFX.royalBlockVolume, queuedCrimsonConfig.SFX.royalBlockVolume, 0, 100);
 			ImGui::PopItemWidth();
 
 			ImGui::PushItemWidth(itemWidth* smallerComboMult);
-			GUI_Slider2<uint8>("Normal Block Volume", activeCrimsonConfig.SFX.normalBlockVolume, queuedCrimsonConfig.SFX.normalBlockVolume, 0, 100);
+			GUI_Slider2<uint8>("普通格挡音量", activeCrimsonConfig.SFX.normalBlockVolume, queuedCrimsonConfig.SFX.normalBlockVolume, 0, 100);
 			ImGui::PopItemWidth();
 
 			ImGui::TableNextColumn();
 			ImGui::Text("");
 
 			ImGui::PushFont(UI::g_ImGuiFont_RussoOne[defaultFontSize * 0.9f]);
-			ImGui::Text("DT EXPLOSION SFX");
+			ImGui::Text("魔人爆发音效");
 			ImGui::PopFont();
 
 			ImGui::PushItemWidth(itemWidth* smallerComboMult);
@@ -11119,11 +11119,11 @@ void SoundSection(size_t defaultFontSize) {
 			ImGui::PopItemWidth();
 
 			ImGui::PushItemWidth(itemWidth* smallerComboMult);
-			GUI_Slider2<uint8>("Finish Volume", activeCrimsonConfig.SFX.dTEFinishVolume, queuedCrimsonConfig.SFX.dTEFinishVolume, 0, 100);
+			GUI_Slider2<uint8>("终结音量", activeCrimsonConfig.SFX.dTEFinishVolume, queuedCrimsonConfig.SFX.dTEFinishVolume, 0, 100);
 			ImGui::PopItemWidth();
 
 			ImGui::PushItemWidth(itemWidth* smallerComboMult);
-			GUI_Slider2<uint8>("Release Volume", activeCrimsonConfig.SFX.dTEReleaseVolume, queuedCrimsonConfig.SFX.dTEReleaseVolume, 0, 100);
+			GUI_Slider2<uint8>("释放音量", activeCrimsonConfig.SFX.dTEReleaseVolume, queuedCrimsonConfig.SFX.dTEReleaseVolume, 0, 100);
 			ImGui::PopItemWidth();
 
 			ImGui::EndTable();
@@ -11134,7 +11134,7 @@ void SoundSection(size_t defaultFontSize) {
 
 	ImGui::PushFont(UI::g_ImGuiFont_RussoOne[defaultFontSize * 1.1f]);
 
-	ImGui::Text("IN-GAME SOUND VOLUMES");
+	ImGui::Text("游戏内音量");
 
 	ImGui::PopFont();
 
@@ -11170,19 +11170,19 @@ void SoundSection(size_t defaultFontSize) {
 		}
 	}
 
-	GUI_Checkbox2("Ignore Enemy Data", activeConfig.soundIgnoreEnemyData, queuedConfig.soundIgnoreEnemyData);
+	GUI_Checkbox2("忽略敌人数据", activeConfig.soundIgnoreEnemyData, queuedConfig.soundIgnoreEnemyData);
 	ImGui::SameLine();
 	TooltipHelper("(?)", "Do not look at enemy data when updating the global indices.\nMost, if not all enemies will lose their sound effects if enabled.\nIntended as a workaround for playable bosses when the sound effect\ninterferences from other enemies get too annoying. - serpentiem");
 
-	GUI_Checkbox2("Override Mission Start Song", activeCrimsonConfig.Sound.overrideMissionStartSong, queuedCrimsonConfig.Sound.overrideMissionStartSong);
+	GUI_Checkbox2("覆盖任务开始音乐", activeCrimsonConfig.Sound.overrideMissionStartSong, queuedCrimsonConfig.Sound.overrideMissionStartSong);
 	ImGui::SameLine();
 	GUI_CCSRequirementButton();
 	ImGui::SameLine();
-	TooltipHelper("(?)", "Override the Mission Start song with the Divinity Statue song while in the Customize menu.");
+	TooltipHelper("(?)", "在自定义菜单中，用女神像音乐覆盖任务开始音乐。");
 
-	GUI_Checkbox2("Crimson Mode Changes Music", activeCrimsonConfig.Sound.crimsonModeChangesMusic, queuedCrimsonConfig.Sound.crimsonModeChangesMusic);
+	GUI_Checkbox2("Crimson 模式更改音乐", activeCrimsonConfig.Sound.crimsonModeChangesMusic, queuedCrimsonConfig.Sound.crimsonModeChangesMusic);
 	if (ImGui::IsItemHovered()) {
-		ImGui::SetTooltip("Only changes Mission Results screen music.");
+		ImGui::SetTooltip("仅更改任务结算画面音乐。");
 	}
 	ImGui::SameLine();
 	GUI_CCSRequirementButton();
@@ -11194,9 +11194,9 @@ void SoundSection(size_t defaultFontSize) {
 }
 
 const char* dergilNames[] = {
-	"Default",
-	"Force Off",
-	"Force On",
+	"默认",
+	"强制关闭",
+	"强制开启",
 };
 
 void VisualSection(size_t defaultFontSize) {
@@ -11208,7 +11208,7 @@ void VisualSection(size_t defaultFontSize) {
 	ImGui::PushFont(UI::g_ImGuiFont_RussoOne[defaultFontSize * 1.1f]);
 
 
-	ImGui::Text("VFX COLORS");
+	ImGui::Text("特效颜色");
 
 	ImGui::PopFont();
 
@@ -11221,12 +11221,12 @@ void VisualSection(size_t defaultFontSize) {
 	ImGui::Text("");
 
 	ImGui::PushFont(UI::g_ImGuiFont_RussoOne[defaultFontSize * 0.9f]);
-    GUI_Checkbox2("STYLE SWITCH FLUX", activeCrimsonConfig.StyleSwitchFX.Flux.enable, queuedCrimsonConfig.StyleSwitchFX.Flux.enable);
+    GUI_Checkbox2("风格切换特效", activeCrimsonConfig.StyleSwitchFX.Flux.enable, queuedCrimsonConfig.StyleSwitchFX.Flux.enable);
 	ImGui::PopFont();
 
 	ImGui::SameLine();
 	ImGui::PushItemWidth(itemWidth);
-	UI::ComboMapValue2("Type", styleSwitchTypeNames, styleSwitchTypeMap,
+	UI::ComboMapValue2("类型", styleSwitchTypeNames, styleSwitchTypeMap,
 		activeCrimsonConfig.StyleSwitchFX.Flux.type, queuedCrimsonConfig.StyleSwitchFX.Flux.type);
 	ImGui::PopItemWidth();
 
@@ -11242,7 +11242,7 @@ void VisualSection(size_t defaultFontSize) {
 
 	if (activeCrimsonConfig.StyleSwitchFX.Flux.type == STYLESWITCHVFXTYPE::CRIMSON) {
 		ImGui::SameLine();
-		GUI_Checkbox2("Custom Swoosh Colors", activeCrimsonConfig.StyleSwitchFX.Flux.customSwooshColors,
+		GUI_Checkbox2("自定义挥砍颜色", activeCrimsonConfig.StyleSwitchFX.Flux.customSwooshColors,
 			queuedCrimsonConfig.StyleSwitchFX.Flux.customSwooshColors);
 
 		if (activeCrimsonConfig.StyleSwitchFX.Flux.customSwooshColors) {
@@ -11258,19 +11258,19 @@ void VisualSection(size_t defaultFontSize) {
 		}
 	}
 
-	if (GUI_Button("Default Colors")) {
+	if (GUI_Button("默认颜色")) {
 		CopyMemory(&queuedCrimsonConfig.StyleSwitchFX.Flux.fluxColor, &colorPresets.StyleSwitchFlux.defaultColors, sizeof(queuedCrimsonConfig.StyleSwitchFX.Flux.fluxColor));
 		CopyMemory(&activeCrimsonConfig.StyleSwitchFX.Flux.fluxColor, &colorPresets.StyleSwitchFlux.defaultColors, sizeof(activeCrimsonConfig.StyleSwitchFX.Flux.fluxColor));
 	}
 
 	ImGui::SameLine();
-	if (GUI_Button("DMC3 Switch")) {
+	if (GUI_Button("DMC3 切换")) {
 		CopyMemory(&queuedCrimsonConfig.StyleSwitchFX.Flux.fluxColor, &colorPresets.StyleSwitchFlux.dMC3Switch, sizeof(queuedCrimsonConfig.StyleSwitchFX.Flux.fluxColor));
 		CopyMemory(&activeCrimsonConfig.StyleSwitchFX.Flux.fluxColor, &colorPresets.StyleSwitchFlux.dMC3Switch, sizeof(activeCrimsonConfig.StyleSwitchFX.Flux.fluxColor));
 	}
 
     ImGui::SameLine();
-	if (GUI_Button("All Red")) {
+	if (GUI_Button("全红")) {
 		CopyMemory(&queuedCrimsonConfig.StyleSwitchFX.Flux.fluxColor, &colorPresets.StyleSwitchFlux.allRed, sizeof(queuedCrimsonConfig.StyleSwitchFX.Flux.fluxColor));
 		CopyMemory(&activeCrimsonConfig.StyleSwitchFX.Flux.fluxColor, &colorPresets.StyleSwitchFlux.allRed, sizeof(activeCrimsonConfig.StyleSwitchFX.Flux.fluxColor));
 	}
@@ -11279,7 +11279,7 @@ void VisualSection(size_t defaultFontSize) {
 	ImGui::Text("");
 
 	ImGui::PushFont(UI::g_ImGuiFont_RussoOne[defaultFontSize * 0.9f]);
-    GUI_Checkbox2("STYLE SWITCH TEXT", activeCrimsonConfig.StyleSwitchFX.Text.textEnabled, queuedCrimsonConfig.StyleSwitchFX.Text.textEnabled);
+    GUI_Checkbox2("风格切换文字", activeCrimsonConfig.StyleSwitchFX.Text.textEnabled, queuedCrimsonConfig.StyleSwitchFX.Text.textEnabled);
 	ImGui::PopFont();
 
 	for (int style = 0; style < 9; style++) {
@@ -11304,14 +11304,14 @@ void VisualSection(size_t defaultFontSize) {
             ImGui::TableNextColumn();
 			
 			ImGui::PushItemWidth(itemWidth * smallerComboMult);
-			GUI_InputDefault2<float>("Alpha", activeCrimsonConfig.StyleSwitchFX.Text.maxAlpha, queuedCrimsonConfig.StyleSwitchFX.Text.maxAlpha,
+			GUI_InputDefault2<float>("透明度", activeCrimsonConfig.StyleSwitchFX.Text.maxAlpha, queuedCrimsonConfig.StyleSwitchFX.Text.maxAlpha,
 				defaultCrimsonConfig.StyleSwitchFX.Text.maxAlpha, 0.1f, "%g", ImGuiInputTextFlags_EnterReturnsTrue);
 			ImGui::PopItemWidth();
 
             ImGui::TableNextColumn();
 
 			ImGui::PushItemWidth(itemWidth * smallerComboMult);
-			GUI_InputDefault2<float>("Size", activeCrimsonConfig.StyleSwitchFX.Text.size, queuedCrimsonConfig.StyleSwitchFX.Text.size,
+			GUI_InputDefault2<float>("大小", activeCrimsonConfig.StyleSwitchFX.Text.size, queuedCrimsonConfig.StyleSwitchFX.Text.size,
 				defaultCrimsonConfig.StyleSwitchFX.Text.size, 0.1f, "%g", ImGuiInputTextFlags_EnterReturnsTrue);
 			ImGui::PopItemWidth();
 
@@ -11320,25 +11320,25 @@ void VisualSection(size_t defaultFontSize) {
 	}
 	
 
-	if (GUI_Button("Midnight")) {
+	if (GUI_Button("午夜")) {
 		CopyMemory(&queuedCrimsonConfig.StyleSwitchFX.Text.color, &colorPresets.StyleSwitchText.midnight, sizeof(queuedCrimsonConfig.StyleSwitchFX.Text.color));
 		CopyMemory(&activeCrimsonConfig.StyleSwitchFX.Text.color, &colorPresets.StyleSwitchText.midnight, sizeof(activeCrimsonConfig.StyleSwitchFX.Text.color));
 	}
 
     ImGui::SameLine();
-	if (GUI_Button("All White")) {
+	if (GUI_Button("全白")) {
 		CopyMemory(&queuedCrimsonConfig.StyleSwitchFX.Text.color, &colorPresets.StyleSwitchText.allWhite, sizeof(queuedCrimsonConfig.StyleSwitchFX.Text.color));
 		CopyMemory(&activeCrimsonConfig.StyleSwitchFX.Text.color, &colorPresets.StyleSwitchText.allWhite, sizeof(activeCrimsonConfig.StyleSwitchFX.Text.color));
 	}
 
     ImGui::SameLine();
-	if (GUI_Button("Colorful Clear")) {
+	if (GUI_Button("彩色通透")) {
 		CopyMemory(&queuedCrimsonConfig.StyleSwitchFX.Text.color, &colorPresets.StyleSwitchText.colorfulClear, sizeof(queuedCrimsonConfig.StyleSwitchFX.Text.color));
 		CopyMemory(&activeCrimsonConfig.StyleSwitchFX.Text.color, &colorPresets.StyleSwitchText.colorfulClear, sizeof(activeCrimsonConfig.StyleSwitchFX.Text.color));
 	}
 
 	ImGui::SameLine();
-	if (GUI_Button("Colorful")) {
+	if (GUI_Button("彩色")) {
 		CopyMemory(&queuedCrimsonConfig.StyleSwitchFX.Text.color, &colorPresets.StyleSwitchText.colorful, sizeof(queuedCrimsonConfig.StyleSwitchFX.Text.color));
 		CopyMemory(&activeCrimsonConfig.StyleSwitchFX.Text.color, &colorPresets.StyleSwitchText.colorful, sizeof(activeCrimsonConfig.StyleSwitchFX.Text.color));
 	}
@@ -11346,7 +11346,7 @@ void VisualSection(size_t defaultFontSize) {
     ImGui::Text("");
 
 	ImGui::PushFont(UI::g_ImGuiFont_RussoOne[defaultFontSize * 0.9f]);
-	ImGui::Text("DEVIL TRIGGER FLUX");
+	ImGui::Text("魔人化特效");
 	ImGui::PopFont();
 
 	for (int dt = 0; dt < 5; dt++) {
@@ -11360,7 +11360,7 @@ void VisualSection(size_t defaultFontSize) {
     ImGui::SameLine();
 	GUI_Color2("", activeConfig.Color.Aura.sparda, queuedConfig.Color.Aura.sparda);
     ImGui::SameLine();
-    ImGui::Text("Sparda");
+    ImGui::Text("斯巴达");
 
 	for (int dt = 0; dt < 3; dt++) {
 		if (dt > 0) {
@@ -11373,12 +11373,12 @@ void VisualSection(size_t defaultFontSize) {
     ImGui::SameLine();
 	GUI_Color2("", activeConfig.Color.Aura.neroAngelo, queuedConfig.Color.Aura.neroAngelo);
 	ImGui::SameLine();
-	ImGui::Text("Nelo Angelo");
+	ImGui::Text("黑天使");
 
 	ImGui::Text("");
 
 	ImGui::PushFont(UI::g_ImGuiFont_RussoOne[defaultFontSize * 0.9f]);
-	ImGui::Text("AIR HIKE");
+	ImGui::Text("空中跳跃");
 	ImGui::PopFont();
 
 	for (int airhike = 0; airhike < 5; airhike++) {
@@ -11393,25 +11393,25 @@ void VisualSection(size_t defaultFontSize) {
     ImGui::Text("");
 
 	ImGui::PushFont(UI::g_ImGuiFont_RussoOne[defaultFontSize * 0.9f]);
-	ImGui::Text("OTHER MOVES");
+	ImGui::Text("其他招式");
 	ImGui::PopFont();
 
 	GUI_Color2("", activeConfig.Color.Trickster.skyStar, queuedConfig.Color.Trickster.skyStar);
 	ImGui::SameLine();
-	ImGui::Text("Sky Star");
+	ImGui::Text("空中之星");
 
     ImGui::SameLine();
 	GUI_Color2("", activeConfig.Color.Royalguard.ultimate, queuedConfig.Color.Royalguard.ultimate);
 	ImGui::SameLine();
-	ImGui::Text("Royalguard Ultimate");
+	ImGui::Text("皇家护卫·终极");
 
     ImGui::SameLine();
 	GUI_Color2("", activeConfig.Color.Doppelganger.clone, queuedConfig.Color.Doppelganger.clone);
 	ImGui::SameLine();
-	ImGui::Text("Doppelganger");
+	ImGui::Text("分身");
 
 
-	if (GUI_Button("DMC3 Default")) {
+	if (GUI_Button("DMC3 默认")) {
 		CopyMemory(&queuedConfig.Color, &colorPresets.ColorDMC3Default, sizeof(queuedConfig.Color));
 		CopyMemory(&activeConfig.Color, &colorPresets.ColorDMC3Default, sizeof(activeConfig.Color));
 	}
@@ -11425,7 +11425,7 @@ void VisualSection(size_t defaultFontSize) {
 
 	ImGui::Text("");
 
-	GUI_Title("CRIMSON VFX OPTIONS");
+	GUI_Title("Crimson 特效选项");
 
 	{
 		const float columnWidth = 0.5f * queuedConfig.globalScale;
@@ -11455,7 +11455,7 @@ void VisualSection(size_t defaultFontSize) {
 
 			ImGui::TableNextColumn();
 
-			GUI_Checkbox2("Royal Block VFX", activeCrimsonConfig.VFX.royalBlockVFX, queuedCrimsonConfig.VFX.royalBlockVFX);
+			GUI_Checkbox2("皇家格挡特效", activeCrimsonConfig.VFX.royalBlockVFX, queuedCrimsonConfig.VFX.royalBlockVFX);
 
 			ImGui::SameLine();
 			GUI_CCSRequirementButton();
@@ -11471,7 +11471,7 @@ void VisualSection(size_t defaultFontSize) {
 
 			ImGui::TableNextColumn();
 
-			GUI_Checkbox2("DT Explosion VFX", activeCrimsonConfig.VFX.dtExplosionVFX, queuedCrimsonConfig.VFX.dtExplosionVFX);
+			GUI_Checkbox2("魔人爆发特效", activeCrimsonConfig.VFX.dtExplosionVFX, queuedCrimsonConfig.VFX.dtExplosionVFX);
 
 			ImGui::SameLine();
 			GUI_CCSRequirementButton();
@@ -11494,7 +11494,7 @@ void VisualSection(size_t defaultFontSize) {
 
 			ImGui::TableNextColumn();
 
-			GUI_Checkbox2("DT Activation Vibration", activeCrimsonConfig.VFX.dtActivationVibration, queuedCrimsonConfig.VFX.dtActivationVibration);
+			GUI_Checkbox2("魔人激活震动", activeCrimsonConfig.VFX.dtActivationVibration, queuedCrimsonConfig.VFX.dtActivationVibration);
 
 			ImGui::SameLine();
 			GUI_CCSRequirementButton();
@@ -11512,7 +11512,7 @@ void VisualSection(size_t defaultFontSize) {
 	ImGui::PushFont(UI::g_ImGuiFont_RussoOne[defaultFontSize * 1.1f]);
 
 
-	ImGui::Text("MISC");
+	ImGui::Text("杂项");
 
 	ImGui::PopFont();
 
@@ -11537,19 +11537,19 @@ void VisualSection(size_t defaultFontSize) {
             ImGui::TableNextColumn();
 
             ImGui::PushItemWidth(itemWidth * smallerComboMult);
-            GUI_Checkbox2("Hide Beowulf on Dante", activeConfig.hideBeowulfDante, queuedConfig.hideBeowulfDante);
+            GUI_Checkbox2("但丁隐藏贝奥武夫", activeConfig.hideBeowulfDante, queuedConfig.hideBeowulfDante);
             ImGui::PopItemWidth();
 
             ImGui::TableNextColumn();
 
             ImGui::PushItemWidth(itemWidth * smallerComboMult);
-            GUI_Checkbox2("Hide Beowulf on Vergil", activeConfig.hideBeowulfVergil, queuedConfig.hideBeowulfVergil);
+            GUI_Checkbox2("维吉尔隐藏贝奥武夫", activeConfig.hideBeowulfVergil, queuedConfig.hideBeowulfVergil);
             ImGui::PopItemWidth();
 
             ImGui::TableNextColumn();
 		
 			ImGui::PushItemWidth(itemWidth * smallerComboMult);
-			if (GUI_Checkbox2("No Devil Appearance in DT", activeConfig.noDevilForm, queuedConfig.noDevilForm)) {
+			if (GUI_Checkbox2("魔人化无恶魔外观", activeConfig.noDevilForm, queuedConfig.noDevilForm)) {
 				ToggleNoDevilForm(activeConfig.noDevilForm);
 			}
 			ImGui::PopItemWidth();
@@ -11557,7 +11557,7 @@ void VisualSection(size_t defaultFontSize) {
 			ImGui::TableNextColumn();
 
 			ImGui::PushItemWidth(itemWidth * smallerComboMult);
-			GUI_Checkbox2("Refined Cloth Physics", activeCrimsonConfig.Visual.clothPhysicsEnhancement, queuedCrimsonConfig.Visual.clothPhysicsEnhancement);
+			GUI_Checkbox2("精细布料物理", activeCrimsonConfig.Visual.clothPhysicsEnhancement, queuedCrimsonConfig.Visual.clothPhysicsEnhancement);
 			if (ImGui::IsItemHovered()) {
 				ImGui::SetTooltip("Relaxes cloth physics slightly, giving them smoother and more natural movement,\n"
 					"also reduces Dante's coat weight. Can cause more clipping.");
@@ -11566,9 +11566,9 @@ void VisualSection(size_t defaultFontSize) {
 
 			ImGui::TableNextColumn();
 
-			GUI_Checkbox2("More Taunt Animations", activeCrimsonConfig.Visual.moreTauntsAnimations, queuedCrimsonConfig.Visual.moreTauntsAnimations);
+			GUI_Checkbox2("更多嘲讽动作", activeCrimsonConfig.Visual.moreTauntsAnimations, queuedCrimsonConfig.Visual.moreTauntsAnimations);
 			if (ImGui::IsItemHovered()) {
-				ImGui::SetTooltip("Brings several taunt animations from other DMC games. Taunts are cycled using Pseudo RNG.");
+				ImGui::SetTooltip("引入其他 DMC 游戏的多个嘲讽动作，通过伪随机循环触发。");
 			}
 			ImGui::SameLine();
 			GUI_CCSRequirementButton();
@@ -11577,12 +11577,12 @@ void VisualSection(size_t defaultFontSize) {
             ImGui::TableNextColumn();
             
 			ImGui::PushItemWidth(itemWidth * smallerComboMult);
-            UI::Combo2("Dot Shadow", dotShadowNames, activeConfig.dotShadow, queuedConfig.dotShadow);
+            UI::Combo2("点状阴影", dotShadowNames, activeConfig.dotShadow, queuedConfig.dotShadow);
 			ImGui::PopItemWidth();
 
 			ImGui::TableNextColumn();
 			ImGui::PushItemWidth(itemWidth * smallerComboMult);
-			if (UI::Combo2("Red-Coated Vergil Boss", dergilNames, activeConfig.dergil, queuedConfig.dergil)) {
+			if (UI::Combo2("红衣维吉尔 Boss", dergilNames, activeConfig.dergil, queuedConfig.dergil)) {
 				ToggleDergil(activeConfig.dergil);
 			}
 			ImGui::PopItemWidth();
@@ -11606,7 +11606,7 @@ void GeneralGameplayOptions() {
 	ImGui::PushStyleColor(ImGuiCol_CheckMark, checkmarkColorBg);
 
 	ImGui::PushFont(UI::g_ImGuiFont_RussoOne[defaultFontSize * 1.1f]);
-	ImGui::Text("GENERAL GAMEPLAY OPTIONS");
+	ImGui::Text("通用玩法选项");
 	ImGui::PopFont();
 	UI::SeparatorEx(defaultFontSize * 23.35f);
 	ImGui::Text("");
@@ -11626,7 +11626,7 @@ void GeneralGameplayOptions() {
 			ImGui::TableNextColumn();
 
 			GUI_PushDisable(!activeConfig.Actor.enable);
-			if (GUI_Checkbox2("Inertia",
+			if (GUI_Checkbox2("惯性",
 				activeCrimsonGameplay.Gameplay.General.inertia,
 				queuedCrimsonGameplay.Gameplay.General.inertia,
 				activeCrimsonGameplayMask.Gameplay.General.inertia)) {
@@ -11635,13 +11635,13 @@ void GeneralGameplayOptions() {
 			GUI_CCSRequirementButton();
 			ImGui::SameLine();
 			TooltipHelper("(?)", "Changes how physics behave during almost all aerial moves. Spices up your combos with more aerial momentum variance.\n"
-				"Enables Guardflying and Bullet Magnetism.");
+				"启用格挡飞行与子弹吸附。");
 			GUI_PopDisable(!activeConfig.Actor.enable);
 
 			//ImGui::TableNextColumn();
 
 			//GUI_PushDisable(!activeConfig.Actor.enable);
-			//if (GUI_Checkbox2("Sprint",
+			//if (GUI_Checkbox2("冲刺",
 			//	activeCrimsonGameplay.Gameplay.General.sprint,
 			//	queuedCrimsonGameplay.Gameplay.General.sprint,
 			//	activeCrimsonGameplayMask.Gameplay.General.sprint)) {
@@ -11649,13 +11649,13 @@ void GeneralGameplayOptions() {
 			//ImGui::SameLine();
 			//GUI_CCSRequirementButton();
 			//ImGui::SameLine();
-			//TooltipHelper("(?)", "Sprints out of combat, similar to DMC4 and 5's Speed Ability.");
+			//TooltipHelper("(?)", "脱离战斗时冲刺，类似 DMC4/5 的加速能力。");
 			//GUI_PopDisable(!activeConfig.Actor.enable);
 
 			ImGui::TableNextColumn();
 
 			GUI_PushDisable(!activeConfig.Actor.enable);
-			if (GUI_Checkbox2("Expanded Movelist",
+			if (GUI_Checkbox2("扩展招式表",
 				activeCrimsonGameplay.Gameplay.General.extramoves,
 				queuedCrimsonGameplay.Gameplay.General.extramoves,
 				activeCrimsonGameplayMask.Gameplay.General.extramoves)) {
@@ -11664,13 +11664,13 @@ void GeneralGameplayOptions() {
 			ImGui::SameLine();
 			GUI_CCSRequirementButton();
 			ImGui::SameLine();
-			TooltipHelper("(?)", "Enables new moves for dante & vergil that can be purchased from the shop.");
+			TooltipHelper("(?)", "为但丁和维吉尔启用可在商店购买的新招式。");
 			GUI_PopDisable(!activeConfig.Actor.enable);
 
 			ImGui::TableNextColumn();
 
 
-			if (GUI_Checkbox2("Hold To Shoot Gun",
+			if (GUI_Checkbox2("按住射击",
 				activeCrimsonGameplay.Gameplay.General.holdToShoot,
 				queuedCrimsonGameplay.Gameplay.General.holdToShoot,
 				activeCrimsonGameplayMask.Gameplay.General.holdToShoot)) {
@@ -11687,7 +11687,7 @@ void GeneralGameplayOptions() {
 			}
 
 			GUI_PushDisable(!activeConfig.Actor.enable);
-			if (GUI_Checkbox2("Hold To Crazy Combo",
+			if (GUI_Checkbox2("按住疯狂连击",
 				activeCrimsonGameplay.Gameplay.General.holdToCrazyCombo,
 				queuedCrimsonGameplay.Gameplay.General.holdToCrazyCombo,
 				activeCrimsonGameplayMask.Gameplay.General.holdToCrazyCombo)) {
@@ -11700,7 +11700,7 @@ void GeneralGameplayOptions() {
 
 			GUI_PushDisable(activeCrimsonGameplay.Gameplay.General.holdToCrazyCombo);
 			ImGui::PushItemWidth(itemWidth * 0.8f);
-			if (GUI_InputDefault2("C. Combo Mash Requirement",
+			if (GUI_InputDefault2("疯狂连击连按需求",
 				activeCrimsonGameplay.Gameplay.General.crazyComboMashRequirement,
 				queuedCrimsonGameplay.Gameplay.General.crazyComboMashRequirement,
 				defaultCrimsonGameplay.Gameplay.General.crazyComboMashRequirement)) {
@@ -11708,13 +11708,13 @@ void GeneralGameplayOptions() {
 			}
 			ImGui::PopItemWidth();
 			ImGui::SameLine();
-			TooltipHelper("(?)", "Multiplier for how hard you need to mash to execute Crazy Combos. Less is easier.");
+			TooltipHelper("(?)", "执行疯狂连击所需连按强度的倍率，数值越低越容易。");
 			GUI_PopDisable(activeCrimsonGameplay.Gameplay.General.holdToCrazyCombo);
 
 			ImGui::TableNextColumn();
 
 			GUI_PushDisable(!activeConfig.Actor.enable);
-			if (GUI_Checkbox2("Freeform Soft Lock",
+			if (GUI_Checkbox2("自由软锁定",
 				activeCrimsonGameplay.Gameplay.General.freeformSoftLock,
 				queuedCrimsonGameplay.Gameplay.General.freeformSoftLock,
 				activeCrimsonGameplayMask.Gameplay.General.freeformSoftLock)) {
@@ -11722,7 +11722,7 @@ void GeneralGameplayOptions() {
 			ImGui::SameLine();
 			GUI_CCSRequirementButton();
 			ImGui::SameLine();
-			TooltipHelper("(?)", "Bypass Soft Lock On Auto Rotation when outside Lock On. Enables Bufferless Reversals.");
+			TooltipHelper("(?)", "未锁定时绕过自动转向的软锁定，启用无预输入反击。");
 			GUI_PopDisable(!activeConfig.Actor.enable);
 
 			ImGui::TableNextColumn();
@@ -11733,7 +11733,7 @@ void GeneralGameplayOptions() {
 			}
 
 			GUI_PushDisable(!activeConfig.Actor.enable || !activeCrimsonGameplay.Gameplay.General.freeformSoftLock);
-			if (GUI_Checkbox2("Bufferless Reversals",
+			if (GUI_Checkbox2("无预输入反击",
 				activeCrimsonGameplay.Gameplay.General.bufferlessReversals,
 				queuedCrimsonGameplay.Gameplay.General.bufferlessReversals,
 				activeCrimsonGameplayMask.Gameplay.General.bufferlessReversals)) {
@@ -11743,7 +11743,7 @@ void GeneralGameplayOptions() {
 			ImGui::SameLine();
 			GUI_CCSRequirementButton();
 			ImGui::SameLine();
-			TooltipHelper("(?)", "Allows you to do Reversals without buffering a move first.");
+			TooltipHelper("(?)", "允许在不预先输入招式的情况下执行反击。");
 			GUI_PopDisable(!activeConfig.Actor.enable || !activeCrimsonGameplay.Gameplay.General.freeformSoftLock);
 
 			
@@ -11751,20 +11751,20 @@ void GeneralGameplayOptions() {
 				ImGui::TableNextColumn();
 
              ImGui::PushItemWidth(itemWidth * 0.8f);
-				GUI_Slider2FloatDefault("Reversal Window",
+				GUI_Slider2FloatDefault("反击窗口",
 					activeCrimsonGameplay.Gameplay.General.reversalWindow,
 					queuedCrimsonGameplay.Gameplay.General.reversalWindow,
 					defaultCrimsonGameplay.Gameplay.General.reversalWindow,
 					100.0f, 300.0f, 5.0f, "%.0f");
 				ImGui::SameLine();
-				TooltipHelper("(?)", "Time window in milliseconds to perform a Bufferless Reversal.");
+				TooltipHelper("(?)", "执行无预输入反击的时间窗口（毫秒）。");
 				ImGui::PopItemWidth();
 			}
 
 			ImGui::TableNextColumn();
 
 			GUI_PushDisable(!activeConfig.Actor.enable);
-			if (GUI_Checkbox2("Improved Buffered Reversals",
+			if (GUI_Checkbox2("强化预输入反击",
 				activeCrimsonGameplay.Gameplay.General.improvedBufferedReversals,
 				queuedCrimsonGameplay.Gameplay.General.improvedBufferedReversals,
 				activeCrimsonGameplayMask.Gameplay.General.improvedBufferedReversals)) {
@@ -11772,7 +11772,7 @@ void GeneralGameplayOptions() {
 			ImGui::SameLine();
 			GUI_CCSRequirementButton();
 			ImGui::SameLine();
-			TooltipHelper("(?)", "Increased Turn Speed on Attacks for easier Buffered Reversals.");
+			TooltipHelper("(?)", "提高攻击时的转向速度，更易完成预输入反击。");
 			GUI_PopDisable(!activeConfig.Actor.enable);
 
 			ImGui::TableNextColumn();
@@ -11784,12 +11784,12 @@ void GeneralGameplayOptions() {
 				CrimsonDetours::ToggleDMC4LockOnDirection(activeCrimsonGameplay.Gameplay.General.dmc4LockOnDirection);
 			}
 			ImGui::SameLine();
-			TooltipHelper("(?)", "Directional moves take enemy camera direction instead of player camera direction.");
+			TooltipHelper("(?)", "方向招式采用敌人镜头方向而非玩家镜头方向。");
 
 			ImGui::TableNextColumn();
 
 			GUI_PushDisable(!activeConfig.Actor.enable);
-			if (GUI_Checkbox2("Increased Jump Cancel Hitboxes",
+			if (GUI_Checkbox2("扩大跳跃取消判定框",
 				activeCrimsonGameplay.Gameplay.General.increasedJCSpheres,
 				queuedCrimsonGameplay.Gameplay.General.increasedJCSpheres,
 				activeCrimsonGameplayMask.Gameplay.General.increasedJCSpheres)) {
@@ -11797,14 +11797,14 @@ void GeneralGameplayOptions() {
 			ImGui::SameLine();
 			GUI_CCSRequirementButton();
 			ImGui::SameLine();
-			TooltipHelper("(?)", "Increased hitboxes for easier Jump Cancels.");
+			TooltipHelper("(?)", "扩大判定框，更易跳跃取消。");
 			GUI_PopDisable(!activeConfig.Actor.enable);
 
 
 			ImGui::TableNextColumn();
 
 			GUI_PushDisable(!activeConfig.Actor.enable);
-			if (GUI_Checkbox2("Disable Height Restriction",
+			if (GUI_Checkbox2("禁用高度限制",
 				activeCrimsonGameplay.Gameplay.General.disableHeightRestriction,
 				queuedCrimsonGameplay.Gameplay.General.disableHeightRestriction,
 				activeCrimsonGameplayMask.Gameplay.General.disableHeightRestriction)) {
@@ -11812,13 +11812,13 @@ void GeneralGameplayOptions() {
 			ImGui::SameLine();
 			GUI_CCSRequirementButton();
 			ImGui::SameLine();
-			TooltipHelper("(?)", "Allows you to do Air Moves even at low heights.");
+			TooltipHelper("(?)", "允许在低空也能使用空中招式。");
 			GUI_PopDisable(!activeConfig.Actor.enable);
 
 			ImGui::TableNextColumn();
 
 			GUI_PushDisable(!activeConfig.Actor.enable);
-			if (GUI_Checkbox2("Disable Jump Cancel Restriction",
+			if (GUI_Checkbox2("禁用跳跃取消限制",
 				activeCrimsonGameplay.Gameplay.General.disableJCRestriction,
 				queuedCrimsonGameplay.Gameplay.General.disableJCRestriction,
 				activeCrimsonGameplayMask.Gameplay.General.disableJCRestriction)) {
@@ -11826,44 +11826,44 @@ void GeneralGameplayOptions() {
 			ImGui::SameLine();
 			GUI_CCSRequirementButton();
 			ImGui::SameLine();
-			TooltipHelper("(?)", "Disables cooldown for Jump Cancels.");
+			TooltipHelper("(?)", "禁用跳跃取消的冷却。");
 			GUI_PopDisable(!activeConfig.Actor.enable);
 
 			ImGui::TableNextColumn();
 
-			if (GUI_Checkbox2("Increased Enemy Juggle Time",
+			if (GUI_Checkbox2("延长敌人浮空时间",
 				activeCrimsonGameplay.Gameplay.General.increasedEnemyJuggleTime,
 				queuedCrimsonGameplay.Gameplay.General.increasedEnemyJuggleTime,
 				activeCrimsonGameplayMask.Gameplay.General.increasedEnemyJuggleTime)) {
 				CrimsonPatches::ToggleIncreasedEnemyJuggleTime(activeCrimsonGameplay.Gameplay.General.increasedEnemyJuggleTime);
 			}
 			ImGui::SameLine();
-			TooltipHelper("(?)", "Increases stagger value of moves in the air, subtly altering the gravity in combat.");
+			TooltipHelper("(?)", "提高空中招式的硬直值，微妙改变战斗中的重力。");
 
 			ImGui::TableNextColumn();
 
-			GUI_Checkbox2("Faster Turn Rate",
+			GUI_Checkbox2("更快转向速度",
 				activeCrimsonGameplay.Gameplay.General.fasterTurnRate,
 				queuedCrimsonGameplay.Gameplay.General.fasterTurnRate,
 				activeCrimsonGameplayMask.Gameplay.General.fasterTurnRate);
 			
 			ImGui::SameLine();
-			TooltipHelper("(?)", "Increases character turn speed.");
+			TooltipHelper("(?)", "提高角色转向速度。");
 
 			ImGui::TableNextColumn();
 			GUI_PushDisable(activeConfig.Actor.enable);
 			ImGui::PushItemWidth(itemWidth * 0.7f);
-			GUI_InputDefault2("Vanilla Weapon Switch Delay", activeCrimsonGameplay.Gameplay.General.vanillaWeaponSwitchDelay,
+			GUI_InputDefault2("原版武器切换延迟", activeCrimsonGameplay.Gameplay.General.vanillaWeaponSwitchDelay,
 				queuedCrimsonGameplay.Gameplay.General.vanillaWeaponSwitchDelay, 
 				defaultCrimsonGameplay.Gameplay.General.vanillaWeaponSwitchDelay, 1.0f, "%g", ImGuiInputTextFlags_EnterReturnsTrue);
 			ImGui::SameLine();
 			ImGui::PopItemWidth();
 			GUI_PopDisable(activeConfig.Actor.enable);
 			TooltipHelper("(?)", "Decreases the cooldown between switching weapons.\n"
-				"Doesn't affect the Weapon Wheel and only applies to the Vanilla game.");
+				"不影响武器轮盘，且仅作用于原版游戏。");
 
 			ImGui::TableNextColumn();
-			if (GUI_Checkbox2("Disable Soul Eater Invisibility",
+			if (GUI_Checkbox2("禁用噬魂者隐身",
 				activeCrimsonGameplay.Gameplay.General.disableSoulEaterInvis,
 				queuedCrimsonGameplay.Gameplay.General.disableSoulEaterInvis,
 				activeCrimsonGameplayMask.Gameplay.General.disableSoulEaterInvis)) {
@@ -11872,7 +11872,7 @@ void GeneralGameplayOptions() {
 			
 			ImGui::TableNextColumn();
 			GUI_PushDisable(!activeConfig.Actor.enable);
-			if (GUI_Checkbox2("Multiplayer Damage Scaling",
+			if (GUI_Checkbox2("多人伤害缩放",
 				activeCrimsonGameplay.Gameplay.General.multiplayerDamageScaling,
 				queuedCrimsonGameplay.Gameplay.General.multiplayerDamageScaling,
 				activeCrimsonGameplayMask.Gameplay.General.multiplayerDamageScaling)) {
@@ -11894,7 +11894,7 @@ void GeneralGameplayOptions() {
 
 			ImGui::TableNextColumn();
 			GUI_PushDisable(!activeConfig.Actor.enable);
-			GUI_Checkbox2("Consecutive Directional Moves",
+			GUI_Checkbox2("连续方向招式",
 				activeCrimsonGameplay.Gameplay.General.consecutiveDirectionalMoves,
 				queuedCrimsonGameplay.Gameplay.General.consecutiveDirectionalMoves,
 				activeCrimsonGameplayMask.Gameplay.General.consecutiveDirectionalMoves);
@@ -11902,7 +11902,7 @@ void GeneralGameplayOptions() {
 			ImGui::SameLine();
 			GUI_CCSRequirementButton();
 			ImGui::SameLine();
-			TooltipHelper("(?)", "Allows Directional Moves like Stinger to be executed consecutively without another move in between.");
+			TooltipHelper("(?)", "允许连续执行刺击等方向招式，中间无需其他招式。");
 
 			ImGui::EndTable();
 		}
@@ -11923,7 +11923,7 @@ void DanteGameplayOptions() {
 
 	// Dante Options Section
 	ImGui::PushFont(UI::g_ImGuiFont_RussoOne[defaultFontSize * 1.1f]);
-	ImGui::Text("DANTE GAMEPLAY OPTIONS");
+	ImGui::Text("但丁玩法选项");
 	ImGui::PopFont();
 
 	UI::SeparatorEx(defaultFontSize * 23.35f);
@@ -11947,7 +11947,7 @@ void DanteGameplayOptions() {
 			ImGui::TableNextColumn();
 
 			GUI_PushDisable(!activeConfig.Actor.enable);
-			if (GUI_Checkbox2("Improved Cancels",
+			if (GUI_Checkbox2("强化取消",
 				activeCrimsonGameplay.Gameplay.Dante.improvedCancels,
 				queuedCrimsonGameplay.Gameplay.Dante.improvedCancels,
 				activeCrimsonGameplayMask.Gameplay.Dante.improvedCancels)) {
@@ -11963,7 +11963,7 @@ void DanteGameplayOptions() {
 			ImGui::TableNextColumn();
 
 			GUI_PushDisable(!activeConfig.Actor.enable);
-			if (GUI_Checkbox2("Aerial Moves Tweaks",
+			if (GUI_Checkbox2("空中招式调整",
 				activeCrimsonGameplay.Gameplay.Dante.aerialMovesTweaks,
 				queuedCrimsonGameplay.Gameplay.Dante.aerialMovesTweaks,
 				activeCrimsonGameplayMask.Gameplay.Dante.aerialMovesTweaks)) {
@@ -11975,13 +11975,13 @@ void DanteGameplayOptions() {
 				"Tweaks Aerial Rave Gravity to be similar to DMC4/5, taking weights into account.\n"
 				"Tweaks Air Flicker Gravity, taking weights into account. Initial windup has less gravity than vanilla.\n"
 				"Tweaks E&I Air Shots Gravity slightly, taking weights into account.\n"
-				"Sky Dance Part 3 is now a separate ability executed by Lock On + Forward + Style. Tweaks Sky Dance Gravity, taking weights into account.");
+				"空中舞第三段改为独立技能，锁定+前+风格触发；调整空中舞重力并计入负重。");
 			GUI_PopDisable(!activeConfig.Actor.enable);
 
 			ImGui::TableNextColumn();
 
 			GUI_PushDisable(!activeConfig.Actor.enable);
-			if (GUI_Checkbox2("Downertia",
+			if (GUI_Checkbox2("下坠惯性",
 				activeCrimsonGameplay.Gameplay.Dante.downertiaD,
 				queuedCrimsonGameplay.Gameplay.Dante.downertiaD,
 				activeCrimsonGameplayMask.Gameplay.Dante.downertiaD)) {
@@ -11996,7 +11996,7 @@ void DanteGameplayOptions() {
 			ImGui::TableNextColumn();
 
 			GUI_PushDisable(!activeConfig.Actor.enable);
-			if (GUI_Checkbox2("Shotgun Air Shot Tweaks",
+			if (GUI_Checkbox2("霰弹枪空中射击调整",
 				activeCrimsonGameplay.Gameplay.Dante.shotgunAirShotTweaks,
 				queuedCrimsonGameplay.Gameplay.Dante.shotgunAirShotTweaks,
 				activeCrimsonGameplayMask.Gameplay.Dante.shotgunAirShotTweaks)) {
@@ -12004,13 +12004,13 @@ void DanteGameplayOptions() {
 			ImGui::SameLine();
 			GUI_CCSRequirementButton();
 			ImGui::SameLine();
-			TooltipHelper("(?)", "Tweaks Air Shotgun Gravity to be lower, making you rise less.");
+			TooltipHelper("(?)", "降低空中霰弹枪重力，使上升幅度更小。");
 			GUI_PopDisable(!activeConfig.Actor.enable);
 
 			ImGui::TableNextColumn();
 
 			GUI_PushDisable(!activeConfig.Actor.enable);
-			if (GUI_Checkbox2("Drive Rework",
+			if (GUI_Checkbox2("冲击波重做",
 				activeCrimsonGameplay.Gameplay.Dante.driveRework,
 				queuedCrimsonGameplay.Gameplay.Dante.driveRework,
 				activeCrimsonGameplayMask.Gameplay.Dante.driveRework)) {
@@ -12019,14 +12019,14 @@ void DanteGameplayOptions() {
 			GUI_CCSRequirementButton();
 			ImGui::SameLine();
 			TooltipHelper("(?)", "Drive is now inputted by Lock On + Back to Forward + Melee, can be held for more damage and is now a three part attack like DMC4/5.\n"
-				"Do Quick Drive by performing Drive after a Rebellion attack.");
+				"在叛逆攻击后使用冲击波，可发动快速冲击波。");
 			GUI_PopDisable(!activeConfig.Actor.enable);
 
 			// Third row
 			ImGui::TableNextColumn();
 
 			GUI_PushDisable(!activeConfig.Actor.enable);
-			if (GUI_Checkbox2("Bullet Stop",
+			if (GUI_Checkbox2("子弹停顿",
 				activeCrimsonGameplay.Gameplay.Dante.bulletStop,
 				queuedCrimsonGameplay.Gameplay.Dante.bulletStop,
 				activeCrimsonGameplayMask.Gameplay.Dante.bulletStop)) {
@@ -12034,13 +12034,13 @@ void DanteGameplayOptions() {
 			ImGui::SameLine();
 			GUI_CCSRequirementButton();
 			ImGui::SameLine();
-			TooltipHelper("(?)", "Shots from E&I among other moves will stop enemy movement on air.");
+			TooltipHelper("(?)", "黑檀木与白象牙等招式的射击会阻止敌人空中移动。");
 			GUI_PopDisable(!activeConfig.Actor.enable);
 
 			ImGui::TableNextColumn();
 
 			GUI_PushDisable(!activeConfig.Actor.enable);
-			if (GUI_Checkbox2("Rainstorm Lift",
+			if (GUI_Checkbox2("暴雨升腾",
 				activeCrimsonGameplay.Gameplay.Dante.rainstormLift,
 				queuedCrimsonGameplay.Gameplay.Dante.rainstormLift,
 				activeCrimsonGameplayMask.Gameplay.Dante.rainstormLift)) {
@@ -12048,36 +12048,36 @@ void DanteGameplayOptions() {
 			ImGui::SameLine();
 			GUI_CCSRequirementButton();
 			ImGui::SameLine();
-			TooltipHelper("(?)", "Rainstorm will elevate you slightly in the air.");
+			TooltipHelper("(?)", "暴雨会令你在空中略微上升。");
 			GUI_PopDisable(!activeConfig.Actor.enable);
 
 			ImGui::TableNextColumn();
 
-			if (GUI_Checkbox2("Infinite Rainstorm",
+			if (GUI_Checkbox2("无限暴雨",
 				activeCrimsonGameplay.Gameplay.Dante.infiniteRainstorm,
 				queuedCrimsonGameplay.Gameplay.Dante.infiniteRainstorm,
 				activeCrimsonGameplayMask.Gameplay.Dante.infiniteRainstorm)) {
 				ToggleEbonyIvoryInfiniteRainStorm(activeCrimsonGameplay.Gameplay.Dante.infiniteRainstorm);
 			}
 			ImGui::SameLine();
-			TooltipHelper("(?)", "Makes rainstorm last indefinitely in the air.");
+			TooltipHelper("(?)", "使暴雨在空中无限持续。");
 
 			// Fourth row
 			ImGui::TableNextColumn();
 
-			if (GUI_Checkbox2("E&I Foursome Time",
+			if (GUI_Checkbox2("黑檀木与白象牙·四人时间",
 				activeCrimsonGameplay.Gameplay.Dante.foursomeTime,
 				queuedCrimsonGameplay.Gameplay.Dante.foursomeTime,
 				activeCrimsonGameplayMask.Gameplay.Dante.foursomeTime)) {
 				ToggleEbonyIvoryFoursomeTime(activeCrimsonGameplay.Gameplay.Dante.foursomeTime);
 			}
 			ImGui::SameLine();
-			TooltipHelper("(?)", "Ebony & Ivory's Twosome Time fires 2 additional shots.");
+			TooltipHelper("(?)", "黑檀木与白象牙的双人时间额外发射 2 发。");
 
 			ImGui::TableNextColumn();
 
 			/*GUI_PushDisable(!activeConfig.Actor.enable);
-			if (GUI_Checkbox2("Air Stinger",
+			if (GUI_Checkbox2("空中刺击",
 				activeCrimsonGameplay.Gameplay.Dante.airStinger,
 				queuedCrimsonGameplay.Gameplay.Dante.airStinger,
 				activeCrimsonGameplayMask.Gameplay.Dante.airStinger)) {
@@ -12085,13 +12085,13 @@ void DanteGameplayOptions() {
 			ImGui::SameLine();
 			GUI_CCSRequirementButton();
 			ImGui::SameLine();
-			TooltipHelper("(?)", "With Rebellion: Lock On + Forward + Melee while in air.");
+			TooltipHelper("(?)", "叛逆：空中锁定+前+近战。");
 			GUI_PopDisable(!activeConfig.Actor.enable);
 
 			ImGui::TableNextColumn();*/
 
 			//GUI_PushDisable(!activeConfig.Actor.enable);
-			//if (GUI_Checkbox2("Air Revolver",
+			//if (GUI_Checkbox2("空中左轮",
 			//	activeCrimsonGameplay.Gameplay.Dante.airRevolver,
 			//	queuedCrimsonGameplay.Gameplay.Dante.airRevolver,
 			//	activeCrimsonGameplayMask.Gameplay.Dante.airRevolver)) {
@@ -12099,14 +12099,14 @@ void DanteGameplayOptions() {
 			//ImGui::SameLine();
 			//GUI_CCSRequirementButton();
 			//ImGui::SameLine();
-			//TooltipHelper("(?)", "With Cerberus: Lock On + Forward + Melee while in air.");
+			//TooltipHelper("(?)", "刻耳柏洛斯：空中锁定+前+近战。");
 			//GUI_PopDisable(!activeConfig.Actor.enable);
 
 			//// Fifth row
 			//ImGui::TableNextColumn();
 
 			/*GUI_PushDisable(!activeConfig.Actor.enable);
-			if (GUI_Checkbox2("Air Agni & Rudra Whirlwind",
+			if (GUI_Checkbox2("空中阿耆尼与楼陀罗旋风",
 				activeCrimsonGameplay.Gameplay.Dante.airAgniRudraWhirlwind,
 				queuedCrimsonGameplay.Gameplay.Dante.airAgniRudraWhirlwind,
 				activeCrimsonGameplayMask.Gameplay.Dante.airAgniRudraWhirlwind)) {
@@ -12114,13 +12114,13 @@ void DanteGameplayOptions() {
 			ImGui::SameLine();
 			GUI_CCSRequirementButton();
 			ImGui::SameLine();
-			TooltipHelper("(?)", "With Agni & Rudra: LockOn + Back + Melee while in air.");
+			TooltipHelper("(?)", "阿耆尼与楼陀罗：空中锁定+后+近战。");
 			GUI_PopDisable(!activeConfig.Actor.enable);
 
 			ImGui::TableNextColumn();*/
 
 			//GUI_PushDisable(!activeConfig.Actor.enable);
-			//if (GUI_Checkbox2("Sky Launch Air Taunt",
+			//if (GUI_Checkbox2("空中挑衅·升空",
 			//	activeCrimsonGameplay.Gameplay.Dante.skyLaunchAirTaunt,
 			//	queuedCrimsonGameplay.Gameplay.Dante.skyLaunchAirTaunt,
 			//	activeCrimsonGameplayMask.Gameplay.Dante.skyLaunchAirTaunt)) {
@@ -12128,13 +12128,13 @@ void DanteGameplayOptions() {
 			//ImGui::SameLine();
 			//GUI_CCSRequirementButton();
 			//ImGui::SameLine();
-			//TooltipHelper("(?)", "With any Weapon or Style: Press Taunt button while in air.");
+			//TooltipHelper("(?)", "任意武器或风格：空中按挑衅键。");
 			//GUI_PopDisable(!activeConfig.Actor.enable);
 
 			//ImGui::TableNextColumn();
 
 			/*GUI_PushDisable(!activeConfig.Actor.enable);
-			if (GUI_Checkbox2("Air Tornado",
+			if (GUI_Checkbox2("空中龙卷",
 				activeCrimsonGameplay.Gameplay.Dante.airTornado,
 				queuedCrimsonGameplay.Gameplay.Dante.airTornado,
 				activeCrimsonGameplayMask.Gameplay.Dante.airTornado)) {
@@ -12142,13 +12142,13 @@ void DanteGameplayOptions() {
 			ImGui::SameLine();
 			GUI_CCSRequirementButton();
 			ImGui::SameLine();
-			TooltipHelper("(?)", "With Beowulf: Neutral + Style while in air. Reduces Tornado damage across the board. Carries inertia.");
+			TooltipHelper("(?)", "贝奥武夫：空中中位+风格。全面降低龙卷伤害，保留惯性。");
 			GUI_PopDisable(!activeConfig.Actor.enable);
 
 			ImGui::TableNextColumn();*/
 
 			GUI_PushDisable(!activeConfig.Actor.enable || !(activeCrimsonGameplay.Gameplay.General.extramoves && ExpConfig::missionExpDataDante.unlocks[UNLOCK_DANTE::SWORDMASTER_MODDED_MOVES]));
-			if (GUI_Checkbox2("Swap Hammer Volcano Inputs",
+			if (GUI_Checkbox2("交换锤击与火山输入",
 				activeCrimsonGameplay.Gameplay.Dante.swapHammerVocalnoInputs,
 				queuedCrimsonGameplay.Gameplay.Dante.swapHammerVocalnoInputs,
 				activeCrimsonGameplayMask.Gameplay.Dante.swapHammerVocalnoInputs)) {
@@ -12159,13 +12159,13 @@ void DanteGameplayOptions() {
 			TooltipHelper("(?)", "Requires Air Tornado. Makes Hammer input become Air Lock On + Style + Forward,\n"
 				"and Volcano input to be Air Lock On + Style + Back.\n"
 				"Ground Volcano will still be Lock On + Forward + Style not to confuse with Real Impact.\n"
-				"This will swap the order in which you unlock both moves.");
+				"这将交换两个招式的解锁顺序。");
 			GUI_PopDisable(!activeConfig.Actor.enable || !(activeCrimsonGameplay.Gameplay.General.extramoves && ExpConfig::missionExpDataDante.unlocks[UNLOCK_DANTE::SWORDMASTER_MODDED_MOVES]));
 
 			/*ImGui::TableNextColumn();
 
 			GUI_PushDisable(!activeConfig.Actor.enable);
-			if (GUI_Checkbox2("Air Rising Dragon Launch",
+			if (GUI_Checkbox2("空中升龙发射",
 				activeCrimsonGameplay.Gameplay.Dante.airRisingDragonLaunch,
 				queuedCrimsonGameplay.Gameplay.Dante.airRisingDragonLaunch,
 				activeCrimsonGameplayMask.Gameplay.Dante.airRisingDragonLaunch)) {
@@ -12173,14 +12173,14 @@ void DanteGameplayOptions() {
 			ImGui::SameLine();
 			GUI_CCSRequirementButton();
 			ImGui::SameLine();
-			TooltipHelper("(?)", "With Beowulf: LockOn + Back + Melee while in air.");
+			TooltipHelper("(?)", "贝奥武夫：空中锁定+后+近战。");
 			GUI_PopDisable(!activeConfig.Actor.enable);*/
 
 			// Sixth row
 			ImGui::TableNextColumn();
 
 			GUI_PushDisable(!activeConfig.Actor.enable);
-			if (GUI_Checkbox2("DMC4 Mobility",
+			if (GUI_Checkbox2("DMC4 机动性",
 				activeCrimsonGameplay.Gameplay.Dante.dmc4Mobility,
 				queuedCrimsonGameplay.Gameplay.Dante.dmc4Mobility,
 				activeCrimsonGameplayMask.Gameplay.Dante.dmc4Mobility)) {
@@ -12189,7 +12189,7 @@ void DanteGameplayOptions() {
 			ImGui::SameLine();
 			GUI_CCSRequirementButton();
 			ImGui::SameLine();
-			TooltipHelper("(?)", "Air Tricking from the ground does not consume the Air Trick Count. Also sets Air Trick, Air Hike and Sky Star Count to 2 when in DT.");
+			TooltipHelper("(?)", "地面空中瞬移不消耗空中瞬移次数；魔人化时空中瞬移、空中跳跃与空中之星次数设为 2。");
 			GUI_PopDisable(!activeConfig.Actor.enable);
 
 			ImGui::TableNextColumn();
@@ -12198,7 +12198,7 @@ void DanteGameplayOptions() {
 			if (!activeConfig.Actor.enable) {
 				activeCrimsonGameplay.Gameplay.Dante.dTInfusedRoyalguard = false;
 			}
-			if (GUI_Checkbox2("DT Infused Royalguard",
+			if (GUI_Checkbox2("魔人灌注皇家护卫",
 				activeCrimsonGameplay.Gameplay.Dante.dTInfusedRoyalguard,
 				queuedCrimsonGameplay.Gameplay.Dante.dTInfusedRoyalguard,
 				activeCrimsonGameplayMask.Gameplay.Dante.dTInfusedRoyalguard)) {
@@ -12206,26 +12206,26 @@ void DanteGameplayOptions() {
 			ImGui::SameLine();
 			GUI_CCSRequirementButton();
 			ImGui::SameLine();
-			TooltipHelper("(?)", "Royalguard Normal Blocks will consume DT instead, until you're low on DT. This will also prevent Guard Breaks by converting them into Normal Blocks.");
+			TooltipHelper("(?)", "皇家护卫普通格挡改为消耗魔人槽，直至魔人槽偏低；破防也会转为普通格挡。");
 			GUI_PopDisable(!activeConfig.Actor.enable);
 
 			ImGui::TableNextColumn();*/
 
 			// Adding Air Hike section
-			if (GUI_Checkbox2("Air Hike Core Ability",
+			if (GUI_Checkbox2("空中跳跃核心技能",
 				activeCrimsonGameplay.Gameplay.Dante.airHikeCoreAbility,
 				queuedCrimsonGameplay.Gameplay.Dante.airHikeCoreAbility,
 				activeCrimsonGameplayMask.Gameplay.Dante.airHikeCoreAbility)) {
 				ToggleAirHikeCoreAbility(activeCrimsonGameplay.Gameplay.Dante.airHikeCoreAbility);
 			}
 			ImGui::SameLine();
-			TooltipHelper("(?)", "Makes Air Hike available for all melee weapons.");
+			TooltipHelper("(?)", "使所有近战武器都可使用空中跳跃。");
 
 			// Seventh row - Last weapon options
 			ImGui::TableNextColumn();
 
 			GUI_PushDisable(!activeConfig.Actor.enable);
-			if (GUI_Checkbox2("Alternate Nevan Vortex",
+			if (GUI_Checkbox2("备用涅梵漩涡",
 				activeCrimsonGameplay.Gameplay.Dante.altNevanVortex,
 				queuedCrimsonGameplay.Gameplay.Dante.altNevanVortex,
 				activeCrimsonGameplayMask.Gameplay.Dante.altNevanVortex)) {
@@ -12233,13 +12233,13 @@ void DanteGameplayOptions() {
 			ImGui::SameLine();
 			GUI_CCSRequirementButton();
 			ImGui::SameLine();
-			TooltipHelper("(?)", "With Nevan and in DT: Lock On + Any Direction + Melee Attack while in air.");
+			TooltipHelper("(?)", "持涅梵且处于魔人化：空中锁定 + 任意方向 + 近战攻击。");
 			GUI_PopDisable(!activeConfig.Actor.enable);
 
 			ImGui::TableNextColumn();
 
 			GUI_PushDisable(!activeConfig.Actor.enable);
-			if (GUI_Checkbox2("Swap Dance Pierce Inputs",
+			if (GUI_Checkbox2("交换舞蹈突刺输入",
 				activeCrimsonGameplay.Gameplay.Dante.swapDancePierceInputs,
 				queuedCrimsonGameplay.Gameplay.Dante.swapDancePierceInputs,
 				activeCrimsonGameplayMask.Gameplay.Dante.swapDancePierceInputs)) {
@@ -12249,12 +12249,12 @@ void DanteGameplayOptions() {
 			ImGui::SameLine();
 			TooltipHelper("(?)", "Swaps Dance Macabre to: Lock On + Forward + Style(Swordmaster)\n"
 				"and Sword Pierce to: Lock On + Back + Style(Swordmaster)\n"
-				"This will swap the order in which you unlock both moves.");
+				"这将交换两个招式的解锁顺序。");
 			GUI_PopDisable(!activeConfig.Actor.enable);
 
 			ImGui::TableNextColumn();
 
-			if (GUI_Checkbox2("Artemis Rework",
+			if (GUI_Checkbox2("阿尔忒弥斯重做",
 				activeCrimsonGameplay.Gameplay.Dante.artemisRework,
 				queuedCrimsonGameplay.Gameplay.Dante.artemisRework,
 				activeCrimsonGameplayMask.Gameplay.Dante.artemisRework)) {
@@ -12263,12 +12263,12 @@ void DanteGameplayOptions() {
 			}
 			ImGui::SameLine();
 			TooltipHelper("(?)", "Makes Artemis' Multi-Lock and Normal Shot charge instantly.\n"
-				"Nerfs Artemis' Multi-Lock and Normal Shot projectile damage by 90-percent to compensate.");
+				"作为平衡，阿尔忒弥斯的多重锁定与普通射击弹道伤害降低90%。");
 
 			ImGui::TableNextColumn();
 
 			/*GUI_PushDisable(!activeConfig.Actor.enable);
-			if (GUI_Checkbox2("Ground Trick",
+			if (GUI_Checkbox2("地面瞬移",
 				activeCrimsonGameplay.Gameplay.Dante.groundTrick,
 				queuedCrimsonGameplay.Gameplay.Dante.groundTrick,
 				activeCrimsonGameplayMask.Gameplay.Dante.groundTrick)) {
@@ -12277,12 +12277,12 @@ void DanteGameplayOptions() {
 			GUI_CCSRequirementButton();
 			ImGui::SameLine();
 			TooltipHelper("(?)", "With Trickster: Lock On + Back to Forward + Style.\n"
-				"Dante Teleports to the Ground near the enemy. Requires Trickster level 3.");
+				"但丁瞬移至敌人附近的地面。需要骗术师等级3。");
 			GUI_PopDisable(!activeConfig.Actor.enable);
 
 			ImGui::TableNextColumn();*/
 
-			if (GUI_Checkbox2("Swap Artemis' Inputs",
+			if (GUI_Checkbox2("交换阿尔忒弥斯输入",
 				activeCrimsonGameplay.Gameplay.Dante.swapArtemisMultiLockNormalShot,
 				queuedCrimsonGameplay.Gameplay.Dante.swapArtemisMultiLockNormalShot,
 				activeCrimsonGameplayMask.Gameplay.Dante.swapArtemisMultiLockNormalShot)) {
@@ -12290,32 +12290,32 @@ void DanteGameplayOptions() {
 			}
 			ImGui::SameLine();
 			TooltipHelper("(?)", "Swaps Artemis' Multi-Lock and Normal Shot inputs/funcionality.\n"
-				"Multi-Lock fires from Normal Shot, and Normal Shot goes to Gunslinger.");
+				"多重锁定改由普通射击发动，普通射击移至枪神。");
 
 			ImGui::TableNextColumn();
 
-			if (GUI_Checkbox2("Cut Nevan Air Slash Knockback",
+			if (GUI_Checkbox2("移除涅梵空中斩击击退",
 				activeCrimsonGameplay.Gameplay.Dante.disableAirSlashKnockback,
 				queuedCrimsonGameplay.Gameplay.Dante.disableAirSlashKnockback,
 				activeCrimsonGameplayMask.Gameplay.Dante.disableAirSlashKnockback)) {
 				CrimsonPatches::DisableAirSlashKnockback(activeCrimsonGameplay.Gameplay.Dante.disableAirSlashKnockback);
 			}
 			ImGui::SameLine();
-			TooltipHelper("(?)", "Disables the Knockback from Nevan's Air Slash pt. 1.");
+			TooltipHelper("(?)", "移除涅梵空中斩击第一段的击退效果。");
 
 			ImGui::TableNextColumn();
 
-			GUI_Checkbox2("Charged Shotgun Launches",
+			GUI_Checkbox2("蓄力霰弹击飞",
 				activeCrimsonGameplay.Gameplay.Dante.chargedShotgunLaunches,
 				queuedCrimsonGameplay.Gameplay.Dante.chargedShotgunLaunches,
 				activeCrimsonGameplayMask.Gameplay.Dante.chargedShotgunLaunches);
 			ImGui::SameLine();
-			TooltipHelper("(?)", "Makes Charged Shots Shotgun launch enemies instead of knocking them back,"
+			TooltipHelper("(?)", "使蓄力霰弹射击将敌人击飞，而非击退。"
 				"\nharkening to the old DMC1 days. Makes shotgun charge slightly faster.");
 			ImGui::TableNextColumn();
 
 			GUI_PushDisable(!activeConfig.Actor.enable);
-			GUI_Checkbox2("Doppelganger Split Sync",
+			GUI_Checkbox2("分身分裂同步",
 				activeCrimsonGameplay.Gameplay.Dante.doppelgangerSplitSync,
 				queuedCrimsonGameplay.Gameplay.Dante.doppelgangerSplitSync,
 				activeCrimsonGameplayMask.Gameplay.Dante.doppelgangerSplitSync);
@@ -12330,12 +12330,12 @@ void DanteGameplayOptions() {
 
 			ImGui::TableNextColumn();
 
-			GUI_Checkbox2("Quick Grapple",
+			GUI_Checkbox2("快速抓取",
 				activeCrimsonGameplay.Gameplay.Dante.quickGrapple,
 				queuedCrimsonGameplay.Gameplay.Dante.quickGrapple,
 				activeCrimsonGameplayMask.Gameplay.Dante.quickGrapple);
 			ImGui::SameLine();
-			TooltipHelper("(?)", "Makes Dante's Grapple skip the initial windup, firing faster.");
+			TooltipHelper("(?)", "使但丁的抓取跳过起手动作，发动更快。");
 
 			ImGui::EndTable();
 		}
@@ -12352,7 +12352,7 @@ void DanteCheatOptions() {
 
 	// Dante Cheats Section
 	ImGui::PushFont(UI::g_ImGuiFont_RussoOne[defaultFontSize * 1.1f]);
-	ImGui::Text("DANTE CHEAT OPTIONS");
+	ImGui::Text("但丁作弊选项");
 	ImGui::PopFont();
 
 	UI::SeparatorEx(defaultFontSize * 23.35f);
@@ -12375,36 +12375,36 @@ void DanteCheatOptions() {
 			ImGui::TableNextRow(0, rowHeight * 0.5f);
 			ImGui::TableNextColumn();
 
-			if (GUI_Checkbox2("Force Royal Release",
+			if (GUI_Checkbox2("强制皇家释放",
 				activeCrimsonGameplay.Cheats.Dante.forceRoyalRelease,
 				queuedCrimsonGameplay.Cheats.Dante.forceRoyalRelease,
 				activeCrimsonGameplayMask.Cheats.Dante.forceRoyalRelease)) {
 				CrimsonPatches::ToggleRoyalguardForceJustFrameRelease(activeCrimsonGameplay.Cheats.Dante.forceRoyalRelease);
 			}
 			ImGui::SameLine();
-			TooltipHelper("(?)", "Forces Royalguard Release to always be a Royal (Just Frame) Release.");
+			TooltipHelper("(?)", "使皇家护卫释放始终为皇家（精准帧）释放。");
 
 			ImGui::TableNextColumn();
 
-			if (GUI_Checkbox2("Infinite Shredder",
+			if (GUI_Checkbox2("无限撕裂",
 				activeCrimsonGameplay.Cheats.Dante.infiniteShredder,
 				queuedCrimsonGameplay.Cheats.Dante.infiniteShredder,
 				activeCrimsonGameplayMask.Cheats.Dante.infiniteShredder)) {
 				ToggleRebellionInfiniteShredder(activeCrimsonGameplay.Cheats.Dante.infiniteShredder);
 			}
 			ImGui::SameLine();
-			TooltipHelper("(?)", "Makes Rebellion's Shredder last for an indefinite amount of time.");
+			TooltipHelper("(?)", "使叛逆的撕裂持续无限时间。");
 
 			ImGui::TableNextColumn();
 
-			if (GUI_Checkbox2("Infinite Sword Pierce",
+			if (GUI_Checkbox2("无限剑刺",
 				activeCrimsonGameplay.Cheats.Dante.infiniteSwordPierce,
 				queuedCrimsonGameplay.Cheats.Dante.infiniteSwordPierce,
 				activeCrimsonGameplayMask.Cheats.Dante.infiniteSwordPierce)) {
 				ToggleRebellionInfiniteSwordPierce(activeCrimsonGameplay.Cheats.Dante.infiniteSwordPierce);
 			}
 			ImGui::SameLine();
-			TooltipHelper("(?)", "Makes Rebellion's Sword Pierce last for an indefinite amount of time.");
+			TooltipHelper("(?)", "使叛逆的剑刺持续无限时间。");
 
 			ImGui::EndTable();
 		}
@@ -12420,7 +12420,7 @@ void VergilGameplayOptions() {
 	auto& defaultFontSize = UI::g_UIContext.DefaultFontSize;
 	ImU32 checkmarkColorBg = UI::SwapColorEndianness(0xFFFFFFFF);
 	ImGui::PushFont(UI::g_ImGuiFont_RussoOne[defaultFontSize * 1.1f]);
-	ImGui::Text("VERGIL GAMEPLAY OPTIONS");
+	ImGui::Text("维吉尔玩法选项");
 	ImGui::PopFont();
 	UI::SeparatorEx(defaultFontSize * 23.35f);
 	ImGui::PushFont(UI::g_ImGuiFont_Roboto[defaultFontSize * 0.9f]);
@@ -12439,7 +12439,7 @@ void VergilGameplayOptions() {
 			ImGui::TableNextRow(0, rowHeight * 0.5f);
 			ImGui::TableNextColumn();
 			GUI_PushDisable(!activeConfig.Actor.enable);
-			if (GUI_Checkbox2("Darkslayer Tricks Cancels All",
+			if (GUI_Checkbox2("暗黑骑士瞬移全能取消",
 				activeCrimsonGameplay.Gameplay.Vergil.darkslayerTrickCancels,
 				queuedCrimsonGameplay.Gameplay.Vergil.darkslayerTrickCancels,
 				activeCrimsonGameplayMask.Gameplay.Vergil.darkslayerTrickCancels)) {
@@ -12447,12 +12447,12 @@ void VergilGameplayOptions() {
 			ImGui::SameLine();
 			GUI_CCSRequirementButton();
 			ImGui::SameLine();
-			TooltipHelper("(?)", "Enables cancelling any move with any Darkslayer Trick at any time.");
+			TooltipHelper("(?)", "允许随时用任意暗黑骑士瞬移取消任何招式。");
 			GUI_PopDisable(!activeConfig.Actor.enable);
 
 			ImGui::TableNextColumn();
 			GUI_PushDisable(!activeConfig.Actor.enable);
-			if (GUI_Checkbox2("Faster DT Rapid Slash",
+			if (GUI_Checkbox2("魔人化连斩加速",
 				activeCrimsonGameplay.Gameplay.Vergil.fasterDTRapidSlash,
 				queuedCrimsonGameplay.Gameplay.Vergil.fasterDTRapidSlash,
 				activeCrimsonGameplayMask.Gameplay.Vergil.fasterDTRapidSlash)) {
@@ -12460,12 +12460,12 @@ void VergilGameplayOptions() {
 			ImGui::SameLine();
 			GUI_CCSRequirementButton();
 			ImGui::SameLine();
-			TooltipHelper("(?)", "Rapid Slashes will execute faster while in DT.");
+			TooltipHelper("(?)", "魔人化时连斩执行更快。");
 			GUI_PopDisable(!activeConfig.Actor.enable);
 
 			ImGui::TableNextColumn();
 			GUI_PushDisable(!activeConfig.Actor.enable);
-			if (GUI_Checkbox2("Round Trip Tweaks",
+			if (GUI_Checkbox2("回旋剑调整",
 				activeCrimsonGameplay.Gameplay.Vergil.roundTripTweaks,
 				queuedCrimsonGameplay.Gameplay.Vergil.roundTripTweaks,
 				activeCrimsonGameplayMask.Gameplay.Vergil.roundTripTweaks)) {
@@ -12473,14 +12473,14 @@ void VergilGameplayOptions() {
 			ImGui::SameLine();
 			GUI_CCSRequirementButton();
 			ImGui::SameLine();
-			TooltipHelper("(?)", "With Force Edge: Lock On + Back to Forward + Melee.");
+			TooltipHelper("(?)", "持力量之刃：锁定 + 后向前 + 近战。");
 			GUI_PopDisable(!activeConfig.Actor.enable);
 
 			// Second row
 			ImGui::TableNextRow(0, rowHeight * 0.5f);
 			ImGui::TableNextColumn();
 			/*GUI_PushDisable(!activeConfig.Actor.enable);
-			if (GUI_Checkbox2("Air Stinger",
+			if (GUI_Checkbox2("空中刺击",
 				activeCrimsonGameplay.Gameplay.Vergil.airStinger,
 				queuedCrimsonGameplay.Gameplay.Vergil.airStinger,
 				activeCrimsonGameplayMask.Gameplay.Vergil.airStinger)) {
@@ -12488,12 +12488,12 @@ void VergilGameplayOptions() {
 			ImGui::SameLine();
 			GUI_CCSRequirementButton();
 			ImGui::SameLine();
-			TooltipHelper("(?)", "With Force Edge : Lock On + Forward + Melee while in air.");
+			TooltipHelper("(?)", "持力量之刃：空中锁定 + 前 + 近战。");
 			GUI_PopDisable(!activeConfig.Actor.enable);
 
 			ImGui::TableNextColumn();*/
 			/*GUI_PushDisable(!activeConfig.Actor.enable);
-			if (GUI_Checkbox2("Air Rising Sun",
+			if (GUI_Checkbox2("空中旭日",
 				activeCrimsonGameplay.Gameplay.Vergil.airRisingSun,
 				queuedCrimsonGameplay.Gameplay.Vergil.airRisingSun,
 				activeCrimsonGameplayMask.Gameplay.Vergil.airRisingSun)) {
@@ -12501,12 +12501,12 @@ void VergilGameplayOptions() {
 			ImGui::SameLine();
 			GUI_CCSRequirementButton();
 			ImGui::SameLine();
-			TooltipHelper("(?)", "With Beowulf: Lock On + Back + Melee while in air.");
+			TooltipHelper("(?)", "持贝奥武夫：空中锁定 + 后 + 近战。");
 			GUI_PopDisable(!activeConfig.Actor.enable);
 
 			ImGui::TableNextColumn();
 			GUI_PushDisable(!activeConfig.Actor.enable);
-			if (GUI_Checkbox2("Air Lunar Phase",
+			if (GUI_Checkbox2("空中月相",
 				activeCrimsonGameplay.Gameplay.Vergil.airLunarPhase,
 				queuedCrimsonGameplay.Gameplay.Vergil.airLunarPhase,
 				activeCrimsonGameplayMask.Gameplay.Vergil.airLunarPhase)) {
@@ -12514,12 +12514,12 @@ void VergilGameplayOptions() {
 			ImGui::SameLine();
 			GUI_CCSRequirementButton();
 			ImGui::SameLine();
-			TooltipHelper("(?)", "With Beowulf: Lock On + Forward + Melee while in air.");
+			TooltipHelper("(?)", "持贝奥武夫：空中锁定 + 前 + 近战。");
 			GUI_PopDisable(!activeConfig.Actor.enable);
 
 			ImGui::TableNextColumn();*/
 			GUI_PushDisable(!activeConfig.Actor.enable);
-			if (GUI_Checkbox2("Judgement Cut Rework",
+			if (GUI_Checkbox2("次元斩重做",
 				activeCrimsonGameplay.Gameplay.Vergil.judgementCutRework,
 				queuedCrimsonGameplay.Gameplay.Vergil.judgementCutRework,
 				activeCrimsonGameplayMask.Gameplay.Vergil.judgementCutRework)) {
@@ -12547,7 +12547,7 @@ void VergilGameplayOptions() {
 
 			ImGui::TableNextColumn();
 			/*GUI_PushDisable(!activeConfig.Actor.enable);
-			if (GUI_Checkbox2("Yamato Rising Star",
+			if (GUI_Checkbox2("阎魔刀 升星",
 				activeCrimsonGameplay.Gameplay.Vergil.yamatoRisingStar,
 				queuedCrimsonGameplay.Gameplay.Vergil.yamatoRisingStar,
 				activeCrimsonGameplayMask.Gameplay.Vergil.yamatoRisingStar)) {
@@ -12555,12 +12555,12 @@ void VergilGameplayOptions() {
 			ImGui::SameLine();
 			GUI_CCSRequirementButton();
 			ImGui::SameLine();
-			TooltipHelper("(?)", "With Yamato: During Rapid Slash HOLD Melee.");
+			TooltipHelper("(?)", "持阎魔刀：连斩中长按近战。");
 			GUI_PopDisable(!activeConfig.Actor.enable);
 
 			ImGui::TableNextColumn();
 			GUI_PushDisable(!activeConfig.Actor.enable);
-			if (GUI_Checkbox2("Yamato High Time",
+			if (GUI_Checkbox2("阎魔刀 上挑",
 				activeCrimsonGameplay.Gameplay.Vergil.yamatoHighTime,
 				queuedCrimsonGameplay.Gameplay.Vergil.yamatoHighTime,
 				activeCrimsonGameplayMask.Gameplay.Vergil.yamatoHighTime)) {
@@ -12568,13 +12568,13 @@ void VergilGameplayOptions() {
 			ImGui::SameLine();
 			GUI_CCSRequirementButton();
 			ImGui::SameLine();
-			TooltipHelper("(?)", "With Yamato: Lock On + Back + HOLD Melee");
+			TooltipHelper("(?)", "持阎魔刀：锁定 + 后 + 长按近战");
 			GUI_PopDisable(!activeConfig.Actor.enable);
 
 			ImGui::TableNextColumn();*/
 
 			//GUI_PushDisable(!activeConfig.Actor.enable);
-			//if (GUI_Checkbox2("Air Taunt Rising Sun",
+			//if (GUI_Checkbox2("空中嘲讽旭日",
 			//	activeCrimsonGameplay.Gameplay.Vergil.airTauntRisingSun,
 			//	queuedCrimsonGameplay.Gameplay.Vergil.airTauntRisingSun,
 			//	activeCrimsonGameplayMask.Gameplay.Vergil.airTauntRisingSun)) {
@@ -12583,13 +12583,13 @@ void VergilGameplayOptions() {
 			//GUI_CCSRequirementButton();
 			//ImGui::SameLine();
 			//TooltipHelper("(?)", "With any Weapon: Press Taunt button while in air.\n"
-			//	"Differs a bit from Air Rising Sun's positioning. ");
+			//	"与空中旭日的站位略有不同。");
 			//GUI_PopDisable(!activeConfig.Actor.enable);
 
 			//ImGui::TableNextColumn();
 
 			GUI_PushDisable(!activeConfig.Actor.enable);
-			if (GUI_Checkbox2("Mirage Trigger",
+			if (GUI_Checkbox2("幻影魔人化",
 				activeCrimsonGameplay.Gameplay.Vergil.mirageTrigger,
 				queuedCrimsonGameplay.Gameplay.Vergil.mirageTrigger,
 				activeCrimsonGameplayMask.Gameplay.Vergil.mirageTrigger)) {
@@ -12604,7 +12604,7 @@ void VergilGameplayOptions() {
 
 			ImGui::TableNextColumn();
 			GUI_PushDisable(!activeConfig.Actor.enable);
-			if (GUI_Checkbox2("Downertia",
+			if (GUI_Checkbox2("下坠惯性",
 				activeCrimsonGameplay.Gameplay.Vergil.downertia,
 				queuedCrimsonGameplay.Gameplay.Vergil.downertia,
 				activeCrimsonGameplayMask.Gameplay.Vergil.downertia)) {
@@ -12613,23 +12613,23 @@ void VergilGameplayOptions() {
 			GUI_CCSRequirementButton();
 			ImGui::SameLine();
 			TooltipHelper("(?)", "Executing another move before about 0.35 seconds of executing Lunar Phase or Air Taunt Rising Sun will send you downwards quickly.\n"
-				"Jump Cancelling won't interrupt this behavior.");
+				"跳跃取消不会中断此效果。");
 			GUI_PopDisable(!activeConfig.Actor.enable);
 
 			ImGui::TableNextColumn();
-			if (GUI_Checkbox2("Trick Up When Not Locked On",
+			if (GUI_Checkbox2("未锁定时上瞬移",
 				activeCrimsonGameplay.Gameplay.Vergil.trickUpNoLockOn,
 				queuedCrimsonGameplay.Gameplay.Vergil.trickUpNoLockOn,
 				activeCrimsonGameplayMask.Gameplay.Vergil.trickUpNoLockOn)) {
 			}
 			ImGui::SameLine();
 			TooltipHelper("(?)", "Allows Vergil to Trick Up instead of Air Tricking when using the Style Button without Lock On.\n"
-				"Similar to DMC5.");
+				"类似《鬼泣5》。");
 
 			ImGui::TableNextColumn();
 			GUI_PushDisable(!activeConfig.Actor.enable);
 			ImGui::PushItemWidth(itemWidth * 0.5f);
-			GUI_Checkbox2("No Air Lunar Phase Lift",
+			GUI_Checkbox2("空中月相无上升",
 				activeCrimsonGameplay.Gameplay.Vergil.noAirLunarPhaseLift,
 				queuedCrimsonGameplay.Gameplay.Vergil.noAirLunarPhaseLift,
 				activeCrimsonGameplayMask.Gameplay.Vergil.noAirLunarPhaseLift);
@@ -12637,14 +12637,14 @@ void VergilGameplayOptions() {
 			ImGui::SameLine();
 			GUI_CCSRequirementButton();
 			ImGui::SameLine();
-			TooltipHelper("(?)", "Stops Lunar Phase from going upwards, enemy behavior intact.");
+			TooltipHelper("(?)", "阻止月相向上移动，敌人行为不受影响。");
 			GUI_PopDisable(!activeConfig.Actor.enable);
 
 
 			ImGui::TableNextColumn();
 
 			ImGui::PushItemWidth(itemWidth * 0.5f);
-			GUI_ComboVectorString2("Sword Formations Shortcut",
+			GUI_ComboVectorString2("剑阵快捷",
 				SwordFormationShortcutNames,
 				activeCrimsonGameplay.Gameplay.Vergil.swordFormationsShortcut,
 				queuedCrimsonGameplay.Gameplay.Vergil.swordFormationsShortcut,
@@ -12653,14 +12653,14 @@ void VergilGameplayOptions() {
 			ImGui::SameLine();
 			TooltipHelper("(?)", "Go directly to Blistering Swords or Storm Swords without needing Spiral Swords beforehand.\n"
 				"Lock On + Forward + Shoot: Blistering Swords, Lock On + Backwards + Shoot: Storm Swords. \n"
-				"Both Inputs can be inverted with this option. Makes Shoot Button Hold Time much shorter to get to any Swords Formation.");
+				"此选项可反转两种输入，并大幅缩短进入任意剑阵所需的射击键长按时间。");
 
-			GUI_Checkbox2("Storm Swords Downed Enemy Fix",
+			GUI_Checkbox2("风暴之剑倒地修复",
 			activeCrimsonGameplay.Gameplay.Vergil.stormSwordsDownedEnemyFix,
 			queuedCrimsonGameplay.Gameplay.Vergil.stormSwordsDownedEnemyFix,
 			activeCrimsonGameplayMask.Gameplay.Vergil.stormSwordsDownedEnemyFix);
 			ImGui::SameLine();
-			TooltipHelper("(?)", "Fixes the radius on Storm Swords so it can properly hit downed enemies.");
+			TooltipHelper("(?)", "修正风暴之剑的判定半径，使其能正确命中倒地敌人。");
 
 			ImGui::EndTable();
 		}
@@ -12676,7 +12676,7 @@ void VergilCheatOptions() {
 	ImU32 checkmarkColorBg = UI::SwapColorEndianness(0xFFFFFFFF);
 
 	ImGui::PushFont(UI::g_ImGuiFont_RussoOne[defaultFontSize * 1.1f]);
-	ImGui::Text("VERGIL CHEAT OPTIONS");
+	ImGui::Text("维吉尔作弊选项");
 	ImGui::PopFont();
 
 	UI::SeparatorEx(defaultFontSize * 23.35f);
@@ -12698,7 +12698,7 @@ void VergilCheatOptions() {
 			ImGui::TableNextColumn();
 
 			GUI_PushDisable(!activeConfig.Actor.enable);
-			if (GUI_Checkbox2("Quicksilver Style",
+			if (GUI_Checkbox2("水银风格",
 				activeCrimsonGameplay.Cheats.Vergil.quicksilverStyle,
 				queuedCrimsonGameplay.Cheats.Vergil.quicksilverStyle,
 				activeCrimsonGameplayMask.Cheats.Vergil.quicksilverStyle)) {
@@ -12706,13 +12706,13 @@ void VergilCheatOptions() {
 			ImGui::SameLine();
 			GUI_CCSRequirementButton();
 			ImGui::SameLine();
-			TooltipHelper("(?)", "Enables Quicksilver for Vergil. Swap to it with D-Pad Downwards. Swap back to Darkslayer with D-Pad Up.");
+			TooltipHelper("(?)", "为维吉尔启用：水银。十字键下切换至水银，十字键上切回暗黑骑士。");
 			GUI_PopDisable(!activeConfig.Actor.enable);
 
 			ImGui::TableNextColumn();
 
 			GUI_PushDisable(!activeConfig.Actor.enable);
-			if (GUI_Checkbox2("Chrono Swords",
+			if (GUI_Checkbox2("时序之剑",
 				activeCrimsonGameplay.Cheats.Vergil.chronoSwords,
 				queuedCrimsonGameplay.Cheats.Vergil.chronoSwords,
 				activeCrimsonGameplayMask.Cheats.Vergil.chronoSwords)) {
@@ -12721,11 +12721,11 @@ void VergilCheatOptions() {
 			ImGui::SameLine();
 			GUI_CCSRequirementButton();
 			ImGui::SameLine();
-			TooltipHelper("(?)", "Summoned Swords will stand still as long as Quicksilver is active.");
+			TooltipHelper("(?)", "水银生效期间，幻影剑将静止不动。");
 			GUI_PopDisable(!activeConfig.Actor.enable);
 
 			ImGui::TableNextColumn();
-			if (GUI_Checkbox2("Infinite Round Trip",
+			if (GUI_Checkbox2("无限回旋剑",
 				activeCrimsonGameplay.Cheats.Vergil.infiniteRoundTrip,
 				queuedCrimsonGameplay.Cheats.Vergil.infiniteRoundTrip,
 				activeCrimsonGameplayMask.Cheats.Vergil.infiniteRoundTrip)) {
@@ -12783,19 +12783,19 @@ void VergilCheatOptions() {
 			ImGui::TableNextColumn();
 
 			ImGui::PushFont(UI::g_ImGuiFont_RussoOne[defaultFontSize * 0.9f]);
-			ImGui::Text("HUMAN");
+			ImGui::Text("人类");
 			ImGui::TableNextColumn();
-			ImGui::Text("DEVIL TRIGGER");
+			ImGui::Text("魔人化");
 			ImGui::PopFont();
 
 			bool beowulfDisabled = !activeCrimsonGameplay.Gameplay.Vergil.airRisingSun;
-			VergilActionDataInput("Air Rising Sun Count",
+			VergilActionDataInput("空中旭日次数",
 				activeCrimsonGameplay.Cheats.Vergil.airRisingSunCount,
 				queuedCrimsonGameplay.Cheats.Vergil.airRisingSunCount,
 				defaultCrimsonGameplay.Cheats.Vergil.airRisingSunCount,
 				beowulfDisabled);
 
-			VergilActionDataInput("Judgement Cut Count",
+			VergilActionDataInput("次元斩次数",
 				activeCrimsonGameplay.Cheats.Vergil.judgementCutCount,
 				queuedCrimsonGameplay.Cheats.Vergil.judgementCutCount,
 				defaultCrimsonGameplay.Cheats.Vergil.judgementCutCount);
@@ -12814,7 +12814,7 @@ void ExtraDifficultyGameplayOptions() {
 	ImU32 checkmarkColorBg = UI::SwapColorEndianness(0xFFFFFFFF);
 
 	ImGui::PushFont(UI::g_ImGuiFont_RussoOne[defaultFontSize * 1.1f]);
-	ImGui::Text("EXTRA DIFFICULTY OPTIONS");
+	ImGui::Text("额外难度选项");
 	ImGui::PopFont();
 	UI::SeparatorEx(defaultFontSize * 23.35f);
 
@@ -12832,7 +12832,7 @@ void ExtraDifficultyGameplayOptions() {
 		ImGui::TableNextColumn();
 
 		ImGui::PushItemWidth(itemWidth * 1.0f);
-		UI::ComboMapValue2("Legendary Dark Knight",
+		UI::ComboMapValue2("传奇黑骑士",
 			ldkModeNames,
 			ldkModes,
 			activeCrimsonGameplay.Gameplay.ExtraDifficulty.ldkMode,
@@ -12840,21 +12840,21 @@ void ExtraDifficultyGameplayOptions() {
 		ImGui::PopItemWidth();
 		ImGui::SameLine();
 		TooltipHelper("(?)", "Spawns large waves of enemies like in DMC5's LDK Mode.\n"
-			"Super LDK spawns even more enemies. Super LDK + Bosses duplicates some of the Bosses.");
+			"超级黑骑士会生成更多敌人；超级黑骑士+Boss会复制部分Boss。");
 
 		ImGui::TableNextColumn();
 
 		ImGui::PushItemWidth(itemWidth * 0.8f);
-		UI::Combo2("Must Style", styleRankNames, activeCrimsonGameplay.Gameplay.ExtraDifficulty.mustStyleMode, queuedCrimsonGameplay.Gameplay.ExtraDifficulty.mustStyleMode);
+		UI::Combo2("风格要求", styleRankNames, activeCrimsonGameplay.Gameplay.ExtraDifficulty.mustStyleMode, queuedCrimsonGameplay.Gameplay.ExtraDifficulty.mustStyleMode);
 		ImGui::PopItemWidth();
 		ImGui::SameLine();
 		TooltipHelper("(?)", "Restrict your damage to only apply at specific Style Ranks. \n"
-			"Being in Devil Trigger when Must Style is active will shield you from losing your Style Rank when hit.");
+			"风格要求生效时，魔人化可保护你受击时不掉风格评级。");
 
 		ImGui::TableNextColumn();
 
 		ImGui::PushItemWidth(itemWidth * 0.93f);
-		if (UI::ComboMapValue2("Enemy DT Mode",
+		if (UI::ComboMapValue2("敌人魔人化模式",
 			enemyDTModeNames,
 			enemyDTModes,
 			activeCrimsonGameplay.Gameplay.ExtraDifficulty.enemyDTMode,
@@ -12865,10 +12865,10 @@ void ExtraDifficultyGameplayOptions() {
 		ImGui::SameLine();
 		TooltipHelper("(?)", "Default setting will apply Enemy DT as normal in Dante Must Die Difficulty.\n"
 			"Instant Enemy DT will apply Enemy DT instantly when they spawn on DMD.\n"
-		"No Enemy DT will make it so enemy DT never occurs, even on DMD.");
+		"选择无敌人魔人化后，即使在DMD难度敌人也不会魔人化。");
 
 		//ImGui::TableNextColumn();
-		//GUI_Checkbox2("Better Arkham 2",
+		//GUI_Checkbox2("强化阿卡姆2",
 		//	activeCrimsonGameplay.Gameplay.ExtraDifficulty.betterArkham2,
 		//	queuedCrimsonGameplay.Gameplay.ExtraDifficulty.betterArkham2);
 		//ImGui::TableNextColumn();
@@ -12876,14 +12876,14 @@ void ExtraDifficultyGameplayOptions() {
 		
 		ImGui::TableNextColumn();
 		ImGui::PushItemWidth(itemWidth * 0.93f);
-		UI::ComboMapValue2("Force Difficulty",
+		UI::ComboMapValue2("强制难度",
 			forceDifficultyNames,
 			forceDifficultyModes,
 			activeCrimsonGameplay.Gameplay.ExtraDifficulty.forceDifficultyMode,
 			queuedCrimsonGameplay.Gameplay.ExtraDifficulty.forceDifficultyMode);
 		ImGui::PopItemWidth();
 		ImGui::SameLine();
-		TooltipHelper("(?)", "This will force any difficulty you wish during the game. Useful for DMD Bloody Palace.");
+		TooltipHelper("(?)", "在游戏过程中强制指定任意难度。适用于DMD血宫。");
 
 		ImGui::EndTable();
 	}
@@ -12917,7 +12917,7 @@ const char* GetButtonNameFromValue(uint16_t value, const std::vector<std::pair<u
             return pair.second;
         }
     }
-    return "Unknown";
+    return "未知";
 }
 
 void DrawButtonCombo(const char* label, uint16_t& current_value, const std::vector<std::pair<uint16_t, const char*>>& buttonPairs) {
@@ -12950,42 +12950,42 @@ void InitPlayerBindingsUI() {
         uint16_t button;
         const char* name;
     } danteBindings[] = {
-        { XINPUT_GAMEPAD_DPAD_UP,        "ITEM SCREEN (UP)" }, // XINPUT buttons are not what uint16_t, const char*>> buttonPairs uses, so this displays incorrectly atm
-        { XINPUT_GAMEPAD_DPAD_DOWN,      "EQUIP SCREEN (DOWN)" },
-        { XINPUT_GAMEPAD_DPAD_RIGHT,     "MAP SCREEN (RIGHT)" },
-        { XINPUT_GAMEPAD_DPAD_LEFT,      "FILE SCREEN (LEFT)" },
-        { XINPUT_GAMEPAD_Y,              "MELEE ATTACK" },
-        { XINPUT_GAMEPAD_A,              "JUMP" },
-        { XINPUT_GAMEPAD_B,              "STYLE ACTION" },
-        { XINPUT_GAMEPAD_X,              "SHOOT" },
-        { XINPUT_GAMEPAD_LEFT_SHOULDER,  "DEVIL TRIGGER" },
-        { XINPUT_GAMEPAD_LEFT_THUMB,     "CHANGE TARGET" },
-        { XINPUT_GAMEPAD_RIGHT_SHOULDER, "LOCK ON" },
-        { XINPUT_GAMEPAD_RIGHT_THUMB,    "DEFAULT CAMERA" },
-        { XINPUT_GAMEPAD_BACK,           "TAUNT" },
-        // { XINPUT_GAMEPAD_LEFT_TRIGGER,   "GUN CHANGE" },
-        // { XINPUT_GAMEPAD_RIGHT_TRIGGER,  "SWORD CHANGE" }
+        { XINPUT_GAMEPAD_DPAD_UP,        "道具界面（上）" }, // XINPUT buttons are not what uint16_t, const char*>> buttonPairs uses, so this displays incorrectly atm
+        { XINPUT_GAMEPAD_DPAD_DOWN,      "装备界面（下）" },
+        { XINPUT_GAMEPAD_DPAD_RIGHT,     "地图界面（右）" },
+        { XINPUT_GAMEPAD_DPAD_LEFT,      "文件界面（左）" },
+        { XINPUT_GAMEPAD_Y,              "近战攻击" },
+        { XINPUT_GAMEPAD_A,              "跳跃" },
+        { XINPUT_GAMEPAD_B,              "风格动作" },
+        { XINPUT_GAMEPAD_X,              "射击" },
+        { XINPUT_GAMEPAD_LEFT_SHOULDER,  "魔人化" },
+        { XINPUT_GAMEPAD_LEFT_THUMB,     "切换目标" },
+        { XINPUT_GAMEPAD_RIGHT_SHOULDER, "锁定" },
+        { XINPUT_GAMEPAD_RIGHT_THUMB,    "默认镜头" },
+        { XINPUT_GAMEPAD_BACK,           "嘲讽" },
+        // { XINPUT_GAMEPAD_LEFT_TRIGGER,   "切换枪械" },
+        // { XINPUT_GAMEPAD_RIGHT_TRIGGER,  "切换刀剑" }
     };
     
     const struct {
         uint16_t button;
         const char* name;
     } vergilBindings[] = {
-        { XINPUT_GAMEPAD_DPAD_UP,        "ITEM SCREEN (UP)" },
-        { XINPUT_GAMEPAD_DPAD_DOWN,      "EQUIP SCREEN (DOWN)" },
-        { XINPUT_GAMEPAD_DPAD_RIGHT,     "MAP SCREEN (RIGHT)" },
-        { XINPUT_GAMEPAD_DPAD_LEFT,      "FILE SCREEN (LEFT)" },
-        { XINPUT_GAMEPAD_Y,              "MELEE ATTACK" },
-        { XINPUT_GAMEPAD_A,              "JUMP" },
-        { XINPUT_GAMEPAD_B,              "DARKSLAYER ACTION" },
-        { XINPUT_GAMEPAD_X,              "SUMMONED SWORD" },
-        { XINPUT_GAMEPAD_LEFT_SHOULDER,  "DEVIL TRIGGER" },
-        { XINPUT_GAMEPAD_LEFT_THUMB,     "CHANGE TARGET" },
-        { XINPUT_GAMEPAD_RIGHT_SHOULDER, "LOCK ON" },
-        { XINPUT_GAMEPAD_RIGHT_THUMB,    "DEFAULT CAMERA" },
-        { XINPUT_GAMEPAD_BACK,           "TAUNT" },
-        // { XINPUT_GAMEPAD_LEFT_TRIGGER,   "WEAPON CHANGE 1" },
-        // { XINPUT_GAMEPAD_RIGHT_TRIGGER,  "WEAPON CHANGE 2" }
+        { XINPUT_GAMEPAD_DPAD_UP,        "道具界面（上）" },
+        { XINPUT_GAMEPAD_DPAD_DOWN,      "装备界面（下）" },
+        { XINPUT_GAMEPAD_DPAD_RIGHT,     "地图界面（右）" },
+        { XINPUT_GAMEPAD_DPAD_LEFT,      "文件界面（左）" },
+        { XINPUT_GAMEPAD_Y,              "近战攻击" },
+        { XINPUT_GAMEPAD_A,              "跳跃" },
+        { XINPUT_GAMEPAD_B,              "暗黑骑士动作" },
+        { XINPUT_GAMEPAD_X,              "幻影剑" },
+        { XINPUT_GAMEPAD_LEFT_SHOULDER,  "魔人化" },
+        { XINPUT_GAMEPAD_LEFT_THUMB,     "切换目标" },
+        { XINPUT_GAMEPAD_RIGHT_SHOULDER, "锁定" },
+        { XINPUT_GAMEPAD_RIGHT_THUMB,    "默认镜头" },
+        { XINPUT_GAMEPAD_BACK,           "嘲讽" },
+        // { XINPUT_GAMEPAD_LEFT_TRIGGER,   "切换武器1" },
+        // { XINPUT_GAMEPAD_RIGHT_TRIGGER,  "切换武器2" }
     };
     
     for (int player = 0; player < 4; player++) {
@@ -13025,11 +13025,11 @@ void DrawKeybindEditor(const std::vector<std::pair<uint16_t, const char*>>& butt
     }
 
     if (ImGui::BeginTabBar("CharacterTabs")) {
-        if (ImGui::BeginTabItem("Dante")) {
+        if (ImGui::BeginTabItem("但丁")) {
             currentCharacter = 0;
             ImGui::EndTabItem();
         }
-        if (ImGui::BeginTabItem("Vergil")) {
+        if (ImGui::BeginTabItem("维吉尔")) {
             currentCharacter = 1;
             ImGui::EndTabItem();
         }
@@ -13037,9 +13037,9 @@ void DrawKeybindEditor(const std::vector<std::pair<uint16_t, const char*>>& butt
     }
 
     if (ImGui::BeginTable("playerBindingsTable", 3, ImGuiTableFlags_Borders | ImGuiTableFlags_RowBg)) {
-        ImGui::TableSetupColumn("Action");
-        ImGui::TableSetupColumn("Controller Button");
-        ImGui::TableSetupColumn("Mapped To");
+        ImGui::TableSetupColumn("动作");
+        ImGui::TableSetupColumn("手柄按键");
+        ImGui::TableSetupColumn("映射至");
         ImGui::TableHeadersRow();
             
         for (size_t i = 0; i < playerBindingsUI[currentPlayer][currentCharacter].size(); i++) {
@@ -13058,47 +13058,47 @@ void DrawKeybindEditor(const std::vector<std::pair<uint16_t, const char*>>& butt
     }
     
     char resetButtonLabel[64];
-    sprintf(resetButtonLabel, "Reset Player %i %s Bindings to Default", currentPlayer + 1, currentCharacter == 0 ? "Dante" : "Vergil");
+    sprintf(resetButtonLabel, "Reset Player %i %s Bindings to Default", currentPlayer + 1, currentCharacter == 0 ? "但丁" : "维吉尔");
     if (ImGui::Button(resetButtonLabel)) {
         const struct {
             uint16_t button;
             const char* name;
         } danteBindings[] = {
-            { XINPUT_GAMEPAD_DPAD_UP,        "ITEM SCREEN (UP)" },
-            { XINPUT_GAMEPAD_DPAD_DOWN,      "EQUIP SCREEN (DOWN)" },
-            { XINPUT_GAMEPAD_DPAD_RIGHT,     "MAP SCREEN (RIGHT)" },
-            { XINPUT_GAMEPAD_DPAD_LEFT,      "FILE SCREEN (LEFT)" },
-            { XINPUT_GAMEPAD_Y,              "MELEE ATTACK" },
-            { XINPUT_GAMEPAD_A,              "JUMP" },
-            { XINPUT_GAMEPAD_B,              "STYLE ACTION" },
-            { XINPUT_GAMEPAD_X,              "SHOOT" },
-            { XINPUT_GAMEPAD_LEFT_SHOULDER,  "DEVIL TRIGGER" },
-            { XINPUT_GAMEPAD_LEFT_THUMB,     "CHANGE TARGET" },
-            { XINPUT_GAMEPAD_RIGHT_SHOULDER, "LOCK ON" },
-            { XINPUT_GAMEPAD_RIGHT_THUMB,    "DEFAULT CAMERA" },
-            { XINPUT_GAMEPAD_BACK,           "TAUNT" },
-            // { XINPUT_GAMEPAD_LEFT_TRIGGER,   "GUN CHANGE" },
-            // { XINPUT_GAMEPAD_RIGHT_TRIGGER,  "SWORD CHANGE" }
+            { XINPUT_GAMEPAD_DPAD_UP,        "道具界面（上）" },
+            { XINPUT_GAMEPAD_DPAD_DOWN,      "装备界面（下）" },
+            { XINPUT_GAMEPAD_DPAD_RIGHT,     "地图界面（右）" },
+            { XINPUT_GAMEPAD_DPAD_LEFT,      "文件界面（左）" },
+            { XINPUT_GAMEPAD_Y,              "近战攻击" },
+            { XINPUT_GAMEPAD_A,              "跳跃" },
+            { XINPUT_GAMEPAD_B,              "风格动作" },
+            { XINPUT_GAMEPAD_X,              "射击" },
+            { XINPUT_GAMEPAD_LEFT_SHOULDER,  "魔人化" },
+            { XINPUT_GAMEPAD_LEFT_THUMB,     "切换目标" },
+            { XINPUT_GAMEPAD_RIGHT_SHOULDER, "锁定" },
+            { XINPUT_GAMEPAD_RIGHT_THUMB,    "默认镜头" },
+            { XINPUT_GAMEPAD_BACK,           "嘲讽" },
+            // { XINPUT_GAMEPAD_LEFT_TRIGGER,   "切换枪械" },
+            // { XINPUT_GAMEPAD_RIGHT_TRIGGER,  "切换刀剑" }
         };
         
         const struct {
             uint16_t button;
             const char* name;
         } vergilBindings[] = {
-            { XINPUT_GAMEPAD_DPAD_UP,        "ITEM SCREEN (UP)" },
-            { XINPUT_GAMEPAD_DPAD_DOWN,      "EQUIP SCREEN (DOWN)" },
-            { XINPUT_GAMEPAD_DPAD_RIGHT,     "MAP SCREEN (RIGHT)" },
-            { XINPUT_GAMEPAD_DPAD_LEFT,      "FILE SCREEN (LEFT)" },
-            { XINPUT_GAMEPAD_Y,              "YAMATO ATTACK" },
-            { XINPUT_GAMEPAD_A,              "JUMP" },
-            { XINPUT_GAMEPAD_B,              "DARK SLAYER ACTION" },
-            { XINPUT_GAMEPAD_X,              "SUMMON SWORDS" },
-            { XINPUT_GAMEPAD_LEFT_SHOULDER,  "DEVIL TRIGGER" },
-            { XINPUT_GAMEPAD_LEFT_THUMB,     "CHANGE TARGET" },
-            { XINPUT_GAMEPAD_RIGHT_SHOULDER, "LOCK ON" },
-            { XINPUT_GAMEPAD_RIGHT_THUMB,    "DEFAULT CAMERA" },
-            { XINPUT_GAMEPAD_BACK,           "TAUNT" },
-            // { XINPUT_GAMEPAD_LEFT_TRIGGER,   "WEAPON CHANGE 1" },
+            { XINPUT_GAMEPAD_DPAD_UP,        "道具界面（上）" },
+            { XINPUT_GAMEPAD_DPAD_DOWN,      "装备界面（下）" },
+            { XINPUT_GAMEPAD_DPAD_RIGHT,     "地图界面（右）" },
+            { XINPUT_GAMEPAD_DPAD_LEFT,      "文件界面（左）" },
+            { XINPUT_GAMEPAD_Y,              "阎魔刀攻击" },
+            { XINPUT_GAMEPAD_A,              "跳跃" },
+            { XINPUT_GAMEPAD_B,              "暗黑骑士动作" },
+            { XINPUT_GAMEPAD_X,              "召唤幻影剑" },
+            { XINPUT_GAMEPAD_LEFT_SHOULDER,  "魔人化" },
+            { XINPUT_GAMEPAD_LEFT_THUMB,     "切换目标" },
+            { XINPUT_GAMEPAD_RIGHT_SHOULDER, "锁定" },
+            { XINPUT_GAMEPAD_RIGHT_THUMB,    "默认镜头" },
+            { XINPUT_GAMEPAD_BACK,           "嘲讽" },
+            // { XINPUT_GAMEPAD_LEFT_TRIGGER,   "切换武器1" },
             // { XINPUT_GAMEPAD_RIGHT_TRIGGER,  "WEAPON CHANGE 2 }
         };
         
@@ -13200,7 +13200,7 @@ void RenderMainMenuInfo(IDXGISwapChain* pSwapChain) {
 	//int cTeamBerthrageAlpha = static_cast<int>(fadeProgress * 255.0f);
 	//ImFont* berthrageFont = UI::g_ImGuiFont_RussoOne[cTeamBerthrageFontSize];
 	//float scaledFontSize = berthrageFont->FontSize * scaleFactorY;
-	//auto cTeamBerthrageText = u8"C•Team Presents • A Berthrage Project";
+	//auto cTeamBerthrageText = u8"C•Team 出品 • Berthrage 项目";
 
 	//// Calculate text size with scaling
 	//ImVec2 cTeamBerthrageTextSize = berthrageFont->CalcTextSizeA(
@@ -13460,9 +13460,9 @@ void RenderMainMenuInfo(IDXGISwapChain* pSwapChain) {
 	float creditsCapCoFontSize = legalFontSize;
 	ImGui::PushFont(UI::g_ImGuiFont_Benguiat[creditsFontSize]);
 	auto OGcreditsText = u8"©CAPCOM CO., LTD. 2005, 2018 ALL RIGHTS RESERVED./ILLUSTRATIONS: Kazuma Kaneko/ATLUS";
-	auto creditsText = u8"C•TEAM • DIRECTED BY BERTHRAGE • PROJECT CRIMSON © • 2025";
+	auto creditsText = u8"C•TEAM • 由 BERTHRAGE 执导 • PROJECT CRIMSON © • 2025";
 
-	auto creditsCapCo = "DEVIL MAY CRY IS A PROPERTY OF CAPCOM CO., LTD. ALL ASSETS BELONG TO THEIR RESPECTIVE OWNERS.";
+	auto creditsCapCo = "《鬼泣》为 CAPCOM CO., LTD. 的财产。所有素材归其各自所有者所有。";
 
 	// Calculate text sizes with correct fonts
 	ImVec2 OGcreditsTextSize = ImGui::CalcTextSize((const char*)OGcreditsText);
@@ -13610,12 +13610,12 @@ void FreezeEnemies() {
 	if (activeCrimsonGameplay.Cheats.Speed.enemy != 0.0f) {
 		activeCrimsonGameplay.Cheats.General.customSpeed = true;
 		activeCrimsonGameplay.Cheats.Speed.enemy = 0.0f;
-		cheatsPopUp.cheatText = "Toggled Freeze Enemies On";
+		cheatsPopUp.cheatText = "已开启冻结敌人";
 	}
 	else {
 		activeCrimsonGameplay.Cheats.General.customSpeed = queuedCrimsonGameplay.Cheats.General.customSpeed;
 		activeCrimsonGameplay.Cheats.Speed.enemy = queuedCrimsonGameplay.Cheats.Speed.enemy;
-		cheatsPopUp.cheatText = "Toggled Freeze Enemies Off";
+		cheatsPopUp.cheatText = "已关闭冻结敌人";
 	}
 	if (activeCrimsonConfig.GUI.sounds) FMOD_PlaySound(0, 25);
 	cheatsPopUp.showPopUp = true;
@@ -13695,11 +13695,11 @@ void ToggleInfiniteHealth() {
 		//activeCrimsonGameplay.Cheats.Training.infiniteHP = false;
 		activeCrimsonGameplay.Cheats.Damage.enemyRecieveDmgDisable = false;
 		activeCrimsonGameplay.Cheats.Damage.playerReceiveDmgDisable = false;
-		cheatsPopUp.cheatText = "Toggled Infinite HP Off";
+		cheatsPopUp.cheatText = "已关闭无限生命";
     } else {
 		activeCrimsonGameplay.Cheats.Damage.playerReceiveDmgDisable = true;
 		activeCrimsonGameplay.Cheats.Damage.enemyRecieveDmgDisable = true;
-		cheatsPopUp.cheatText = "Toggled Infinite HP On";
+		cheatsPopUp.cheatText = "已开启无限生命";
     }
 	if (activeCrimsonConfig.GUI.sounds) FMOD_PlaySound(0, 25); 
 
@@ -13715,7 +13715,7 @@ void ToggleOneHitKill() {
 		activeCrimsonGameplay.Cheats.General.customDamage = true;
 		activeCrimsonGameplay.Cheats.Damage.enemyReceivedDmgMult = 9999.0f;
 		activeCrimsonGameplay.Cheats.Damage.enemyRecieveDmgDisable = false;
-		cheatsPopUp.cheatText = "Toggled One Hit Kill On";
+		cheatsPopUp.cheatText = "已开启一击必杀";
 	} else {
 		toggled = false;
 		activeCrimsonGameplay.Cheats.General.customDamage = queuedCrimsonGameplay.Gameplay.General.multiplayerDamageScaling;
@@ -13728,7 +13728,7 @@ void ToggleOneHitKill() {
 		if (!queuedCrimsonGameplay.Cheats.Damage.playerReceiveDmgDisable && activeCrimsonGameplay.Cheats.Damage.playerReceiveDmgDisable)
 			activeCrimsonGameplay.Cheats.Damage.enemyRecieveDmgDisable = true;
 		
-		cheatsPopUp.cheatText = "Toggled One Hit Kill Off";
+		cheatsPopUp.cheatText = "已关闭一击必杀";
 	}
 	if (activeCrimsonConfig.GUI.sounds) FMOD_PlaySound(0, 25); 
 	cheatsPopUp.showPopUp = true;
@@ -13785,24 +13785,24 @@ void GamepadToggleShowMain() {
 
 std::vector<KeyBinding> keyBindings = {
     {
-        "Toggle Crimson Overlay",
+        "切换绯红叠加层",
         activeConfig.keyData[0],
         queuedConfig.keyData[0],
         defaultConfig.keyData[0],
         ToggleCrimsonGUI,
     },
-	{"Toggle Infinite Health Points", activeConfig.keyData[1], queuedConfig.keyData[1], defaultConfig.keyData[1], ToggleInfiniteHealth},
-	{"Toggle One Hit Kill", activeConfig.keyData[2], queuedConfig.keyData[2], defaultConfig.keyData[2], ToggleOneHitKill},
-    {"Reload Room", activeConfig.keyData[3], queuedConfig.keyData[3], defaultConfig.keyData[3], ReloadRoom},
-    {"Move To Main Character", activeConfig.keyData[4], queuedConfig.keyData[4], defaultConfig.keyData[4], MoveToMainActor},
-	{"Freeze Enemies", activeConfig.keyData[5], queuedConfig.keyData[5], defaultConfig.keyData[5], FreezeEnemies},
+	{"切换无限生命值", activeConfig.keyData[1], queuedConfig.keyData[1], defaultConfig.keyData[1], ToggleInfiniteHealth},
+	{"切换一击必杀", activeConfig.keyData[2], queuedConfig.keyData[2], defaultConfig.keyData[2], ToggleOneHitKill},
+    {"重载房间", activeConfig.keyData[3], queuedConfig.keyData[3], defaultConfig.keyData[3], ReloadRoom},
+    {"移至主角", activeConfig.keyData[4], queuedConfig.keyData[4], defaultConfig.keyData[4], MoveToMainActor},
+	{"冻结敌人", activeConfig.keyData[5], queuedConfig.keyData[5], defaultConfig.keyData[5], FreezeEnemies},
 	
 };
 
 void HotkeysSection() {
 	auto& defaultFontSize = UI::g_UIContext.DefaultFontSize;
 
-	GUI_Title("KEYBOARD HOTKEYS");
+	GUI_Title("键盘快捷键");
 
 	ImGui::PushStyleColor(ImGuiCol_Button, UI::SwapColorEndianness(0x333642FF));
 
@@ -13931,7 +13931,7 @@ void TrainingWindow() {
 
 	if (ImGui::Begin("TrainingWindow", 0, ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize)) {
 		ImGui::SetWindowFontScale(scaleFactorY);
-		if (GUI_Button("Close")) {
+		if (GUI_Button("关闭")) {
 			if (!trainingCooldownActive) {
 				//CloseShop();
 				run = false;
@@ -13939,7 +13939,7 @@ void TrainingWindow() {
 			}
 		}
 
-		auto BACKGROUND_FADED_TEXT = u8"The Void";
+		auto BACKGROUND_FADED_TEXT = u8"虚空";
 		ImFont* fadedFont = UI::g_ImGuiFont_RussoOne256;
 		float fadedFontSize = scaledFontSize * 4.8f;
 
@@ -13969,7 +13969,7 @@ void TrainingWindow() {
 
 		ImGui::PushFont(UI::g_ImGuiFont_RussoOne[defaultFontSize * 0.9f]);
 
-		GUI_Title("TRAINING OPTIONS");
+		GUI_Title("训练选项");
 
 		{
 			const float columnWidth = 0.5f * queuedConfig.globalScale;
@@ -13981,34 +13981,34 @@ void TrainingWindow() {
 				ImGui::TableNextRow(0, rowWidth);
 				ImGui::TableNextColumn();
 
-				GUI_Checkbox2("Disable Player Damage", activeCrimsonGameplay.Cheats.Damage.playerReceiveDmgDisable, queuedCrimsonGameplay.Cheats.Damage.playerReceiveDmgDisable);
+				GUI_Checkbox2("玩家免疫伤害", activeCrimsonGameplay.Cheats.Damage.playerReceiveDmgDisable, queuedCrimsonGameplay.Cheats.Damage.playerReceiveDmgDisable);
 				ImGui::TableNextColumn();
-				GUI_Checkbox2("Disable Enemy Damage", activeCrimsonGameplay.Cheats.Damage.enemyRecieveDmgDisable, queuedCrimsonGameplay.Cheats.Damage.enemyRecieveDmgDisable);
+				GUI_Checkbox2("敌人免疫伤害", activeCrimsonGameplay.Cheats.Damage.enemyRecieveDmgDisable, queuedCrimsonGameplay.Cheats.Damage.enemyRecieveDmgDisable);
 
 				ImGui::TableNextColumn();
-				if (GUI_Checkbox2("Disable all damage", activeCrimsonGameplay.Cheats.Training.infiniteHP, queuedCrimsonGameplay.Cheats.Training.infiniteHP)) {
+				if (GUI_Checkbox2("禁用所有伤害", activeCrimsonGameplay.Cheats.Training.infiniteHP, queuedCrimsonGameplay.Cheats.Training.infiniteHP)) {
 					ToggleInfiniteHitPoints(activeCrimsonGameplay.Cheats.Training.infiniteHP);
 				}
 
 				ImGui::TableNextColumn();
 
-				if (GUI_Checkbox2("Infinite Devil Trigger", activeCrimsonGameplay.Cheats.Training.infiniteDT, queuedCrimsonGameplay.Cheats.Training.infiniteDT)) {
+				if (GUI_Checkbox2("无限魔人化", activeCrimsonGameplay.Cheats.Training.infiniteDT, queuedCrimsonGameplay.Cheats.Training.infiniteDT)) {
 					ToggleInfiniteMagicPoints(activeCrimsonGameplay.Cheats.Training.infiniteDT);
 				}
 
 				ImGui::TableNextColumn();
 
-				if (GUI_Checkbox2("Disable Regular Enemy Attacks", activeCrimsonGameplay.Cheats.Training.disableRegularEnemyAttacks, queuedCrimsonGameplay.Cheats.Training.disableRegularEnemyAttacks)) {
+				if (GUI_Checkbox2("禁用普通敌人攻击", activeCrimsonGameplay.Cheats.Training.disableRegularEnemyAttacks, queuedCrimsonGameplay.Cheats.Training.disableRegularEnemyAttacks)) {
 					CrimsonPatches::DisableRegularEnemyAttacks(activeCrimsonGameplay.Cheats.Training.disableRegularEnemyAttacks);
 				}
 				ImGui::SameLine();
 				GUI_WIPButton();
 				ImGui::SameLine();
-				TooltipHelper("(?)", "Does not work for all regular enemies.");
+				TooltipHelper("(?)", "并非对所有普通敌人生效。");
 
 				ImGui::TableNextColumn();
 
-				if (GUI_Checkbox2("Disable Timer", activeCrimsonGameplay.Cheats.Training.disableTimers, queuedCrimsonGameplay.Cheats.Training.disableTimers)) {
+				if (GUI_Checkbox2("禁用计时器", activeCrimsonGameplay.Cheats.Training.disableTimers, queuedCrimsonGameplay.Cheats.Training.disableTimers)) {
 					ToggleDisableTimer(activeCrimsonGameplay.Cheats.Training.disableTimers);
 				}
 				ImGui::TableNextColumn();
@@ -14019,13 +14019,13 @@ void TrainingWindow() {
 					ImGui::TableNextColumn();
 
 					GUI_PushDisable(!activeCrimsonGameplay.Cheats.General.legacyDDMKCharacters);
-					if (GUI_Checkbox2("Infinite B. Lady Bullets", activeCrimsonGameplay.Cheats.Training.infiniteBossLadyBullets,
+					if (GUI_Checkbox2("无限 B. Lady 子弹", activeCrimsonGameplay.Cheats.Training.infiniteBossLadyBullets,
 						queuedCrimsonGameplay.Cheats.Training.infiniteBossLadyBullets)) {
 						ToggleInfiniteBullets(activeCrimsonGameplay.Cheats.Training.infiniteBossLadyBullets);
 					}
 					ImGui::SameLine();
 					GUI_PopDisable(!activeCrimsonGameplay.Cheats.General.legacyDDMKCharacters);
-					TooltipHelper("(?)", "For Boss Lady (Legacy DDMK Character).");
+					TooltipHelper("(?)", "用于 Boss Lady（旧版 DDMK 角色）。");
 				}
 
 
@@ -14043,15 +14043,15 @@ void TrainingWindow() {
 			ImGui::TableNextColumn();
 
 			ImGui::PushFont(UI::g_ImGuiFont_RussoOne[defaultFontSize * 0.9f]);
-			ImGui::Text("Room Settings");
+			ImGui::Text("房间设置");
 			ImGui::PopFont();
 			//CrimsonTrainingRoom::DrawRoomSelect();
 
 			ImGui::TableNextColumn();
 			ImGui::PushFont(UI::g_ImGuiFont_RussoOne[defaultFontSize * 0.9f]);
-			ImGui::Text("Enemy Settings");
+			ImGui::Text("敌人设置");
 			ImGui::PopFont();
-			if (GUI_Button("Holy Water"))
+			if (GUI_Button("圣水"))
 			{
 				//UseHolyWater();
 			}
@@ -14080,7 +14080,7 @@ void Main(IDXGISwapChain* pSwapChain) {
     if (!g_showMain) {
         return;
     }
-    // ImGui::InputScalar("Heheheh", ImGuiDataType_U64, &g_SampleMod_ReturnAddr1);
+    // ImGui::InputScalar("呵呵呵", ImGuiDataType_U64, &g_SampleMod_ReturnAddr1);
 
 
     static bool doOnce = false;
@@ -14286,8 +14286,8 @@ void DrawMainContent(ID3D11Device* pDevice, UI::UIContext& context) {
 
 		float comboBoxWidth = width * 0.8f;
 
-		std::array<const char*, 3> modes{ "VANILLA MODE", "STYLE SWITCHER MODE", "CRIMSON MODE" };
-		std::array<const char*, 4> modesWCustom{ "VANILLA MODE", "STYLE SWITCHER MODE", "CRIMSON MODE", "CUSTOM MODE" };
+		std::array<const char*, 3> modes{ "原版模式", "风格切换模式", "CRIMSON 模式" };
+		std::array<const char*, 4> modesWCustom{ "原版模式", "风格切换模式", "CRIMSON 模式", "自定义模式" };
 
 		ImGui::SetNextItemWidth(comboBoxWidth);
 
@@ -14435,8 +14435,8 @@ void DrawMainContent(ID3D11Device* pDevice, UI::UIContext& context) {
 			static const Texture2DD3D11 vsHybridPreview((std::string(Paths::visualStylesPreviews) + "\\Hybrid.png").c_str(), pDevice);
 			static const Texture2DD3D11 vsModernPreview((std::string(Paths::visualStylesPreviews) + "\\Modern.png").c_str(), pDevice);
 
-			std::array<const char*, 3> visualModes{ "CLASSIC VISUAL STYLE", "HYBRID VISUAL STYLE", "MODERN VISUAL STYLE" };
-			std::array<const char*, 4> visualModesWCustom{ "CLASSIC VISUAL STYLE", "HYBRID VISUAL STYLE", "MODERN VISUAL STYLE", "CUSTOM VISUAL STYLE" };
+			std::array<const char*, 3> visualModes{ "经典画面风格", "混合画面风格", "现代画面风格" };
+			std::array<const char*, 4> visualModesWCustom{ "经典画面风格", "混合画面风格", "现代画面风格", "自定义画面风格" };
 
 			uint8 currentPreset = activeCrimsonConfig.VisualStyle.preset;
 			auto previewValue = (currentPreset == VISUALSTYLEPRESETS::CUSTOM)
@@ -14528,7 +14528,7 @@ void DrawMainContent(ID3D11Device* pDevice, UI::UIContext& context) {
 						if (i == VISUALSTYLEPRESETS::CLASSIC) previewTex = &vsClassicPreview;
 						else if (i == VISUALSTYLEPRESETS::HYBRID) previewTex = &vsHybridPreview;
 						else if (i == VISUALSTYLEPRESETS::MODERN) previewTex = &vsModernPreview;
-						ImGui::Text("Preview");
+						ImGui::Text("预览");
 						if (previewTex && previewTex->IsValid()) {
 							ImVec2 tipSize = ImVec2(400.0f * scaleFactorY, 225.0f * scaleFactorY);
 							ImGui::Image(*previewTex, tipSize);
@@ -14554,7 +14554,7 @@ void DrawMainContent(ID3D11Device* pDevice, UI::UIContext& context) {
 
 			ImGui::SameLine();
 			ImGui::PushFont(UI::g_ImGuiFont_Roboto[baseFontSize]);
-			if (GUI_Checkbox2("Tie Visual Style to Game Mode", activeCrimsonConfig.VisualStyle.tieVisualStyleToGameMode, 
+			if (GUI_Checkbox2("画面风格随游戏模式", activeCrimsonConfig.VisualStyle.tieVisualStyleToGameMode, 
 				queuedCrimsonConfig.VisualStyle.tieVisualStyleToGameMode)) {
 				if (activeCrimsonConfig.VisualStyle.tieVisualStyleToGameMode) {
 					CrimsonVisualStyle::SetVisualStylePreset(activeCrimsonGameplay.GameMode.preset);
@@ -14600,10 +14600,10 @@ void DrawMainContent(ID3D11Device* pDevice, UI::UIContext& context) {
 
 		// Bottom text
 		{
-			constexpr auto MODE_INFO_TEXT_VANILLA = "Experience the game how it was originally made.";
-			constexpr auto MODE_INFO_TEXT_SW_LINE1 = "This is DMC3 as you are probably familiar with. Closer to how the Switch Version and DDMK plays.";
+			constexpr auto MODE_INFO_TEXT_VANILLA = "体验游戏最初的模样。";
+			constexpr auto MODE_INFO_TEXT_SW_LINE1 = "这是你可能熟悉的DMC3，更接近Switch版与DDMK的手感。";
 			constexpr auto MODE_INFO_TEXT_SW_LINE2 = "Vanilla + Style / Full Weapon Switching.";
-			constexpr auto MODE_INFP_TEXT_CRIMSON = "Enjoy the ultimate DMC3 experience! All new Gameplay Improvements and Expansions enabled.";
+			constexpr auto MODE_INFP_TEXT_CRIMSON = "享受终极DMC3体验！启用全部新玩法改进与扩展。";
 
 			auto descriptionVanilla =
 				u8"• No Style Switching\n"
@@ -14688,7 +14688,7 @@ void DrawMainContent(ID3D11Device* pDevice, UI::UIContext& context) {
 
 			ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, { context.DefaultFontSize * 0.4f, context.DefaultFontSize * 0.4f });
 			ImGui::SetNextWindowPos(areaMin, ImGuiCond_Always);
-			ImGui::BeginChildEx("Widget Area", cntWindow->GetID("Widget Area"), areaSize, false, ImGuiWindowFlags_AlwaysUseWindowPadding);
+			ImGui::BeginChildEx("控件区域", cntWindow->GetID("控件区域"), areaSize, false, ImGuiWindowFlags_AlwaysUseWindowPadding);
 			ImGui::PopStyleVar();
 			{
                 CharacterSection(context.DefaultFontSize);
@@ -14708,10 +14708,10 @@ void DrawMainContent(ID3D11Device* pDevice, UI::UIContext& context) {
 
 			ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, { context.DefaultFontSize * 0.4f, context.DefaultFontSize * 0.4f });
 			ImGui::SetNextWindowPos(areaMin, ImGuiCond_Always);
-			ImGui::BeginChildEx("Tooltip Area", cntWindow->GetID("Tooltip Area"), areaSize, false, ImGuiWindowFlags_AlwaysUseWindowPadding);
+			ImGui::BeginChildEx("提示区域", cntWindow->GetID("提示区域"), areaSize, false, ImGuiWindowFlags_AlwaysUseWindowPadding);
 			ImGui::PopStyleVar();
 			{
-                constexpr auto ACTOR_SYSTEM_INTRO = u8"Custom Character Creation and Spawning System primarily developed by DDMK's Serpentiem (Formerly 'Actor System').";
+                constexpr auto ACTOR_SYSTEM_INTRO = u8"由DDMK的Serpentiem（原“Actor System”）主导开发的自定义角色创建与生成系统。";
                 constexpr auto FEATURE_STYLE_SWITCH = u8"   • Style Switching;";
                 constexpr auto FEATURE_WEAPONS = u8"   • Custom Weapon Loadouts;";
                 constexpr auto FEATURE_CHAR_SWITCH = u8"   • Character Switching;";
@@ -14719,7 +14719,7 @@ void DrawMainContent(ID3D11Device* pDevice, UI::UIContext& context) {
                 constexpr auto FEATURE_DOPPEL_TWEAKS = u8"   • Doppelganger Tweaks;";
 
 				ImGui::PushFont(UI::g_ImGuiFont_RussoOne[size_t(context.DefaultFontSize * 1.0f)]);
-				ImGui::Text("CRIMSON CHARACTER SYSTEM");
+				ImGui::Text("绯红角色系统");
 				ImGui::PopFont();
 
 
@@ -14727,7 +14727,7 @@ void DrawMainContent(ID3D11Device* pDevice, UI::UIContext& context) {
 				ImGui::PushFont(UI::g_ImGuiFont_Roboto[size_t(context.DefaultFontSize * 0.9f)]);
 
                 ImGui::TextWrapped((const char*) ACTOR_SYSTEM_INTRO);
-                ImGui::TextWrapped("Essential for enabling most gameplay options.");
+                ImGui::TextWrapped("启用大多数玩法选项的必要前提。");
                 ImGui::TextWrapped("");
                 ImGui::TextWrapped("Features:");
                 ImGui::TextWrapped((const char*) FEATURE_STYLE_SWITCH);
@@ -14737,9 +14737,9 @@ void DrawMainContent(ID3D11Device* pDevice, UI::UIContext& context) {
                 ImGui::TextWrapped((const char*) FEATURE_DOPPEL_TWEAKS);
                 ImGui::TextWrapped("");
                 ImGui::TextWrapped("");
-                ImGui::TextWrapped("Required for Crimson and Style Switcher modes.");
-                ImGui::TextWrapped("Note: Changes the Divinity Statue (Shop) UI.");
-				ImGui::TextWrapped("Automatically disables itself during Battle of Brothers and End Credits for stability.");
+                ImGui::TextWrapped("绯红与风格切换模式所必需。");
+                ImGui::TextWrapped("注意：会改变女神像（商店）界面。");
+				ImGui::TextWrapped("为保持稳定，在兄弟之战与片尾字幕期间会自动禁用。");
 
 
 				ImGui::PopFont();
@@ -14759,7 +14759,7 @@ void DrawMainContent(ID3D11Device* pDevice, UI::UIContext& context) {
 
 			ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, { context.DefaultFontSize * 0.4f, context.DefaultFontSize * 0.4f });
 			ImGui::SetNextWindowPos(areaMin, ImGuiCond_Always);
-			ImGui::BeginChildEx("Widget Area", cntWindow->GetID("Widget Area"), areaSize, false, ImGuiWindowFlags_AlwaysUseWindowPadding);
+			ImGui::BeginChildEx("控件区域", cntWindow->GetID("控件区域"), areaSize, false, ImGuiWindowFlags_AlwaysUseWindowPadding);
 			ImGui::PopStyleVar();
             {
                 ArcadeSection(context.DefaultFontSize);
@@ -14780,11 +14780,11 @@ void DrawMainContent(ID3D11Device* pDevice, UI::UIContext& context) {
 
 			ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, { context.DefaultFontSize * 0.4f, context.DefaultFontSize * 0.4f });
 			ImGui::SetNextWindowPos(areaMin, ImGuiCond_Always);
-			ImGui::BeginChildEx("Tooltip Area", cntWindow->GetID("Tooltip Area"), areaSize, false, ImGuiWindowFlags_AlwaysUseWindowPadding);
+			ImGui::BeginChildEx("提示区域", cntWindow->GetID("提示区域"), areaSize, false, ImGuiWindowFlags_AlwaysUseWindowPadding);
 			ImGui::PopStyleVar();
 			{
 				ImGui::PushFont(UI::g_ImGuiFont_RussoOne[size_t(context.DefaultFontSize * 1.0f)]);
-				ImGui::Text("ARCADE");
+				ImGui::Text("街机模式");
                 ImGui::PopFont();
 				
 
@@ -14816,7 +14816,7 @@ void DrawMainContent(ID3D11Device* pDevice, UI::UIContext& context) {
 
 				ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, { context.DefaultFontSize * 0.4f, context.DefaultFontSize * 0.4f });
 				ImGui::SetNextWindowPos(areaMin, ImGuiCond_Always);
-				ImGui::BeginChildEx("Widget Area", cntWindow->GetID("Widget Area"), areaSize, false, ImGuiWindowFlags_AlwaysUseWindowPadding);
+				ImGui::BeginChildEx("控件区域", cntWindow->GetID("控件区域"), areaSize, false, ImGuiWindowFlags_AlwaysUseWindowPadding);
 				ImGui::PopStyleVar();
 				{
 					{
@@ -14840,11 +14840,11 @@ void DrawMainContent(ID3D11Device* pDevice, UI::UIContext& context) {
 
                 ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, { context.DefaultFontSize * 0.4f, context.DefaultFontSize * 0.4f });
                 ImGui::SetNextWindowPos(areaMin, ImGuiCond_Always);
-                ImGui::BeginChildEx("Tooltip Area", cntWindow->GetID("Tooltip Area"), areaSize, false, ImGuiWindowFlags_AlwaysUseWindowPadding);
+                ImGui::BeginChildEx("提示区域", cntWindow->GetID("提示区域"), areaSize, false, ImGuiWindowFlags_AlwaysUseWindowPadding);
                 ImGui::PopStyleVar();
                 {
                     ImGui::PushFont(UI::g_ImGuiFont_RussoOne[size_t(context.DefaultFontSize * 1.0f)]);
-                    ImGui::Text("GAMEPLAY OPTIONS");
+                    ImGui::Text("玩法选项");
                     ImGui::PopFont();
 
 
@@ -14852,7 +14852,7 @@ void DrawMainContent(ID3D11Device* pDevice, UI::UIContext& context) {
                     ImGui::PushFont(UI::g_ImGuiFont_Roboto[size_t(context.DefaultFontSize * 0.9f)]);
 
                     ImGui::TextWrapped("These options will largely affect your gameplay experience and govern the Game Modes.\n\n"
-						"Some Gameplay Options are optional for each Game Mode to stay active, and some are not.");
+						"部分玩法选项在各游戏模式下可选择是否生效，部分则不可。");
                     ImGui::PopFont();
                 }
                 ImGui::EndChild();
@@ -14867,7 +14867,7 @@ void DrawMainContent(ID3D11Device* pDevice, UI::UIContext& context) {
 
 				ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, { context.DefaultFontSize * 0.4f, context.DefaultFontSize * 0.4f });
 				ImGui::SetNextWindowPos(areaMin, ImGuiCond_Always);
-				ImGui::BeginChildEx("Widget Area", cntWindow->GetID("Widget Area"), areaSize, false, ImGuiWindowFlags_AlwaysUseWindowPadding);
+				ImGui::BeginChildEx("控件区域", cntWindow->GetID("控件区域"), areaSize, false, ImGuiWindowFlags_AlwaysUseWindowPadding);
 				ImGui::PopStyleVar();
 				{
 					{
@@ -14889,18 +14889,18 @@ void DrawMainContent(ID3D11Device* pDevice, UI::UIContext& context) {
 
 				ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, { context.DefaultFontSize * 0.4f, context.DefaultFontSize * 0.4f });
 				ImGui::SetNextWindowPos(areaMin, ImGuiCond_Always);
-				ImGui::BeginChildEx("Tooltip Area", cntWindow->GetID("Tooltip Area"), areaSize, false, ImGuiWindowFlags_AlwaysUseWindowPadding);
+				ImGui::BeginChildEx("提示区域", cntWindow->GetID("提示区域"), areaSize, false, ImGuiWindowFlags_AlwaysUseWindowPadding);
 				ImGui::PopStyleVar();
 				{
 					ImGui::PushFont(UI::g_ImGuiFont_RussoOne[size_t(context.DefaultFontSize * 1.0f)]);
-					ImGui::Text("CAMERA OPTIONS");
+					ImGui::Text("镜头选项");
 					ImGui::PopFont();
 
 
 					ImGui::SetCursorPosY(ImGui::GetCursorPosY() + context.DefaultFontSize * 0.8f);
 					ImGui::PushFont(UI::g_ImGuiFont_Roboto[size_t(context.DefaultFontSize * 0.9f)]);
 
-					ImGui::TextWrapped("Settings related to camera behaviour.");
+					ImGui::TextWrapped("与镜头行为相关的设置。");
 					ImGui::PopFont();
 				}
 				ImGui::EndChild();
@@ -14915,7 +14915,7 @@ void DrawMainContent(ID3D11Device* pDevice, UI::UIContext& context) {
 
 				ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, { context.DefaultFontSize * 0.4f, context.DefaultFontSize * 0.4f });
 				ImGui::SetNextWindowPos(areaMin, ImGuiCond_Always);
-				ImGui::BeginChildEx("Widget Area", cntWindow->GetID("Widget Area"), areaSize, false, ImGuiWindowFlags_AlwaysUseWindowPadding);
+				ImGui::BeginChildEx("控件区域", cntWindow->GetID("控件区域"), areaSize, false, ImGuiWindowFlags_AlwaysUseWindowPadding);
 				ImGui::PopStyleVar();
 				{
 					{
@@ -14937,18 +14937,18 @@ void DrawMainContent(ID3D11Device* pDevice, UI::UIContext& context) {
 
 				ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, { context.DefaultFontSize * 0.4f, context.DefaultFontSize * 0.4f });
 				ImGui::SetNextWindowPos(areaMin, ImGuiCond_Always);
-				ImGui::BeginChildEx("Tooltip Area", cntWindow->GetID("Tooltip Area"), areaSize, false, ImGuiWindowFlags_AlwaysUseWindowPadding);
+				ImGui::BeginChildEx("提示区域", cntWindow->GetID("提示区域"), areaSize, false, ImGuiWindowFlags_AlwaysUseWindowPadding);
 				ImGui::PopStyleVar();
 				{
 					ImGui::PushFont(UI::g_ImGuiFont_RussoOne[size_t(context.DefaultFontSize * 1.0f)]);
-					ImGui::Text("HOTKEY OPTIONS");
+					ImGui::Text("快捷键选项");
 					ImGui::PopFont();
 
 
 					ImGui::SetCursorPosY(ImGui::GetCursorPosY() + context.DefaultFontSize * 0.8f);
 					ImGui::PushFont(UI::g_ImGuiFont_Roboto[size_t(context.DefaultFontSize * 0.9f)]);
 
-					ImGui::TextWrapped("Set various settings to keyboard shortcuts.");
+					ImGui::TextWrapped("将各种设置绑定到键盘快捷键。");
 					ImGui::PopFont();
 				}
 				ImGui::EndChild();
@@ -14967,7 +14967,7 @@ void DrawMainContent(ID3D11Device* pDevice, UI::UIContext& context) {
 
 				ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, { context.DefaultFontSize * 0.4f, context.DefaultFontSize * 0.4f });
 				ImGui::SetNextWindowPos(areaMin, ImGuiCond_Always);
-				ImGui::BeginChildEx("Widget Area", cntWindow->GetID("Widget Area"), areaSize, false, ImGuiWindowFlags_AlwaysUseWindowPadding);
+				ImGui::BeginChildEx("控件区域", cntWindow->GetID("控件区域"), areaSize, false, ImGuiWindowFlags_AlwaysUseWindowPadding);
 				ImGui::PopStyleVar();
 				{
 					{
@@ -14989,18 +14989,18 @@ void DrawMainContent(ID3D11Device* pDevice, UI::UIContext& context) {
 
 				ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, { context.DefaultFontSize * 0.4f, context.DefaultFontSize * 0.4f });
 				ImGui::SetNextWindowPos(areaMin, ImGuiCond_Always);
-				ImGui::BeginChildEx("Tooltip Area", cntWindow->GetID("Tooltip Area"), areaSize, false, ImGuiWindowFlags_AlwaysUseWindowPadding);
+				ImGui::BeginChildEx("提示区域", cntWindow->GetID("提示区域"), areaSize, false, ImGuiWindowFlags_AlwaysUseWindowPadding);
 				ImGui::PopStyleVar();
 				{
 					ImGui::PushFont(UI::g_ImGuiFont_RussoOne[size_t(context.DefaultFontSize * 1.0f)]);
-					ImGui::Text("GUI OPTIONS");
+					ImGui::Text("界面选项");
 					ImGui::PopFont();
 
 
 					ImGui::SetCursorPosY(ImGui::GetCursorPosY() + context.DefaultFontSize * 0.8f);
 					ImGui::PushFont(UI::g_ImGuiFont_Roboto[size_t(context.DefaultFontSize * 0.9f)]);
 
-					ImGui::TextWrapped("Change Crimson GUI's settings.");
+					ImGui::TextWrapped("更改绯红界面的设置。");
 					ImGui::PopFont();
 				}
 				ImGui::EndChild();
@@ -15015,7 +15015,7 @@ void DrawMainContent(ID3D11Device* pDevice, UI::UIContext& context) {
 
 				ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, { context.DefaultFontSize * 0.4f, context.DefaultFontSize * 0.4f });
 				ImGui::SetNextWindowPos(areaMin, ImGuiCond_Always);
-				ImGui::BeginChildEx("Widget Area", cntWindow->GetID("Widget Area"), areaSize, false, ImGuiWindowFlags_AlwaysUseWindowPadding);
+				ImGui::BeginChildEx("控件区域", cntWindow->GetID("控件区域"), areaSize, false, ImGuiWindowFlags_AlwaysUseWindowPadding);
 				ImGui::PopStyleVar();
 				{
 					{
@@ -15037,18 +15037,18 @@ void DrawMainContent(ID3D11Device* pDevice, UI::UIContext& context) {
 
 				ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, { context.DefaultFontSize * 0.4f, context.DefaultFontSize * 0.4f });
 				ImGui::SetNextWindowPos(areaMin, ImGuiCond_Always);
-				ImGui::BeginChildEx("Tooltip Area", cntWindow->GetID("Tooltip Area"), areaSize, false, ImGuiWindowFlags_AlwaysUseWindowPadding);
+				ImGui::BeginChildEx("提示区域", cntWindow->GetID("提示区域"), areaSize, false, ImGuiWindowFlags_AlwaysUseWindowPadding);
 				ImGui::PopStyleVar();
 				{
 					ImGui::PushFont(UI::g_ImGuiFont_RussoOne[size_t(context.DefaultFontSize * 1.0f)]);
-					ImGui::Text("SOUND OPTIONS");
+					ImGui::Text("音效选项");
 					ImGui::PopFont();
 
 
 					ImGui::SetCursorPosY(ImGui::GetCursorPosY() + context.DefaultFontSize * 0.8f);
 					ImGui::PushFont(UI::g_ImGuiFont_Roboto[size_t(context.DefaultFontSize * 0.9f)]);
 
-					ImGui::TextWrapped("Settings related to Sound.");
+					ImGui::TextWrapped("与音效相关的设置。");
 					ImGui::PopFont();
 				}
 				ImGui::EndChild();
@@ -15063,7 +15063,7 @@ void DrawMainContent(ID3D11Device* pDevice, UI::UIContext& context) {
 
 				ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, { context.DefaultFontSize * 0.4f, context.DefaultFontSize * 0.4f });
 				ImGui::SetNextWindowPos(areaMin, ImGuiCond_Always);
-				ImGui::BeginChildEx("Widget Area", cntWindow->GetID("Widget Area"), areaSize, false, ImGuiWindowFlags_AlwaysUseWindowPadding);
+				ImGui::BeginChildEx("控件区域", cntWindow->GetID("控件区域"), areaSize, false, ImGuiWindowFlags_AlwaysUseWindowPadding);
 				ImGui::PopStyleVar();
 				{
 					{
@@ -15085,18 +15085,18 @@ void DrawMainContent(ID3D11Device* pDevice, UI::UIContext& context) {
 
 				ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, { context.DefaultFontSize * 0.4f, context.DefaultFontSize * 0.4f });
 				ImGui::SetNextWindowPos(areaMin, ImGuiCond_Always);
-				ImGui::BeginChildEx("Tooltip Area", cntWindow->GetID("Tooltip Area"), areaSize, false, ImGuiWindowFlags_AlwaysUseWindowPadding);
+				ImGui::BeginChildEx("提示区域", cntWindow->GetID("提示区域"), areaSize, false, ImGuiWindowFlags_AlwaysUseWindowPadding);
 				ImGui::PopStyleVar();
 				{
 					ImGui::PushFont(UI::g_ImGuiFont_RussoOne[size_t(context.DefaultFontSize * 1.0f)]);
-					ImGui::Text("VISUAL OPTIONS");
+					ImGui::Text("画面选项");
 					ImGui::PopFont();
 
 
 					ImGui::SetCursorPosY(ImGui::GetCursorPosY() + context.DefaultFontSize * 0.8f);
 					ImGui::PushFont(UI::g_ImGuiFont_Roboto[size_t(context.DefaultFontSize * 0.9f)]);
 
-					ImGui::TextWrapped("Settings related to various Visual Effects.");
+					ImGui::TextWrapped("与各种视觉效果相关的设置。");
 					ImGui::PopFont();
 				}
 				ImGui::EndChild();
@@ -15111,7 +15111,7 @@ void DrawMainContent(ID3D11Device* pDevice, UI::UIContext& context) {
 
 				ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, { context.DefaultFontSize * 0.4f, context.DefaultFontSize * 0.4f });
 				ImGui::SetNextWindowPos(areaMin, ImGuiCond_Always);
-				ImGui::BeginChildEx("Widget Area", cntWindow->GetID("Widget Area"), areaSize, false, ImGuiWindowFlags_AlwaysUseWindowPadding);
+				ImGui::BeginChildEx("控件区域", cntWindow->GetID("控件区域"), areaSize, false, ImGuiWindowFlags_AlwaysUseWindowPadding);
 				ImGui::PopStyleVar();
 				{
 					{
@@ -15133,18 +15133,18 @@ void DrawMainContent(ID3D11Device* pDevice, UI::UIContext& context) {
 
 				ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, { context.DefaultFontSize * 0.4f, context.DefaultFontSize * 0.4f });
 				ImGui::SetNextWindowPos(areaMin, ImGuiCond_Always);
-				ImGui::BeginChildEx("Tooltip Area", cntWindow->GetID("Tooltip Area"), areaSize, false, ImGuiWindowFlags_AlwaysUseWindowPadding);
+				ImGui::BeginChildEx("提示区域", cntWindow->GetID("提示区域"), areaSize, false, ImGuiWindowFlags_AlwaysUseWindowPadding);
 				ImGui::PopStyleVar();
 				{
 					ImGui::PushFont(UI::g_ImGuiFont_RussoOne[size_t(context.DefaultFontSize * 1.0f)]);
-					ImGui::Text("SYSTEM OPTIONS");
+					ImGui::Text("系统选项");
 					ImGui::PopFont();
 
 
 					ImGui::SetCursorPosY(ImGui::GetCursorPosY() + context.DefaultFontSize * 0.8f);
 					ImGui::PushFont(UI::g_ImGuiFont_Roboto[size_t(context.DefaultFontSize * 0.9f)]);
 
-					ImGui::TextWrapped("Settings related to the program's behavior.");
+					ImGui::TextWrapped("与程序行为相关的设置。");
 					ImGui::PopFont();
 				}
 				ImGui::EndChild();
@@ -15166,7 +15166,7 @@ void DrawMainContent(ID3D11Device* pDevice, UI::UIContext& context) {
 
 				ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, { context.DefaultFontSize * 0.4f, context.DefaultFontSize * 0.4f });
 				ImGui::SetNextWindowPos(areaMin, ImGuiCond_Always);
-				ImGui::BeginChildEx("Widget Area", cntWindow->GetID("Widget Area"), areaSize, false, ImGuiWindowFlags_AlwaysUseWindowPadding);
+				ImGui::BeginChildEx("控件区域", cntWindow->GetID("控件区域"), areaSize, false, ImGuiWindowFlags_AlwaysUseWindowPadding);
 				ImGui::PopStyleVar();
 				{
 					{
@@ -15188,11 +15188,11 @@ void DrawMainContent(ID3D11Device* pDevice, UI::UIContext& context) {
 
 				ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, { context.DefaultFontSize * 0.4f, context.DefaultFontSize * 0.4f });
 				ImGui::SetNextWindowPos(areaMin, ImGuiCond_Always);
-				ImGui::BeginChildEx("Tooltip Area", cntWindow->GetID("Tooltip Area"), areaSize, false, ImGuiWindowFlags_AlwaysUseWindowPadding);
+				ImGui::BeginChildEx("提示区域", cntWindow->GetID("提示区域"), areaSize, false, ImGuiWindowFlags_AlwaysUseWindowPadding);
 				ImGui::PopStyleVar();
 				{
 					ImGui::PushFont(UI::g_ImGuiFont_RussoOne[size_t(context.DefaultFontSize * 1.0f)]);
-					ImGui::Text("COMMON CHEATS");
+					ImGui::Text("通用作弊");
 					ImGui::PopFont();
 
 
@@ -15200,7 +15200,7 @@ void DrawMainContent(ID3D11Device* pDevice, UI::UIContext& context) {
 					ImGui::PushFont(UI::g_ImGuiFont_Roboto[size_t(context.DefaultFontSize * 0.9f)]);
 
 					ImGui::TextWrapped("Various Cheats for you to customize the game to your liking.\n"
-						"This can tag you at the Mission Result screen, and possibly change your Game Mode to 'Custom Mode'.");
+						"这会在任务结算界面标记你，并可能将游戏模式改为“自定义模式”。");
 					ImGui::PopFont();
 				}
 				ImGui::EndChild();
@@ -15215,7 +15215,7 @@ void DrawMainContent(ID3D11Device* pDevice, UI::UIContext& context) {
 
 				ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, { context.DefaultFontSize * 0.4f, context.DefaultFontSize * 0.4f });
 				ImGui::SetNextWindowPos(areaMin, ImGuiCond_Always);
-				ImGui::BeginChildEx("Widget Area", cntWindow->GetID("Widget Area"), areaSize, false, ImGuiWindowFlags_AlwaysUseWindowPadding);
+				ImGui::BeginChildEx("控件区域", cntWindow->GetID("控件区域"), areaSize, false, ImGuiWindowFlags_AlwaysUseWindowPadding);
 				ImGui::PopStyleVar();
 				{
 					{
@@ -15237,11 +15237,11 @@ void DrawMainContent(ID3D11Device* pDevice, UI::UIContext& context) {
 
 				ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, { context.DefaultFontSize * 0.4f, context.DefaultFontSize * 0.4f });
 				ImGui::SetNextWindowPos(areaMin, ImGuiCond_Always);
-				ImGui::BeginChildEx("Tooltip Area", cntWindow->GetID("Tooltip Area"), areaSize, false, ImGuiWindowFlags_AlwaysUseWindowPadding);
+				ImGui::BeginChildEx("提示区域", cntWindow->GetID("提示区域"), areaSize, false, ImGuiWindowFlags_AlwaysUseWindowPadding);
 				ImGui::PopStyleVar();
 				{
 					ImGui::PushFont(UI::g_ImGuiFont_RussoOne[size_t(context.DefaultFontSize * 1.0f)]);
-					ImGui::Text("CHARACTER CHEAT OPTIONS");
+					ImGui::Text("角色作弊选项");
 					ImGui::PopFont();
 
 
@@ -15249,7 +15249,7 @@ void DrawMainContent(ID3D11Device* pDevice, UI::UIContext& context) {
 					ImGui::PushFont(UI::g_ImGuiFont_Roboto[size_t(context.DefaultFontSize * 0.9f)]);
 
 					ImGui::TextWrapped("Cheats for several Character-based Gameplay changes.\n"
-						"This can tag you at the Mission Result screen, and possibly change your Game Mode to 'Custom Mode'.");
+						"这会在任务结算界面标记你，并可能将游戏模式改为“自定义模式”。");
 					ImGui::PopFont();
 				}
 				ImGui::EndChild();
@@ -15264,7 +15264,7 @@ void DrawMainContent(ID3D11Device* pDevice, UI::UIContext& context) {
 
 				ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, { context.DefaultFontSize * 0.4f, context.DefaultFontSize * 0.4f });
 				ImGui::SetNextWindowPos(areaMin, ImGuiCond_Always);
-				ImGui::BeginChildEx("Widget Area", cntWindow->GetID("Widget Area"), areaSize, false, ImGuiWindowFlags_AlwaysUseWindowPadding);
+				ImGui::BeginChildEx("控件区域", cntWindow->GetID("控件区域"), areaSize, false, ImGuiWindowFlags_AlwaysUseWindowPadding);
 				ImGui::PopStyleVar();
 				{
 					{
@@ -15286,11 +15286,11 @@ void DrawMainContent(ID3D11Device* pDevice, UI::UIContext& context) {
 
 				ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, { context.DefaultFontSize * 0.4f, context.DefaultFontSize * 0.4f });
 				ImGui::SetNextWindowPos(areaMin, ImGuiCond_Always);
-				ImGui::BeginChildEx("Tooltip Area", cntWindow->GetID("Tooltip Area"), areaSize, false, ImGuiWindowFlags_AlwaysUseWindowPadding);
+				ImGui::BeginChildEx("提示区域", cntWindow->GetID("提示区域"), areaSize, false, ImGuiWindowFlags_AlwaysUseWindowPadding);
 				ImGui::PopStyleVar();
 				{
 					ImGui::PushFont(UI::g_ImGuiFont_RussoOne[size_t(context.DefaultFontSize * 1.0f)]);
-					ImGui::Text("TELEPORTER TOOL");
+					ImGui::Text("传送工具");
 					ImGui::PopFont();
 
 
@@ -15313,7 +15313,7 @@ void DrawMainContent(ID3D11Device* pDevice, UI::UIContext& context) {
 
 				ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, { context.DefaultFontSize * 0.4f, context.DefaultFontSize * 0.4f });
 				ImGui::SetNextWindowPos(areaMin, ImGuiCond_Always);
-				ImGui::BeginChildEx("Widget Area", cntWindow->GetID("Widget Area"), areaSize, false, ImGuiWindowFlags_AlwaysUseWindowPadding);
+				ImGui::BeginChildEx("控件区域", cntWindow->GetID("控件区域"), areaSize, false, ImGuiWindowFlags_AlwaysUseWindowPadding);
 				ImGui::PopStyleVar();
 				{
 					{
@@ -15335,11 +15335,11 @@ void DrawMainContent(ID3D11Device* pDevice, UI::UIContext& context) {
 
 				ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, { context.DefaultFontSize * 0.4f, context.DefaultFontSize * 0.4f });
 				ImGui::SetNextWindowPos(areaMin, ImGuiCond_Always);
-				ImGui::BeginChildEx("Tooltip Area", cntWindow->GetID("Tooltip Area"), areaSize, false, ImGuiWindowFlags_AlwaysUseWindowPadding);
+				ImGui::BeginChildEx("提示区域", cntWindow->GetID("提示区域"), areaSize, false, ImGuiWindowFlags_AlwaysUseWindowPadding);
 				ImGui::PopStyleVar();
 				{
 					ImGui::PushFont(UI::g_ImGuiFont_RussoOne[size_t(context.DefaultFontSize * 1.0f)]);
-					ImGui::Text("ENEMY SPAWNER TOOL");
+					ImGui::Text("敌人生成器工具");
 					ImGui::PopFont();
 
 
@@ -15361,7 +15361,7 @@ void DrawMainContent(ID3D11Device* pDevice, UI::UIContext& context) {
 
 				ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, { context.DefaultFontSize * 0.4f, context.DefaultFontSize * 0.4f });
 				ImGui::SetNextWindowPos(areaMin, ImGuiCond_Always);
-				ImGui::BeginChildEx("Widget Area", cntWindow->GetID("Widget Area"), areaSize, false, ImGuiWindowFlags_AlwaysUseWindowPadding);
+				ImGui::BeginChildEx("控件区域", cntWindow->GetID("控件区域"), areaSize, false, ImGuiWindowFlags_AlwaysUseWindowPadding);
 				ImGui::PopStyleVar();
 				{
 					{
@@ -15383,18 +15383,18 @@ void DrawMainContent(ID3D11Device* pDevice, UI::UIContext& context) {
 
 				ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, { context.DefaultFontSize * 0.4f, context.DefaultFontSize * 0.4f });
 				ImGui::SetNextWindowPos(areaMin, ImGuiCond_Always);
-				ImGui::BeginChildEx("Tooltip Area", cntWindow->GetID("Tooltip Area"), areaSize, false, ImGuiWindowFlags_AlwaysUseWindowPadding);
+				ImGui::BeginChildEx("提示区域", cntWindow->GetID("提示区域"), areaSize, false, ImGuiWindowFlags_AlwaysUseWindowPadding);
 				ImGui::PopStyleVar();
 				{
 					ImGui::PushFont(UI::g_ImGuiFont_RussoOne[size_t(context.DefaultFontSize * 1.0f)]);
-					ImGui::Text("FMOD JUKEBOX TOOL");
+					ImGui::Text("FMOD 点唱机工具");
 					ImGui::PopFont();
 
 
 					ImGui::SetCursorPosY(ImGui::GetCursorPosY() + context.DefaultFontSize * 0.8f);
 					ImGui::PushFont(UI::g_ImGuiFont_Roboto[size_t(context.DefaultFontSize * 0.9f)]);
 
-					ImGui::TextWrapped("Play songs from the original game at your heart's content, using the original game's audio system (FMOD).");
+					ImGui::TextWrapped("使用原版游戏的音频系统（FMOD），尽情播放原版游戏歌曲。");
 					ImGui::PopFont();
 				}
 				ImGui::EndChild();
@@ -15437,7 +15437,7 @@ void DrawMainContent(ID3D11Device* pDevice, UI::UIContext& context) {
 			   lastTime = currentTime;
 			   float scrollSpeed = 25.0f; // pixels per second, adjust as needed
 
-			   ImGui::BeginChildEx("C Team Area", cntWindow->GetID("C Team Area"), ImVec2(areaSize.x, 650 * scaleFactorY), false,
+			   ImGui::BeginChildEx("C Team 区域", cntWindow->GetID("C Team 区域"), ImVec2(areaSize.x, 650 * scaleFactorY), false,
 				   ImGuiWindowFlags_AlwaysUseWindowPadding | ImGuiWindowFlags_AlwaysVerticalScrollbar);
 
 			   float maxScroll = ImGui::GetScrollMaxY();
@@ -15480,7 +15480,7 @@ void DrawMainContent(ID3D11Device* pDevice, UI::UIContext& context) {
 				auto window = ImGui::GetCurrentWindow();
 				ImGui::PushFont(UI::g_ImGuiFont_RussoOne[uint64_t(context.DefaultFontSize * 1.4f)]);
 				{
-					ImGui::Text("CREDITS");
+					ImGui::Text("制作人员");
 					ImGui::SetCursorPosY(ImGui::GetCursorPosY() + scaledFontSize * 0.2f);
 					ImGui::Text((const char*)u8"C•Team");
 				}
@@ -15580,7 +15580,7 @@ void DrawMainContent(ID3D11Device* pDevice, UI::UIContext& context) {
 				{
 					ImGui::PushFont(UI::g_ImGuiFont_RussoOne[uint64_t(context.DefaultFontSize * 0.8f)]);
 					{
-						ImGui::Text("Project Director, Lead Programmer, Game Design, Reverse Engineering");
+						ImGui::Text("项目总监、首席程序员、游戏设计、逆向工程");
 					}
 					ImGui::PopFont();
 
@@ -15640,7 +15640,7 @@ void DrawMainContent(ID3D11Device* pDevice, UI::UIContext& context) {
 				{
 					ImGui::PushFont(UI::g_ImGuiFont_RussoOne[uint64_t(context.DefaultFontSize * 0.8f)]);
 					{
-						ImGui::Text("Reverse Engineering, Lead Gameplay Programmer, Q&A, Testing");
+						ImGui::Text("逆向工程、首席玩法程序员、QA、测试");
 					}
 					ImGui::PopFont();
 
@@ -15682,7 +15682,7 @@ void DrawMainContent(ID3D11Device* pDevice, UI::UIContext& context) {
 				{
 					ImGui::PushFont(UI::g_ImGuiFont_RussoOne[uint64_t(context.DefaultFontSize * 0.9f)]);
 					{
-						ImGui::Text("Reverse Engineering, Tooling, General Programmer");
+						ImGui::Text("逆向工程、工具开发、通用程序员");
 					}
 					ImGui::PopFont();
 
@@ -15718,7 +15718,7 @@ void DrawMainContent(ID3D11Device* pDevice, UI::UIContext& context) {
 				{
 					ImGui::PushFont(UI::g_ImGuiFont_RussoOne[uint64_t(context.DefaultFontSize * 0.9f)]);
 					{
-						ImGui::Text("Backend, DevOps, General Programmer, Reverse Engineering");
+						ImGui::Text("后端、DevOps、通用程序员、逆向工程");
 					}
 					ImGui::PopFont();
 
@@ -15754,7 +15754,7 @@ void DrawMainContent(ID3D11Device* pDevice, UI::UIContext& context) {
 				{
 					ImGui::PushFont(UI::g_ImGuiFont_RussoOne[uint64_t(context.DefaultFontSize * 0.9f)]);
 					{
-						ImGui::Text("Community Manager, Testing, Q&A, Game Design");
+						ImGui::Text("社区经理、测试、QA、游戏设计");
 					}
 					ImGui::PopFont();
 
@@ -15791,7 +15791,7 @@ void DrawMainContent(ID3D11Device* pDevice, UI::UIContext& context) {
 				{
 					ImGui::PushFont(UI::g_ImGuiFont_RussoOne[uint64_t(context.DefaultFontSize * 0.9f)]);
 					{
-						ImGui::Text("General Programmer, Reverse Engineering, Game Design");
+						ImGui::Text("通用程序员、逆向工程、游戏设计");
 					}
 					ImGui::PopFont();
 
@@ -15835,7 +15835,7 @@ void DrawMainContent(ID3D11Device* pDevice, UI::UIContext& context) {
 				{
 					ImGui::PushFont(UI::g_ImGuiFont_RussoOne[uint64_t(context.DefaultFontSize * 0.9f)]);
 					{
-						ImGui::Text("Testing, Q&A");
+						ImGui::Text("测试、QA");
 					}
 					ImGui::PopFont();
 
@@ -15864,7 +15864,7 @@ void DrawMainContent(ID3D11Device* pDevice, UI::UIContext& context) {
 				{
 					ImGui::PushFont(UI::g_ImGuiFont_RussoOne[uint64_t(context.DefaultFontSize * 0.9f)]);
 					{
-						ImGui::Text("Lead 2D Artist");
+						ImGui::Text("首席2D美术");
 					}
 					ImGui::PopFont();
 
@@ -15918,7 +15918,7 @@ void DrawMainContent(ID3D11Device* pDevice, UI::UIContext& context) {
 				{
 					ImGui::PushFont(UI::g_ImGuiFont_RussoOne[uint64_t(context.DefaultFontSize * 0.9f)]);
 					{
-						ImGui::Text("Lead VFX Artist");
+						ImGui::Text("首席特效美术");
 					}
 					ImGui::PopFont();
 
@@ -15983,7 +15983,7 @@ void DrawMainContent(ID3D11Device* pDevice, UI::UIContext& context) {
 				{
 					ImGui::PushFont(UI::g_ImGuiFont_RussoOne[uint64_t(context.DefaultFontSize * 1.2f)]);
 					{
-						ImGui::Text("With Additional Work By");
+						ImGui::Text("额外参与者");
 					}
 					ImGui::PopFont();
 
@@ -15992,7 +15992,7 @@ void DrawMainContent(ID3D11Device* pDevice, UI::UIContext& context) {
 					{
 						ImGui::PushFont(UI::g_ImGuiFont_RussoOne[uint64_t(context.DefaultFontSize * 0.9f)]);
 						{
-							ImGui::Text("Video Producer, Promoter, Consultant");
+							ImGui::Text("视频制作、推广、顾问");
 						}
 						ImGui::PopFont();
 
@@ -16028,7 +16028,7 @@ void DrawMainContent(ID3D11Device* pDevice, UI::UIContext& context) {
 					{
 						ImGui::PushFont(UI::g_ImGuiFont_RussoOne[uint64_t(context.DefaultFontSize * 0.9f)]);
 						{
-							ImGui::Text("Animation & Texturing Work, Mod Tooling, Consultant");
+							ImGui::Text("动画与贴图、Mod工具、顾问");
 						}
 						ImGui::PopFont();
 
@@ -16046,7 +16046,7 @@ void DrawMainContent(ID3D11Device* pDevice, UI::UIContext& context) {
 					{
 						ImGui::PushFont(UI::g_ImGuiFont_RussoOne[uint64_t(context.DefaultFontSize * 0.9f)]);
 						{
-							ImGui::Text("Artist");
+							ImGui::Text("美术");
 						}
 						ImGui::PopFont();
 
@@ -16075,7 +16075,7 @@ void DrawMainContent(ID3D11Device* pDevice, UI::UIContext& context) {
 					{
 						ImGui::PushFont(UI::g_ImGuiFont_RussoOne[uint64_t(context.DefaultFontSize * 0.9f)]);
 						{
-							ImGui::Text("Artist");
+							ImGui::Text("美术");
 						}
 						ImGui::PopFont();
 
@@ -16123,7 +16123,7 @@ void DrawMainContent(ID3D11Device* pDevice, UI::UIContext& context) {
 					{
 						ImGui::PushFont(UI::g_ImGuiFont_RussoOne[uint64_t(context.DefaultFontSize * 0.9f)]);
 						{
-							ImGui::Text("Programmer");
+							ImGui::Text("程序员");
 						}
 						ImGui::PopFont();
 
@@ -16152,7 +16152,7 @@ void DrawMainContent(ID3D11Device* pDevice, UI::UIContext& context) {
 					{
 						ImGui::PushFont(UI::g_ImGuiFont_RussoOne[uint64_t(context.DefaultFontSize * 0.9f)]);
 						{
-							ImGui::Text("Sound Producer");
+							ImGui::Text("音效制作");
 						}
 						ImGui::PopFont();
 
@@ -16181,7 +16181,7 @@ void DrawMainContent(ID3D11Device* pDevice, UI::UIContext& context) {
 					{
 						ImGui::PushFont(UI::g_ImGuiFont_RussoOne[uint64_t(context.DefaultFontSize * 0.9f)]);
 						{
-							ImGui::Text("Programmer");
+							ImGui::Text("程序员");
 						}
 						ImGui::PopFont();
 
@@ -16292,7 +16292,7 @@ void DrawMainContent(ID3D11Device* pDevice, UI::UIContext& context) {
 						{
 							ImGui::Text("Thanks to Spritzkrieg for the express permission\n"
 								"to airdragon50 to use and modify his Original PS2 \n"
-								"Textures Pack and Subtitle Alignment and Grammar Fix.");
+								"贴图包、字幕对齐与语法修正。");
 						}
 						ImGui::PopFont();
 					}
@@ -16305,7 +16305,7 @@ void DrawMainContent(ID3D11Device* pDevice, UI::UIContext& context) {
 				{
 					ImGui::PushFont(UI::g_ImGuiFont_RussoOne[uint64_t(context.DefaultFontSize * 1.2f)]);
 					{
-						ImGui::Text("Original DDMK Developer");
+						ImGui::Text("原DDMK开发者");
 					}
 					ImGui::PopFont();
 
@@ -16337,7 +16337,7 @@ void DrawMainContent(ID3D11Device* pDevice, UI::UIContext& context) {
 				{
 					ImGui::PushFont(UI::g_ImGuiFont_RussoOne[uint64_t(context.DefaultFontSize * 1.2f)]);
 					{
-						ImGui::Text("DMCHDFix Developer");
+						ImGui::Text("DMCHDFix 开发者");
 					}
 					ImGui::PopFont();
 
@@ -16392,7 +16392,7 @@ void DrawMainContent(ID3D11Device* pDevice, UI::UIContext& context) {
 			   patronsLastTime = patronsCurrentTime;
 			   float patronsScrollSpeed = 25.0f;
 
-			   ImGui::BeginChildEx("Patrons Area", cntWindow->GetID("Patrons Area"), areaSize, false,
+			   ImGui::BeginChildEx("赞助者区域", cntWindow->GetID("赞助者区域"), areaSize, false,
 				   ImGuiWindowFlags_AlwaysUseWindowPadding | ImGuiWindowFlags_AlwaysVerticalScrollbar);
 
 			   float patronsMaxScroll = ImGui::GetScrollMaxY();
@@ -16434,7 +16434,7 @@ void DrawMainContent(ID3D11Device* pDevice, UI::UIContext& context) {
 			   {
 				ImGui::PushFont(UI::g_ImGuiFont_RussoOne[uint64_t(context.DefaultFontSize * 1.4f)]);
 				{
-					ImGui::Text("PATREON SUPPORTERS");
+					ImGui::Text("Patreon 支持者");
 					ImGui::Separator();
 				}
 				ImGui::PopFont();
@@ -16508,12 +16508,12 @@ void DrawMainContent(ID3D11Device* pDevice, UI::UIContext& context) {
 
 			ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, { scaledFontSize * 0.4f, scaledFontSize * 0.4f });
 			ImGui::SetNextWindowPos(areaMin, ImGuiCond_Always);
-			ImGui::BeginChildEx("Special Thanks Area", cntWindow->GetID("Special Thanks Area"), areaSize, false, ImGuiWindowFlags_AlwaysUseWindowPadding);
+			ImGui::BeginChildEx("特别鸣谢区域", cntWindow->GetID("特别鸣谢区域"), areaSize, false, ImGuiWindowFlags_AlwaysUseWindowPadding);
 			ImGui::PopStyleVar();
 			{
 				ImGui::PushFont(UI::g_ImGuiFont_RussoOne[uint64_t(context.DefaultFontSize * 1.4f)]);
 				{
-					ImGui::Text("SPECIAL THANKS");
+					ImGui::Text("特别鸣谢");
 					ImGui::Separator();
 				}
 				ImGui::PopFont();
@@ -16543,12 +16543,12 @@ void DrawMainContent(ID3D11Device* pDevice, UI::UIContext& context) {
 
 			ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, { scaledFontSize * 0.4f, scaledFontSize * 0.4f });
 			ImGui::SetNextWindowPos(areaMin, ImGuiCond_Always);
-			ImGui::BeginChildEx("Footer Area", cntWindow->GetID("Footer Area"), areaSize, false, ImGuiWindowFlags_AlwaysUseWindowPadding);
+			ImGui::BeginChildEx("页脚区域", cntWindow->GetID("页脚区域"), areaSize, false, ImGuiWindowFlags_AlwaysUseWindowPadding);
 			ImGui::PopStyleVar();
 			{
 				auto window = ImGui::GetCurrentWindow();
-				constexpr const char* THX_TEXT = "Thank you all for playing and supporting the project!";
-				constexpr const char* LICENSE_BUTTON_TEXT = "LICENSE";
+				constexpr const char* THX_TEXT = "感谢大家游玩并支持本项目！";
+				constexpr const char* LICENSE_BUTTON_TEXT = "许可证";
 				constexpr const char* COPYRIGHT_TEXT = "Copyright (c) 2026 Berthrage";
 				static bool showLicense = false;
 
@@ -16592,7 +16592,7 @@ void DrawMainContent(ID3D11Device* pDevice, UI::UIContext& context) {
 						ImGui::SetWindowFontScale(licenseScaleFactor);
 
 						ImGui::PushFont(UI::g_ImGuiFont_RussoOne[context.DefaultFontSize * 1.2f]);
-						ImGui::Text("LICENSE");
+						ImGui::Text("许可证");
 						ImGui::SameLine();
 
 						const float xBtnSize = 24.0f * licenseScaleFactor;
