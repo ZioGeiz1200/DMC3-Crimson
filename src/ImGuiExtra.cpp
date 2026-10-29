@@ -153,30 +153,12 @@ namespace UI {
 		builder.AddRanges(io.Fonts->GetGlyphRangesDefault());
 		builder.BuildRanges(&ranges);
 
-		// --- Chinese font merge (zh patch) ---
-		ImVector<ImWchar> cjkRanges;
-		ImFontGlyphRangesBuilder cjkBuilder;
-		cjkBuilder.AddRanges(CJKSubset_ranges);
-		cjkBuilder.BuildRanges(&cjkRanges);
-
-		auto mergeCJK = [&](float px) {
-			if (px < 14.0f || px > 28.0f) return;
-			ImFontConfig cfg;
-			cfg.MergeMode = true;
-			cfg.FontDataOwnedByAtlas = false;
-			cfg.PixelSnapH = true;
-			io.Fonts->AddFontFromMemoryTTF((void*)CJKSubset_data, CJKSubset_size, px, &cfg, cjkRanges.Data);
-		};
-		// --- end zh patch ---
-
 		for (size_t i = 0; i < g_ImGuiFont_Roboto.m_FontSizes.size(); i++) {
 			g_ImGuiFont_Roboto.m_FontSizes[i] = io.Fonts->AddFontFromMemoryCompressedTTF(RobotoMedium_compressed_data, RobotoMedium_compressed_size, float(i + 10), nullptr, ranges.Data);
-			mergeCJK(float(i + 10));
 		}
 
 		for (size_t i = 0; i < g_ImGuiFont_RussoOne.m_FontSizes.size(); i++) {
 			g_ImGuiFont_RussoOne.m_FontSizes[i] = io.Fonts->AddFontFromMemoryCompressedTTF(RussoOneRegular_compressed_data, RussoOneRegular_compressed_size, float(i + 10), nullptr, ranges.Data);
-			mergeCJK(float(i + 10));
 		}
 
 		for (size_t i = 0; i < g_ImGuiFont_RedOrbRusso.m_FontSizes.size(); i++) {
@@ -201,10 +183,28 @@ namespace UI {
 
 		g_ImGuiFont_RussoOne256 = io.Fonts->AddFontFromMemoryCompressedTTF(RussoOneRegular_compressed_data, RussoOneRegular_compressed_size, 256.0f, nullptr, ranges.Data);
 
+		// --- Chinese font replacement (zh patch) ---
+		ImVector<ImWchar> cjkRanges;
+		ImFontGlyphRangesBuilder cjkBuilder;
+		cjkBuilder.AddRanges(CJKSubset_ranges);
+		cjkBuilder.BuildRanges(&cjkRanges);
+
+		for (int zhSize = 15; zhSize <= 26; ++zhSize) {
+			ImFont* zhFont = io.Fonts->AddFontFromMemoryTTF((void*)CJKSubset_data, CJKSubset_size, (float)zhSize, nullptr, cjkRanges.Data);
+			int idx = zhSize - 10;
+			if (zhFont && idx >= 0 && idx < (int)g_ImGuiFont_Roboto.m_FontSizes.size()) g_ImGuiFont_Roboto.m_FontSizes[idx] = zhFont;
+			if (zhFont && idx >= 0 && idx < (int)g_ImGuiFont_RussoOne.m_FontSizes.size()) g_ImGuiFont_RussoOne.m_FontSizes[idx] = zhFont;
+		}
+		// --- end zh patch ---
+
 		io.FontDefault = g_ImGuiFont_Roboto[18];
 
-		io.Fonts->TexDesiredWidth = 4096;
+		if (io.Fonts->TexDesiredWidth > 2048) io.Fonts->TexDesiredWidth = 2048;
 		io.Fonts->Build();
+		{
+			FILE* f = fopen("crimson_fontlog.txt", "w");
+			if (f) { fprintf(f, "tx=%d ty=%d pixels=%p\n", io.Fonts->TexWidth, io.Fonts->TexHeight, (void*)io.Fonts->TexPixelsAlpha8); fclose(f); }
+		}
 	}
 
 	bool ButtonEx(const char* label, const ImVec2& size_arg, ImU32 hover_text_color, ImGuiButtonFlags flags)
