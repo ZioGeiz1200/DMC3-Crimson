@@ -15,6 +15,7 @@ namespace UI {
 #include "Fonts/RussoOneRegular.hpp"
 #include "Fonts/RedOrbRusso.hpp"
 #include "Fonts/RedOrbRussoBackdrop.hpp"
+#include "Fonts/CJKSubset.hpp"
 #include "Core/GUI.hpp"
 
 	Roboto_t g_ImGuiFont_Roboto;
@@ -152,28 +153,50 @@ namespace UI {
 		builder.AddRanges(io.Fonts->GetGlyphRangesDefault());
 		builder.BuildRanges(&ranges);
 
+		// --- Chinese font merge (added by zh patch) ---
+		ImVector<ImWchar> cjkRanges;
+		ImFontGlyphRangesBuilder cjkBuilder;
+		cjkBuilder.AddRanges(CJKSubset_ranges);
+		cjkBuilder.BuildRanges(&cjkRanges);
+
+		auto mergeCJK = [&](float px) {
+			if (px < 14.0f || px > 32.0f) return;
+			ImFontConfig cfg;
+			cfg.MergeMode = true;
+			cfg.FontDataOwnedByAtlas = false;
+			cfg.PixelSnapH = true;
+			io.Fonts->AddFontFromMemoryTTF((void*)CJKSubset_data, CJKSubset_size, px, &cfg, cjkRanges.Data);
+		};
+		// --- end zh patch ---
+
 		for (size_t i = 0; i < g_ImGuiFont_Roboto.m_FontSizes.size(); i++) {
 			g_ImGuiFont_Roboto.m_FontSizes[i] = io.Fonts->AddFontFromMemoryCompressedTTF(RobotoMedium_compressed_data, RobotoMedium_compressed_size, float(i + 10), nullptr, ranges.Data);
+			mergeCJK(float(i + 10));
 		}
 
 		for (size_t i = 0; i < g_ImGuiFont_RussoOne.m_FontSizes.size(); i++) {
 			g_ImGuiFont_RussoOne.m_FontSizes[i] = io.Fonts->AddFontFromMemoryCompressedTTF(RussoOneRegular_compressed_data, RussoOneRegular_compressed_size, float(i + 10), nullptr, ranges.Data);
+			mergeCJK(float(i + 10));
 		}
 
 		for (size_t i = 0; i < g_ImGuiFont_RedOrbRusso.m_FontSizes.size(); i++) {
 			g_ImGuiFont_RedOrbRusso.m_FontSizes[i] = io.Fonts->AddFontFromMemoryCompressedTTF(RedOrbRusso_compressed_data, RedOrbRusso_compressed_size, float(i + 10), nullptr, ranges.Data);
+			mergeCJK(float(i + 10));
 		}
 
 		for (size_t i = 0; i < g_ImGuiFont_RedOrbRussoBackdrop.m_FontSizes.size(); i++) {
 			g_ImGuiFont_RedOrbRussoBackdrop.m_FontSizes[i] = io.Fonts->AddFontFromMemoryCompressedTTF(RedOrbRussoBackdrop_compressed_data, RedOrbRussoBackdrop_compressed_size, float(i + 10), nullptr, ranges.Data);
+			mergeCJK(float(i + 10));
 		}
 
 		for (size_t i = 0; i < g_ImGuiFont_Benguiat.m_FontSizes.size(); i++) {
 			g_ImGuiFont_Benguiat.m_FontSizes[i] = io.Fonts->AddFontFromMemoryCompressedTTF(Benguiat_compressed_data, Benguiat_compressed_size, float(i + 10), nullptr, ranges.Data);
+			mergeCJK(float(i + 10));
 		}
 
 		for (size_t i = 0; i < g_ImGuiFont_Messenger.m_FontSizes.size(); i++) {
 			g_ImGuiFont_Messenger.m_FontSizes[i] = io.Fonts->AddFontFromMemoryCompressedTTF(Messenger_compressed_data, Messenger_compressed_size, float(i + 10), nullptr, ranges.Data);
+			mergeCJK(float(i + 10));
 		}
 
 		g_ImGuiFont_Benguiat256 = io.Fonts->AddFontFromMemoryCompressedTTF(Benguiat_compressed_data, Benguiat_compressed_size, 80.0f, nullptr, ranges.Data);
@@ -184,6 +207,7 @@ namespace UI {
 
 		io.FontDefault = g_ImGuiFont_Roboto[18];
 
+		io.Fonts->TexDesiredWidth = 4096;
 		io.Fonts->Build();
 	}
 
