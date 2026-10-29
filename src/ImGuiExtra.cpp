@@ -153,14 +153,14 @@ namespace UI {
 		builder.AddRanges(io.Fonts->GetGlyphRangesDefault());
 		builder.BuildRanges(&ranges);
 
-		// --- Chinese font merge (added by zh patch) ---
+		// --- Chinese font merge (zh patch) ---
 		ImVector<ImWchar> cjkRanges;
 		ImFontGlyphRangesBuilder cjkBuilder;
 		cjkBuilder.AddRanges(CJKSubset_ranges);
 		cjkBuilder.BuildRanges(&cjkRanges);
 
 		auto mergeCJK = [&](float px) {
-			if (px < 14.0f || px > 32.0f) return;
+			if (px < 14.0f || px > 28.0f) return;
 			ImFontConfig cfg;
 			cfg.MergeMode = true;
 			cfg.FontDataOwnedByAtlas = false;
@@ -181,22 +181,18 @@ namespace UI {
 
 		for (size_t i = 0; i < g_ImGuiFont_RedOrbRusso.m_FontSizes.size(); i++) {
 			g_ImGuiFont_RedOrbRusso.m_FontSizes[i] = io.Fonts->AddFontFromMemoryCompressedTTF(RedOrbRusso_compressed_data, RedOrbRusso_compressed_size, float(i + 10), nullptr, ranges.Data);
-			mergeCJK(float(i + 10));
 		}
 
 		for (size_t i = 0; i < g_ImGuiFont_RedOrbRussoBackdrop.m_FontSizes.size(); i++) {
 			g_ImGuiFont_RedOrbRussoBackdrop.m_FontSizes[i] = io.Fonts->AddFontFromMemoryCompressedTTF(RedOrbRussoBackdrop_compressed_data, RedOrbRussoBackdrop_compressed_size, float(i + 10), nullptr, ranges.Data);
-			mergeCJK(float(i + 10));
 		}
 
 		for (size_t i = 0; i < g_ImGuiFont_Benguiat.m_FontSizes.size(); i++) {
 			g_ImGuiFont_Benguiat.m_FontSizes[i] = io.Fonts->AddFontFromMemoryCompressedTTF(Benguiat_compressed_data, Benguiat_compressed_size, float(i + 10), nullptr, ranges.Data);
-			mergeCJK(float(i + 10));
 		}
 
 		for (size_t i = 0; i < g_ImGuiFont_Messenger.m_FontSizes.size(); i++) {
 			g_ImGuiFont_Messenger.m_FontSizes[i] = io.Fonts->AddFontFromMemoryCompressedTTF(Messenger_compressed_data, Messenger_compressed_size, float(i + 10), nullptr, ranges.Data);
-			mergeCJK(float(i + 10));
 		}
 
 		g_ImGuiFont_Benguiat256 = io.Fonts->AddFontFromMemoryCompressedTTF(Benguiat_compressed_data, Benguiat_compressed_size, 80.0f, nullptr, ranges.Data);
